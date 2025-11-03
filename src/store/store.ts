@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import courseReducer from "../Components/Redux/CourseSlice";
 
 const store = configureStore({
   reducer: {
     
+    courses: courseReducer,
   },
 });
 
