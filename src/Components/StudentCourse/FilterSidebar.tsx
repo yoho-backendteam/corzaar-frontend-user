@@ -5,6 +5,14 @@ import filter from "../../assets/Image/fillteryl.png";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 
 export default function FilterSidebar() {
+  const handleApplyFilters = () => {
+    console.log("filters :");
+  };
+
+  const handleResetFilters = () => {
+    console.log("Reset filters");
+  };
+
   return (
     <div
       className="p-4 rounded-2xl shadow-md h-fit"
@@ -261,17 +269,52 @@ export default function FilterSidebar() {
         </div>
       </div>
 
-      <button
-        className="w-full mt-4 rounded-md py-2 transition-colors"
-        style={{
-          backgroundColor: COLORS.primary_red,
-          color: COLORS.primary_white,
-          fontFamily: FONTS.medium?.fontFamily,
-          fontWeight: FONTS.medium?.fontWeight,
-        }}
-      >
-        Reset Filters
-      </button>
+      {/* ✅ Apply Filters Button */}
+<button
+  onClick={handleApplyFilters}
+  className="w-full mt-4 rounded-md py-2 mb-2 border transition-all duration-300 hover:shadow-md"
+  style={{
+    backgroundColor: COLORS.primary_white,
+    color: COLORS.primary_red,
+    borderColor: COLORS.primary_red,
+    fontFamily: FONTS.medium?.fontFamily,
+    fontWeight: FONTS.medium?.fontWeight,
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = COLORS.primary_red;
+    e.currentTarget.style.color = COLORS.primary_white;
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = COLORS.primary_white;
+    e.currentTarget.style.color = COLORS.primary_red;
+  }}
+>
+  Apply Filters
+</button>
+
+{/* 🔄 Reset Filters Button */}
+<button
+  onClick={handleResetFilters}
+  className="w-full rounded-md py-2 border transition-all duration-300 hover:shadow-md"
+  style={{
+    backgroundColor: COLORS.primary_white,
+    color: COLORS.primary_red,
+    borderColor: COLORS.primary_red,
+    fontFamily: FONTS.medium?.fontFamily,
+    fontWeight: FONTS.medium?.fontWeight,
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = COLORS.primary_red;
+    e.currentTarget.style.color = COLORS.primary_white;
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = COLORS.primary_white;
+    e.currentTarget.style.color = COLORS.primary_red;
+  }}
+>
+  Reset Filters
+</button>
+
     </div>
   );
 }
