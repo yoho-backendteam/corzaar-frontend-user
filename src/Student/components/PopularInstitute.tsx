@@ -2,6 +2,7 @@ import React from "react";
 import { Star, MapPin } from "lucide-react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
+import { COLORS } from "../../Constants/uiconstants";
 
 const PopularInstitute = () => {
   const institutes = useSelector(
@@ -11,11 +12,11 @@ const PopularInstitute = () => {
   return (
     <section className="py-12 px-6 md:px-12 lg:px-20">
       {/* Header */}
-      <div className="mb-8 text-left">
+      <div className="mb-14 text-left">
         <h2 className="text-2xl md:text-3xl font-bold text-black mb-1">
           Popular Institutes
         </h2>
-        <p className="text-[#707070] text-sm md:text-base">
+        <p className=" text-sm md:text-base" style={{color: COLORS.primary_gray}}>
           Learn from verified and trusted Institutes
         </p>
       </div>
@@ -39,7 +40,7 @@ const PopularInstitute = () => {
               <h3 className="text-lg mt-3 font-semibold text-black mb-1">
                 {institute.name}
               </h3>
-              <p className="text-gray-600 mt-3 text-sm mb-3">
+              <p className=" mt-3 text-sm mb-3" style={{color: COLORS.primary_gray}}>
                 {institute.courses} courses
               </p>
 
@@ -49,7 +50,7 @@ const PopularInstitute = () => {
                   <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                   <span className="font-semibold">{institute.rating}</span>
                 </div>
-                <div className="flex mt-3 items-center gap-1 text-gray-600">
+                <div className="flex mt-3 items-center gap-1 " style={{color: COLORS.primary_gray}}>
                   <MapPin className="w-4 h-4" />
                   <span>{institute.location}</span>
                 </div>

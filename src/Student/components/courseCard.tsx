@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { FaHeart } from "react-icons/fa";
 import enroll from '../../assets/clipboard-tick.png'
+import { COLORS } from "../../Constants/uiconstants";
 
 interface CourseCardProps {
   course: {
@@ -65,7 +66,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
 
         {/* Discount Tag */}
         {course.discount && (
-          <div className="absolute top-3 left-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
+          <div className="absolute top-3 left-3 text-white text-xs font-semibold px-2 py-1 rounded-md"  style={{color: COLORS.primary_red}}>
             {course.discount}% OFF
           </div>
         )}
@@ -76,9 +77,9 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           className="absolute top-3 right-3 bg-white rounded-full p-1.5 shadow hover:scale-110 transition"
         >
           {isFavorite ? (
-            <FaHeart className="w-5 h-5 text-red-600" />
+            <FaHeart className="w-5 h-5 "  style={{color: COLORS.primary_red}}/>
           ) : (
-            <Heart className="w-5 h-5 text-gray-600" />
+            <Heart className="w-5 h-5 "  style={{color: COLORS.primary_gray}}/>
           )}
         </button>
 
@@ -94,10 +95,10 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
       <div className="p-5 text-left">
         {/* Category & Type */}
         <div className="flex items-center justify-between mb-3">
-          <span className="bg-[#ED1C24] text-white text-xs font-semibold px-2 py-1 rounded-md">
+          <span className="text-white text-xs font-semibold px-2 py-1 rounded-md"  style={{background: COLORS.primary_red}}>
             {course.category}
           </span>
-          <span className="border border-[#ED1C24] text-[#ED1C24] text-xs font-semibold px-2 py-1 rounded-md">
+          <span className="border border-[#ED1C24] text-xs font-semibold px-2 py-1 rounded-md"  style={{color: COLORS.primary_red}}>
             {course.type}
           </span>
         </div>
@@ -108,29 +109,29 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         </h3>
 
         {/* Description */}
-        <p className="text-gray-600 text-sm mb-2 leading-snug">
+        <p className=" text-sm mb-2 leading-snug"  style={{color: COLORS.primary_gray}}>
           Master web development with HTML, CSS, JavaScript, React, Node.js and
           more. Build real-world projects and get job-ready.
         </p>
 
         {/* Institute */}
-        <p className="text-sm font-semibold text-gray-800 mb-3">
+        <p className="text-sm font-semibold  mb-3"  style={{color: COLORS.primary_gray}}>
           {course.institute}
         </p>
 
         {/* Ratings, Students, Duration */}
-        <div className="flex items-center text-sm text-gray-600 mb-4">
+        <div className="flex items-center text-sm  mb-4"  style={{color: COLORS.primary_gray}}>
           <div className="flex gap-3 items-center mr-4">
             <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
             <span className="font-semibold text-black">{course.rating}</span>
-            <span className="ml-1 text-gray-500">({course.reviews})</span>
+            <span className="ml-1 "  style={{color: COLORS.primary_gray}}>({course.reviews})</span>
           </div>
           <div className="flex items-center mr-4">
-            <Users className="w-4 h-4 text-gray-500 mr-1" />
+            <Users className="w-4 h-4  mr-1"  style={{color: COLORS.primary_gray}}/>
             <span>{course.students.toLocaleString()}</span>
           </div>
           <div className="flex items-center">
-            <Clock className="w-4 h-4 text-gray-500 mr-1" />
+            <Clock className="w-4 h-4  mr-1"  style={{color: COLORS.primary_gray}}/>
             <span>{course.duration}</span>
           </div>
         </div>
@@ -141,7 +142,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             <p className="text-2xl font-bold text-black">
               ₹{course.price.toLocaleString()}
             </p>
-            <p className="text-[#707070] mt-1 ml-3 line-through">
+            <p className=" mt-1 ml-3 line-through"  style={{color: COLORS.primary_gray}}>
               ₹{course.oldPrice.toLocaleString()}
             </p>
           </div>
@@ -149,13 +150,13 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
 
         {/* Button */}
         {course.enrolled ? (
-          <button className="bg-[#ED1C24] text-white text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-red-700 transition">
+          <button className=" text-white text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-red-700 transition"  style={{background: COLORS.primary_red}}>
             
             Already Enrolled
             <img src={enroll} alt="" className="font-bold ml-1 h-5"/>
           </button>
         ) : (
-          <button className="bg-[#FFDD00] text-black text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-[#FFD400] transition">
+          <button className=" text-black text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-[#FFD400] transition"  style={{background: COLORS.primary_yellow}}>
             <ShoppingCart className="w-4 h-4" />
             Add To Cart
           </button>

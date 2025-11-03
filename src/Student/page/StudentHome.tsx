@@ -58,7 +58,7 @@ const StudentHome = () => {
 
       {/* Content Wrapper */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#ED1C24] mb-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold  mb-4" style={{color: COLORS.primary_red}}>
           Learn from the Best Institutes, Anywhere
         </h1>
 
@@ -74,7 +74,22 @@ const StudentHome = () => {
             Explore Courses
             <FaArrowRight className="mt-1.5 ml-2" />
           </button>
-          <button className="group border flex items-center bg-white border-[#ED1C24] text-[#ED1C24] px-6 py-2.5 rounded-lg font-semibold hover:bg-[#ED1C24] hover:text-white transition">
+<button
+  className="group  flex items-center bg-white px-6 py-2.5 rounded-lg font-semibold 
+  transition-all duration-300 border"
+  style={{
+    borderColor: COLORS.primary_red,
+    color: COLORS.primary_red,
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = COLORS.primary_red;
+    e.currentTarget.style.color = "white";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = "white";
+    e.currentTarget.style.color = COLORS.primary_red;
+  }}
+>
             <img
               src={teacher}
               alt="teacher"
@@ -94,8 +109,8 @@ const StudentHome = () => {
               <button
                 key={i}
                 onClick={() => handleScroll(item.target)}
-                className="bg-white px-4 py-2 rounded-full text-[#ED1C24] font-medium shadow hover:bg-red-50 transition"
-              >
+                className="bg-white px-4 py-2 rounded-full font-medium shadow hover:bg-red-50 transition"
+              style={{color: COLORS.primary_red}}>
                 {item.label}
               </button>
             ))}
@@ -106,28 +121,28 @@ const StudentHome = () => {
         {/* Stats Section */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 max-w-5xl mx-auto mb-16">
           <div className="bg-white px-6 py-6 rounded-xl shadow text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#ED1C24]">
+            <h2 className="text-2xl md:text-3xl font-bold " style={{color: COLORS.primary_red}}>
               {stats.students.toLocaleString()}+
             </h2>
-            <p className="text-gray-600 mt-3">Students</p>
+            <p className=" mt-3" style={{color: COLORS.primary_gray}}>Students</p>
           </div>
           <div className="bg-white px-6 py-6 rounded-xl shadow text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#ED1C24]">
+            <h2 className="text-2xl md:text-3xl font-bold" style={{color: COLORS.primary_red}}>
               {stats.courses}+
             </h2>
-            <p className="text-gray-600 mt-3">Courses</p>
+            <p className=" mt-3" style={{color: COLORS.primary_gray}}>Courses</p>
           </div>
           <div className="bg-white px-6 py-6 rounded-xl shadow text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#ED1C24]">
+            <h2 className="text-2xl md:text-3xl font-bold" style={{color: COLORS.primary_red}}>
               {stats.institutes}+
             </h2>
-            <p className="text-gray-600 mt-3">Institutes</p>
+            <p className=" mt-3" style={{color: COLORS.primary_gray}}>Institutes</p>
           </div>
           <div className="bg-white px-6 py-6 rounded-xl shadow text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#ED1C24]">
+            <h2 className="text-2xl md:text-3xl font-bold" style={{color: COLORS.primary_red}}>
               {stats.ratings}/5
             </h2>
-            <p className="text-gray-600 mt-3">Ratings</p>
+            <p className=" mt-3" style={{color: COLORS.primary_gray}}>Ratings</p>
           </div>
         </div>
       </div>

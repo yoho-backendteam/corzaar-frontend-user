@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
 import CourseCard from "./courseCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { COLORS } from "../../Constants/uiconstants";
 
 const RecommendedCourse = () => {
   const topCourses = useSelector(
@@ -12,7 +13,6 @@ const RecommendedCourse = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Scroll function
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const containerWidth = scrollRef.current.offsetWidth;
@@ -23,7 +23,6 @@ const RecommendedCourse = () => {
     }
   };
 
-  // Update active dot when user scrolls
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -46,12 +45,12 @@ const RecommendedCourse = () => {
   return (
     <section className="relative py-10 px-4 md:px-12 lg:px-20  overflow-hidden">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-14 gap-3">
         <div>
           <h2 className="text-2xl md:text-3xl font-bold text-black">
            Recommended Courses
           </h2>
-          <p className="text-[#707070] text-sm md:text-base">
+          <p className=" text-sm md:text-base" style={{color: COLORS.primary_gray}}>
            Bases on your skills interest
           </p>
         </div>
