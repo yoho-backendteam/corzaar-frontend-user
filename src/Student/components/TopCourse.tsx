@@ -55,7 +55,9 @@ const TopCourse = () => {
             Discover quality courses from institues in your area
           </p>
         </div>
-        <button className=" text-white font-semibold px-4 py-2 rounded-lg hover:bg-red-700" style={{background: COLORS.primary_red}}>
+        <button className=" text-white font-semibold px-4 py-2 rounded-lg " style={{ background: COLORS.primary_red }}
+  onMouseEnter={(e) => (e.currentTarget.style.background = "#b01218")}
+  onMouseLeave={(e) => (e.currentTarget.style.background = COLORS.primary_red)}>
           View All
         </button>
       </div>
