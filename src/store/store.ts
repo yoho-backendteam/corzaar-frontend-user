@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import dealsSlice from "../features/deals/dealsSlice"
+import coursesSlice from "../features/courses/courseSlice"
 
 const store = configureStore({
   reducer: {
-    
+     dealSlice : dealsSlice,
+    courseSlice: coursesSlice
   },
 });
 
