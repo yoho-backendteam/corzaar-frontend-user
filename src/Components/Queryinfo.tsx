@@ -1,4 +1,3 @@
-// src/components/ContactInfo.tsx
 import { COLORS, FONTS } from "../Constants/uiconstants";
 import { contactInfo, quickLinks } from "../redux/Queries/querydata";
 
@@ -29,19 +28,31 @@ export default function ContactInfo() {
                         </span>
                     )}
 
-                    <div>
-                        <h4 style={{ ...FONTS.regular2 }}>{item.title}</h4>
-                        {item.value.split("\n").map((line, i) => (
-                            <p key={i} style={{ ...FONTS.regular1, color: COLORS.primary_gray }}>
-                                {line}
-                            </p>
-                        ))}
-                        {item.desc && (
-                            <p style={{ ...FONTS.boldHeading2, color: COLORS.primary_gray }}>
-                                {item.desc}
-                            </p>
-                        )}
-                    </div>
+                    <div className="min-w-0 flex-1 overflow-hidden">
+  <h4 className="whitespace-normal break-word" style={{ ...FONTS.regular2 }}>
+    {item.title}
+  </h4>
+
+  {item.value.split("\n").map((line, i) => (
+    <p
+      key={i}
+      className="whitespace-normal break-word text-sm"
+      style={{ ...FONTS.regular1, color: COLORS.primary_gray }}
+    >
+      {line}
+    </p>
+  ))}
+
+  {item.desc && (
+    <p
+      className="whitespace-normal break-word text-sm"
+      style={{ ...FONTS.boldHeading2, color: COLORS.primary_gray }}
+    >
+      {item.desc}
+    </p>
+  )}
+</div>
+
                 </div>
             ))}
 
