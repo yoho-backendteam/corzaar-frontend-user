@@ -7,7 +7,7 @@ export const Attendance = () => {
   return (
     <div className="flex flex-col items-center">
       {profile.attendance.map((course, index) => (
-       <CourseProgressCard
+        <CourseProgressCard
           key={index}
           title={course.label}
           lastAttended={course.date}

@@ -1,5 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../../../../hooks/reduxhooks";
+import { COLORS } from "../../../../Constants/uiconstants";
 
 type PaymentCardProps = {
   title: string;
@@ -21,23 +22,43 @@ const PaymentCard: React.FC<PaymentCardProps> = ({
   const isCompleted = status.toLowerCase() === "completed";
 
   return (
-    <div className="bg-white shadow-sm rounded-2xl p-5 flex flex-col gap-2 mb-4 border border-gray-200">
-      <h3 className="text-base font-semibold text-gray-800">{title}</h3>
+    <div
+      className=" shadow-sm rounded-2xl p-5 flex flex-col gap-2 mb-4 "
+      style={{ backgroundColor: COLORS.primary_white }}
+    >
+      <h3
+        className="text-base font-semibold text-gray-800"
+        style={{ color: COLORS.primary_gray }}
+      >
+        {title}
+      </h3>
       <div className="flex justify-between items-center">
-        <p className="text-sm text-gray-600">Payment ID: {paymentId}</p>
-        <p className="text-lg font-semibold text-gray-900">₹{amount}</p>
+        <p className="text-sm " style={{ color: COLORS.primary_gray }}>
+          Payment ID: {paymentId}
+        </p>
+        <p
+          className="text-lg font-semibold "
+          style={{ color: COLORS.primary_black }}
+        >
+          ₹{amount}
+        </p>
       </div>
       <div className="flex justify-between items-center">
-        <div className="flex items-center gap-2 text-sm text-gray-600">
+        <div
+          className="flex items-center gap-2 text-sm"
+          style={{ color: COLORS.primary_gray }}
+        >
           <span>{date}</span>
-          <span className="font-medium text-gray-800">{method}</span>
+          <span className="font-medium ">{method}</span>
         </div>
         <span
-          className={`px-3 py-1 text-xs font-medium rounded-full ${
-            isCompleted
-              ? "bg-green-100 text-green-700"
-              : "bg-yellow-100 text-yellow-700"
-          }`}
+          className={`px-3 py-1 text-xs font-medium rounded-full `}
+          style={{
+            backgroundColor: isCompleted
+              ? COLORS.secondary_green
+              : COLORS.primary_yellow,
+            color: COLORS.primary_black,
+          }}
         >
           {status}
         </span>
@@ -51,7 +72,6 @@ export const Payments: React.FC = () => {
 
   return (
     <div className="">
-
       {profile.payments && profile.payments.length > 0 ? (
         profile.payments.map((payment, index) => (
           <PaymentCard key={index} {...payment} />

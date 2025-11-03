@@ -7,7 +7,10 @@ export const Overview = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="bg-white p-6 rounded-xl shadow-sm">
+      <div
+        className="p-6 rounded-xl shadow-sm"
+        style={{ backgroundColor: COLORS.primary_white }}
+      >
         <h3
           className="text-xl font-bold mb-4"
           style={{ fontFamily: FONTS.boldHeading.fontFamily }}
@@ -17,34 +20,42 @@ export const Overview = () => {
         <div className="">
           <form className="grid grid-cols-2 gap-5">
             <div className="flex flex-col gap-2">
-              <label>Full Name</label>
+              <label style={{ color: COLORS.primary_black }}>Full Name</label>
               <input
                 type="text"
                 value={profile.name}
-                className=" p-2 text-sm text-[#707070]"
+                className=" p-2 text-sm "
+                style={{ color: COLORS.primary_gray }}
                 readOnly
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label>Email</label>
+              <label style={{ color: COLORS.primary_black }}>Email</label>
               <input
                 type="email"
                 value={profile.email}
-                className=" p-2 text-sm text-[#707070]"
+                className=" p-2 text-sm "
+                style={{ color: COLORS.primary_gray }}
                 readOnly
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label>Location</label>
+              <label style={{ color: COLORS.primary_black }}>Location</label>
               <input
                 type="text"
                 value={profile.location}
-                className="p-2 text-sm text-[#707070]"
+                className="p-2 text-sm "
+                style={{ color: COLORS.primary_gray }}
                 readOnly
               />
             </div>
             <div>
-              <p className="font-semibold text-gray-700">Role</p>
+              <p
+                className="font-semibold "
+                style={{ color: COLORS.primary_gray }}
+              >
+                Role
+              </p>
               <span
                 className="px-3 py-1 rounded-md text-sm font-medium"
                 style={{
@@ -60,12 +71,15 @@ export const Overview = () => {
 
         {/* Skills */}
         <div className="mt-4">
-          <p className="font-bold text-gray-700 mb-2">Skills</p>
+          <p className="font-bold  mb-2" style={{ color: COLORS.primary_gray }}>
+            Skills
+          </p>
           <div className="flex flex-wrap gap-2">
             {profile.skills.map((skill, i) => (
               <span
                 key={i}
-                className="bg-[#707070]/10 px-3 py-1 rounded-md text-sm"
+                className=" px-3 py-1 rounded-md text-sm"
+                style={{ backgroundColor: `${COLORS.primary_gray}1A` }}
               >
                 {skill}
               </span>
@@ -75,12 +89,18 @@ export const Overview = () => {
 
         {/* Interests */}
         <div className="mt-4">
-          <p className="font-semibold text-gray-700 mb-2">Interests</p>
+          <p
+            className="font-semibold  mb-2"
+            style={{ color: COLORS.primary_gray }}
+          >
+            Interests
+          </p>
           <div className="flex flex-wrap gap-2">
             {profile.interests.map((interest, i) => (
               <span
                 key={i}
-                className="bg-[#707070]/10 px-3 py-1 rounded-md text-sm"
+                className=" px-3 py-1 rounded-md text-sm"
+                style={{ backgroundColor: `${COLORS.primary_gray}1A` }}
               >
                 {interest}
               </span>
@@ -90,9 +110,13 @@ export const Overview = () => {
       </div>
 
       {/* Attendance Overview */}
-      <div className="bg-white p-6 rounded-xl shadow-sm">
+      <div
+        className="bg-white p-6 rounded-xl shadow-sm"
+        style={{ backgroundColor: COLORS.primary_white }}
+      >
         <h3 className="text-xl font-semibold mb-2">Attendance Overview</h3>
-        <p className="text-sm text-[#707070] mb-4">
+        <p className="text-sm  mb-4"
+        style={{color:`${COLORS.primary_gray}`}}>
           Your attendance across all enrolled courses
         </p>
         <div className="flex flex-col gap-4">
@@ -100,17 +124,20 @@ export const Overview = () => {
             <div key={index}>
               <div className="flex justify-between items-center text-sm font-semibold mt-5">
                 <p>{course.label}</p>
-                <p className="bg-[#68D391] px-2 py-[2px] rounded-lg text-white text-xs">
+                <p className=" px-2 py-[2px] rounded-lg  text-xs"
+                style={{backgroundColor:COLORS.secondary_green,color:COLORS.primary_white}}>
                   {course.progress}%
                 </p>
               </div>
-              <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
+              <div className="w-full  h-2 rounded-full mt-1"
+              style={{backgroundColor:`${COLORS.secondary_gray}1A`}}>
                 <div
-                  className="bg-[#707070] h-2 rounded-full"
-                  style={{ width: `${course.progress}%` }}
+                  className="] h-2 rounded-full"
+                  style={{ width: `${course.progress}%` ,backgroundColor:COLORS.primary_gray}}
                 ></div>
               </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <div className="flex justify-between text-xs  mt-1"
+              style={{color:`${COLORS.primary_gray}`}}>
                 <p>
                   {course.sessionsCompleted} / {course.totalSessions} sessions
                 </p>
@@ -122,17 +149,21 @@ export const Overview = () => {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white p-6 rounded-xl shadow-sm">
+      <div className=" p-6 rounded-xl shadow-sm"
+      style={{backgroundColor:COLORS.primary_white}}>
         <h3 className="text-xl font-semibold mb-4">Recent Activity</h3>
         <div className="flex flex-col gap-4">
           {profile.recentActivity.map((item, idx) => (
             <div key={idx} className="flex items-center gap-3 mt-5">
-              <div className="h-10 w-10 flex items-center justify-center rounded-full bg-green-100">
-                <img src={tick} alt="tick"  />
+              <div className="h-10 w-10 flex items-center justify-center rounded-full "
+              style={{backgroundColor:`${COLORS.secondary_green}1A`}}>
+                <img src={tick} alt="tick" />
               </div>
               <div className="flex flex-col">
-                <p className="font-medium text-gray-800">{item.title}</p>
-                <p className="text-xs text-gray-500">{item.date}</p>
+                <p className="font-medium "
+                style={{color:`${COLORS.primary_black}`}}>{item.title}</p>
+                <p className="text-xs text-gray-500"
+                style={{color:`${COLORS.primary_gray}`}}>{item.date}</p>
               </div>
             </div>
           ))}

@@ -39,7 +39,13 @@ export const Settingprofile = () => {
   return (
     <div
       className="min-w-screen min-h-screen"
-      style={{ backgroundColor: COLORS.primary_yellow ,fontFamily:FONTS.regular.fontFamily}}
+      style={{
+        fontFamily: FONTS.regular.fontFamily,
+        fontOpticalSizing: FONTS.regular.fontOpticalSizing as "auto" | "none",
+        fontWeight: FONTS.regular.fontWeight,
+        fontStyle: FONTS.regular.fontStyle,
+        backgroundColor: COLORS.primary_yellow,
+      }}
     >
       <div className="w-full flex h-full p-10 flex flex-col gap-8">
         <ProfileHeader

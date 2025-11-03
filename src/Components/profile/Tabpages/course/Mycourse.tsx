@@ -1,5 +1,6 @@
 import { CourseCard } from "./CourseNote";
 import { useAppSelector } from "../../../../hooks/reduxhooks";
+import { COLORS } from "../../../../Constants/uiconstants";
 
 export const Mycourse = () => {
   const profile = useAppSelector((state) => state.profile);
@@ -18,7 +19,8 @@ export const Mycourse = () => {
           />
         ))
       ) : (
-        <p className="text-gray-500 text-sm">No courses found.</p>
+        <p className="text-sm"
+        style={{color:COLORS.primary_gray}}>No courses found.</p>
       )}
     </div>
   );

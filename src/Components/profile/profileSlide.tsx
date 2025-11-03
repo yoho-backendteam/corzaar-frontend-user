@@ -28,10 +28,12 @@ export const ProfileSlide: React.FC<ProfileSlideProps> = ({
         >
           <img src={icon} alt={label} className="w-6 h-6 object-contain" />
         </div>
-        <p className="text-gray-800 text-xl">{label}</p>
+        <p className=" text-xl"
+        style={{color:`${COLORS.primary_gray}`}}>{label}</p>
       </div>
       <div className="">
-        <p className="text-black font-bold text-3xl">{value}</p>
+        <p className=" font-bold text-3xl"
+        style={{color:COLORS.primary_black}}>{value}</p>
       </div>
     </div>
   );
