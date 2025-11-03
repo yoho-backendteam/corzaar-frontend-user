@@ -67,7 +67,7 @@ export default function ContactForm() {
                 style={{ ...FONTS.medium, color: COLORS.primary_gray }}
             ></textarea>
 
-            <div className="text-right py-11">
+            <div className="text-right py-11.5">
                 <button className="bg-[#ED1C24] px-6 py-3 text-white rounded-lg flex items-center gap-3 float-right">
                     <img src={sndimg} className="w-5" />
                     Send Message
