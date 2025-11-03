@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
+import  studentHomeReducer from '../Student/redux/studentSlice'
 
 const store = configureStore({
   reducer: {
-    
+    studentHome: studentHomeReducer,
   },
 });
 
