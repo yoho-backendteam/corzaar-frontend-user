@@ -25,11 +25,11 @@ export default function CourseCard({ course }: { course: any }) {
       }}
     >
       <div className="relative w-full">
-        <img
-          src={course.image}
-          alt={course.title}
-          className="w-full h-40 sm:h-44 md:h-48 object-cover rounded-lg"
-        />
+      <img
+  src={course.image}
+  alt={course.title}
+  className="w-full h-48 object-cover rounded-lg"
+/>
 
         <span
           className="absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded-md"

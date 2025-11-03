@@ -3,10 +3,12 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useState } from "react";
-import { ChevronDown, SearchIcon, Sliders } from "lucide-react";
+import { ChevronDown, SearchIcon, X } from "lucide-react";
 import CourseCard from "../StudentCourse/CourseCard";
 import FilterSidebar from "../StudentCourse/FilterSidebar";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
+import filter from "../../assets/Image/fillteryl.png";
+
 
 const sortOptions = [
   "Most Popular",
@@ -17,31 +19,27 @@ const sortOptions = [
 ];
 
 export default function ExploreCourses() {
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const courses = useSelector((state: RootState) => state.courses.list);
-
-  console.log("Dummy Data:", courses);
 
   return (
     <div
-      className="min-h-screen"
+      className="min-h-screen w-full flex flex-col"
       style={{ backgroundColor: COLORS.primary_yellow }}
     >
       <header
-        className="sticky top-0 z-40 px-6 py-6 border-b border-black/10"
+        className="sticky top-0 z-40 px-4 md:px-8 py-5 border-b border-black/10"
         style={{ backgroundColor: COLORS.primary_yellow }}
       >
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          {/* Title + Search */}
           <div className="flex-1">
             <h1
-              className=" font-bold mb-3"
+              className="mb-3"
               style={{
                 color: COLORS.primary_black,
                 fontFamily: FONTS.boldHeading.fontFamily,
                 fontWeight: FONTS.boldHeading.fontWeight,
-                fontStyle: FONTS.boldHeading.fontStyle,
                 fontSize: FONTS.boldHeading.fontSize,
               }}
             >
@@ -61,9 +59,7 @@ export default function ExploreCourses() {
                   borderColor: COLORS.primary_gray,
                   color: COLORS.primary_black,
                   fontFamily: FONTS.regular.fontFamily,
-                  fontWeight: FONTS.regular.fontWeight,
                   fontSize: "15px",
-                  outlineColor: COLORS.primary_red,
                 }}
               />
             </div>
@@ -124,27 +120,45 @@ export default function ExploreCourses() {
         </p>
       </header>
 
-      <main className="flex gap-6 px-4 py-6 md:px-8">
-        <aside className="hidden lg:block w-64">
-          <div className="sticky top-24">
+      <main className="flex flex-1 gap-6 px-4 md:px-8 py-6 relative">
+        <aside className="hidden lg:block w-72 shrink-0">
+          <div className="sticky top-28">
             <FilterSidebar />
           </div>
         </aside>
 
-        <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="lg:hidden fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg hover:opacity-90"
-          style={{
-            backgroundColor: COLORS.primary_red,
-            color: COLORS.primary_white,
-            fontFamily: FONTS.medium.fontFamily,
-          }}
-        >
-          <Sliders size={20} />
-          Filters
-        </button>
+        {isSidebarOpen && (
+          <div className="fixed inset-0 z-50 bg-black/40 flex justify-end">
+            <div className="bg-white w-72 h-full p-4 overflow-y-auto shadow-lg">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="font-semibold text-lg">Filters</h2>
+                <button
+                  onClick={() => setIsSidebarOpen(false)}
+                  className="p-2 rounded-full hover:bg-gray-100"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <FilterSidebar />
+            </div>
+          </div>
+        )}
 
-        <section className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <button
+  onClick={() => setIsSidebarOpen(true)}
+  className="lg:hidden fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-full shadow-lg hover:opacity-90"
+  style={{
+    backgroundColor: COLORS.primary_red,
+    fontFamily: FONTS.medium.fontFamily,
+  }}
+>
+  <img src={filter} alt="Filter Icon" className="w-5 h-5" />
+  <span style={{ color: COLORS.primary_white }}>Filters</span>
+</button>
+
+
+
+        <section className="flex-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3  gap-6">
           {courses.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))}

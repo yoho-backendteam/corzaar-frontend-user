@@ -48,11 +48,22 @@ export default function FilterSidebar() {
         >
           Category
         </p>
-        <div className="flex flex-col gap-1 text-sm" style={{ color: COLORS.primary_gray }}>
-          <label><input type="checkbox" className="mr-2 accent-red-600" /> All</label>
-          <label><input type="checkbox" className="mr-2 accent-red-600" /> Technology</label>
-          <label><input type="checkbox" className="mr-2 accent-red-600" /> Finance</label>
-          <label><input type="checkbox" className="mr-2 accent-red-600" /> Business</label>
+        <div
+          className="flex flex-col gap-1 text-sm"
+          style={{ color: COLORS.primary_gray }}
+        >
+          <label>
+            <input type="checkbox" className="mr-2 accent-red-600" /> All
+          </label>
+          <label>
+            <input type="checkbox" className="mr-2 accent-red-600" /> Technology
+          </label>
+          <label>
+            <input type="checkbox" className="mr-2 accent-red-600" /> Finance
+          </label>
+          <label>
+            <input type="checkbox" className="mr-2 accent-red-600" /> Business
+          </label>
         </div>
       </div>
 
@@ -67,10 +78,20 @@ export default function FilterSidebar() {
         >
           Level
         </p>
-        <div className="flex flex-col gap-1 text-sm" style={{ color: COLORS.primary_gray }}>
-          <label><input type="checkbox" className="mr-2 accent-red-600" /> Beginner</label>
-          <label><input type="checkbox" className="mr-2 accent-red-600" /> Intermediate</label>
-          <label><input type="checkbox" className="mr-2 accent-red-600" /> Advanced</label>
+        <div
+          className="flex flex-col gap-1 text-sm"
+          style={{ color: COLORS.primary_gray }}
+        >
+          <label>
+            <input type="checkbox" className="mr-2 accent-red-600" /> Beginner
+          </label>
+          <label>
+            <input type="checkbox" className="mr-2 accent-red-600" />{" "}
+            Intermediate
+          </label>
+          <label>
+            <input type="checkbox" className="mr-2 accent-red-600" /> Advanced
+          </label>
         </div>
       </div>
 
@@ -101,7 +122,11 @@ export default function FilterSidebar() {
                 className="w-5 h-5 flex items-center justify-center rounded mr-1"
                 style={{ backgroundColor: COLORS.primary_yellow }}
               >
-                <Star className="w-3 h-3" style={{ color: COLORS.primary_white }} fill={COLORS.primary_white} />
+                <Star
+                  className="w-3 h-3"
+                  style={{ color: COLORS.primary_white }}
+                  fill={COLORS.primary_white}
+                />
               </div>
               4.9 & Above
             </span>
@@ -121,7 +146,11 @@ export default function FilterSidebar() {
                 className="w-5 h-5 flex items-center justify-center rounded mr-1"
                 style={{ backgroundColor: COLORS.primary_yellow }}
               >
-                <Star className="w-3 h-3" style={{ color: COLORS.primary_white }} fill={COLORS.primary_white} />
+                <Star
+                  className="w-3 h-3"
+                  style={{ color: COLORS.primary_white }}
+                  fill={COLORS.primary_white}
+                />
               </div>
               4 & Above
             </span>
@@ -141,7 +170,11 @@ export default function FilterSidebar() {
                 className="w-5 h-5 flex items-center justify-center rounded mr-1"
                 style={{ backgroundColor: COLORS.primary_yellow }}
               >
-                <Star className="w-3 h-3" style={{ color: COLORS.primary_white }} fill={COLORS.primary_white} />
+                <Star
+                  className="w-3 h-3"
+                  style={{ color: COLORS.primary_white }}
+                  fill={COLORS.primary_white}
+                />
               </div>
               3.5 & Above
             </span>
@@ -161,7 +194,11 @@ export default function FilterSidebar() {
                 className="w-5 h-5 flex items-center justify-center rounded mr-1"
                 style={{ backgroundColor: COLORS.primary_yellow }}
               >
-                <Star className="w-3 h-3" style={{ color: COLORS.primary_white }} fill={COLORS.primary_white} />
+                <Star
+                  className="w-3 h-3"
+                  style={{ color: COLORS.primary_white }}
+                  fill={COLORS.primary_white}
+                />
               </div>
               3 & Above
             </span>
@@ -208,10 +245,19 @@ export default function FilterSidebar() {
         >
           Mode
         </p>
-        <div className="flex flex-col gap-1 text-sm" style={{ color: COLORS.primary_gray }}>
-          <label><input type="checkbox" className="mr-2 accent-red-600" /> Online</label>
-          <label><input type="checkbox" className="mr-2 accent-red-600" /> Offline</label>
-          <label><input type="checkbox" className="mr-2 accent-red-600" /> Hybrid</label>
+        <div
+          className="flex flex-col gap-1 text-sm"
+          style={{ color: COLORS.primary_gray }}
+        >
+          <label>
+            <input type="checkbox" className="mr-2 accent-red-600" /> Online
+          </label>
+          <label>
+            <input type="checkbox" className="mr-2 accent-red-600" /> Offline
+          </label>
+          <label>
+            <input type="checkbox" className="mr-2 accent-red-600" /> Hybrid
+          </label>
         </div>
       </div>
 
