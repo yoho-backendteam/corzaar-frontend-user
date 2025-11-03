@@ -28,6 +28,41 @@ export const FONTS = {
     fontStyle: 'normal',
     fontSize: '30px',
   },
+    boldHeading1: {
+    fontFamily: '"Source Serif 4", serif',
+    fontWeight: 600,
+    fontStyle: 'normal',
+    fontSize: '22px',
+  },
+   regular1: {
+    fontFamily: '"Source Serif 4", serif',
+    fontWeight: 400,
+    fontStyle: 'normal',
+    fontSize: '14px',
+  },
+
+   regular2: {
+    fontFamily: '"Source Serif 4", serif',
+    fontWeight: 600,
+    fontStyle: 'normal',
+    fontSize: '14px',
+  },
+   boldHeading2: {
+    fontFamily: '"Source Serif 4", serif',
+    fontWeight: 400,
+    fontStyle: 'normal',
+    fontSize: '12px',
+  },
+   boldHeading3: {
+    fontFamily: '"Source Serif 4", serif',
+    fontWeight: 700,
+    fontSize: '22px',
+  },
+  boldHeading4: {
+    fontFamily: '"Source Serif 4", serif',
+    fontWeight: 600,
+    fontSize: '20px',
+  },
 };
 
 
