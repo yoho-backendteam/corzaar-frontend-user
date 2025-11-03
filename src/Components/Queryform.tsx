@@ -13,10 +13,10 @@ export default function ContactForm() {
     return (
         <div className="bg-white p-6 md:p-7 rounded-xl shadow w-full">
             <h2 className="text-right font-semibold" style={{ ...FONTS.boldHeading3 }}>
-                Send Us A Message
+                Send Us A Message<br/><br/>
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8">
 
                 {[
                     ["fullName", "Full Name"],
@@ -67,7 +67,7 @@ export default function ContactForm() {
                 style={{ ...FONTS.medium, color: COLORS.primary_gray }}
             ></textarea>
 
-            <div className="text-right py-13">
+            <div className="text-right py-11">
                 <button className="bg-[#ED1C24] px-6 py-3 text-white rounded-lg flex items-center gap-3 float-right">
                     <img src={sndimg} className="w-5" />
                     Send Message
