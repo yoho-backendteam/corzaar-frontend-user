@@ -3,7 +3,7 @@ export const COLORS = {
     primary_yellow: '#FFDD00',
     primary_gray: '#707070',
     primary_black: '#000000',
-    primary_white: '#000000'
+    primary_white: '#ffffff',
 };
 
 // uiConstants.js
