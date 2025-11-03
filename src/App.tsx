@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import store from './store/store'
 import OfferPage from './pages/OfferPage'
 import Queries from "../src/Pages/Queries.tsx";
+import StudentHome from './Student/page/StudentHome'
 
 function App() {
 
@@ -14,7 +15,8 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<StudentCourse />} />
+          <Route path='/' element={<StudentHome />} />
+          <Route path='/course' element={<StudentCourse />} />
           <Route path='/offer' element={<OfferPage />} />
           <Route path='/query' element={<Queries />} />
         </Routes>
