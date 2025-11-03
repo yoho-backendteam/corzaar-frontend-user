@@ -17,7 +17,7 @@ const Notification: React.FC = () => {
 
   return (
     <div className="bg-yellow-400 min-h-screen px-4 sm:px-6 md:px-10 py-6">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 space-y-3 md:space-y-0">
+      <div className="flex flex-col gap-4 md:flex-row justify-between items-start md:items-center mb-6 space-y-3 md:space-y-0">
         <div>
           <h1 className="text-xl md:text-2xl font-semibold text-black"style={{ ...FONTS.boldHeading }}>
             Notifications
@@ -61,12 +61,12 @@ const Notification: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 sm:gap-3 mb-6" style={{ ...FONTS.medium }}>
+      <div className="flex flex-wrap gap-2 justify-center sm:justify-start items-center sm:gap-3 mb-6 text-center" style={{ ...FONTS.medium }}>
         {["all", "unread", "read"].map((f) => (
           <button
             key={f}
             onClick={() => dispatch(setFilter(f as any))}
-            className={`px-4 py-2 rounded-md text-sm font-medium capitalize transition-all w-full sm:w-auto
+            className={`px-4 py-2 rounded-md text-sm font-medium capitalize transition-all
               ${filterType === f
                 ? "bg-red-600 text-white shadow"
                 : "bg-white text-black border border-gray-300 hover:bg-gray-100"
@@ -98,7 +98,7 @@ const Notification: React.FC = () => {
                 <h2 className="font-semibold text-gray-800 text-sm sm:text-base" style={{ ...FONTS.medium }}>
                   {n.title}
                 </h2>
-                <p className="text-sm text-gray-600 leading-snug" style={{ ...FONTS.regular }}>
+                <p className=" text-sm text-gray-600 leading-snug" style={{ ...FONTS.regular }}>
                   {n.message}
                 </p>
                 <p className="text-xs text-gray-400 mt-2"style={{ ...FONTS.medium }}>
@@ -107,7 +107,7 @@ const Notification: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+            <div className="flex sm:flex-nowrap items-center gap-2 sm:gap-3 flex-wrap justify-end">
               {!n.read && (
                 <button
                   onClick={() => dispatch(markAsRead(n.id))}
@@ -122,7 +122,7 @@ const Notification: React.FC = () => {
               </button>
               <button
                 onClick={() => dispatch(deleteNotification(n.id))}
-                className="text-[#ED1C24] "
+                className="text-[#ED1C24] flex items-center p-1 justify-center"
               >
                 <Trash2 className="w-5 h-5" />
               </button>

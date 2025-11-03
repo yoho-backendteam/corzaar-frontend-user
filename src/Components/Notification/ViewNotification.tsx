@@ -36,7 +36,7 @@ const ViewNotification: React.FC<ViewNotificationProps> = ({
 
                 </button>
 
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-3 mb-8">
                     <div>
                         <span className="text-lg">
                             <img src={offericon1} alt="icon" className="w-8 h-8" />
@@ -62,11 +62,9 @@ const ViewNotification: React.FC<ViewNotificationProps> = ({
                         className="bg-[#ED1C24] text-white px-4 py-2 rounded-md text-sm " style={{ ...FONTS.medium }}>
                         View Details
                     </button>
-
-
                 </div>
 
-                <div className="flex justify-between mt-4">
+                <div className="flex justify-between mt-10">
                     <div>
                         <button className="px-2 rounded-full border border-[#9810FA] text-[#9810FA]" style={{ ...FONTS.medium }}>Promo</button>
                     </div>
