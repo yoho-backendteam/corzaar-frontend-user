@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import dealsSlice from "../features/deals/dealsSlice"
 import coursesSlice from "../features/courses/courseSlice"
+import courseReducer from "../Components/Redux/CourseSlice";
 
 const store = configureStore({
   reducer: {
-     dealSlice : dealsSlice,
-    courseSlice: coursesSlice
+    dealSlice: dealsSlice,
+    courseSlice: coursesSlice,
+    courses: courseReducer,
   },
 });
 

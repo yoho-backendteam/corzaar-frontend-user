@@ -1,9 +1,9 @@
 export const COLORS = {
-    primary_red: '#ED1C24',
-    primary_yellow: '#FFDD00',
-    primary_gray: '#707070',
-    primary_black: '#000000',
-    primary_white: '#FFFFFF'
+  primary_red: '#ED1C24',
+  primary_yellow: '#FFDD00',
+  primary_gray: '#707070',
+  primary_black: '#000000',
+  primary_white: '#FFFFFF',
 };
 
 // uiConstants.js
