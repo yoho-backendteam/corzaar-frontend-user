@@ -11,7 +11,7 @@ export default function ContactForm() {
     const change = (f, v) => dispatch(updateField({ field: f, value: v }));
 
     return (
-        <div className="bg-white p-6 md:p-7 rounded-xl shadow w-full">
+        <div className="bg-white p-6 md:p-7 rounded-xl shadow w-full h-full">
             <h2 className="text-right font-semibold" style={{ ...FONTS.boldHeading3 }}>
                 Send Us A Message<br/><br/>
             </h2>
