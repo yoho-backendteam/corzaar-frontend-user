@@ -4,6 +4,7 @@ import coursesSlice from "../features/courses/courseSlice"
 import courseReducer from "../Components/Redux/CourseSlice";
 import contactReducer from "../redux/Queries/queryslice";
 import studentHomeReducer from '../Student/redux/studentSlice'
+import profileReducer from "../features/profile/profileSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     courses: courseReducer,
     contact: contactReducer,
     studentHome: studentHomeReducer,
+    profile: profileReducer,
   },
 });
 export default store;

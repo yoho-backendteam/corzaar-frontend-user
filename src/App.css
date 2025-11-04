@@ -4,4 +4,14 @@
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+::-webkit-scrollbar {
+  display: none;
+}
+html, body {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
+  overflow: -moz-scrollbars-none;
+}
+body {
+  overflow-y: scroll;
 }
