@@ -7,6 +7,7 @@ import OfferPage from './pages/OfferPage'
 import Queries from "../src/Pages/Queries.tsx";
 import StudentHome from './Student/page/StudentHome'
 import { Settingprofile } from "./pages/Settingprofile";
+import Student_cart from './pages/Student_Cart/student_cart'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/offer' element={<OfferPage />} />
           <Route path='/query' element={<Queries />} />
           <Route path='/setting' element={<Settingprofile />} />
+          <Route path='/cart' element={<Student_cart />} />
         </Routes>
 
       </BrowserRouter>
