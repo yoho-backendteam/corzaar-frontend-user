@@ -2,15 +2,18 @@ import { Provider } from 'react-redux'
 import './App.css'
 
 import store from './store/store'
-import OfferPage from './pages/OfferPage'
+import LayoutRoute from './Routes/LayoutRoute'
+
+
 
 
 function App() {
 
   return (
     <>
+    
     <Provider store={store}>
-      <OfferPage />   
+       <LayoutRoute/>
     </Provider>
     </>
   )
