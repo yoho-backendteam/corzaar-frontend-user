@@ -23,7 +23,7 @@ const Navbar:React.FC = () => {
     <div>
           
     <nav className="shadow-md sticky top-0 z-50" style={{ ...(FONTS.regular as any) , background : COLORS.primary_white}}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between p-7 gap-4">
+      <div className=" flex flex-wrap items-center justify-between p-7 gap-4">
 
        <NavLink to="/">
         <div className="flex items-center gap-2">
