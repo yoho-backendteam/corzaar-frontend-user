@@ -1,11 +1,11 @@
 "use client";
 
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import {type RootState } from "../../store/store";
 import { useState } from "react";
 import { ChevronDown, SearchIcon, X } from "lucide-react";
-import CourseCard from "../StudentCourse/CourseCard";
-import FilterSidebar from "../StudentCourse/FilterSidebar";
+import CourseCard from "./CourseCard";
+import FilterSidebar from "./FilterSidebar";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import filter from "../../assets/Image/fillteryl.png";
 

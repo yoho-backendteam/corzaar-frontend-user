@@ -113,5 +113,7 @@ export const FONTS = {
     // fontSize: "28px",
     fontSize: "16px"
   },
-
 };
+
+
+

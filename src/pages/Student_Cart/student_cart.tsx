@@ -4,7 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { LuClock4 } from "react-icons/lu";
-const student_cart = () => {
+const Student_cart = () => {
     return (
         <div className='h-screen p-5' style={{ backgroundColor: COLORS.primary_yellow }}>
             <div className=''>
@@ -140,4 +140,4 @@ const student_cart = () => {
     )
 }
 
-export default student_cart
+export default Student_cart

@@ -1,5 +1,5 @@
-import ContactInfo from "../Components/Queryinfo";
-import ContactForm from "../Components/Queryform";
+import ContactInfo from "../components/Queryinfo";
+import ContactForm from "../components/Queryform";
 import { FONTS } from "../Constants/uiconstants";
 
 export default function ContactPage() {
@@ -7,10 +7,10 @@ export default function ContactPage() {
         <div className="w-full">
 
             <div className="bg-[#ED1C24] text-white text-center py-20 px-4">
-                <h1 className="text-2xl md:text-3xl" style={{ ...FONTS.boldHeading1 }}>
+                <h1 className="text-2xl md:text-3xl" style={{ ...FONTS.boldHeading as any}}>
                     Get in Touch
                 </h1>
-                <p className="max-w-2xl mx-auto text-sm md:text-base mt-2" style={{ ...FONTS.regular1 }}>
+                <p className="max-w-2xl mx-auto text-sm md:text-base mt-2" style={{ ...FONTS.regular as any}}>
                     Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
                 </p>
             </div>
