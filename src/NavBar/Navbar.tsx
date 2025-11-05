@@ -139,29 +139,48 @@ const Navbar:React.FC = () => {
 
 
       {showProfile && (
-           <div className="absolute right-0 mt-3 w-64 bg-white shadow-lg rounded-2xl p-5 z-50">
-          <h2 className="text-lg font-semibold text-gray-900">Rahul Sharma</h2>
-          <p className="text-gray-500 text-sm mb-4">Student</p>
+  <div className="absolute right-0 mt-3 w-64 bg-white shadow-lg rounded-2xl p-5 z-50">
+    <h2 className="text-lg font-semibold text-gray-900">Rahul Sharma</h2>
+    <p className="text-gray-500 text-sm mb-4">Student</p>
 
-          <ul className="space-y-3 text-gray-700">
-            <li className="flex items-center gap-2 hover:text-black cursor-pointer">
-              <FiUser size={16} /> My Profile
-              
-            </li>
-            <li className="flex items-center gap-2 hover:text-black cursor-pointer">
-              <FiShoppingCart size={16} /> My Courses
-            </li>
-            <li className="flex items-center gap-2 hover:text-black cursor-pointer">
-              <IoSettingsOutline size={16} /> Settings
-            </li>
-          </ul>
+    <ul className="space-y-3 text-gray-700">
+      <Link to="Portfolio" onClick={() => setShowProfile(false)}>
+        <li className="flex items-center gap-2 hover:text-black cursor-pointer">
+          <FiUser size={16} /> My Profile
+        </li>
+      </Link>
 
-          <button className="flex items-center justify-center gap-1  w-full py-2 mt-5 rounded-md hover:bg-red-600 transition" style={{background : COLORS.primary_red , color:COLORS.primary_white}}>
-           <img src={logout} alt="logout icon" className="w-5 h-5" />
-         Logout
-          </button>
-        </div>
-      )}
+     <Link to="Mycourse" onClick={() => setShowProfile(false)}>
+     <li className="flex items-center gap-2 hover:text-black cursor-pointer">
+        <FiShoppingCart size={16} /> My Courses
+      </li>
+     </Link>
+      
+
+      <Link to="Settingprofile" onClick={() => setShowProfile(false)}>
+        <li className="flex items-center gap-2 hover:text-black cursor-pointer">
+          <IoSettingsOutline size={16} /> Settings
+        </li>
+      </Link>
+    </ul>
+
+    <button
+      onClick={() => {
+        
+        setShowProfile(false);
+      }}
+      className="flex items-center justify-center gap-1 w-full py-2 mt-5 rounded-md hover:bg-red-600 transition"
+      style={{
+        background: COLORS.primary_red,
+        color: COLORS.primary_white,
+      }}
+    >
+      <img src={logout} alt="logout icon" className="w-5 h-5" />
+      Logout
+    </button>
+  </div>
+)}
+
     </div>
         </div>
 

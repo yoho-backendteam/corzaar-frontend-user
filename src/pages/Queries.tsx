@@ -1,9 +1,10 @@
 import React from 'react'
+import ContactPage from "../components/Querypage";
 
-const Queries:React.FC= () => {
+const Queries:React.FC = () => {
   return (
     <div>
-        Queries
+      <ContactPage />
     </div>
   )
 }

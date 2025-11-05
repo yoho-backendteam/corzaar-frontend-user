@@ -9,6 +9,11 @@ import Navbar from '../NavBar/Navbar'
 import CartPage from '../pages/CartPage'
 import NotificationPage from '../pages/NotificationPage'
 import ProfilePage from '../pages/ProfilePage'
+import StudentHome from '../Student/page/StudentHome'
+import StudentCourse from '../components/StudentCourse/StudentCourse'
+import { Settingprofile } from '../pages/Settingprofile'
+import { Portfolio } from '../components/profile/Tabpages/Portfolio/Portfolio'
+
 
 const LayoutRoute : React.FC = () => {
   return (
@@ -20,10 +25,16 @@ const LayoutRoute : React.FC = () => {
             <Route path='/Courses' element={<Courses/>}/>
             <Route path='/Institutes' element={<Institutes/>}/>
             <Route path='/Offers' element={<OfferPage/>}/>
-            <Route path='/Queries' element={<Queries/>}/>
             <Route path='/cartPage' element={<CartPage/>}/>
             <Route path='/notificationPage' element={<NotificationPage/>} />
             <Route path='/profilePage' element={<ProfilePage/>} />
+            <Route path='/' element={<StudentHome />} />
+          <Route path='/course' element={<StudentCourse />} />
+          <Route path='/offer' element={<OfferPage />} />
+          <Route path='/Queries' element={<Queries />} />
+          <Route path='/settingprofile' element={<Settingprofile/>} />
+          <Route path='/Portfolio' element={<Portfolio/>} />
+
         </Routes>
         
         </BrowserRouter>
