@@ -1,8 +1,10 @@
-import React from 'react'
+import Notification from '../Components/Notification/Notification'
 
-const NotificationPage : React.FC = () => {
+const NotificationPage = () => {
   return (
-    <div>NotificationPage</div>
+    <div>
+      <Notification/>
+    </div>
   )
 }
 
