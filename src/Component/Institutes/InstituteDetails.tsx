@@ -431,4 +431,4 @@ const InstituteDetails: React.FC = () => {
   );
 };
 
-export default InstituteDetails;
+export default InstituteDetails; 
