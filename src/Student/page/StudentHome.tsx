@@ -15,7 +15,7 @@ import { FaArrowRight } from "react-icons/fa";
 import teacher from '../../assets/teacher4.png'
 
 
-const StudentHome = () => {
+const StudentHome:React.FC = () => {
   const { stats, filters } = useSelector(
     (state: RootState) => state.studentHome
   );

@@ -11,15 +11,21 @@ import NotificationPage from '../pages/NotificationPage'
 import ProfilePage from '../pages/ProfilePage'
 import { Settingprofile } from '../pages/Settingprofile'
 import { Portfolio } from '../components/profile/Tabpages/Portfolio/Portfolio'
+// import SignIn from '../components/Authentication/SignIn'
+import StepProgress from '../components/StudentVerfication/StudentRegistration'
 
 
 const LayoutRoute : React.FC = () => {
   return (
     <div>
         <BrowserRouter>
+        <Routes>
+            {/* <Route path='/' element={<SignIn/>}/> */}
+            <Route path='/' element={<StepProgress/>}/>
+        </Routes>
         <Navbar/>
         <Routes>
-            <Route path='/' element={<Home/>}/>
+            <Route path='/Home' element={<Home/>}/>
             <Route path='/Courses' element={<Courses/>}/>
             <Route path='/Institutes' element={<Institutes/>}/>
             <Route path='/Offers' element={<OfferPage/>}/>
