@@ -10,6 +10,7 @@ import carticon from '../assets/images/shopping-cart.png'
 import notify from '../assets/images/notification.png'
 import profileimg from '../assets/images/profileimg.png'
 import logout from '../assets/images/export.svg'
+import { useNavigate } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,6 +18,7 @@ const Navbar: React.FC = () => {
   const [location, setLocation] = useState("Mumbai, India");
   const locations = ["Chennai", "Bangalore", "Pune", "Salem"];
   const [showProfile, setShowProfile] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -24,7 +26,7 @@ const Navbar: React.FC = () => {
         <div className="flex flex-wrap items-center justify-between px-5 md:px-7 py-4 md:py-7 gap-4">
 
          
-          <NavLink to="/" className="sm:flex md:flex items-center gap-2">
+          <NavLink to="/Home" className="sm:flex md:flex items-center gap-2">
             <img src={logocap} alt="Logo" className="w-8 h-8" />
             <h1 style={{ ...(FONTS.boldHeading as any), color: COLORS.primary_red }} className="hidden sm:block">CORZAAR</h1>
           </NavLink>
@@ -163,16 +165,19 @@ const Navbar: React.FC = () => {
                   </ul>
 
                   <button
-                    onClick={() => setShowProfile(false)}
-                    className="flex items-center justify-center gap-1 w-full py-2 mt-5 rounded-md hover:bg-red-600 transition"
-                    style={{
-                      background: COLORS.primary_red,
-                      color: COLORS.primary_white,
-                    }}
-                  >
-                    <img src={logout} alt="logout icon" className="w-5 h-5" />
-                    Logout
-                  </button>
+      onClick={() => {
+       
+        navigate("/"); 
+      }}
+      className="flex items-center justify-center gap-1 w-full py-2 mt-5 rounded-md hover:bg-red-600 transition"
+      style={{
+        background: COLORS.primary_red,
+        color: COLORS.primary_white,
+      }}
+    >
+      <img src={logout} alt="logout icon" className="w-5 h-5" />
+      Logout
+    </button>
                 </div>
               )}
             </div>
