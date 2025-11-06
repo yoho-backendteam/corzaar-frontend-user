@@ -21,7 +21,6 @@ const LayoutRoute : React.FC = () => {
         <BrowserRouter>
         <Routes>
             <Route path='/' element={<SignIn/>}/>
-            <Route path='/student-register' element={<StudentRegistration/>}/>
         </Routes>
        <Navbar/>
         <Routes>
@@ -37,6 +36,8 @@ const LayoutRoute : React.FC = () => {
           <Route path='/Portfolio' element={<Portfolio/>} />
           {/* profile -> Mycourse */}
           <Route path='/Mycourse' element={<CartPage/>}/>     
+        <Route path='/student-register' element={<StudentRegistration/>}/>
+
         </Routes>
         
         </BrowserRouter>
