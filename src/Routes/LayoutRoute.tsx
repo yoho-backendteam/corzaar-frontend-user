@@ -21,8 +21,6 @@ const LayoutRoute: React.FC = () => {
         
         <Route path="/" element={<SignIn />} />
         <Route path="/student-register" element={<StudentRegistration />} />
-
-       
         <Route
           path="/*"
           element={

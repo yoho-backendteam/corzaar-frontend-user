@@ -7,11 +7,6 @@ import SendOTP from "./SendOTP";
 import OTPVerification from "./OTPVerification";
 import { useNavigate } from "react-router-dom";
 
-
-
-
-
-
 const SignIn = () => {
 const navigate = useNavigate();
   const [method, setMethod] = useState<"password" | "otp">("password");
@@ -101,7 +96,7 @@ const navigate = useNavigate();
 
        
         <div
-          className="w-full md:w-1/2 bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between transition-all duration-300"
+          className="w-full md:w-1/2 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between "
           style={{
             backgroundColor: COLORS.primary_white,
             minHeight: "520px", 

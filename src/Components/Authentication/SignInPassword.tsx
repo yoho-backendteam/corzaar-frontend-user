@@ -16,7 +16,7 @@ const SignInPassword = () => {
         Email or Phone
       </label>
       <div className="flex items-center border rounded-md px-3 py-2 mb-4 mt-1">
-        <Mail className="w-4 h-4 mr-2 text-gray-400" />
+        <Mail className="w-4 h-4 mr-2 " style={{color:COLORS.primary_red}}/>
         <input
           type="text"
           placeholder="Enter Email or Phone"
@@ -29,7 +29,7 @@ const SignInPassword = () => {
         Password
       </label>
       <div className="flex items-center border rounded-md px-3 py-2 mt-1 mb-2">
-        <Lock className="w-4 h-4 mr-2 text-gray-400" />
+        <Lock className="w-4 h-4 mr-2 " style={{color:COLORS.primary_red}}/>
         <input
           type="password"
           placeholder="Enter your Password"
