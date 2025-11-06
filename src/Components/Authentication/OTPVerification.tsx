@@ -1,10 +1,12 @@
 import { COLORS, FONTS } from "../../Constants/uiconstants";
+import { useNavigate } from "react-router-dom";
 
 interface OTPVerificationProps {
   goBack: () => void;
 }
 
 const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
+    const navigate = useNavigate();
   return (
     <div className="w-full">
       <label style={{ ...(FONTS.medium as any), fontSize: "14px", color: COLORS.C_DIV_Title }}>
@@ -39,11 +41,15 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
       </button>
 
       <button
-        className="w-full py-2 rounded-md font-semibold text-sm"
-        style={{ backgroundColor: COLORS.primary_red, color: COLORS.primary_white }}
-      >
-        Verify & Sign In
-      </button>
+      onClick={() => navigate("/Home")} 
+      className="w-full py-2 rounded-md font-semibold text-sm"
+      style={{
+        backgroundColor: COLORS.primary_red,
+        color: COLORS.primary_white,
+      }}
+    >
+      Verify & Sign In
+    </button>
     </div>
   );
 };

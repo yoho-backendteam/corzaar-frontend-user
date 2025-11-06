@@ -1,10 +1,11 @@
 import React from "react";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
-import { HiOutlineLocationMarker } from "react-icons/hi";
+import { HiOutlineUsers } from "react-icons/hi2";
+
 
 const StudentInfo: React.FC = () => (
   <div>
-    <h2 style={{ ...FONTS.S_Cart_title, color: COLORS.C_DIV_Title }}><HiOutlineLocationMarker size={24} />Student Information</h2>
+    <h2 style={{ ...FONTS.S_Cart_title, color: COLORS.C_DIV_Title }} className="flex items-center gap-2"><HiOutlineUsers size={38} className="rounded-full p-2 sm:p-3 md:p-2" style={{background:COLORS.primary_red, color:COLORS.primary_white}}/>Student Information</h2>
     <p style={{ ...FONTS.regular as any, color: COLORS.primary_gray }}>Let's Start with the Basics</p>
 
     <label htmlFor="fullName" style={{ ...FONTS.medium as any, display: "block", marginTop: "20px" }}>

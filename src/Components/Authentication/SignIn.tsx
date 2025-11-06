@@ -5,8 +5,15 @@ import logocap from "../../assets/images/logocap.png";
 import SignInPassword from "./SignInPassword";
 import SendOTP from "./SendOTP";
 import OTPVerification from "./OTPVerification";
+import { useNavigate } from "react-router-dom";
+
+
+
+
+
 
 const SignIn = () => {
+const navigate = useNavigate();
   const [method, setMethod] = useState<"password" | "otp">("password");
   const [otpStep, setOtpStep] = useState<"enter-phone" | "enter-otp">("enter-phone");
 
@@ -174,21 +181,26 @@ const SignIn = () => {
           </div>
 
           
-          <p
-            className="text-center mt-4 text-sm"
-            style={{ color: COLORS.primary_gray }}
-          >
-            Don’t have an account?{" "}
-            <span
-              style={{
-                color: COLORS.primary_red,
-                fontWeight: 600,
-                cursor: "pointer",
-              }}
-            >
-              Sign up now
-            </span>
-          </p>
+         <p
+  className="text-center mt-4 text-sm"
+  style={{ color: COLORS.primary_gray }}
+>
+  Don’t have an account?{" "}
+  <button
+    onClick={() => navigate("/student-register")}
+    style={{
+      color: COLORS.primary_red,
+      fontWeight: 600,
+      cursor: "pointer",
+      background: "none",
+      border: "none",
+      padding: 0,
+      fontSize: "inherit",
+    }}
+  >
+    Sign up now
+  </button>
+</p>
         </div>
       </div>
     </div>

@@ -7,8 +7,8 @@ interface AddressProps {
 
 const Address: React.FC<AddressProps> = ({ InputField }) => (
   <div>
-    <h2 style={{ ...FONTS.S_Cart_title, color: COLORS.C_DIV_Title }}>
-     <HiOutlineLocationMarker size={24} />  Address Information
+    <h2 style={{ ...FONTS.S_Cart_title, color: COLORS.C_DIV_Title }} className="flex items-center gap-2"> 
+     <HiOutlineLocationMarker size={38} className="rounded-full p-2 sm:p-3 md:p-2" style={{background:COLORS.primary_red, color:COLORS.primary_white}} />  Address Information
     </h2>
     <p style={{ ...FONTS.regular as any, color: COLORS.primary_gray }}>
       Where can we reach you?

@@ -9,7 +9,7 @@ interface PersonalDetailsProps {
 
 const PersonalDetails: React.FC<PersonalDetailsProps> = ({ InputField, SelectField }) => (
   <div>
-    <h2 style={{ ...FONTS.S_Cart_title, color: COLORS.C_DIV_Title }}><LuUserRound size={24} />Personal Details</h2>
+    <h2 style={{ ...FONTS.S_Cart_title, color: COLORS.C_DIV_Title }} className="flex items-center gap-2"><LuUserRound size={38} className="rounded-full p-2 sm:p-3 md:p-2" style={{background:COLORS.primary_red, color:COLORS.primary_white}} />Personal Details</h2>
     <p style={{ ...FONTS.regular as any, color: COLORS.primary_gray }}>Help us know you better</p>
 
     <div

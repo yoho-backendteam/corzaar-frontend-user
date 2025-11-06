@@ -10,8 +10,8 @@ interface EmergencyContactProps {
 const EmergencyContact: React.FC<EmergencyContactProps> = ({ InputField }) => (
   <div>
     <div className="shadow-md p-4 rounded-2xl mb-5">
-    <h1 style={{ ...FONTS.S_Cart_title, color: COLORS.C_DIV_Title, marginBottom: "8px" }}>
-     <HiOutlinePhone size={24} /> Emergency Contact
+    <h1 style={{ ...FONTS.S_Cart_title, color: COLORS.C_DIV_Title, marginBottom: "8px" }} className="flex items-center gap-2"> 
+     <HiOutlinePhone size={38} className="rounded-full p-2 sm:p-3 md:p-2" style={{background:COLORS.primary_red, color:COLORS.primary_white}} /> Emergency Contact
     </h1>
     <p style={{ ...FONTS.regular as any, color: COLORS.primary_gray, marginBottom: "32px" }}>
       Someone we can reach in emergencies

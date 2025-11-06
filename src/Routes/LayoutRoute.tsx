@@ -11,7 +11,7 @@ import NotificationPage from '../pages/NotificationPage'
 import ProfilePage from '../pages/ProfilePage'
 import { Settingprofile } from '../pages/Settingprofile'
 import { Portfolio } from '../components/profile/Tabpages/Portfolio/Portfolio'
-// import SignIn from '../components/Authentication/SignIn'
+import SignIn from '../components/Authentication/SignIn'
 import StudentRegistration from '../components/StudentVerfication/StudentRegistration'
 
 
@@ -20,10 +20,10 @@ const LayoutRoute : React.FC = () => {
     <div>
         <BrowserRouter>
         <Routes>
-            {/* <Route path='/' element={<SignIn/>}/> */}
-            <Route path='/' element={<StudentRegistration/>}/>
+            <Route path='/' element={<SignIn/>}/>
+            <Route path='/student-register' element={<StudentRegistration/>}/>
         </Routes>
-        <Navbar/>
+       <Navbar/>
         <Routes>
             <Route path='/Home' element={<Home/>}/>
             <Route path='/Courses' element={<Courses/>}/>
