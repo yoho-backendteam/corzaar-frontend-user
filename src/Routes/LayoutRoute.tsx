@@ -12,7 +12,7 @@ import ProfilePage from '../pages/ProfilePage'
 import { Settingprofile } from '../pages/Settingprofile'
 import { Portfolio } from '../components/profile/Tabpages/Portfolio/Portfolio'
 // import SignIn from '../components/Authentication/SignIn'
-import StepProgress from '../components/StudentVerfication/StudentRegistration'
+import StudentRegistration from '../components/StudentVerfication/StudentRegistration'
 
 
 const LayoutRoute : React.FC = () => {
@@ -21,7 +21,7 @@ const LayoutRoute : React.FC = () => {
         <BrowserRouter>
         <Routes>
             {/* <Route path='/' element={<SignIn/>}/> */}
-            <Route path='/' element={<StepProgress/>}/>
+            <Route path='/' element={<StudentRegistration/>}/>
         </Routes>
         <Navbar/>
         <Routes>
