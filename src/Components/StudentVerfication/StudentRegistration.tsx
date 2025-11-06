@@ -234,11 +234,11 @@ const StudentRegistration: React.FC = () => {
                 setStep((s) => Math.min(4, s + 1));
               }
             }}
-            className={`flex items-center justify-center gap-2 px-6 py-2 rounded-md font-semibold text-white transition-all ${
-              step === 4
-                ? "bg-green-500 hover:bg-green-600"
-                : "bg-red-600 hover:bg-red-700"
-            }`}
+            className="flex items-center justify-center gap-2 px-6 py-2 rounded-md font-semibold transition-all"
+           style={{
+             backgroundColor: step === 4 ? COLORS.secondary_green : COLORS.primary_red,
+              color: COLORS.primary_white,
+  }}
           >
             {step === 4 ? (
               <>

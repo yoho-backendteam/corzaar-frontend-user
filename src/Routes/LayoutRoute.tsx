@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import Courses from '../pages/Courses';
-import Institutes from '../pages/Institutes';
+// import Institutes from '../pages/Institutes';
 import OfferPage from '../pages/OfferPage';
 import Queries from '../pages/Queries';
 import Navbar from '../NavBar/Navbar';
@@ -23,7 +23,6 @@ const LayoutRoute: React.FC = () => {
 
         <Route path="/" element={<SignIn />} />
         <Route path="/student-register" element={<StudentRegistration />} />
-
         <Route
           path="/*"
           element={

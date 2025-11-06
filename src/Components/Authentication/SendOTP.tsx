@@ -12,7 +12,7 @@ const SendOTP: React.FC<SendOTPProps> = ({ goToOtp }) => {
         Phone Number
       </label>
       <div className="flex items-center border rounded-md px-3 py-2 mt-1 mb-2">
-        <Phone className="w-4 h-4 mr-2 text-gray-400" />
+        <Phone className="w-4 h-4 mr-2 " style={{color:COLORS.primary_red}} />
         <input
           type="text"
           placeholder="+91 9876543210"
