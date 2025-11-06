@@ -6,6 +6,7 @@ import contactReducer from "../redux/Queries/queryslice";
 import studentHomeReducer from '../Student/redux/studentSlice'
 import profileReducer from "../features/profile/profileSlice";
 import notificationReducer from "../redux/Notification/notificationSlice";
+import instituteReducer from "../redux/Institute/instituteSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,8 +17,10 @@ const store = configureStore({
     studentHome: studentHomeReducer,
     profile: profileReducer,
     notifications: notificationReducer,
+    institute: instituteReducer,
   },
 });
-export default store;
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export default store;

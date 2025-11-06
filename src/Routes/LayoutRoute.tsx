@@ -13,16 +13,17 @@ import { Settingprofile } from '../pages/Settingprofile';
 import { Portfolio } from '../components/profile/Tabpages/Portfolio/Portfolio';
 import SignIn from '../components/Authentication/SignIn';
 import StudentRegistration from '../components/StudentVerfication/StudentRegistration';
+import ExploreInstitutes from '../Component/Institutes/ExploreInstitutes';
+import InstituteDetails from '../Component/Institutes/InstituteDetails';
 
 const LayoutRoute: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        
+
         <Route path="/" element={<SignIn />} />
         <Route path="/student-register" element={<StudentRegistration />} />
 
-       
         <Route
           path="/*"
           element={
@@ -31,6 +32,8 @@ const LayoutRoute: React.FC = () => {
               <Routes>
                 <Route path="/Home" element={<Home />} />
                 <Route path="/Courses" element={<Courses />} />
+                <Route path="/Institutes" element={<ExploreInstitutes />} />
+                <Route path="/institute/:id" element={<InstituteDetails />} />
                 <Route path="/Institutes" element={<Institutes />} />
                 <Route path="/Offers" element={<OfferPage />} />
                 <Route path="/cartPage" element={<CartPage />} />
