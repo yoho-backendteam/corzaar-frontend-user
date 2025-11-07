@@ -5,12 +5,19 @@ import logocap from "../../assets/images/logocap.png";
 import SignInPassword from "./SignInPassword";
 import SendOTP from "./SendOTP";
 import OTPVerification from "./OTPVerification";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/context"; // Import the auth context
 
 const SignIn = () => {
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
+  
   const [method, setMethod] = useState<"password" | "otp">("password");
   const [otpStep, setOtpStep] = useState<"enter-phone" | "enter-otp">("enter-phone");
+
+  // Get the intended destination or default to home
+  const from = location.state?.from?.pathname || "/Home";
 
   return (
     <div
@@ -21,7 +28,7 @@ const navigate = useNavigate();
         className="flex flex-col md:flex-row rounded-xl overflow-hidden w-full max-w-6xl"
         style={{ backgroundColor: "#FFFBE1", padding: "2rem" }}
       >
-       
+        {/* Left Section - Brand & Stats */}
         <div className="w-full md:w-1/2 flex flex-col justify-center px-4 md:px-8 mb-8 md:mb-0">
           <div className="flex items-center mb-8 justify-center md:justify-start">
             <img src={logocap} alt="Logo" className="w-8 h-8" />
@@ -59,9 +66,11 @@ const navigate = useNavigate();
           </p>
 
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
-            {[{ count: "10K+", label: "Courses" },
+            {[
+              { count: "10K+", label: "Courses" },
               { count: "50K+", label: "Students" },
-              { count: "500+", label: "Instructors" }].map((item, i) => (
+              { count: "500+", label: "Instructors" }
+            ].map((item, i) => (
               <div
                 key={i}
                 className="border rounded-md p-4 text-center flex flex-col items-center justify-center"
@@ -94,12 +103,12 @@ const navigate = useNavigate();
           </div>
         </div>
 
-       
+        {/* Right Section - Sign In Form */}
         <div
-          className="w-full md:w-1/2 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between "
+          className="w-full md:w-1/2 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between"
           style={{
             backgroundColor: COLORS.primary_white,
-            minHeight: "520px", 
+            minHeight: "520px",
           }}
         >
           <div>
@@ -163,39 +172,49 @@ const navigate = useNavigate();
               </button>
             </div>
 
-           
+            {/* Authentication Components */}
             <div className="flex items-center justify-center transition-all duration-300">
-              {method === "password" && <SignInPassword />}
+              {method === "password" && (
+                <SignInPassword 
+                  onSuccess={() => navigate(from, { replace: true })}
+                />
+              )}
               {method === "otp" && otpStep === "enter-phone" && (
-                <SendOTP goToOtp={() => setOtpStep("enter-otp")} />
+                <SendOTP 
+                  goToOtp={() => setOtpStep("enter-otp")}
+                  onSuccess={() => navigate(from, { replace: true })}
+                />
               )}
               {method === "otp" && otpStep === "enter-otp" && (
-                <OTPVerification goBack={() => setOtpStep("enter-phone")} />
+                <OTPVerification 
+                  goBack={() => setOtpStep("enter-phone")}
+                  onSuccess={() => navigate(from, { replace: true })}
+                />
               )}
             </div>
           </div>
 
-          
-         <p
-  className="text-center mt-4 text-sm"
-  style={{ color: COLORS.primary_gray }}
->
-  Don’t have an account?{" "}
-  <button
-    onClick={() => navigate("/student-register")}
-    style={{
-      color: COLORS.primary_red,
-      fontWeight: 600,
-      cursor: "pointer",
-      background: "none",
-      border: "none",
-      padding: 0,
-      fontSize: "inherit",
-    }}
-  >
-    Sign up now
-  </button>
-</p>
+          {/* Sign Up Link */}
+          <p
+            className="text-center mt-4 text-sm"
+            style={{ color: COLORS.primary_gray }}
+          >
+            Don't have an account?{" "}
+            <button
+              onClick={() => navigate("/student-register")}
+              style={{
+                color: COLORS.primary_red,
+                fontWeight: 600,
+                cursor: "pointer",
+                background: "none",
+                border: "none",
+                padding: 0,
+                fontSize: "inherit",
+              }}
+            >
+              Sign up now
+            </button>
+          </p>
         </div>
       </div>
     </div>
