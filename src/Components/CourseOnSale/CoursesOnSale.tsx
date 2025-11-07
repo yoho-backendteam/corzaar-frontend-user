@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectCourses } from "../features/courses/Selector";
+import { selectCourses } from "../../features/courses/Selector";
 import { LuGraduationCap } from "react-icons/lu";
-import { COLORS, FONTS } from "../Constants/uiconstants";
+import { COLORS, FONTS } from "../../Constants/uiconstants";
 
 const CoursesOnSale: React.FC = () => {
   const courses = useSelector(selectCourses);

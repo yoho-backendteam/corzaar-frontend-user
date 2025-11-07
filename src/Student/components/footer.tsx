@@ -1,6 +1,8 @@
 
-import { COLORS, FONTS } from "../../Constants/uiconstants";
+import { COLORS } from "../../Constants/uiconstants";
 import { Mail, Phone, MapPin } from "lucide-react";
+import logocap from "../../assets/images/logocap.png";
+
 
 const Footer = () => {
   return (
@@ -34,6 +36,7 @@ const Footer = () => {
 
           <div className="text-left">
             <h2 className="text-xl font-bold flex items-center gap-2" style={{ color: COLORS.primary_red }}>
+            <img src={logocap} alt="Logo" className="w-8 h-8" />
               CORZAAR
             </h2>
             <p className=" text-sm mt-3" style={{ color: COLORS.primary_gray }}>
@@ -93,37 +96,68 @@ const Footer = () => {
 
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-12 text-center md:text-left">
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <div className="flex">
-              <div className=" p-3 rounded-lg inline-block" style={{ background: COLORS.primary_yellow }}>
-                <Mail className="w-5 h-5 text-white" />
-              </div>
-              <p className="font-bold mt-2 ml-3 text-lg">Email</p>
-            </div>
-            <p className="" style={{ color: COLORS.primary_gray }}>support@edumarket.com</p>
-          </div>
+          
+<div className="flex flex-col items-center md:items-start gap-2">
+  <div className="flex items-start">
+  
+    <div
+      className="p-3 rounded-lg inline-block items-center justify-center"
+      style={{ background: COLORS.primary_yellow }}
+    >
+      <Mail className="w-5 h-5" style={{color:COLORS.primary_white}}/>
+    </div>
+
+ 
+    <div className="ml-3">
+      <p className="font-bold text-lg">Email</p>
+      <p className="text-sm md:text-base" style={{ color: COLORS.primary_gray }}>
+        support@edumarket.com
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div className="flex flex-col items-center md:items-start gap-2">
+  <div className="flex items-start">
+    
+    <div
+      className="p-3 rounded-lg inline-block  items-center justify-center"
+      style={{ background: COLORS.primary_yellow }}
+    >
+      <Phone className="w-5 h-5 " style={{color:COLORS.primary_white}} />
+    </div>
+
+    {/* Text */}
+    <div className="ml-3">
+      <p className="font-bold text-lg">Phone</p>
+      <p className="text-sm md:text-base" style={{ color: COLORS.primary_gray }}>
+        +91 9876565784
+      </p>
+    </div>
+  </div>
+</div>
+
 
           <div className="flex flex-col items-center md:items-start gap-2">
-            <div className="flex">
-              <div className=" p-3 rounded-lg inline-block" style={{ background: COLORS.primary_yellow }}>
-                <Phone className="w-5 h-5 text-white" />
-              </div>
-              <p className="font-bold mt-2 ml-3 text-lg">Phone</p>
-            </div>
-            <p className="" style={{ color: COLORS.primary_gray }}>+91 9876565784</p>
-          </div>
+  <div className="flex items-start">
+    
+    <div
+      className="p-3 rounded-lg inline-block items-center justify-center"
+      style={{ background: COLORS.primary_yellow }}
+    >
+      <MapPin className="w-5 h-5 " style={{color:COLORS.primary_white}}/>
+    </div>
 
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <div className="flex">
-              <div className=" p-3 rounded-lg inline-block" style={{ background: COLORS.primary_yellow }}>
-                <MapPin className="w-5 h-5 text-white" />
-              </div>
-              <p className="font-bold mt-2 ml-3 text-lg">Address</p>
-            </div>
-            <p className="" style={{ color: COLORS.primary_gray }}>
-              123 Education Street, Boston, MA
-            </p>
-          </div>
+    
+    <div className="ml-3">
+      <p className="font-bold text-lg">Address</p>
+      <p className="text-sm md:text-base" style={{ color: COLORS.primary_gray }}>
+        123 Education Street, Boston, MA
+      </p>
+    </div>
+  </div>
+</div>
         </div>
 
 

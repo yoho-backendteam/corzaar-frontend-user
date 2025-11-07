@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector} from "react-redux";
-import { selectDeals } from "../features/deals/Selector";
+import { selectDeals } from "../../features/deals/Selector";
 import { LuTag } from "react-icons/lu";
 import { GoClock } from "react-icons/go";
-import { COLORS, FONTS } from "../Constants/uiconstants";
+import { COLORS, FONTS } from "../../Constants/uiconstants";
 
 const FeaturedDeals: React.FC = () => {
  

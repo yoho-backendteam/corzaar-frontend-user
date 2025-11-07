@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
-import { COLORS } from "../../Constants/uiconstants";
+import { COLORS, FONTS } from "../../Constants/uiconstants";
 
 
 const SpecialPromotions = () => {
@@ -11,7 +11,7 @@ const SpecialPromotions = () => {
 
   return (
     <div className="mt-16 px-4 md:px-12 lg:px-20">
-      <h2 className="text-2xl md:text-3xl font-bold text-left text-black mb-1">
+      <h2 className="text-2xl md:text-3xl text-left mb-1" style={{color:COLORS.primary_black,...(FONTS.boldHeading as any)}}>
         Special Promotions
       </h2>
       <p className=" mb-8 text-left"  style={{color: COLORS.primary_gray}}>
@@ -22,7 +22,8 @@ const SpecialPromotions = () => {
         {promotions.map((promo) => (
           <div
             key={promo.id}
-            className="bg-white rounded-2xl shadow p-6 flex flex-col justify-between text-left hover:shadow-lg transition"
+            className=" rounded-2xl shadow p-6 flex flex-col justify-between text-left hover:shadow-lg transition"
+            style={{background:COLORS.primary_white}}
           >
             <div>
               <div className=" w-12 h-12 rounded-full flex items-center justify-center mb-4">
