@@ -1,8 +1,11 @@
 
+import { useNavigate } from "react-router-dom";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
+
+  const navigate = useNavigate();
   return (
     <footer className="mt-0">
 
@@ -14,7 +17,8 @@ const Footer = () => {
           <p className="text-base md:text-lg mb-8">
             Join thousands of Students already learning on CORZAAR
           </p>
-          <button className="bg-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition flex items-center justify-center gap-2 mx-auto" style={{ color: COLORS.primary_red }}>
+          <button className="bg-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition flex items-center justify-center gap-2 mx-auto" style={{ color: COLORS.primary_red }}
+           onClick={() => navigate("/courses")} >
             Explore All Courses →
           </button>
         </div>

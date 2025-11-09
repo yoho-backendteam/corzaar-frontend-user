@@ -1,13 +1,32 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
 import { COLORS } from "../../Constants/uiconstants";
+import { selectOfferData } from "../../features/home_page/reducers/homeSelector";
+import { useEffect } from "react";
+import { getOfferThunk } from "../../features/home_page/reducers/homeThunk";
+import type { AppDispatch, RootState } from "../../store/store";
+import type { Offer } from "../../userHomeTypes/types";
+
+
 
 
 const SpecialPromotions = () => {
-  const promotions = useSelector(
-    (state: RootState) => state.studentHome.promotions
-  );
+  const promotions = useSelector<RootState, Offer[]>(selectOfferData);
+  const dispatch = useDispatch<AppDispatch>();
+
+
+useEffect(() => {
+  const getAllOffers = async () => {
+      try {
+      await dispatch(getOfferThunk());
+      } catch (error) {
+        console.error("Error in fetching offers:", error);
+      }
+  };
+
+  getAllOffers();
+}, [dispatch]);
+
+
 
   return (
     <div className="mt-16 px-4 md:px-12 lg:px-20">
@@ -19,7 +38,7 @@ const SpecialPromotions = () => {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 mt-14 lg:grid-cols-3 gap-6">
-        {promotions.map((promo) => (
+        {promotions?.length > 0 ? promotions.slice(0,3).map((promo) => (
           <div
             key={promo.id}
             className="bg-white rounded-2xl shadow p-6 flex flex-col justify-between text-left hover:shadow-lg transition"
@@ -45,7 +64,13 @@ const SpecialPromotions = () => {
               {promo.buttonText}
             </button>
           </div>
-        ))}
+        )) : <>
+        <div className="col-span-full flex justify-center items-center h-40">
+      <p className="text-center font-bold text-md text-gray-600">
+        "No promotions available"
+      </p>
+    </div>
+        </>}
       </div>
     </div>
   );

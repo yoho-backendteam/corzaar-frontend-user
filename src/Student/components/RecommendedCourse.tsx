@@ -4,11 +4,11 @@ import type { RootState } from "../../store/store";
 import CourseCard from "./courseCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { COLORS } from "../../Constants/uiconstants";
+import { selectCourseData } from "../../features/home_page/reducers/homeSelector";
+import type { CourseCardProps } from "../../userHomeTypes/types";
 
 const RecommendedCourse = () => {
-  const topCourses = useSelector(
-    (state: RootState) => state.studentHome.topCourses
-  );
+  const RecommendCourses = useSelector(selectCourseData);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -40,7 +40,7 @@ const RecommendedCourse = () => {
 
   // Calculate number of pages (approx)
   const itemsPerPage = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-  const totalPages = Math.ceil(topCourses.length / itemsPerPage);
+  const totalPages = Math.ceil(RecommendCourses.length / itemsPerPage);
 
   return (
     <section className="relative py-10 px-4 md:px-12 lg:px-20  overflow-hidden">
@@ -63,12 +63,13 @@ const RecommendedCourse = () => {
         ref={scrollRef}
         className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
       >
-        {topCourses.map((course) => (
+        {RecommendCourses.map((course) => (
           <div
             key={course.id}
             className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
           >
-            <CourseCard course={course} />
+           <CourseCard course={course as unknown as CourseCardProps["course"]} />
+
           </div>
         ))}
       </div>

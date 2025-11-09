@@ -5,33 +5,18 @@ import {
   Users,
   Clock,
   ShoppingCart,
-  CheckCircle,
 } from "lucide-react";
 import { FaHeart } from "react-icons/fa";
 import enroll from '../../assets/clipboard-tick.png'
 import { COLORS } from "../../Constants/uiconstants";
+import type { CourseCardProps } from "../../userHomeTypes/types";
 
-interface CourseCardProps {
-  course: {
-    id: number;
-    title: string;
-    category: string;
-    type: string;
-    institute: string;
-    price: number;
-    oldPrice: number;
-    enrolled: boolean;
-    image: string;
-    discount?: number;
-    rating: number;
-    reviews: number;
-    students: number;
-    duration: string;
-  };
-}
+
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+
+  console.log("trending",course)
 
   const handleFavoriteToggle = () => {
     setIsFavorite((prev) => !prev);
@@ -54,12 +39,14 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
     }
   };
 
+  
+
   return (
     <div className="relative bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
       {/* Image Section */}
       <div className="relative">
         <img
-          src={course.image}
+          src={course.thumbnail}
           alt={course.title}
           className="w-full h-48 object-cover"
         />
@@ -96,10 +83,10 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         {/* Category & Type */}
         <div className="flex items-center justify-between mb-3">
           <span className="text-white text-xs font-semibold px-2 py-1 rounded-md"  style={{background: COLORS.primary_red}}>
-            {course.category}
+            {course?.category?.primary}
           </span>
           <span className="border border-[#ED1C24] text-xs font-semibold px-2 py-1 rounded-md"  style={{color: COLORS.primary_red}}>
-            {course.type}
+            {course?.level}
           </span>
         </div>
 
@@ -116,40 +103,51 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
 
         {/* Institute */}
         <p className="text-sm font-semibold  mb-3"  style={{color: COLORS.primary_gray}}>
-          {course.institute}
+          {course?.institute}
         </p>
 
         {/* Ratings, Students, Duration */}
-        <div className="flex items-center text-sm  mb-4"  style={{color: COLORS.primary_gray}}>
+        {course?.reviews?.length  && course?.reviews?.map((review, index)=>(
+        <div className="flex items-center text-sm  mb-4"  style={{color: COLORS.primary_gray}} key={index}>
           <div className="flex gap-3 items-center mr-4">
             <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-            <span className="font-semibold text-black">{course.rating}</span>
-            <span className="ml-1 "  style={{color: COLORS.primary_gray}}>({course.reviews})</span>
+            <span className="font-semibold text-black">{review.rating}</span>
+            <span className="ml-1 "  style={{color: COLORS.primary_gray}}>({review.comment})</span>
           </div>
           <div className="flex items-center mr-4">
             <Users className="w-4 h-4  mr-1"  style={{color: COLORS.primary_gray}}/>
-            <span>{course.students.toLocaleString()}</span>
+            <span>{review.name}</span>
           </div>
-          <div className="flex items-center">
-            <Clock className="w-4 h-4  mr-1"  style={{color: COLORS.primary_gray}}/>
-            <span>{course.duration}</span>
-          </div>
+           <div className="flex items-center">
+  <Clock
+    className="w-4 h-4 mr-1"
+    style={{ color: COLORS.primary_gray }}
+  />
+  <span>
+    {new Date(review.createdAt).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    })}
+  </span>
+</div>
         </div>
+        ))}
 
         {/* Price */}
         <div className="flex items-end justify-between mb-3">
           <div className="flex">
             <p className="text-2xl font-bold text-black">
-              ₹{course.price.toLocaleString()}
+              ₹{course?.price}
             </p>
             <p className=" mt-1 ml-3 line-through"  style={{color: COLORS.primary_gray}}>
-              ₹{course.oldPrice.toLocaleString()}
+              ₹{course?.oldPrice}
             </p>
           </div>
         </div>
 
         {/* Button */}
-        {course.enrolled ? (
+        {course?.enrolled ? (
           <button className=" text-white text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-red-700 transition"  style={{background: COLORS.primary_red}}>
             
             Already Enrolled
