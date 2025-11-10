@@ -3,19 +3,23 @@ import { Phone } from "lucide-react";
 
 interface SendOTPProps {
   goToOtp: () => void;
+  phoneNumber: string;
+  setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SendOTP: React.FC<SendOTPProps> = ({ goToOtp }) => {
+const SendOTP: React.FC<SendOTPProps> = ({ goToOtp, phoneNumber, setPhoneNumber }) => {
   return (
     <div className="w-full">
       <label style={{ ...(FONTS.medium as any), fontSize: "14px", color: COLORS.C_DIV_Title }}>
         Phone Number
       </label>
       <div className="flex items-center border rounded-md px-3 py-2 mt-1 mb-2">
-        <Phone className="w-4 h-4 mr-2 " style={{color:COLORS.primary_red}} />
+        <Phone className="w-4 h-4 mr-2 " style={{ color: COLORS.primary_red }} />
         <input
           type="text"
           placeholder="+91 9876543210"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
           className="flex-1 outline-none text-sm"
           style={FONTS.regular as any}
         />
