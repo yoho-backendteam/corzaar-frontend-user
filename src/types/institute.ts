@@ -22,6 +22,11 @@ export interface Statistics {
 }
 
 export interface Institute {
+  verification: any;
+  number_of_faculty: number;
+  student_capacity: number;
+  status: string;
+  isActive: any;
   _id: string;
   id: string;
   name: string;
