@@ -1,5 +1,5 @@
-import  { useEffect } from "react";
-import {  MapPin } from "lucide-react";
+import { useEffect } from "react";
+import { MapPin } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { COLORS } from "../../Constants/uiconstants";
@@ -43,16 +43,17 @@ const ExpertsInstitute = () => {
       {/* Card Grid or Empty State */}
       {limitedInstitutes?.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {limitedInstitutes?.map((institute) => (
+          {limitedInstitutes?.map((institute, index) => (
             <div
-              key={institute?.id}
+              key={institute?.id || institute?._id || index} 
               className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
             >
               <img
-                src={institute?.coverImage}
-                alt={institute?.name}
+                src={institute?.coverImage || "/placeholder.png"} 
+                alt={institute?.name || "Institute"}
                 className="w-full h-40 object-cover"
               />
+
               <div className="p-5 text-left">
                 <h3 className="text-lg mt-3 font-semibold text-black mb-1">
                   {institute?.name}
@@ -62,18 +63,14 @@ const ExpertsInstitute = () => {
                   style={{ color: COLORS.primary_gray }}
                 >
                   {Array.isArray(institute?.courses)
-    ? `${institute?.courses.length} courses`
-    : `${institute?.courses || 0} courses`}
+                    ? `${institute?.courses.length} courses`
+                    : `${institute?.courses || 0} courses`}
                 </p>
 
                 <div
                   className="flex flex-col gap-1 text-sm"
                   style={{ color: COLORS.primary_gray }}
                 >
-                  {/* <div className="flex mt-3 items-center gap-1">
-                    <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    <span className="font-semibold">{institute?.rating}</span>
-                  </div> */}
                   <div
                     className="flex mt-3 items-center gap-1"
                     style={{ color: COLORS.primary_gray }}
@@ -87,7 +84,6 @@ const ExpertsInstitute = () => {
           ))}
         </div>
       ) : (
-      
         <div className="text-center py-20 text-white text-lg font-medium">
           No institute expert hubs available
         </div>
