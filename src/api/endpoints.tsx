@@ -8,6 +8,11 @@ export const API_END_POINTS = {
         getallinstitutes:"/api/getall",
         getcategories:"/api/courses/categories",
         addtokart:"/addtocart"
+      },
+
+      offer:{
+         getalloffers: "/api/offer",
+         getofferbyid: "/api/offer/:id",
       }
     }
     

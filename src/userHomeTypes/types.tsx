@@ -8,7 +8,19 @@ export interface Offer {
   buttonColor?: string;
   discount?: number;
   validTill?: string;
+  validity: string;
+  applicableTo: string[];
+  code: string; 
+  endDate:string;
+  discountValue:string;
+  courseId?: string;  
+  _id:string;
+  courseData: {
+    title: string
+  }
 }
+
+
 
 
 export interface Course {
@@ -35,6 +47,7 @@ export interface Course {
     ];
   students: number;
   duration: string;
+  _id:string
 }
 
 

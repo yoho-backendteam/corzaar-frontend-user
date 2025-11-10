@@ -8,6 +8,7 @@ import profileReducer from "../features/profile/profileSlice";
 import notificationReducer from "../redux/Notification/notificationSlice";
 import instituteReducer from "../redux/Institute/instituteSlice";
 import homeReducer from "../features/home_page/reducers/homeSlice"
+import offerReducer from "../features/offer_page/reducers/offerSlice"
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     notifications: notificationReducer,
     institute: instituteReducer,
     home:homeReducer,
+    offer:offerReducer,
   },
 });
 

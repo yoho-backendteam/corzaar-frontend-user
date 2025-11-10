@@ -16,8 +16,13 @@ class Client {
 
             
         }
+
+         offer = {
+            getalloffers: () => httpclients.get(API_END_POINTS.offer.getalloffers),
+            getofferbyid: (id: string) => httpclients.get(API_END_POINTS.offer.getofferbyid.replace(":id",id)),
     
 }
 
+}
 
 export default new Client();
