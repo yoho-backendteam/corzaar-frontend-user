@@ -6,7 +6,8 @@ export const API_END_POINTS = {
         getallcourses: "/api/courses/all",
         gettrendingcourses: "/api/courses/trending",
         getallinstitutes:"/api/getall",
-        getcategories:"/api/courses/categories"
+        getcategories:"/api/courses/categories",
+        addtokart:"/addtocart"
       }
     }
     

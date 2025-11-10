@@ -89,7 +89,7 @@ const TrendingCourse = () => {
 
       {/* If no trending courses */}
       {itemsToShow.length === 0 ? (
-        <p className="text-center font-bold text-md">No top courses available</p>
+        <p className="text-center font-bold text-md">No trending courses available</p>
       ) : (
         <>
           {/* Left Arrow */}

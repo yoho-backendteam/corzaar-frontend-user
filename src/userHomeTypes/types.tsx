@@ -94,6 +94,9 @@ export interface ContactInfo {
 
 export interface CategoryType {
   id: number;
-  name: string;
+  category: {
+      primary: string
+    };
   courses: number;
+  _id:string;
 }

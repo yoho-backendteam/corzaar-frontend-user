@@ -22,9 +22,7 @@ const PopularInstitute = () => {
     getInstitutes();
   }, [dispatch]);
 
-  console.log(institutes, "ins");
 
-  // ✅ Limit to 3 institutes
   const displayedInstitutes = institutes?.slice(0, 4);
 
   return (

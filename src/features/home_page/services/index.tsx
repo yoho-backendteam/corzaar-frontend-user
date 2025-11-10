@@ -69,3 +69,17 @@ export const getCategoriesService = async () => {
     }
 
 };
+
+
+export const addtokartService = async () => {
+	const response = await Client.user_home.addtokart();
+	try {
+        if (response) {
+        		return response;
+        	}
+    }catch (error) {
+    console.error("Error in addtokart:", error);
+    return null;
+    }
+
+};

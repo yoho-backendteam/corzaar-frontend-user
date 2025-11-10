@@ -16,8 +16,6 @@ import type { CourseCardProps } from "../../userHomeTypes/types";
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  console.log("trending",course)
-
   const handleFavoriteToggle = () => {
     setIsFavorite((prev) => !prev);
 

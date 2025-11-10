@@ -11,7 +11,9 @@ class Client {
             getallcourses: () => httpclients.get(API_END_POINTS.user_home.getallcourses),
             gettrendingcourses: () => httpclients.get(API_END_POINTS.user_home.gettrendingcourses),
             getallinstitutes: () => httpclients.get(API_END_POINTS.user_home.getallinstitutes),
-            getcategories:() => httpclients.get(API_END_POINTS.user_home.getcategories)
+            getcategories:() => httpclients.get(API_END_POINTS.user_home.getcategories),
+            addtokart: () => httpclients.post(API_END_POINTS.user_home.addtokart, {})
+
             
         }
     

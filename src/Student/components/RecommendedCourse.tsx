@@ -60,21 +60,24 @@ const RecommendedCourse = () => {
     
       {/* Course Cards */}
       <div
-        ref={scrollRef}
-        className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
+  ref={scrollRef}
+  className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
+>
+  {RecommendCourses && RecommendCourses.length > 0 ? (
+    RecommendCourses.map((course, index) => (
+      <div
+        key={index}
+        className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
       >
-        {RecommendCourses.map((course) => (
-          <div
-            key={course.id}
-            className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
-          >
-           <CourseCard course={course as unknown as CourseCardProps["course"]} />
-
-          </div>
-        ))}
+        <CourseCard course={course as unknown as CourseCardProps["course"]} />
       </div>
-
-    
+    ))
+  ) : (
+    <div className="text-center text-gray-500 w-full py-8">
+      No recommended courses available
+    </div>
+  )}
+</div>    
     </section>
   );
 };

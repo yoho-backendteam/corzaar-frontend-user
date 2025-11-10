@@ -20,11 +20,11 @@ const TopCourse = () => {
     dispatch(getCourseThunk()).catch((err) => console.error(err));
   }, [dispatch]);
 
-  // Only show first 6 courses
-  const itemsToShow = topCourses.slice(0, 6);
-  console.log("top course",itemsToShow);
 
-  // Determine items per page for dots
+  const itemsToShow = topCourses.slice(0, 6);
+ 
+
+  
   const itemsPerPage = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
   const totalPages = Math.ceil(itemsToShow.length / itemsPerPage);
 
@@ -76,7 +76,7 @@ const TopCourse = () => {
       </div>
 
       {/* No courses */}
-      {itemsToShow.length < 0 ? (
+      {itemsToShow.length <= 0 ? (
         <p className="text-center font-bold text-md">No top courses available</p>
       ) : (
         <>

@@ -10,6 +10,7 @@ const HomeSlice = createSlice({
         trendingCourseData:[],
         instituteData:[],
          categoryData:[],
+          addtokart:[],
        
     },
     reducers: {
@@ -28,11 +29,14 @@ const HomeSlice = createSlice({
         getCategoryData: (state, action) => {
             state.categoryData = action.payload;
         },
+        postaddtokart: (state, action) => {
+            state.addtokart = action.payload;
+        },
         
 
        
     },
 });
 
-export const { getOfferData,getCourseData,trendingCourseData,getInstituteData ,getCategoryData} = HomeSlice.actions;
+export const { getOfferData,getCourseData,trendingCourseData,getInstituteData ,getCategoryData,postaddtokart} = HomeSlice.actions;
 export default HomeSlice.reducer;

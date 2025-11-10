@@ -1,6 +1,6 @@
 import type { AppDispatch } from "../../../store/store";
-import { getCategoriesService, getCourseService, getInstituteService, getOfferService, getTrendingCourseService } from "../services";
-import { getCategoryData, getCourseData, getInstituteData, getOfferData, trendingCourseData } from "./homeSlice";
+import { addtokartService, getCategoriesService, getCourseService, getInstituteService, getOfferService, getTrendingCourseService } from "../services";
+import { getCategoryData, getCourseData, getInstituteData, getOfferData, postaddtokart, trendingCourseData } from "./homeSlice";
 
 export const getOfferThunk = () => async (dispatch: AppDispatch) => {
   try {
@@ -59,6 +59,18 @@ export const getCategoriesThunk = () => async (dispatch: AppDispatch) => {
     const response = await getCategoriesService();
     if (response) {
       dispatch(getCategoryData(response?.data));
+    }
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const addtokartThunk = (p0: {}) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await addtokartService();
+    if (response) {
+      dispatch(postaddtokart(response?.data));
     }
     return response;
   } catch (error) {
