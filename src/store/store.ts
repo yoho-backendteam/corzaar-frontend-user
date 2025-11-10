@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import dealsSlice from "../features/deals/dealsSlice"
 import coursesSlice from "../features/courses/courseSlice"
-import courseReducer from "../components/Redux/CourseSlice";
+import courseReducer from "../Components/Redux/CourseSlice";
 import contactReducer from "../redux/Queries/queryslice";
 import studentHomeReducer from '../Student/redux/studentSlice'
 import profileReducer from "../features/profile/profileSlice";
 import notificationReducer from "../redux/Notification/notificationSlice";
 import instituteReducer from "../redux/Institute/instituteSlice";
+import homeReducer from "../features/home_page/reducers/homeSlice"
+import offerReducer from "../features/offer_page/reducers/offerSlice"
 
 const store = configureStore({
   reducer: {
@@ -18,6 +20,8 @@ const store = configureStore({
     profile: profileReducer,
     notifications: notificationReducer,
     institute: instituteReducer,
+    home:homeReducer,
+    offer:offerReducer,
   },
 });
 

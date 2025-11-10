@@ -16,7 +16,7 @@ import teacher from '../../assets/teacher4.png'
 
 
 const StudentHome:React.FC = () => {
-  const { stats, filters } = useSelector(
+  const { stats } = useSelector(
     (state: RootState) => state.studentHome
   );
 

@@ -1,27 +1,26 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../store/store";
 import CourseCard from "./courseCard";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+// import { ChevronLeft, ChevronRight } from "lucide-react";
 import { COLORS } from "../../Constants/uiconstants";
+import { selectCourseData } from "../../features/home_page/reducers/homeSelector";
+import type { CourseCardProps } from "../../userHomeTypes/types";
 
-const RecommendedCourse: React.FC = () => {
-  const topCourses = useSelector(
-    (state: RootState) => state.studentHome.topCourses
-  );
+const RecommendedCourse = () => {
+  const RecommendCourses = useSelector(selectCourseData);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const containerWidth = scrollRef.current.offsetWidth;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -containerWidth / 1.05 : containerWidth / 1.05,
-        behavior: "smooth",
-      });
-    }
-  };
+  // const scroll = (direction: "left" | "right") => {
+  //   if (scrollRef.current) {
+  //     const containerWidth = scrollRef.current.offsetWidth;
+  //     scrollRef.current.scrollBy({
+  //       left: direction === "left" ? -containerWidth / 1.05 : containerWidth / 1.05,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -38,11 +37,9 @@ const RecommendedCourse: React.FC = () => {
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Responsive items per page
-  const itemsPerPage =
-    window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-
-  const totalPages = Math.ceil(topCourses.length / itemsPerPage);
+  // Calculate number of pages (approx)
+  // const itemsPerPage = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+  // const totalPages = Math.ceil(RecommendCourses.length / itemsPerPage);
 
   return (
     <section className="md:px-12 lg:px-20 overflow-hidden relative">
@@ -64,59 +61,27 @@ const RecommendedCourse: React.FC = () => {
         </div>
       </div>
 
-      {/* Outer container for arrows + scroll */}
-      <div className="flex items-center justify-center relative">
-        {/* Left Arrow (outside) */}
-        <button
-          onClick={() => scroll("left")}
-          className="hidden sm:flex items-center justify-center p-2 rounded-full shadow bg-white hover:bg-gray-100 transition absolute -left-6 md:-left-10 z-10"
-        >
-          <ChevronLeft
-            className="w-5 h-5"
-            style={{ color: COLORS.primary_red }}
-          />
-        </button>
 
-        {/* Scrollable Courses */}
-        <div
-          ref={scrollRef}
-          className="flex gap-5 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory  sm:px-1"
-        >
-          {topCourses.map((course) => (
+      {/* Course Cards */}
+      <div
+        ref={scrollRef}
+        className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
+      >
+        {RecommendCourses && RecommendCourses.length > 0 ? (
+          RecommendCourses.map((course, index) => (
             <div
-              key={course.id}
-              className="flex shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
+              key={index}
+              className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
             >
-              <CourseCard course={course} />
+              <CourseCard course={course as unknown as CourseCardProps["course"]} />
             </div>
-          ))}
-        </div>
-
-        {/* Right Arrow (outside) */}
-        <button
-          onClick={() => scroll("right")}
-          className="hidden sm:flex items-center justify-center p-2 rounded-full shadow bg-white hover:bg-gray-100 transition absolute -right-6 md:-right-10 z-10"
-        >
-          <ChevronRight
-            className="w-5 h-5"
-            style={{ color: COLORS.primary_red }}
-          />
-        </button>
+          ))
+        ) : (
+          <div className="text-center text-gray-500 w-full py-8">
+            No recommended courses available
+          </div>
+        )}
       </div>
-
-      {/* Pagination Dots */}
-      {totalPages > 1 && (
-        <div className="flex justify-center mt-6 gap-2">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <div
-              key={i}
-              className={`h-2 w-2 rounded-full transition-all ${
-                i === activeIndex ? "bg-red-500 w-4" : "bg-gray-300"
-              }`}
-            />
-          ))}
-        </div>
-      )}
     </section>
   );
 };
