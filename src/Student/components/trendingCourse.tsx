@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../store/store";
+import type { AppDispatch } from "../../store/store";
 import CourseCard from "./courseCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { COLORS } from "../../Constants/uiconstants";
