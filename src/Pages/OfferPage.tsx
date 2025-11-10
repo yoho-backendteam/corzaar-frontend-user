@@ -1,7 +1,7 @@
 import React from 'react'
 import { COLORS } from '../Constants/uiconstants'
-import CoursesOnSale from '../Components/CoursesOnSale'
-import FeaturedDeals from '../Components/FeatureDeals'
+import CoursesOnSale from '../Components/CourseOnSale/CoursesOnSale'
+import FeaturedDeals from '../Components/CourseOnSale/FeatureDeals'
 
 const OfferPage: React.FC = () => {
   return (
