@@ -10,7 +10,7 @@ const RecommendedCourse = () => {
   const RecommendCourses = useSelector(selectCourseData);
 
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [_activeIndex, setActiveIndex] = useState(0);
 
   // const scroll = (direction: "left" | "right") => {
   //   if (scrollRef.current) {

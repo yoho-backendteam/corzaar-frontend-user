@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../store/store";
+import type { AppDispatch } from "../../store/store";
 import CourseCard from "./courseCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { COLORS } from "../../Constants/uiconstants";
@@ -10,13 +10,15 @@ import type { Course } from "../../userHomeTypes/types";
 import { useNavigate } from "react-router-dom";
 
 const TrendingCourse = () => {
-  const trendingCourses = useSelector<RootState, Course[]>(selectTrendingCourseData);
+  const rawTrendingCourses = useSelector(selectTrendingCourseData);
+  const trendingCourses: Course[] = Array.isArray(rawTrendingCourses)
+    ? rawTrendingCourses
+    : []; // ✅ prevents .slice() error
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const getTrendingCourses = async () => {
@@ -34,7 +36,10 @@ const TrendingCourse = () => {
     if (scrollRef.current) {
       const containerWidth = scrollRef.current.offsetWidth;
       scrollRef.current.scrollBy({
-        left: direction === "left" ? -containerWidth / 1.05 : containerWidth / 1.05,
+        left:
+          direction === "left"
+            ? -containerWidth / 1.05
+            : containerWidth / 1.05,
         behavior: "smooth",
       });
     }
@@ -56,11 +61,12 @@ const TrendingCourse = () => {
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Show only first 6 courses
+  // ✅ Safe slice now
   const itemsToShow = trendingCourses.slice(0, 6);
 
   // Calculate pages for dots
-  const itemsPerPage = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+  const itemsPerPage =
+    window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
   const totalPages = Math.ceil(itemsToShow.length / itemsPerPage);
 
   return (
@@ -71,25 +77,33 @@ const TrendingCourse = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-black">
             Trending Courses
           </h2>
-          <p className="text-sm md:text-base" style={{ color: COLORS.primary_gray }}>
+          <p
+            className="text-sm md:text-base"
+            style={{ color: COLORS.primary_gray }}
+          >
             Most popular courses this week
           </p>
         </div>
-       <button
-  className="text-white font-semibold px-4 py-2 rounded-lg transition duration-300"
-  style={{ background: COLORS.primary_red }}
-  onClick={() => navigate("/courses")} 
-  onMouseEnter={(e) => (e.currentTarget.style.background = "#b01218")}
-  onMouseLeave={(e) => (e.currentTarget.style.background = COLORS.primary_red)}
->
-  View All
-</button>
-
+        <button
+          className="text-white font-semibold px-4 py-2 rounded-lg transition duration-300"
+          style={{ background: COLORS.primary_red }}
+          onClick={() => navigate("/courses")}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.background = "#b01218")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.background = COLORS.primary_red)
+          }
+        >
+          View All
+        </button>
       </div>
 
       {/* If no trending courses */}
       {itemsToShow.length === 0 ? (
-        <p className="text-center font-bold text-md">No trending courses available</p>
+        <p className="text-center font-bold text-md">
+          No trending courses available
+        </p>
       ) : (
         <>
           {/* Left Arrow */}
@@ -97,7 +111,10 @@ const TrendingCourse = () => {
             onClick={() => scroll("left")}
             className="hidden md:flex absolute left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
           >
-            <ChevronLeft className="w-6 h-6" style={{ color: COLORS.primary_red }} />
+            <ChevronLeft
+              className="w-6 h-6"
+              style={{ color: COLORS.primary_red }}
+            />
           </button>
 
           {/* Course Cards */}
@@ -105,9 +122,9 @@ const TrendingCourse = () => {
             ref={scrollRef}
             className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
           >
-            {itemsToShow.map((course) => (
+            {itemsToShow.map((course, index) => (
               <div
-                key={course.id}
+                key={course.id || course._id || index} // ✅ ensures unique key
                 className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
               >
                 <CourseCard course={course} />
@@ -120,7 +137,10 @@ const TrendingCourse = () => {
             onClick={() => scroll("right")}
             className="hidden md:flex absolute right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
           >
-            <ChevronRight className="w-6 h-6" style={{ color: COLORS.primary_red }} />
+            <ChevronRight
+              className="w-6 h-6"
+              style={{ color: COLORS.primary_red }}
+            />
           </button>
 
           {/* Page Dots */}
@@ -129,9 +149,14 @@ const TrendingCourse = () => {
               <div
                 key={i}
                 className={`h-3 rounded-full transition-all duration-500 ease-in-out ${
-                  i === activeIndex ? "w-10" : "bg-white opacity-70 w-3"
+                  i === activeIndex
+                    ? "w-10"
+                    : "bg-white opacity-70 w-3"
                 }`}
-                style={{ background: i === activeIndex ? COLORS.primary_red : "white" }}
+                style={{
+                  background:
+                    i === activeIndex ? COLORS.primary_red : "white",
+                }}
               ></div>
             ))}
           </div>

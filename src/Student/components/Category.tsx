@@ -10,8 +10,8 @@ import { getCategoriesThunk } from "../../features/home_page/reducers/homeThunk"
 import type { CategoryType, Course } from "../../userHomeTypes/types";
 
 const Category = () => {
-  const categories = useSelector<RootState, CategoryType[]>(selectCategoryData);
-  const courses = useSelector<RootState, Course[]>(selectCourseData);
+  const categories = useSelector<RootState, CategoryType[]>(selectCategoryData) || [];
+  const courses = useSelector<RootState, Course[]>(selectCourseData) || [];
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -25,20 +25,22 @@ const Category = () => {
     getCategories();
   }, [dispatch]);
 
+  // --- Handle if 'courses' or 'categories' are not arrays safely ---
+  const safeCategories = Array.isArray(categories) ? categories : [];
+  const safeCourses = Array.isArray(courses) ? courses : [];
 
   const courseCountMap: Record<string, number> = {};
-  courses?.forEach((course) => {
+  safeCourses.forEach((course) => {
     const primary = course?.category?.primary;
     if (primary) {
       courseCountMap[primary] = (courseCountMap[primary] || 0) + 1;
     }
   });
 
-
-  const uniqueCategories = categories.reduce((acc, cat) => {
+  // ✅ Safe reduce usage
+  const uniqueCategories = safeCategories.reduce((acc, cat) => {
     const primary = cat?.category?.primary;
     if (!primary) return acc;
-
 
     const existing = acc.find((c) => c.primary === primary);
     if (!existing) {
@@ -49,7 +51,6 @@ const Category = () => {
     }
     return acc;
   }, [] as { primary: string; count: number }[]);
-
 
   const limitedCategories = uniqueCategories.slice(0, 4);
 

@@ -45,9 +45,9 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
       {/* Image Section */}
       <div className="relative">
         <img
-          src={course.thumbnail}
-          alt={course.title}
-          className="w-full h-48 object-cover rounded-2xl"
+          src={course?.thumbnail || "/placeholder.png"}
+          alt={course?.title || "Course Image"}
+          className="w-full h-48 object-cover"
         />
 
         {/* Discount Tag */}

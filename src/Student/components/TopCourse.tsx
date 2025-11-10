@@ -76,7 +76,7 @@ const TopCourse = () => {
       </div>
 
       {/* No courses */}
-      {itemsToShow.length <= 0 ? (
+      {itemsToShow?.length <= 0 ? (
         <p className="text-center font-bold text-md">No top courses available</p>
       ) : (
         <>
@@ -95,9 +95,9 @@ const TopCourse = () => {
             ref={scrollRef}
             className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
           >
-            {itemsToShow.map((course) => (
+            {itemsToShow?.map((course,index) => (
               <div
-                key={course.id}
+                key={course?.id ?? index}
                 className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
               >
                 <CourseCard course={course} />
@@ -118,7 +118,7 @@ const TopCourse = () => {
           {/* Page Dots */}
           {totalPages > 1 && (
             <div className="flex justify-center mt-6 gap-2">
-              {Array.from({ length: totalPages }).map((_, i) => (
+              {Array?.from({ length: totalPages })?.map((_, i) => (
                 <div
                   key={i}
                   className={`h-3 rounded-full transition-all duration-500 ease-in-out ${i === activeIndex ? "w-10" : "bg-white opacity-70 w-3"
