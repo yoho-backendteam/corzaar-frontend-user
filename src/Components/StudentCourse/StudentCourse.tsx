@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import {type RootState } from "../../store/store";
 import { useState } from "react";
 import { ChevronDown, SearchIcon, X } from "lucide-react";
-import CourseCard from "./CourseCard";
-import FilterSidebar from "./FilterSidebar";
+import CourseCard from "../../Components/StudentCourse/CourseCard";
+import FilterSidebar from "../../Components/StudentCourse/FilterSidebar";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import filter from "../../assets/Image/fillteryl.png";
 
@@ -77,7 +77,7 @@ export default function ExploreCourses() {
 
   <details className="relative w-full">
     <summary
-      className="flex items-center justify-between px-4 border rounded-lg hover:bg-gray-100 transition cursor-pointer list-none bg-white h-[44px]"
+      className="flex items-center justify-between px-4 border rounded-lg hover:bg-gray-100 transition cursor-pointer list-none bg-white h-11"
       style={{
         borderColor: COLORS.primary_gray,
         color: COLORS.primary_black,

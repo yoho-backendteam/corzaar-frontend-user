@@ -1,18 +1,18 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '../pages/Home';
-import Courses from '../pages/Courses';
+import Home from '../Pages/Home';
+import Courses from '../Pages/Courses';
 // import Institutes from '../pages/Institutes';
-import OfferPage from '../pages/OfferPage';
-import Queries from '../pages/Queries';
+import OfferPage from '../Pages/OfferPage';
+import Queries from '../Pages/Queries';
 import Navbar from '../NavBar/Navbar';
-import CartPage from '../pages/CartPage';
-import NotificationPage from '../pages/NotificationPage';
-import ProfilePage from '../pages/ProfilePage';
-import { Settingprofile } from '../pages/Settingprofile';
+import CartPage from '../Pages/CartPage';
+import NotificationPage from '../Pages/NotificationPage';
+import ProfilePage from '../Pages/ProfilePage';
+import { Settingprofile } from '../Pages/Settingprofile';
 import { Portfolio } from '../components/profile/Tabpages/Portfolio/Portfolio';
-import SignIn from '../components/Authentication/SignIn';
-import StudentRegistration from '../components/StudentVerfication/StudentRegistration';
+import SignIn from '../Components/Authentication/SignIn';
+import StudentRegistration from '../Components/StudentVerfication/StudentRegistration';
 import ExploreInstitutes from '../Component/Institutes/ExploreInstitutes';
 import InstituteDetails from '../Component/Institutes/InstituteDetails';
 
