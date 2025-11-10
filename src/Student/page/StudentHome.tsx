@@ -101,8 +101,8 @@ const StudentHome:React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <p className="text-xl font-semibold text-gray-900 mb-3">
-            Quick Search
+          <p className="mb-3" style={{...(FONTS.boldHeading4),color:COLORS.primary_red}}>
+            Quick Filters
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {quickLinks.map((item, i) => (

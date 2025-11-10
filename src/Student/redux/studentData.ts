@@ -27,7 +27,7 @@ const initialState = {
         "Join the top-rated Full Stack course — limited offer ends soon!",
       buttonText: "Enroll Now",
       buttonColor: "bg-red-600",
-      icon: promo1,
+      icon: promo3,
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ const initialState = {
         "Over 10,000 students trained by expert mentors. Explore their best courses!",
       buttonText: "View Institute",
       buttonColor: "bg-red-600",
-      icon: promo2,
+      icon: promo1,
     },
     {
       id: 3,
@@ -45,7 +45,7 @@ const initialState = {
         "Learn AI and Machine Learning with real-world projects and mentorship.",
       buttonText: "Discover Now",
       buttonColor: "bg-red-600",
-      icon: promo3,
+      icon: promo2,
     },
   ],
 

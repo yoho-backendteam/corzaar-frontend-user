@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { FaHeart } from "react-icons/fa";
 import enroll from '../../assets/clipboard-tick.png'
-import { COLORS } from "../../Constants/uiconstants";
+import { COLORS, FONTS } from "../../Constants/uiconstants";
 
 interface CourseCardProps {
   course: {
@@ -55,18 +55,19 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   };
 
   return (
-    <div className="relative bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+    <div className="relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 p-2 rounded-2xl"
+    style={{background:COLORS.primary_white}}>
       {/* Image Section */}
       <div className="relative">
         <img
           src={course.image}
           alt={course.title}
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-cover rounded-2xl"
         />
 
         {/* Discount Tag */}
         {course.discount && (
-          <div className="absolute top-3 left-3 text-white text-xs font-semibold px-2 py-1 rounded-md"  style={{color: COLORS.primary_red}}>
+          <div className="absolute top-3 left-3 text-xs font-semibold px-2 py-1 rounded-md"  style={{color: COLORS.primary_white,background:COLORS.primary_red}}>
             {course.discount}% OFF
           </div>
         )}
@@ -74,18 +75,20 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         
         <button
           onClick={handleFavoriteToggle}
-          className="absolute top-3 right-3 bg-white rounded-full p-1.5 shadow hover:scale-110 transition"
+          className="absolute top-3 right-3 rounded-full p-1.5 shadow hover:scale-110 transition"
+          style={{background:COLORS.primary_white}}
         >
           {isFavorite ? (
             <FaHeart className="w-5 h-5 "  style={{color: COLORS.primary_red}}/>
           ) : (
-            <Heart className="w-5 h-5 "  style={{color: COLORS.primary_gray}}/>
+            <Heart className="w-5 h-5 "  style={{color: COLORS.primary_red}}/>
           )}
         </button>
 
         {/* Enrolled Tag */}
         {course.enrolled && (
-          <div className="absolute bottom-3 right-3 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
+          <div className="absolute bottom-3 right-3 px-2 py-1 rounded-md"
+          style={{background:COLORS.secondary_green,color:COLORS.primary_white}} >
             Enrolled
           </div>
         )}
@@ -95,16 +98,16 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
       <div className="p-5 text-left">
         {/* Category & Type */}
         <div className="flex items-center justify-between mb-3">
-          <span className="text-white text-xs font-semibold px-2 py-1 rounded-md"  style={{background: COLORS.primary_red}}>
+          <span className="px-2 py-1 rounded-md"  style={{background: COLORS.primary_red ,color:COLORS.primary_white}}>
             {course.category}
           </span>
-          <span className="border border-[#ED1C24] text-xs font-semibold px-2 py-1 rounded-md"  style={{color: COLORS.primary_red}}>
+          <span className="border  text-xs font-semibold px-2 py-1 rounded-md"  style={{color: COLORS.primary_red}}>
             {course.type}
           </span>
         </div>
 
         {/* Title */}
-        <h3 className="text-lg font-bold text-black leading-snug mb-2">
+        <h3 className="leading-snug mb-2" style={{color:COLORS.primary_black,...(FONTS.boldHeadingg2 as any)}}>
           {course.title}
         </h3>
 
@@ -115,27 +118,34 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         </p>
 
         {/* Institute */}
-        <p className="text-sm font-semibold  mb-3"  style={{color: COLORS.primary_gray}}>
+        <p className="text-sm font-semibold  mb-3"  style={{color: COLORS.primary_black}}>
           {course.institute}
         </p>
 
         {/* Ratings, Students, Duration */}
-        <div className="flex items-center text-sm  mb-4"  style={{color: COLORS.primary_gray}}>
-          <div className="flex gap-3 items-center mr-4">
-            <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-            <span className="font-semibold text-black">{course.rating}</span>
-            <span className="ml-1 "  style={{color: COLORS.primary_gray}}>({course.reviews})</span>
-          </div>
-          <div className="flex items-center mr-4">
-            <Users className="w-4 h-4  mr-1"  style={{color: COLORS.primary_gray}}/>
-            <span>{course.students.toLocaleString()}</span>
-          </div>
-          <div className="flex items-center">
-            <Clock className="w-4 h-4  mr-1"  style={{color: COLORS.primary_gray}}/>
-            <span>{course.duration}</span>
-          </div>
-        </div>
+       <div
+  className="flex flex-wrap items-center text-sm mb-4 gap-3 sm:gap-4"
+  style={{ color: COLORS.primary_gray }}
+>
+  <div className="flex gap-1 items-center mr-4 sm:mr-6">
+    <Star className="w-4 h-4" style={{ fill: COLORS.primary_yellow,  
+    stroke: COLORS.primary_yellow, }} />
+    <span className="font-semibold" style={{color:COLORS.primary_black}}>{course.rating}</span>
+    <span className="ml-1" style={{ color: COLORS.primary_gray }}>
+      ({course.reviews})
+    </span>
+  </div>
 
+  <div className="flex items-center mr-4 sm:mr-6">
+    <Users className="w-4 h-4 mr-1" style={{ color: COLORS.primary_gray }} />
+    <span>{course.students.toLocaleString()}</span>
+  </div>
+
+  <div className="flex items-center">
+    <Clock className="w-4 h-4 mr-1" style={{ color: COLORS.primary_gray }} />
+    <span>{course.duration}</span>
+  </div>
+</div>
         {/* Price */}
         <div className="flex items-end justify-between mb-3">
           <div className="flex">

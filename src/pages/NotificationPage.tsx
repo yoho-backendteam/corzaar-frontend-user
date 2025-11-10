@@ -1,4 +1,4 @@
-import Notification from '../Components/Notification/Notification'
+import Notification from '../components/Notification/Notification'
 
 const NotificationPage = () => {
   return (
