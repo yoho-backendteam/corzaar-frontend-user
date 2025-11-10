@@ -1,6 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
-import { COLORS, FONTS } from "../../Constants/uiconstants";
+import { COLORS } from "../../Constants/uiconstants";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {

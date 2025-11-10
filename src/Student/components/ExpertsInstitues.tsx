@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Star, MapPin } from "lucide-react";
+import  { useEffect } from "react";
+import {  MapPin } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { COLORS } from "../../Constants/uiconstants";
