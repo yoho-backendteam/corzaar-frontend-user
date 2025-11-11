@@ -188,7 +188,7 @@ const Navbar: React.FC = () => {
                         <FiShoppingCart size={16} /> My Courses
                       </li>
                     </Link>
-                    <Link to="Settingprofile" onClick={() => setShowProfile(false)}>
+                    <Link to="/settingprofile" onClick={() => setShowProfile(false)}>
                       <li className="flex items-center gap-2 hover:text-black cursor-pointer">
                         <IoSettingsOutline size={16} /> Settings
                       </li>

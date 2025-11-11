@@ -1,4 +1,4 @@
-import httpClient from "../api/httpClient";
+import httpClient from "../api/httpclient";
 import { API_END_POINTS } from "../api/endpoints";
 import type { Institute } from "../types/institute";
 
@@ -155,6 +155,44 @@ class Client {
   deleteCourseReview(reviewId: string) {
     return httpClient.delete(`/reviews/${reviewId}`);
   }
+
+
+  payment = {
+    getAll: (params: string) =>
+      httpClient.get(API_END_POINTS.student.payment.getAll.replace(":id", params))
+  }
+  fav = {
+    get: (userId: string) =>
+      httpClient.post(API_END_POINTS.student.fav.get, { userId })
+
+  }
+  profile = {
+    get: () =>
+      httpClient.get(API_END_POINTS.student.profile.get),
+
+    getById: (params: string) =>
+      httpClient.get(API_END_POINTS.student.profile.getById.replace(":id", params))
+
+  }
+  portfolio = {
+    get: (params: string) =>
+      httpClient.get(API_END_POINTS.student.portfolio.get.replace(":id", params))
+
+  }
+  activity = {
+    get: (params: string) =>
+      httpClient.get(API_END_POINTS.student.activity.get.replace(":userid", params))
+
+  }
+  attendance = {
+    get: (params: string) =>
+      httpClient.get(API_END_POINTS.student.attendance.get.replace(":studentId", params))
+  }
+  courses = {
+    getById: (params: string) =>
+      httpClient.get(API_END_POINTS.student.courses.getById.replace(":id", params))
+  }
+
 }
 
 export default new Client();

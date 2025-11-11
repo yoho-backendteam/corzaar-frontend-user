@@ -10,7 +10,7 @@ import CartPage from '../Pages/CartPage';
 // import NotificationPage from '../Pages/NotificationPage';
 import ProfilePage from '../Pages/ProfilePage';
 import { Settingprofile } from '../Pages/Settingprofile';
-import { Portfolio } from '../components/profile/Tabpages/Portfolio/Portfolio';
+import { Portfolio } from '../Components/profile/Tabpages/Portfolio/PortfolioPage';
 import SignIn from '../Components/Authentication/SignIn';
 import StudentRegistration from '../Components/StudentVerfication/StudentRegistration';
 import ExploreInstitutes from '../Component/Institutes/ExploreInstitutes';

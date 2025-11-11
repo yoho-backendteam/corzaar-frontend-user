@@ -43,12 +43,12 @@ class HttpClient {
         const response = Axios.patch(url, data);
         return response;
     }
-    async put(url: string, data: any) {
-        const response = Axios.put(url, data);
+    async put(url: string, data: any, params?: string) {
+        const response = Axios.put(url, data, { params });
         return response;
     }
-    async delete(url: string) {
-        const response = Axios.delete(url);
+    async delete(url: string, params?: string) {
+        const response = Axios.delete(url, { params });
         return response;
     }
     async uploadFile(url: string, data: any) {

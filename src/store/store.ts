@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import dealsSlice from "../features/deals/dealsSlice"
 import coursesSlice from "../features/courses/courseSlice"
-import courseReducer from "../Components/Redux/CourseSlice";
 // import coursesSlice from "../features/courses/courseSlice"
 import courseSlice from "../Components/Redux/CourseSlices";
 import contactReducer from "../redux/Queries/queryslice";
@@ -16,23 +15,25 @@ import instituteSearchReducer from "../features/institute/reducers/searchSlice"
 import loginotpReducer from "../features/userlogin/reducers/otpslice";
 // import instituteReducer from "../redux/Institute/instituteSlice";
 import querySlice from "../redux/Queries/queryslice";
+import SettingSlice from '../features/settings/reducers/SettingSlice'
 
 const store = configureStore({
-  reducer: {
-    dealSlice: dealsSlice,
-    courseSlice: coursesSlice,
-    course: courseSlice,
-    contact: contactReducer,
-    studentHome: studentHomeReducer,
-    profile: profileReducer,
-    notifications: notificationReducer,
-    institute: instituteReducer,
-    home: homeReducer,
-    offer: offerReducer,
-    instituteSearch: instituteSearchReducer,
-    loginotp: loginotpReducer,
-    query: querySlice,
-  },
+    reducer: {
+        dealSlice: dealsSlice,
+        courseSlice: coursesSlice,
+        course: courseSlice,
+        contact: contactReducer,
+        studentHome: studentHomeReducer,
+        profile: profileReducer,
+        notifications: notificationReducer,
+        institute: instituteReducer,
+        home: homeReducer,
+        offer: offerReducer,
+        instituteSearch: instituteSearchReducer,
+        loginotp: loginotpReducer,
+        query: querySlice,
+        SettingSlice: SettingSlice
+    },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

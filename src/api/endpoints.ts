@@ -54,4 +54,29 @@ export const API_END_POINTS = {
       movetocart: `${BASE_API_URL}/student/api/cart/fav/movetocart`,
     },
   },
+
+  student: {
+    payment: {
+      getAll: "/payment/api/student/getall/:id"
+    },
+    fav: {
+      get: "/student/api/product/fav/get"
+    },
+    profile: {
+      get: "users/profile",
+      getById: "/student/api/student_management/getbyid/:id"
+    },
+    portfolio: {
+      get: "/studnet/api/student_management/getBatch/:id"
+    },
+    activity: {
+      get: "/logs/api/activity/:userid"
+    },
+    attendance: {
+      get: "/merchant/api/attendance/getStudentAllAttendance/:studentId"
+    },
+    courses: {
+      getById: "/course/api/courses/getCoursesId/:id"
+    }
+  }
 };
