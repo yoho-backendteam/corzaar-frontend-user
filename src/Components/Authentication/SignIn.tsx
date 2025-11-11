@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
@@ -25,24 +25,24 @@ const SignIn = () => {
   const [otpStep, setOtpStep] = useState<"enter-phone" | "enter-otp">("enter-phone");
   const [phoneNumber, setPhoneNumber] = useState("");
 
- const handleSendOTP = async () => {
-  if (!phoneNumber) return toast.error("Phone number is required");
-  const resultAction = await dispatch(sendOTPThunk({ phoneNumber }));
-  
-  if (resultAction.payload && (resultAction.payload as OTPResponse).data?.token) {
-    localStorage.setItem('token', (resultAction.payload as OTPResponse).data?.token || '');
-  }
+  const handleSendOTP = async () => {
+    if (!phoneNumber) return toast.error("Phone number is required");
+    const resultAction = await dispatch(sendOTPThunk({ phoneNumber }));
 
-  if (sendOTPThunk.fulfilled.match(resultAction)) {
-    toast.success((resultAction.payload as OTPResponse).message);
-    setOtpStep("enter-otp");
-  } else {
-    const errorMessage = typeof resultAction.payload === 'string' 
-      ? resultAction.payload 
-      : "Failed to send OTP";
-    toast.error(errorMessage);
-  }
-};
+    if (resultAction.payload && (resultAction.payload as OTPResponse).data?.token) {
+      localStorage.setItem('token', (resultAction.payload as OTPResponse).data?.token || '');
+    }
+
+    if (sendOTPThunk.fulfilled.match(resultAction)) {
+      toast.success((resultAction.payload as OTPResponse).message);
+      setOtpStep("enter-otp");
+    } else {
+      const errorMessage = typeof resultAction.payload === 'string'
+        ? resultAction.payload
+        : "Failed to send OTP";
+      toast.error(errorMessage);
+    }
+  };
 
   return (
     <div
@@ -91,9 +91,11 @@ const SignIn = () => {
           </p>
 
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
-            {[{ count: "10K+", label: "Courses" },
+            {[
+              { count: "10K+", label: "Courses" },
               { count: "50K+", label: "Students" },
-              { count: "500+", label: "Instructors" }].map((item, i) => (
+              { count: "500+", label: "Instructors" }
+            ].map((item, i) => (
               <div
                 key={i}
                 className="border rounded-md p-4 text-center flex flex-col items-center justify-center"
@@ -129,8 +131,10 @@ const SignIn = () => {
         {/* Right Auth Panel */}
         <div
           className="w-full md:w-1/2 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between"
+          className="w-full md:w-1/2 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between"
           style={{
             backgroundColor: COLORS.primary_white,
+            minHeight: "520px",
             minHeight: "520px",
           }}
         >

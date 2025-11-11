@@ -6,6 +6,7 @@ import { otpVerify } from "../../features/userlogin/reducers/service";
 
 interface OTPVerificationProps {
   goBack: () => void;
+  onSuccess: () => void;
 }
 
 const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
@@ -64,9 +65,9 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
 
   return (
     <div className="w-full">
-     <label style={{ ...FONTS.medium, fontSize: "14px", color: COLORS.C_DIV_Title } as any}>
-  Enter OTP
-</label>
+      <label style={{ ...FONTS.medium, fontSize: "14px", color: COLORS.C_DIV_Title } as any}>
+        Enter OTP
+      </label>
 
 
       <div className="flex flex-wrap justify-center gap-4 my-3 w-full mx-auto">
@@ -86,13 +87,14 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
       </div>
 
       <button
-        className="w-full py-2 rounded-md font-semibold text-sm mb-3 border"
+        className="w-full py-2 rounded-md font-semibold text-sm mb-3 border transition-opacity disabled:opacity-50"
         style={{
           borderColor: COLORS.primary_gray,
           color: COLORS.primary_black,
           backgroundColor: COLORS.primary_white,
         }}
         onClick={goBack}
+        disabled={loading}
       >
         Change Number
       </button>
