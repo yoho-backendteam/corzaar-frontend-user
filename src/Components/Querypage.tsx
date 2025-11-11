@@ -1,5 +1,5 @@
-import ContactInfo from "../components/Queryinfo";
-import ContactForm from "../components/Queryform";
+import ContactInfo from "../Components/Queryinfo";
+import ContactForm from "../Components/Queryform";
 import { FONTS } from "../Constants/uiconstants";
 
 export default function ContactPage() {
