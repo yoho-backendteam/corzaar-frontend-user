@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import {type RootState } from "../../store/store";
 import { useState } from "react";
 import { ChevronDown, SearchIcon, X } from "lucide-react";
-import CourseCard from "./CourseCard";
-import FilterSidebar from "./FilterSidebar";
+import CourseCard from "../../../src/Components/StudentCourse/CourseCard";
+import FilterSidebar from "./../../../src/Components/StudentCourse/FilterSidebar";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import filter from "../../assets/Image/fillteryl.png";
 
