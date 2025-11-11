@@ -4,10 +4,10 @@ import Home from '../Pages/Home';
 import Courses from '../Pages/Courses';
 // import Institutes from '../pages/Institutes';
 import OfferPage from '../Pages/OfferPage';
-import Queries from '../Pages/Queries';
+// import Queries from '../Pages/Queries';
 import Navbar from '../NavBar/Navbar';
 import CartPage from '../Pages/CartPage';
-import NotificationPage from '../Pages/NotificationPage';
+// import NotificationPage from '../Pages/NotificationPage';
 import ProfilePage from '../Pages/ProfilePage';
 import { Settingprofile } from '../Pages/Settingprofile';
 import { Portfolio } from '../components/profile/Tabpages/Portfolio/Portfolio';
@@ -36,9 +36,9 @@ const LayoutRoute: React.FC = () => {
                 {/* <Route path="/Institutes" element={<Institutes />} /> */}
                 <Route path="/Offers" element={<OfferPage />} />
                 <Route path="/cartPage" element={<CartPage />} />
-                <Route path="/notificationPage" element={<NotificationPage />} />
+                {/* <Route path="/notificationPage" element={<NotificationPage />} /> */}
                 <Route path="/profilePage" element={<ProfilePage />} />
-                <Route path="/Queries" element={<Queries />} />
+                {/* <Route path="/Queries" element={<Queries />} /> */}
                 <Route path="/settingprofile" element={<Settingprofile />} />
                 <Route path="/Portfolio" element={<Portfolio />} />
                 <Route path="/Mycourse" element={<CartPage />} />

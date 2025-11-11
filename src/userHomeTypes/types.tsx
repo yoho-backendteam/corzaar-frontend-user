@@ -48,6 +48,10 @@ export interface Course {
   students: number;
   duration: string;
   _id:string
+  description: string;
+  pricing: {
+      price: number
+    }
 }
 
 
@@ -60,9 +64,13 @@ export interface CourseCardProps {
     category: {
       primary: string
     };
+    description: string;
     level: string;
     institute: string;
     price: number;
+    pricing: {
+      price: number
+    }
     oldPrice: number;
     enrolled: boolean;
     thumbnail: string;
@@ -112,4 +120,16 @@ export interface CategoryType {
     };
   courses: number;
   _id:string;
+}
+
+
+export interface addtocartTypes{
+  userId:string
+      courseId:string
+      title:string
+      price:number 
+      discount :number 
+      instituteId:string
+      payment:number
+      billing:string
 }
