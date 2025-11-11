@@ -2,7 +2,6 @@ import { useState } from "react";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { otpVerify } from "../../features/userlogin/reducers/service";
 
 interface OTPVerificationProps {
   goBack: () => void;
@@ -12,7 +11,8 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
   const navigate = useNavigate();
   const [otpValues, setOtpValues] = useState<string[]>(Array(6).fill(""));
 
-  const otpToken = localStorage.getItem("token");
+  // Get stored OTP (from localStorage, set during send)
+  const storedOtp = localStorage.getItem("generatedOtp");
 
   const handleChange = (index: number, value: string) => {
     if (!/^\d*$/.test(value)) return;
@@ -33,41 +33,40 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
     }
   };
 
-  const handleVerify = async () => {
-    if (!otpToken) {
-      toast.error("Invalid session. Please resend OTP.");
-      goBack();
-      return;
-    }
+  const handleVerify = () => {
+    const enteredOtp = otpValues.join("");
 
-    const otpInput = otpValues.join("");
-    if (otpInput.length < 6) {
+    if (enteredOtp.length < 6) {
       toast.error("Please enter the complete 6-digit OTP.");
       return;
     }
 
-    try {
-      const response = await otpVerify.verifyOTP(otpToken, otpInput);
+    if (!storedOtp) {
+      toast.error("OTP expired or missing. Please resend.");
+      goBack();
+      return;
+    }
 
-      if (response.status) {
-        localStorage.removeItem("token");
-        toast.success("OTP verified successfully!");
-        navigate("/Home");
-      } else {
-        toast.error(response.message || "Invalid OTP. Please try again.");
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error("OTP verification failed. Try again.");
+    if (enteredOtp === storedOtp) {
+      toast.success("OTP verified successfully!");
+      localStorage.removeItem("generatedOtp"); // clear stored OTP
+      navigate("/Home");
+    } else {
+      toast.error("Invalid OTP. Please try again.");
     }
   };
 
   return (
     <div className="w-full">
-     <label style={{ ...FONTS.medium, fontSize: "14px", color: COLORS.C_DIV_Title } as any}>
-  Enter OTP
-</label>
-
+      <label
+        style={{
+          ...FONTS.medium,
+          fontSize: "14px",
+          color: COLORS.C_DIV_Title,
+        } as any}
+      >
+        Enter OTP
+      </label>
 
       <div className="flex flex-wrap justify-center gap-4 my-3 w-full mx-auto">
         {otpValues.map((val, i) => (

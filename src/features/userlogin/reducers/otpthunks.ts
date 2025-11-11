@@ -7,7 +7,7 @@ export const sendOTPThunk = createAsyncThunk<OTPResponse, { phoneNumber: string 
   async ({ phoneNumber }, { rejectWithValue }) => {
     try {
       const data = await otpService.sendOTP(phoneNumber);
-      return data;
+      return data; // must conform to OTPResponse
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : "Failed to send OTP";
       return rejectWithValue(errorMessage);

@@ -13,6 +13,31 @@ export const otpService = {
     }
   },
 };
+export const userService = {
+  login: async (email: string, password:string): Promise<OTPResponse> => {
+    try {
+      const response = await Client.loginEndpoint.userlogin(email,password);
+      return response.data;
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+      console.error("Error:", errorMessage);
+      throw new Error(errorMessage);
+    }
+  },
+};
+
+export const forgotService = {
+  sendOTP: async (email: string): Promise<OTPResponse> => {
+    try {
+      const response = await Client.forgotEndpoint.postforgot(email);
+      return response.data;
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+      console.error("Error:", errorMessage);
+      throw new Error(errorMessage);
+    }
+  },
+};
 
 export const otpVerify = {
   verifyOTP: async (token: string, otp: string): Promise<OTPVerifyResponse> => {

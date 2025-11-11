@@ -2,7 +2,7 @@ import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { Phone } from "lucide-react";
 
 interface SendOTPProps {
-  goToOtp: () => void;
+  goToOtp:  () => void;
   phoneNumber: string;
   setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
 }
