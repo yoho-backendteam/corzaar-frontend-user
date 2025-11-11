@@ -30,7 +30,10 @@ const FeaturedDeals: React.FC = () => {
         Featured Deals
       </h2>
 
-      
+
+
+
+
       {(!deals || deals.length === 0) ? (
         <p
           className="text-center py-10 rounded-lg shadow-sm"
