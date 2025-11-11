@@ -1,4 +1,5 @@
 import Client from '../../../api/index2';
+import type { addtocartTypes } from '../../../userHomeTypes/types';
 
 
 export const getOfferService = async () => {
@@ -71,8 +72,8 @@ export const getCategoriesService = async () => {
 };
 
 
-export const addtokartService = async () => {
-    const response = await Client.user_home.addtokart();
+export const addtokartService = async (data:addtocartTypes) => {
+    const response = await Client.user_home.addtokart(data);
     try {
         if (response) {
             return response;

@@ -31,6 +31,8 @@ const TrendingCourse = () => {
     getTrendingCourses();
   }, [dispatch]);
 
+
+
   // Scroll function
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -63,6 +65,7 @@ const TrendingCourse = () => {
 
   // ✅ Safe slice now
   const itemsToShow = trendingCourses.slice(0, 6);
+
 
   // Calculate pages for dots
   const itemsPerPage =

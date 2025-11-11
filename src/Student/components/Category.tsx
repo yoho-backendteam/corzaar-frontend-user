@@ -25,7 +25,8 @@ const Category = () => {
     getCategories();
   }, [dispatch]);
 
-  // --- Handle if 'courses' or 'categories' are not arrays safely ---
+
+  
   const safeCategories = Array.isArray(categories) ? categories : [];
   const safeCourses = Array.isArray(courses) ? courses : [];
 

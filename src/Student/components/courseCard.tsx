@@ -10,11 +10,16 @@ import { FaHeart } from "react-icons/fa";
 import enroll from '../../assets/clipboard-tick.png'
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import type { CourseCardProps } from "../../userHomeTypes/types";
+// import { useDispatch } from "react-redux";
+// import type { AppDispatch } from "../../store/store";
+// import { addtokartThunk } from "../../features/home_page/reducers/homeThunk";
+
 
 
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  // const dispatch = useDispatch<AppDispatch>();
 
   const handleFavoriteToggle = () => {
     setIsFavorite((prev) => !prev);
@@ -37,7 +42,25 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
     }
   };
 
+  const oldPrice = (course?.pricing?.price * 0.05) + course?.pricing?.price
 
+  const handleAddtokart = async() =>{
+    try {
+      // const payload = {
+      //    userId:"" ,
+      // courseId:"",
+      // title:"",
+      // price:"", 
+      // discount :0, 
+      // instituteId:"",
+      // payment:"",
+      // billing:""
+      // }
+      // await dispatch(addtokartThunk(payload))
+    } catch (error) {
+      console.log("failed to addtokart",error)
+    }
+  }
 
   return (
     <div className="relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 p-2 rounded-2xl"
@@ -98,8 +121,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
 
         {/* Description */}
         <p className=" text-sm mb-2 leading-snug" style={{ color: COLORS.primary_gray }}>
-          Master web development with HTML, CSS, JavaScript, React, Node.js and
-          more. Build real-world projects and get job-ready.
+          {course?.description}
         </p>
 
         {/* Institute */}
@@ -108,7 +130,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         </p>
 
         {/* Ratings, Students, Duration */}
-        {course?.reviews?.length && course?.reviews?.map((review, index) => (
+        {course?.reviews?.length ? course?.reviews?.map((review, index) => (
           <div className="flex items-center text-sm  mb-4" style={{ color: COLORS.primary_gray }} key={index}>
             <div className="flex gap-3 items-center mr-4">
               <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
@@ -133,16 +155,16 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
               </span>
             </div>
           </div>
-        ))}
+        )) : null}
 
         {/* Price */}
         <div className="flex items-end justify-between mb-3">
           <div className="flex">
             <p className="text-2xl font-bold text-black">
-              ₹{course?.price}
+              ₹{course?.pricing?.price}
             </p>
             <p className=" mt-1 ml-3 line-through" style={{ color: COLORS.primary_gray }}>
-              ₹{course?.oldPrice}
+              ₹{oldPrice}
             </p>
           </div>
         </div>
@@ -155,7 +177,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             <img src={enroll} alt="" className="font-bold ml-1 h-5" />
           </button>
         ) : (
-          <button className=" text-black text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-[#FFD400] transition" style={{ background: COLORS.primary_yellow }}>
+          <button className=" text-black text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-[#FFD400] transition" style={{ background: COLORS.primary_yellow }} onClick = {()=>handleAddtokart()}>
             <ShoppingCart className="w-4 h-4" />
             Add To Cart
           </button>
