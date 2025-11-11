@@ -1,5 +1,5 @@
-import { COLORS, FONTS } from "../Constants/uiconstants";
-import { contactInfo, quickLinks } from "../redux/Queries/querydata";
+import { COLORS, FONTS } from "../../Constants/uiconstants";
+import { contactInfo, quickLinks } from "../../redux/Queries/querydata";
 
 export default function ContactInfo() {
     return (

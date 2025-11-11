@@ -12,6 +12,8 @@ import instituteReducer from "../features/institute/reducers/instituteslice"
 import instituteSearchReducer from "../features/institute/reducers/searchSlice"
 // import instituteReducer from "../redux/Institute/instituteSlice";
 import loginotpReducer from "../features/userlogin/reducers/otpslice";
+// import instituteReducer from "../redux/Institute/instituteSlice";
+import querySlice from "../redux/Queries/queryslice";
 
 const store = configureStore({
   reducer: {
@@ -27,7 +29,7 @@ const store = configureStore({
     offer: offerReducer,
     instituteSearch: instituteSearchReducer,
     loginotp: loginotpReducer,
-
+    query: querySlice,
   },
 });
 
