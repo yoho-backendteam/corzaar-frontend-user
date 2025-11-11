@@ -1,16 +1,48 @@
 import { useState } from "react";
-import { COLORS, FONTS } from "../../Constants/uiconstants";
-import { Lock, Phone } from "lucide-react";
-import logocap from "../../assets/images/logocap.png";
-import SignInPassword from "./SignInPassword";
-import SendOTP from "./SendOTP";
-import OTPVerification from "./OTPVerification";
+import { useDispatch} from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { COLORS, FONTS } from "../../Constants/uiconstants";
+import logocap from "../../assets/images/logocap.png";
+import SignInPassword from "../../Components/Authentication/SignInPassword";
+import SendOTP from "../../Components/Authentication/SendOTP";
+import OTPVerification from "../../Components/Authentication/OTPVerification";
+import { resetOTP } from "../../features/userlogin/reducers/otpslice";
+import { sendOTPThunk } from "../../features/userlogin/reducers/otpthunks";
+import type { AppDispatch } from "../../store/store";
+import { Lock, Phone } from "lucide-react";
+import type { OTPResponse } from "../../features/userlogin/types/otptypes";
+
+
 
 const SignIn = () => {
-const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  // const otpData = useSelector((state: RootState) => state.loginotp.data);
+
   const [method, setMethod] = useState<"password" | "otp">("password");
   const [otpStep, setOtpStep] = useState<"enter-phone" | "enter-otp">("enter-phone");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+ const handleSendOTP = async () => {
+  if (!phoneNumber) return toast.error("Phone number is required");
+  const resultAction = await dispatch(sendOTPThunk({ phoneNumber }));
+  
+  if (resultAction.payload && (resultAction.payload as OTPResponse).data?.token) {
+    localStorage.setItem('token', (resultAction.payload as OTPResponse).data?.token || '');
+  }
+
+  if (sendOTPThunk.fulfilled.match(resultAction)) {
+    toast.success((resultAction.payload as OTPResponse).message);
+    setOtpStep("enter-otp");
+  } else {
+    const errorMessage = typeof resultAction.payload === 'string' 
+      ? resultAction.payload 
+      : "Failed to send OTP";
+    toast.error(errorMessage);
+  }
+};
 
   return (
     <div
@@ -21,7 +53,7 @@ const navigate = useNavigate();
         className="flex flex-col md:flex-row rounded-xl overflow-hidden w-full max-w-6xl"
         style={{ backgroundColor: "#FFFBE1", padding: "2rem" }}
       >
-       
+        {/* Left Info Panel */}
         <div className="w-full md:w-1/2 flex flex-col justify-center px-4 md:px-8 mb-8 md:mb-0">
           <div className="flex items-center mb-8 justify-center md:justify-start">
             <img src={logocap} alt="Logo" className="w-8 h-8" />
@@ -94,12 +126,12 @@ const navigate = useNavigate();
           </div>
         </div>
 
-       
+        {/* Right Auth Panel */}
         <div
-          className="w-full md:w-1/2 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between "
+          className="w-full md:w-1/2 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between"
           style={{
             backgroundColor: COLORS.primary_white,
-            minHeight: "520px", 
+            minHeight: "520px",
           }}
         >
           <div>
@@ -125,18 +157,18 @@ const navigate = useNavigate();
               Choose your preferred method to sign in to your account
             </p>
 
+            {/* Method Toggle */}
             <div className="flex mb-6">
               <button
                 onClick={() => {
                   setMethod("password");
                   setOtpStep("enter-phone");
+                  dispatch(resetOTP());
                 }}
                 className="flex-1 py-2 rounded-l-md font-semibold text-sm transition-all"
                 style={{
-                  backgroundColor:
-                    method === "password" ? COLORS.primary_red : COLORS.primary_white,
-                  color:
-                    method === "password" ? COLORS.primary_white : COLORS.primary_red,
+                  backgroundColor: method === "password" ? COLORS.primary_red : COLORS.primary_white,
+                  color: method === "password" ? COLORS.primary_white : COLORS.primary_red,
                   border: `1px solid ${COLORS.primary_red}`,
                 }}
               >
@@ -151,10 +183,8 @@ const navigate = useNavigate();
                 }}
                 className="flex-1 py-2 rounded-r-md font-semibold text-sm transition-all"
                 style={{
-                  backgroundColor:
-                    method === "otp" ? COLORS.primary_red : COLORS.primary_white,
-                  color:
-                    method === "otp" ? COLORS.primary_white : COLORS.primary_red,
+                  backgroundColor: method === "otp" ? COLORS.primary_red : COLORS.primary_white,
+                  color: method === "otp" ? COLORS.primary_white : COLORS.primary_red,
                   border: `1px solid ${COLORS.primary_red}`,
                 }}
               >
@@ -163,39 +193,40 @@ const navigate = useNavigate();
               </button>
             </div>
 
-           
-            <div className="flex items-center justify-center transition-all duration-300">
+            {/* Form Area */}
+            <div className="flex flex-col items-center transition-all duration-300 w-full">
               {method === "password" && <SignInPassword />}
               {method === "otp" && otpStep === "enter-phone" && (
-                <SendOTP goToOtp={() => setOtpStep("enter-otp")} />
+                <SendOTP
+                  goToOtp={handleSendOTP}
+                  phoneNumber={phoneNumber}
+                  setPhoneNumber={setPhoneNumber}
+                />
               )}
-              {method === "otp" && otpStep === "enter-otp" && (
-                <OTPVerification goBack={() => setOtpStep("enter-phone")} />
-              )}
+              {method === "otp" && otpStep === "enter-otp" && <OTPVerification goBack={() => setOtpStep("enter-phone")} />}
             </div>
           </div>
 
-          
-         <p
-  className="text-center mt-4 text-sm"
-  style={{ color: COLORS.primary_gray }}
->
-  Don’t have an account?{" "}
-  <button
-    onClick={() => navigate("/student-register")}
-    style={{
-      color: COLORS.primary_red,
-      fontWeight: 600,
-      cursor: "pointer",
-      background: "none",
-      border: "none",
-      padding: 0,
-      fontSize: "inherit",
-    }}
-  >
-    Sign up now
-  </button>
-</p>
+          <p
+            className="text-center mt-4 text-sm"
+            style={{ color: COLORS.primary_gray }}
+          >
+            Don’t have an account?{" "}
+            <button
+              onClick={() => navigate("/student-register")}
+              style={{
+                color: COLORS.primary_red,
+                fontWeight: 600,
+                cursor: "pointer",
+                background: "none",
+                border: "none",
+                padding: 0,
+                fontSize: "inherit",
+              }}
+            >
+              Sign up now
+            </button>
+          </p>
         </div>
       </div>
     </div>

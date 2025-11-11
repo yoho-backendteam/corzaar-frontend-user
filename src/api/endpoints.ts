@@ -9,4 +9,7 @@ export const API_END_POINTS = {
     getCoursesByInstitute: "/api/getall/:id/courses",
     searchById: "/api/:id/search",
   },
-};
+
+  login: { post: "/users/login" },
+  otpverify: { post: "/users/verify-otp" }
+}

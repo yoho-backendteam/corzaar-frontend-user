@@ -25,6 +25,15 @@ class Client {
     searchById: (id: string) =>
       httpClient.get(API_END_POINTS.instituteManagement.searchById.replace(":id", id)),
   };
+
+  loginEndpoint = {
+    postotp: (phoneNumber: string) =>
+      httpClient.post(API_END_POINTS.login.post, { phoneNumber })
+  }
+  verifyOtpEndpoint = {
+    postverifyotp: (token: string, otp: string,) =>
+      httpClient.post(API_END_POINTS.otpverify.post, { token, otp })
+  }
 }
 
 export default new Client();

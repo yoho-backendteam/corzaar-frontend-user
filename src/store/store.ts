@@ -10,6 +10,8 @@ import homeReducer from "../features/home_page/reducers/homeSlice"
 import offerReducer from "../features/offer_page/reducers/offerSlice"
 import instituteReducer from "../features/institute/reducers/instituteslice"
 import instituteSearchReducer from "../features/institute/reducers/searchSlice"
+// import instituteReducer from "../redux/Institute/instituteSlice";
+import loginotpReducer from "../features/userlogin/reducers/otpslice";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +26,8 @@ const store = configureStore({
     home: homeReducer,
     offer: offerReducer,
     instituteSearch: instituteSearchReducer,
+    loginotp: loginotpReducer,
+
   },
 });
 
