@@ -15,6 +15,8 @@ import SignIn from '../Components/Authentication/SignIn';
 import StudentRegistration from '../Components/StudentVerfication/StudentRegistration';
 import ExploreInstitutes from '../Component/Institutes/ExploreInstitutes';
 import InstituteDetails from '../Component/Institutes/InstituteDetails';
+import ContactPage from '../Components/Queries/Querypage';
+import NotificationPage from '../Pages/NotificationPage';
 
 const LayoutRoute: React.FC = () => {
   return (
@@ -36,9 +38,9 @@ const LayoutRoute: React.FC = () => {
                 {/* <Route path="/Institutes" element={<Institutes />} /> */}
                 <Route path="/Offers" element={<OfferPage />} />
                 <Route path="/cartPage" element={<CartPage />} />
-                {/* <Route path="/notificationPage" element={<NotificationPage />} /> */}
+                <Route path="/notificationPage" element={<NotificationPage />} />
                 <Route path="/profilePage" element={<ProfilePage />} />
-                {/* <Route path="/Queries" element={<Queries />} /> */}
+                <Route path="/Queries" element={<ContactPage />} />
                 <Route path="/settingprofile" element={<Settingprofile />} />
                 <Route path="/Portfolio" element={<Portfolio />} />
                 <Route path="/Mycourse" element={<CartPage />} />

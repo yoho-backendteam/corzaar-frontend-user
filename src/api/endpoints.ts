@@ -5,7 +5,7 @@ export const API_END_POINTS = {
   instituteManagement: {
     base: "/api/",
     getAll: "/open/merchant/api/getall",
-    getById: "/merchant/api/getbyid/:id",
+    getById: "/open/merchant/api/getbyid/:id",
     updateById: "/api/update/:id",
     deleteById: "/api/delete/:id",
     getStudentsByInstitute: "/api/getall/:id/students",
