@@ -34,6 +34,127 @@ class Client {
     postverifyotp: (token: string, otp: string,) =>
       httpClient.post(API_END_POINTS.otpverify.post, { token, otp })
   }
+  createCourse(data: any) {
+    return httpClient.post(API_END_POINTS.course.create, data);
+  }
+
+  getAllCourses() {
+    return httpClient.get(API_END_POINTS.course.getAll);
+  }
+
+  getDetailedCourses() {
+    return httpClient.get(API_END_POINTS.course.getAllDetailed);
+  }
+
+  getCourseById(id: string) {
+    return httpClient.get(API_END_POINTS.course.getById(id));
+  }
+
+  updateCourse(id: string, data: any) {
+    return httpClient.put(API_END_POINTS.course.update(id), data);
+  }
+
+  deleteCourse(id: string) {
+    return httpClient.delete(API_END_POINTS.course.delete(id));
+  }
+
+  getCoursesByBranch(branchId: string) {
+    return httpClient.get(API_END_POINTS.course.getByBranch(branchId));
+  }
+
+  getCoursesByInstitute(instituteId: string) {
+    return httpClient.get(API_END_POINTS.course.getByInstitute(instituteId));
+  }
+
+  searchCourses(query: string) {
+    return httpClient.get(`${API_END_POINTS.course.search}?query=${query}`);
+  }
+
+  getCategories() {
+    return httpClient.get(API_END_POINTS.course.categories);
+  }
+
+  getFeaturedCourses() {
+    return httpClient.get(API_END_POINTS.course.featured);
+  }
+
+  getTrendingCourses() {
+    return httpClient.get(API_END_POINTS.course.trending);
+  }
+
+  // COURSE CONTENT METHODS
+  addCourseContent(courseId: string, data: any) {
+    return httpClient.post(API_END_POINTS.course.addContent(courseId), data);
+  }
+
+  getCourseContent(courseId: string) {
+    return httpClient.get(API_END_POINTS.course.getContent(courseId));
+  }
+
+  updateCourseContent(courseId: string, contentId: string, data: any) {
+    return httpClient.put(
+      API_END_POINTS.course.updateContent(courseId, contentId),
+      data
+    );
+  }
+
+  deleteCourseContent(courseId: string, contentId: string) {
+    return httpClient.delete(
+      API_END_POINTS.course.deleteContent(courseId, contentId)
+    );
+  }
+
+  // FAVORITE METHODS
+  addToFavourites(courseId: string) {
+    return httpClient.post(API_END_POINTS.cart.fav.add, { courseId });
+  }
+
+  getFavouriteCourses() {
+    return httpClient.get(API_END_POINTS.cart.fav.get);
+  }
+
+  moveFavouriteToCart(courseId: string) {
+    return httpClient.post(API_END_POINTS.cart.fav.movetocart, { courseId });
+  }
+
+  getCourseReviews(courseId: string) {
+    return httpClient.get(`/courses/${courseId}/reviews`);
+  }
+
+  // Get a specific review by ID
+  getReviewById(reviewId: string) {
+    return httpClient.get(`/reviews/${reviewId}`);
+  }
+
+  // Get reviews by user
+  getUserReviews(userId: string) {
+    return httpClient.get(`/users/${userId}/reviews`);
+  }
+
+  // Get featured reviews (top rated)
+  getFeaturedReviews() {
+    return httpClient.get('/reviews/featured');
+  }
+
+  // Get recent reviews
+  getRecentReviews(limit: number = 10) {
+    return httpClient.get(`/reviews/recent?limit=${limit}`);
+  }
+
+  // Add a new review to a course
+  addCourseReview(courseId: string, reviewData: any) {
+    return httpClient.post(`/courses/${courseId}/reviews`, reviewData);
+  }
+
+  // Update a review
+  updateCourseReview(reviewId: string, reviewData: any) {
+    return httpClient.put(`/reviews/${reviewId}`, reviewData);
+  }
+
+  // Delete a review
+  deleteCourseReview(reviewId: string) {
+    return httpClient.delete(`/reviews/${reviewId}`);
+  }
 }
 
 export default new Client();
