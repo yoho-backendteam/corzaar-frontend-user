@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import dealsSlice from "../features/deals/dealsSlice"
-import coursesSlice from "../features/courses/courseSlice"
-import courseReducer from "../components/Redux/CourseSlice";
+// import coursesSlice from "../features/courses/courseSlice"
+import courseSlice from "../Components/Redux/CourseSlices";
 import contactReducer from "../redux/Queries/queryslice";
 import studentHomeReducer from '../Student/redux/studentSlice'
 import profileReducer from "../features/profile/profileSlice";
@@ -11,8 +11,8 @@ import instituteReducer from "../redux/Institute/instituteSlice";
 const store = configureStore({
   reducer: {
     dealSlice: dealsSlice,
-    courseSlice: coursesSlice,
-    courses: courseReducer,
+    // courseSlice: coursesSlice,
+    course: courseSlice,
     contact: contactReducer,
     studentHome: studentHomeReducer,
     profile: profileReducer,

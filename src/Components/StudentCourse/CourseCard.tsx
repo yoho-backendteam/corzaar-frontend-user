@@ -6,11 +6,85 @@ import enroll from "../../assets/Image/enroll.png";
 import cart from "../../assets/Image/cart.png";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 
-export default function CourseCard({ course }: { course: any }) {
+interface Course {
+  _id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  category: {
+    primary: string;
+    tags: string[];
+  };
+  level: string;
+  rating: number;
+  reviews: any[];
+  pricing: {
+    price: number;
+    discountPrice?: number;
+    currency: string;
+  };
+  content: {
+    totalDuration?: number;
+    totalLessons?: number;
+  };
+  instituteId?: string;
+  enrolled?: boolean;
+}
+
+export default function CourseCard({ course }: { course: Course }) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const handleHeartClick = () => {
     setIsFavorite(!isFavorite);
+  };
+
+  if (!course) {
+    return (
+      <div className="flex flex-col justify-center items-start p-4 gap-4 w-full max-w-sm mx-auto rounded-2xl bg-white shadow-lg">
+        <div className="w-full h-48 bg-gray-200 rounded-lg animate-pulse"></div>
+        <div className="w-full space-y-2">
+          <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+          <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
+        </div>
+      </div>
+    );
+  }
+
+  const formatPrice = (price: number, currency: string) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: currency || 'INR',
+    }).format(price);
+  };
+
+  const formatDuration = (minutes: number) => {
+    if (!minutes) return "N/A";
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+  };
+
+  const getOriginalPrice = () => {
+    if (course.pricing.discountPrice && course.pricing.discountPrice > 0) {
+      return formatPrice(course.pricing.price, course.pricing.currency);
+    }
+    return null;
+  };
+
+  const getDisplayPrice = () => {
+    if (course.pricing.discountPrice && course.pricing.discountPrice > 0) {
+      return formatPrice(course.pricing.discountPrice, course.pricing.currency);
+    }
+    return formatPrice(course.pricing.price, course.pricing.currency);
+  };
+
+  const getDiscountPercentage = () => {
+    if (course.pricing.discountPrice && course.pricing.discountPrice > 0) {
+      const discount = ((course.pricing.price - course.pricing.discountPrice) / course.pricing.price) * 100;
+      return Math.round(discount);
+    }
+    return null;
   };
 
   return (
@@ -25,22 +99,25 @@ export default function CourseCard({ course }: { course: any }) {
       }}
     >
       <div className="relative w-full">
-      <img
-  src={course.image}
-  alt={course.title}
-  className="w-full h-48 object-cover rounded-lg"
-/>
+        <img
+          src={imageError ? '/fallback-course-image.jpg' : (course.thumbnail || '/fallback-course-image.jpg')}
+          alt={course.title}
+          className="w-full h-48 object-cover rounded-lg"
+          onError={() => setImageError(true)}
+        />
 
-        <span
-          className="absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded-md"
-          style={{
-            backgroundColor: COLORS.primary_red,
-            color: COLORS.primary_white,
-            fontFamily: FONTS.medium?.fontFamily,
-          }}
-        >
-          42% OFF
-        </span>
+        {getDiscountPercentage() && (
+          <span
+            className="absolute top-2 left-2 text-xs font-bold px-2 py-1 rounded-md"
+            style={{
+              backgroundColor: COLORS.primary_red,
+              color: COLORS.primary_white,
+              fontFamily: FONTS.medium?.fontFamily,
+            }}
+          >
+            {getDiscountPercentage()}% OFF
+          </span>
+        )}
 
         <button
           onClick={handleHeartClick}
@@ -67,7 +144,7 @@ export default function CourseCard({ course }: { course: any }) {
             fontWeight: FONTS.medium?.fontWeight,
           }}
         >
-          {course.technology}
+          {course.category?.primary || "Uncategorized"}
         </span>
 
         <span
@@ -79,7 +156,7 @@ export default function CourseCard({ course }: { course: any }) {
             fontWeight: FONTS.medium?.fontWeight,
           }}
         >
-          {course.level}
+          {course.level?.charAt(0).toUpperCase() + course.level?.slice(1) || "Beginner"}
         </span>
       </div>
 
@@ -106,7 +183,7 @@ export default function CourseCard({ course }: { course: any }) {
               fontStyle: FONTS.regular?.fontStyle,
             }}
           >
-            {course.description}
+            {course.description || "No description available"}
           </p>
         </div>
 
@@ -119,7 +196,7 @@ export default function CourseCard({ course }: { course: any }) {
             fontWeight: FONTS.medium?.fontWeight,
           }}
         >
-          {course.institute}
+          {course.instituteId || "Institute"}
         </p>
 
         <div className="flex flex-row justify-between items-center w-full">
@@ -134,7 +211,7 @@ export default function CourseCard({ course }: { course: any }) {
                   fontWeight: FONTS.medium?.fontWeight,
                 }}
               >
-                {course.rating}
+                {course.rating || 0}
               </span>
             </div>
             <span
@@ -145,7 +222,7 @@ export default function CourseCard({ course }: { course: any }) {
                 fontWeight: FONTS.regular?.fontWeight,
               }}
             >
-              ({course.reviews})
+              ({course.reviews?.length || 0})
             </span>
           </div>
 
@@ -159,7 +236,7 @@ export default function CourseCard({ course }: { course: any }) {
                 fontWeight: FONTS.regular?.fontWeight,
               }}
             >
-              {course.students}
+              {course.content?.totalLessons || 0}
             </span>
           </div>
 
@@ -173,7 +250,7 @@ export default function CourseCard({ course }: { course: any }) {
                 fontWeight: FONTS.regular?.fontWeight,
               }}
             >
-              {course.duration}
+              {formatDuration(course.content?.totalDuration || 0)}
             </span>
           </div>
         </div>
@@ -189,18 +266,20 @@ export default function CourseCard({ course }: { course: any }) {
                   fontFamily: FONTS.medium?.fontFamily,
                 }}
               >
-                {course.price}
+                {getDisplayPrice()}
               </p>
-              <p
-                className="line-through"
-                style={{
-                  color: COLORS.primary_gray,
-                  fontSize: "13px",
-                  fontFamily: FONTS.regular?.fontFamily,
-                }}
-              >
-                {course.originalPrice}
-              </p>
+              {getOriginalPrice() && (
+                <p
+                  className="line-through"
+                  style={{
+                    color: COLORS.primary_gray,
+                    fontSize: "13px",
+                    fontFamily: FONTS.regular?.fontFamily,
+                  }}
+                >
+                  {getOriginalPrice()}
+                </p>
+              )}
             </div>
           </div>
 
