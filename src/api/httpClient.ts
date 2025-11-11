@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const Axios = axios.create({
-    baseURL: 'https://gateway-2dic.onrender.com/',
+    baseURL: import.meta.env.VITE_PUBLIC_API_URL,
     timeout: 50000,
     headers: {
         'Content-Type': 'application/json',

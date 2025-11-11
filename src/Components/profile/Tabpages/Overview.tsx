@@ -124,7 +124,7 @@ export const Overview = () => {
             <div key={index}>
               <div className="flex justify-between items-center text-sm font-semibold mt-5">
                 <p>{course.label}</p>
-                <p className=" px-2 py-[2px] rounded-lg  text-xs"
+                <p className=" px-2 py-0.5 rounded-lg  text-xs"
                 style={{backgroundColor:COLORS.secondary_green,color:COLORS.primary_white}}>
                   {course.progress}%
                 </p>

@@ -9,7 +9,8 @@ import { HiOutlineUsers, HiOutlinePhone } from "react-icons/hi2";
 import { LuUserRound } from "react-icons/lu";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import { RiMagicLine } from "react-icons/ri";
+import star from '../../assets/images/magic-starYellow.png'
+
 
 const StudentRegistration: React.FC = () => {
   const navigate = useNavigate();
@@ -172,7 +173,12 @@ const StudentRegistration: React.FC = () => {
         }}
         className="rounded-full items-center justify-center flex-wrap inline-flex"
       >
-    <RiMagicLine className="w-6 h-8"/>
+    <img
+            src={star}
+            alt="star"
+            className="h-5 w-5 mr-2"
+         
+         />
   Professional Enrollment
       </div>
 

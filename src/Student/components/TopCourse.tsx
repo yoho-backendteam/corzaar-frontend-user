@@ -22,9 +22,9 @@ const TopCourse = () => {
 
 
   const itemsToShow = topCourses.slice(0, 6);
- 
 
-  
+
+
   const itemsPerPage = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
   const totalPages = Math.ceil(itemsToShow.length / itemsPerPage);
 
@@ -53,7 +53,7 @@ const TopCourse = () => {
   }, []);
 
   return (
-    <section className="relative py-10 px-4 md:px-12 lg:px-20 overflow-hidden">
+    <section className="relative py-10 px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-14 gap-3">
         <div>
@@ -67,7 +67,7 @@ const TopCourse = () => {
         <button
           className="text-white font-semibold px-4 py-2 rounded-lg"
           style={{ background: COLORS.primary_red }}
-           onClick={() => navigate("/courses")} 
+          onClick={() => navigate("/courses")}
           onMouseEnter={(e) => (e.currentTarget.style.background = "#b01218")}
           onMouseLeave={(e) => (e.currentTarget.style.background = COLORS.primary_red)}
         >
@@ -121,9 +121,8 @@ const TopCourse = () => {
               {Array?.from({ length: totalPages })?.map((_, i) => (
                 <div
                   key={i}
-                  className={`h-3 rounded-full transition-all duration-500 ease-in-out ${
-                    i === activeIndex ? "w-10" : "bg-white opacity-70 w-3"
-                  }`}
+                  className={`h-3 rounded-full transition-all duration-500 ease-in-out ${i === activeIndex ? "w-10" : "bg-white opacity-70 w-3"
+                    }`}
                   style={{
                     background: i === activeIndex ? COLORS.primary_red : "white",
                   }}

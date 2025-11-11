@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectFilteredInstitutes,
   selectActiveCategory,
   selectSearch,
-} from "../../redux/Institute/instituteSelectors";
-import { setSearch, setActiveCategory } from "../../redux/Institute/instituteSlice";
+} from "../../features/institute/reducers/selectors";
+import { fetchInstitutes } from "../../features/institute/reducers/thunks";
+import { setSearch, setActiveCategory } from "../../features/institute/reducers/instituteslice";
 import { FONTS } from "../../Constants/uiconstants";
 import { Search } from "lucide-react";
 import map from "../../assets/map.png";
@@ -16,13 +17,25 @@ import website from "../../assets/website.png";
 import linkedin from "../../assets/linkedin.png";
 import teacher from "../../assets/teacher.png";
 import { useNavigate } from "react-router-dom";
+import type { AppDispatch } from "../../store/store";
 
 const ExploreInstitutes: React.FC = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const filteredInstitutes = useSelector(selectFilteredInstitutes);
   const activeCategory = useSelector(selectActiveCategory);
   const search = useSelector(selectSearch);
+  const dispatch = useDispatch<AppDispatch>();
+
+  // Fetch all institutes on mount
+  useEffect(() => {
+    dispatch(fetchInstitutes());
+  }, [dispatch]);
+  
+
+
+
+  
 
   const categories = [
     "All Categories",
@@ -30,7 +43,6 @@ const ExploreInstitutes: React.FC = () => {
     "Design",
     "Business",
     "Data Science",
-    "All",
     "Marketing",
     "Cloud",
     "DevOps",
@@ -40,7 +52,7 @@ const ExploreInstitutes: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FFDD00] px-4 sm:px-6 md:px-10 lg:px-20 py-8">
-      {/* 🧭 Page Title */}
+      {/* Page Title */}
       <div className="text-center md:text-left">
         <h1
           style={FONTS.boldHeading as React.CSSProperties}
@@ -56,8 +68,8 @@ const ExploreInstitutes: React.FC = () => {
         </p>
       </div>
 
-      {/* 🔍 Search Bar */}
-      <div className="relative mt-6 w-full max-w-2xl mx-auto md:mx-0">
+      {/* Search Bar */}
+       <div className="relative mt-6 w-full max-w-2xl mx-auto md:mx-0">
         <Search className="absolute left-3 top-3 text-[#707070]" size={18} />
         <input
           style={FONTS.regular as React.CSSProperties}
@@ -69,7 +81,7 @@ const ExploreInstitutes: React.FC = () => {
         />
       </div>
 
-      {/* 🏷 Categories */}
+      {/* Categories */}
       <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 md:gap-5 lg:gap-7 mt-6">
         {categories.map((cat) => (
           <button
@@ -88,30 +100,30 @@ const ExploreInstitutes: React.FC = () => {
         ))}
       </div>
 
-      {/* 📊 Institute Count */}
+      {/* Institute Count */}
       <h2
         style={FONTS.boldHeading as React.CSSProperties}
         className="mt-8 text-base sm:text-lg md:text-xl font-semibold text-gray-900 text-center md:text-left"
       >
-        Find {filteredInstitutes.length} Institutes
+        Find {filteredInstitutes?.length || 0} Institutes
       </h2>
 
-      {/* 🏫 Institutes Grid */}
+      {/* Institutes Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 mt-6">
-        {filteredInstitutes.map((inst) => (
+        {filteredInstitutes?.map((inst) => (
           <div
-            key={inst.id}
+            key={inst._id}
             className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col"
           >
             {/* Image */}
             <img
-              src={inst.image}
+              src={inst.logo || inst.coverImage} // fallback to coverImage if logo missing
               alt={inst.name}
               className="h-40 sm:h-48 w-full object-cover"
             />
 
             {/* Content */}
-            <div className="p-4 sm:p-5 flex flex-col flex-grow">
+            <div className="p-4 sm:p-5 flex flex-col grow">
               <h3
                 style={FONTS.boldHh as React.CSSProperties}
                 className="text-lg sm:text-xl font-semibold text-gray-900"
@@ -131,11 +143,11 @@ const ExploreInstitutes: React.FC = () => {
                 className="flex flex-wrap items-center gap-3 mt-3 text-[#707070] text-xs sm:text-sm"
               >
                 <img src={star} alt="Rating" className="w-4 h-4" />
-                <span>{inst.rating}</span>
+                <span>{inst.statistics?.averageRating || "N/A"}</span>
                 <img src={hat} alt="Courses" className="w-4 h-4" />
-                <span>{inst.courses} Courses</span>
+                <span>{inst.statistics?.totalCourses || 0} Courses</span>
                 <img src={student} alt="Students" className="w-4 h-4" />
-                <span>{inst.students} Students</span>
+                <span>{inst.statistics?.totalStudents || 0} Students</span>
               </div>
 
               {/* Location */}
@@ -144,7 +156,7 @@ const ExploreInstitutes: React.FC = () => {
                 className="flex items-center text-xs sm:text-sm text-[#707070] mt-4 gap-2"
               >
                 <img src={map} alt="location" className="w-4 h-4 sm:w-5 sm:h-5" />
-                {inst.city}
+                {inst.contactInfo?.address?.city || "City not available"}
               </p>
 
               {/* Tags */}
@@ -152,7 +164,7 @@ const ExploreInstitutes: React.FC = () => {
                 style={FONTS.mediummm as React.CSSProperties}
                 className="flex flex-wrap gap-2 mt-3"
               >
-                {inst.tags.map((tag) => (
+                {inst.tags?.map((tag) => (
                   <span
                     key={tag}
                     className="text-[10px] sm:text-xs bg-[#7070701A] px-2 py-1 rounded-md text-[#707070]"
@@ -167,7 +179,7 @@ const ExploreInstitutes: React.FC = () => {
                 style={FONTS.regular as React.CSSProperties}
                 className="flex items-center text-xs sm:text-sm text-[#707070] mt-3"
               >
-                {inst.email}
+                {inst.contactInfo?.email || "Email not available"}
               </p>
 
               {/* Links */}
@@ -175,37 +187,37 @@ const ExploreInstitutes: React.FC = () => {
                 style={FONTS.nummedium1 as React.CSSProperties}
                 className="flex flex-wrap gap-6 mt-3"
               >
-                <a
-                  href={inst.website}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 text-[#ED1C24] text-xs sm:text-sm font-medium hover:underline"
-                >
-                  <img src={website} alt="Website" className="w-4 h-4 sm:w-5 sm:h-5" />
-                  Website
-                </a>
-
-                <a
-                  href={inst.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 text-blue-700 text-xs sm:text-sm font-medium hover:underline"
-                >
-                  <img
-                    src={linkedin}
-                    alt="LinkedIn"
-                    className="w-4 h-4 sm:w-5 sm:h-5"
-                  />
-                  LinkedIn
-                </a>
+                {inst.website && (
+                  <a
+                    href={inst.website}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-[#ED1C24] text-xs sm:text-sm font-medium hover:underline"
+                  >
+                    <img src={website} alt="Website" className="w-4 h-4 sm:w-5 sm:h-5" />
+                    Website
+                  </a>
+                )}
+                {inst.socialMedia?.linkedin && (
+                  <a
+                    href={inst.socialMedia.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-blue-700 text-xs sm:text-sm font-medium hover:underline"
+                  >
+                    <img src={linkedin} alt="LinkedIn" className="w-4 h-4 sm:w-5 sm:h-5" />
+                    LinkedIn
+                  </a>
+                )}
               </div>
 
               {/* View Courses Button */}
               <button
-                onClick={() => navigate(`/institute/${inst.id}`)}
+                onClick={() => navigate(`/institute/${inst._id}`)}
                 className="mt-4 sm:mt-5 bg-[#ED1C24] text-white font-medium py-2 rounded-md w-full flex items-center justify-center gap-2 text-sm sm:text-base hover:bg-[#d0181f] transition-colors"
               >
-                View Courses <img src={teacher}alt="teacher" className="w-4 h-4 sm:w-5 sm:h-5" />
+                View Courses{" "}
+                <img src={teacher} alt="teacher" className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
           </div>

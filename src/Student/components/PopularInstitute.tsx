@@ -1,4 +1,4 @@
-import {  MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { COLORS } from "../../Constants/uiconstants";
@@ -29,7 +29,7 @@ const PopularInstitute = () => {
     <section className="py-12 px-6 md:px-12 lg:px-20">
       {/* Header */}
       <div className="mb-14 text-left">
-        <h2 className="text-2xl md:text-3xl font-bold text-black mb-1">
+        <h2 className="text-2xl md:text-3xl font-bold text-black mb-1" style={{ color: COLORS.primary_black }}>
           Popular Institutes
         </h2>
         <p
@@ -61,13 +61,13 @@ const PopularInstitute = () => {
                   {institute?.name}
                 </h3>
                 <p
-  className="mt-3 text-sm mb-3"
-  style={{ color: COLORS.primary_gray }}
->
-  {Array.isArray(institute?.courses)
-    ? `${institute?.courses.length} courses`
-    : `${institute?.courses || 0} courses`}
-</p>
+                  className="mt-3 text-sm mb-3"
+                  style={{ color: COLORS.primary_gray }}
+                >
+                  {Array.isArray(institute?.courses)
+                    ? `${institute?.courses.length} courses`
+                    : `${institute?.courses || 0} courses`}
+                </p>
 
 
                 {/* Rating + Location */}

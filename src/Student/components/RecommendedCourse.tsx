@@ -1,4 +1,4 @@
-import  { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CourseCard from "./courseCard";
 // import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -42,43 +42,48 @@ const RecommendedCourse = () => {
   // const totalPages = Math.ceil(RecommendCourses.length / itemsPerPage);
 
   return (
-    <section className="relative py-10 px-4 md:px-12 lg:px-20  overflow-hidden">
+    <section className="md:px-12 lg:px-20 overflow-hidden relative">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-14 gap-3">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-10 gap-3">
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-black">
-           Recommended Courses
+          <h2
+            className="text-2xl md:text-3xl font-bold"
+            style={{ color: COLORS.primary_black }}
+          >
+            Recommended Courses
           </h2>
-          <p className=" text-sm md:text-base" style={{color: COLORS.primary_gray}}>
-           Bases on your skills interest
+          <p
+            className="text-sm md:text-base flex"
+            style={{ color: COLORS.primary_gray }}
+          >
+            Based on your skills and interests
           </p>
         </div>
-       
       </div>
 
-    
+
       {/* Course Cards */}
       <div
-  ref={scrollRef}
-  className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
->
-  {RecommendCourses && RecommendCourses.length > 0 ? (
-    RecommendCourses.map((course, index) => (
-      <div
-        key={index}
-        className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
+        ref={scrollRef}
+        className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
       >
-        <CourseCard course={course as unknown as CourseCardProps["course"]} />
+        {RecommendCourses && RecommendCourses.length > 0 ? (
+          RecommendCourses.map((course, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
+            >
+              <CourseCard course={course as unknown as CourseCardProps["course"]} />
+            </div>
+          ))
+        ) : (
+          <div className="text-center text-gray-500 w-full py-8">
+            No recommended courses available
+          </div>
+        )}
       </div>
-    ))
-  ) : (
-    <div className="text-center text-gray-500 w-full py-8">
-      No recommended courses available
-    </div>
-  )}
-</div>    
     </section>
   );
 };
 
-export default  RecommendedCourse;
+export default RecommendedCourse;
