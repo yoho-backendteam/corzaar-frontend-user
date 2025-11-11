@@ -7,7 +7,7 @@ interface SendOTPProps {
   onSuccess: () => void;
 }
 
-const SendOTP: React.FC<SendOTPProps> = ({ goToOtp, onSuccess }) => {
+const SendOTP: React.FC<SendOTPProps> = ({ goToOtp }) => {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -28,7 +28,7 @@ const SendOTP: React.FC<SendOTPProps> = ({ goToOtp, onSuccess }) => {
         setLoading(false);
       }, 1000);
     } catch (err) {
-      setError('Failed to send OTP. Please try again.');
+      setError(`Failed to send OTP. Please try again ${err}`);
       setLoading(false);
     }
   };

@@ -50,8 +50,8 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack, onSuccess }) 
       const mockEmail = "user@example.com";
       login(mockEmail, "otp-password");
       onSuccess();
-    } catch (err) {
-      setError('Verification failed. Please try again.');
+    } catch (err : unknown) {
+      setError(`Verification failed. Please try again ${err}` );
     } finally {
       setLoading(false);
     }

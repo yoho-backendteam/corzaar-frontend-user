@@ -1,3 +1,6 @@
+@import url("react-toastify/dist/ReactToastify.css");
+
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

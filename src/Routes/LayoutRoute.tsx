@@ -15,7 +15,7 @@ import NotificationPage from '../Pages/NotificationPage';
 import ProfilePage from '../Pages/ProfilePage';
 import Queries from '../Pages/Queries';
 import { Settingprofile } from '../Pages/Settingprofile';
-import { Portfolio } from '../components/profile/Tabpages/Portfolio/Portfolio';
+import { Portfolio } from '../Components/profile/Tabpages/Portfolio/PortfolioPage';
 
 const LayoutRoute: React.FC = () => {
   return (
