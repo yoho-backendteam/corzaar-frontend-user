@@ -193,6 +193,11 @@ class Client {
       httpClient.get(API_END_POINTS.student.courses.getById.replace(":id", params))
   }
 
+  StudentCart = {
+    getAll: (params: { userId: string }) => httpClient.get(API_END_POINTS.Cart.getAll, params),
+    delete: (courseId: string, userId: string) => httpClient.delete(API_END_POINTS.Cart.deleteone.replace(':id', courseId), { data: { userId } }
+    ),
+  };
 }
 
 export default new Client();

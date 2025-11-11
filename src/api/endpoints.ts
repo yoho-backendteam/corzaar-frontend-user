@@ -78,5 +78,10 @@ export const API_END_POINTS = {
     courses: {
       getById: "/course/api/courses/getCoursesId/:id"
     }
+  },
+  Cart: {
+    getAll: `/student/api/cart`,
+    deleteone: `/student/api/cart/remove/:id` // here id is courseid from the item
   }
 };
+

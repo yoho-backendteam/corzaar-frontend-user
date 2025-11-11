@@ -238,8 +238,8 @@ export default function ExploreCourses() {
               key={filter.id}
               onClick={() => handleFilterChange(filter.id)}
               className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm transition-colors ${activeFilter === filter.id
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
             >
               {filter.label}
