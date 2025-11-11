@@ -1,22 +1,23 @@
 import { COLORS, FONTS } from "./../Constants/uiconstants";
-import { ProfileSlide } from "../components/profile/profileSlide";
-import { ProfileHeader } from "../components/profile/profileHeader";
-import { ProfileTabs } from "../components/profile/profileTab";
 
 import icon from "../assets/profile/icons/Icon.png";
 import icon1 from "../assets/profile/icons/Icon1.png";
 import icon2 from "../assets/profile/icons/Icon2.png";
 import icon3 from "../assets/profile/icons/Icon3.png";
-import { Overview } from "../components/profile/Tabpages/Overview";
-import { Mycourse } from "../components/profile/Tabpages/course/Mycourse";
-import { Portfolio } from "../components/profile/Tabpages/Portfolio/Portfolio";
-import { Attendance } from "../components/profile/Tabpages/Attendance/Attendance";
-import { Payments } from "../components/profile/Tabpages/Payment/Payments";
-import { Settings } from "../components/profile/Tabpages/SettingsProfile/Settings";
-import { Favorites } from "../components/profile/Tabpages/Favorites/Favorites";
 import { useAppSelector } from "../hooks/reduxhooks";
-
+import { ProfileSlide } from "../Components/profile/profileSlide";
+import { ProfileTabs } from "../Components/profile/profileTab";
+import { ProfileHeader } from "../Components/profile/profileHeader";
+import { Overview } from "../Components/profile/Tabpages/Overview";
+import { Mycourse } from "../Components/profile/Tabpages/course/Mycourse";
+import { Attendance } from "../Components/profile/Tabpages/Attendance/Attendance";
+import Payments from "../Components/profile/Tabpages/Payment/Payments";
+import Favorites from "../Components/profile/Tabpages/Favorites/Favorites";
+import Settings from "../Components/profile/Tabpages/SettingsProfile/Settings";
+import { Portfolio } from "../Components/profile/Tabpages/Portfolio/PortfolioPage";
 export const Settingprofile = () => {
+  
+
   const profile = useAppSelector((state) => state.profile);
   console.log("Profile DATA", profile);
 
