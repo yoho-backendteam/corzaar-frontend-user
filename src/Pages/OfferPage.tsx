@@ -13,7 +13,7 @@ const OfferPage: React.FC = () => {
         </div>
 
       </div>
-    </div>s
+    </div>
   )
 }
 
