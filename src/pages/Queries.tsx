@@ -1,5 +1,5 @@
 import React from 'react'
-import ContactPage from "../Components/Queries/Querypage";
+import ContactPage from "../components/Querypage";
 
 const Queries:React.FC = () => {
   return (

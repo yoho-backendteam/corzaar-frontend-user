@@ -20,7 +20,7 @@ import querySlice from "../redux/Queries/queryslice";
 const store = configureStore({
   reducer: {
     dealSlice: dealsSlice,
-    // courseSlice: coursesSlice,
+    courseSlice: coursesSlice,
     course: courseSlice,
     contact: contactReducer,
     studentHome: studentHomeReducer,

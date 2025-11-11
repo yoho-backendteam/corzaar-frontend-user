@@ -1,10 +1,10 @@
 const BASE_API_URL = import.meta.env.VITE_PUBLIC_API_URL;
 
-const BASE_COURSE_URL = `${BASE_API_URL}/course/api/courses`;
+const BASE_COURSE_URL = `${BASE_API_URL}/open/course/api/courses`;
 export const API_END_POINTS = {
   instituteManagement: {
     base: "/api/",
-    getAll: "/merchant/api/getall",
+    getAll: "/open/merchant/api/getall",
     getById: "/merchant/api/getbyid/:id",
     updateById: "/api/update/:id",
     deleteById: "/api/delete/:id",
