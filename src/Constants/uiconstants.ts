@@ -30,7 +30,7 @@ export const FONTS = {
   },
   medium: {
     fontFamily: '"Source Serif 4", serif',
-    fontOpticalSizing: "auto",
+    fontOpticalSizing: "auto" as const,
     fontWeight: 500,
     fontStyle: "normal",
   },

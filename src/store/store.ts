@@ -7,6 +7,7 @@ import studentHomeReducer from '../Student/redux/studentSlice'
 import profileReducer from "../features/profile/profileSlice";
 import notificationReducer from "../redux/Notification/notificationSlice";
 import instituteReducer from "../redux/Institute/instituteSlice";
+import querySlice from "../redux/Queries/queryslice";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     profile: profileReducer,
     notifications: notificationReducer,
     institute: instituteReducer,
+    query:querySlice,
   },
 });
 

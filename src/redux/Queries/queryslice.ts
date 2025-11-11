@@ -1,35 +1,55 @@
+// src/redux/Queries/queryslice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { QueryFormData, QueryState } from "./querytypes";
+import { sendQueryThunk } from "./querythunks";
 
-interface ContactState {
-  fullName: string;
-  email: string;
-  phone: string;
-  category: string;
-  subject: string;
-  message: string;
-}
-
-const initialState: ContactState = {
-  fullName: "Rahul Sharma",
-  email: "john@example.com",
-  phone: "9876546864",
-  category: "",
-  subject: "Brisf description of your inquiry",
-  message: "Tell us more about your inquiry"
+const initialState: QueryState = {
+  form: {
+    senderid: "",
+    senderrole: "",
+    fullName: "",
+    email: "",
+    phone: "",
+    category: "",
+    subject: "",
+    message: "",
+    query: ""
+  },
+  loading: false,
+  error: null,
+  success: false,
 };
 
-const contactSlice = createSlice({
-  name: "contact",
+const querySlice = createSlice({
+  name: "query",
   initialState,
   reducers: {
-    updateField: (
-      state,
-      action: PayloadAction<{ field: keyof ContactState; value: string }>
-    ) => {
-      state[action.payload.field] = action.payload.value;
-    }
-  }
+    updateField: (state, action: PayloadAction<{ field: string; value: string }>) => {
+      (state.form as any)[action.payload.field] = action.payload.value;
+    },
+    resetForm: (state) => {
+      state.form = initialState.form;
+      state.success = false;
+      state.error = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(sendQueryThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.success = false;
+      })
+      .addCase(sendQueryThunk.fulfilled, (state) => {
+        state.loading = false;
+        state.success = true;
+      })
+      .addCase(sendQueryThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
+  },
 });
 
-export const { updateField } = contactSlice.actions;
-export default contactSlice.reducer;
+export const { updateField, resetForm } = querySlice.actions;
+export default querySlice.reducer;
