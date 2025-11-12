@@ -9,7 +9,7 @@ import { PrivacySetting } from "./tabs/Privacysetting";
 import type { AppDispatch } from "../../../../store/store";
 import { useEffect } from "react";
 import { setAttendanceData, setProfileData } from "../../../../features/settings/reducers/settingThunks";
-import { attendanceSelect, profileSelect } from "../../../../features/settings/reducers/settingSelectors";
+import { profileSelect } from "../../../../features/settings/reducers/settingSelectors";
 import type { ProfileResponse } from "../../../../features/settings/types/settingTypes";
 
 export const Settings: React.FC = () => {
@@ -48,8 +48,6 @@ export const Settings: React.FC = () => {
 
     fetchAttendanceData();
   }, [dispatch]);
-
-  const attendance = useSelector(attendanceSelect);
 
   return (
     <div className="space-y-6">

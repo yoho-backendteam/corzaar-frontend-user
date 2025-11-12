@@ -197,26 +197,6 @@ export interface AttendanceResponse {
   data: AttendanceItem[];
 }
 
-// Course types
-export interface CourseData {
-  title: string;
-  category?: {
-    primary: string;
-  };
-  instituteId?: string;
-  description: string;
-  shortDescription?: string;
-  thumbnail?: string;
-  price?: number;
-  discountPrice?: number;
-}
-
-export interface CourseResponse {
-  success: boolean;
-  data: CourseData;
-  message?: string;
-}
-
 export interface CoursesIdResponse {
   success: boolean;
   message: string;
@@ -235,3 +215,108 @@ export interface SettingState {
   coursesIdData: CoursesIdResponse | null;
 }
 
+// Favorite types based on your API response
+export interface FavoriteItem {
+  _id: string;
+  courseId: string;
+  title: string;
+  price: number;
+  discountPrice?: number;
+  merchantId: string;
+}
+
+export interface FavoritesData {
+  _id: string;
+  userId: string;
+  items: FavoriteItem[];
+  isactive: boolean;
+  isdeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+
+// Course types based on your API response
+export interface CourseCategory {
+  primary: string;
+  secondary: string[];
+  tags: string[];
+}
+
+export interface CoursePricing {
+  type: string;
+  price: number;
+  currency: string;
+}
+
+export interface CourseContent {
+  totalDuration: number;
+  totalLessons: number;
+  totalQuizzes: number;
+  totalAssignments: number;
+}
+
+export interface CourseReview {
+  userId: string;
+  name: string;
+  rating: number;
+  comment: string;
+  _id: string;
+  createdAt: string;
+}
+
+export interface CourseData {
+  _id: string;
+  title: string;
+  description: string;
+  shortDescription: string;
+  thumbnail: string;
+  previewVideo: string;
+  instituteId: string;
+  instructorId: string;
+  requirements: string[];
+  learningOutcomes: string[];
+  targetAudience: string[];
+  language: string;
+  level: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  category: CourseCategory;
+  pricing: CoursePricing;
+  content: CourseContent;
+  reviews: CourseReview[];
+  uuid: string;
+  is_active: boolean;
+}
+
+export interface CourseResponse {
+  message: string;
+  data: CourseData;
+}
+
+// Combined favorite item interface
+export interface CombinedFavoriteItem {
+  courseId: string;
+  title: string;
+  price: number;
+  discountPrice?: number;
+  merchantId: string;
+  category: string;
+  institute: string;
+  description: string;
+  thumbnail?: string;
+}
+
+// Add to your settingTypes.ts
+export interface CourseThunkResponse {
+  payload?: CourseResponse;
+}
+
+export interface CourseResponse {
+  message: string;
+  data: CourseData;
+  success?: boolean; // Add if your API response includes this
+}

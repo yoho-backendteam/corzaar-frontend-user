@@ -14,8 +14,9 @@ import type {
   FavResponse, 
   PortfolioResponse, 
   ActivityResponse, 
-  AttendanceResponse, 
-  CoursesIdResponse 
+  AttendanceResponse,
+  CourseResponse,
+  CoursesIdResponse, 
 } from "../types/settingTypes";
 import { 
   getFav, 
@@ -45,7 +46,7 @@ export const getAllPaymentData = (params: string) => async(dispatch: AppDispatch
 export const getAllFavData = (userId: string) => async(dispatch: AppDispatch): Promise<FavResponse | undefined> => {
   try {
     const response = await getFavlist(userId);
-    console.log("favorites response", response);
+    console.log("Favorites thunk response:", response);
     if (response) {
       dispatch(getFav(response));
     }
@@ -54,7 +55,7 @@ export const getAllFavData = (userId: string) => async(dispatch: AppDispatch): P
     console.log("Favorites fetch error:", error);
     return undefined;
   }
-} 
+}  
 
 export const getProfileData = (userId: string) => async(dispatch: AppDispatch): Promise<ProfileResponse | undefined> => {
   try {
@@ -126,14 +127,18 @@ export const setAttendanceData = (params: string) => async(dispatch: AppDispatch
   }
 } 
 
-export const setCoursesById = (params: string) => async(dispatch: AppDispatch): Promise<CoursesIdResponse | undefined> => {
+export const setCoursesById = (params: string) => async(dispatch: AppDispatch): Promise<CourseResponse | undefined> => {
   try {
-    const response = await getCoursesId(params);
-    console.log("courses thunk response:", response);
+    const response: CourseResponse | undefined = await getCoursesId(params);
+    console.log("Courses thunk response:", response);
+    
     if (response) {
-      dispatch(setCoursesId(response));
+      // Use type assertion to fix the type mismatch
+      dispatch(setCoursesId(response as unknown as CoursesIdResponse));
+      return response; // Return directly
     }
-    return response;
+    
+    return undefined;
   } catch (error) {
     console.log("setCourseById error:", error);
     return undefined;

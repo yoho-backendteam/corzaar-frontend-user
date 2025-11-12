@@ -7,7 +7,7 @@ import type {
   ProfileResponse, 
   ActivityResponse, 
   AttendanceResponse, 
-  CoursesIdResponse 
+  CourseResponse
 } from '../types/settingTypes';
 
 export const getAllPayment = async(params: string): Promise<PaymentResponse | undefined> => {
@@ -20,22 +20,22 @@ export const getAllPayment = async(params: string): Promise<PaymentResponse | un
   }
 }
 
-    export const getFavlist = async(userId: string): Promise<FavResponse | undefined> => {
-    try {
-        const response = await Client.fav.get(userId);
-        console.log("favorites service response:", response);
-        return response;
-    } catch (error) {
-        console.log("get favorites error:", error);
-        return undefined;
-    }
-    }
+export const getFavlist = async(userId: string): Promise<FavResponse | undefined> => {
+  try {
+    const response = await Client.fav.get(userId);
+    console.log("Favorites service response:", response);
+    return response.data; // Note: changed from return response to return response.data
+  } catch (error) {
+    console.log("get favorites error:", error);
+    return undefined;
+  }
+}
 
 export const getProfile = async(): Promise<ProfileResponse | undefined> => {
   try {
-    const response = await Client.profile.get;
+    const response = await Client.profile.get();
     console.log("profile service response:", response);
-    return response;
+    return response?.data;
   } catch (error) {
     console.log("get profile error:", error);
     return undefined;
@@ -84,9 +84,10 @@ export const getStudentAttendance = async (studentId: string): Promise<Attendanc
   }
 };
 
-export const getCoursesId = async(params: string): Promise<CoursesIdResponse | undefined> => {
+export const getCoursesId = async(params: string): Promise<CourseResponse | undefined> => {
   try {
     const response = await axios.get(`http://localhost:3004/api/courses/getCourseById/${params}`);
+    console.log("Courses service response:", response.data);
     return response.data;
   } catch (error) {
     console.log("courses error:", error);

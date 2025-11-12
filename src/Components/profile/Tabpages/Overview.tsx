@@ -7,7 +7,6 @@ import type { AppDispatch } from "../../../store/store";
 import { useEffect } from "react";
 import { setActivityData, setProfileData } from "../../../features/settings/reducers/settingThunks";
 import { activitySelect, profileSelect } from "../../../features/settings/reducers/settingSelectors";
-import type { RootState } from "../../../store/store";
 import { formatDate } from "../../../utils/helper";
 import type { UIProfileState, ActivityItem } from "../../../features/settings/types/settingTypes";
 
@@ -53,7 +52,7 @@ export const Overview: React.FC = () => {
   
 
   // Mock UI profile data (replace with actual data from your store)
-  const profile: UIProfileState = useAppSelector((state: RootState) => ({
+  const profile: UIProfileState = useAppSelector(() => ({
     email: "john@example.com", // This should come from your actual profile state
     role: "Student",
     skills: ["JavaScript", "TypeScript", "React", "Node.js"],
@@ -279,7 +278,7 @@ export const Overview: React.FC = () => {
       >
         <h3 className="text-xl font-semibold mb-4">Recent Activity</h3>
         <div className="flex flex-col gap-4">
-          {activityData?.Data?.map((item: ActivityItem, index: number) => (
+          {activityData?.Data?.map((item: ActivityItem) => (
             <div key={item._id} className="flex items-center gap-3 mt-5">
               <div 
                 className="h-10 w-10 flex items-center justify-center rounded-full"

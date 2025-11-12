@@ -2,19 +2,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAppSelector } from "../../../../hooks/reduxhooks";
 import { CourseProgressCard } from "./Progresscard";
 import { attendanceSelect, courseIdSelect } from "../../../../features/settings/reducers/settingSelectors";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import type { AppDispatch } from "../../../../store/store";
 import { setAttendanceData, setCoursesById } from "../../../../features/settings/reducers/settingThunks";
+import type { AttendanceItem } from "../../../../features/settings/types/settingTypes";
+import { toast } from "react-toastify";
 
 export const Attendance = () => {
+
+
+  
   const dispatch = useDispatch<AppDispatch>();
 
   // Redux selectors
   const attendanceState = useSelector(attendanceSelect);
   const courseState = useAppSelector(courseIdSelect);
 
-  // State to store mapped course data
-  const [mappedCourses, setMappedCourses] = useState<any[]>([]);
+  const courseData = courseState?.data
+  console.log("course", courseData)
 
   // ✅ Step 1: Fetch Attendance Data (once)
   useEffect(() => {
@@ -22,100 +27,93 @@ export const Attendance = () => {
       try {
         const studentId = "68fb72ea19c3430ef1c8d3e6";
         const response = await dispatch(setAttendanceData(studentId));
-        console.log("✅ Attendance Data:", response?.data);
-      } catch (error) {
-        console.error("❌ Attendance fetch error:", error);
+        if(response?.success === true) {
+          toast.success(response?.message)
+        }
+      } catch (error:unknown) {
+        toast.error(`error as Error ${error}`);
       }
     };
     fetchAttendance();
   }, [dispatch]);
 
-  // ✅ Extract course IDs from attendance data
-  const courseIds = useMemo(() => {
-    return attendanceState?.data?.map((item: any) => item.courseId) || [];
-  }, [attendanceState?.data]);
-
+  // ✅ Extract course IDs (always an array)
+  const courseIds = attendanceState?.data?.map((item: any) => item.courseId) || [];
   console.log("🟢 Course IDs:", courseIds);
 
   // ✅ Step 2: Fetch course details for each ID
   useEffect(() => {
     const fetchCourseDetails = async () => {
       if (!courseIds || courseIds.length === 0) return;
-      
       try {
-        const coursePromises = courseIds.map(async (id: string) => {
+        for (const id of courseIds) {
           if (id) {
             const response = await dispatch(setCoursesById(id));
-            return response?.data;
           }
-          return null;
-        });
-
-        const courseDetails = await Promise.all(coursePromises);
-        console.log("📘 All Course Data:", courseDetails[0]);
-        
-        // Map attendance data with course details
-        const mappedData = attendanceState?.data?.map((attendanceItem: any, index: number) => {
-          const courseDetail = courseDetails[index].data;
-          console.log("course",courseDetail);
-          
-          if (!courseDetail) return null;
-
-          const totalSessions = attendanceItem.totalDays;
-          const sessionsCompleted = attendanceItem.totalPresent;
-          const progress = totalSessions > 0 ? (sessionsCompleted / totalSessions) * 100 : 0;
-
-          return {
-            title: courseDetail.title || "Unknown Course",
-            date: getLastAttendedDate(attendanceItem.attendance),
-            sessionsCompleted: sessionsCompleted,
-            totalSessions: totalSessions,
-            progress: progress,
-            eligible: progress >= 75 
-          };
-        }).filter(Boolean);
-
-        setMappedCourses(mappedData || []);
-        
+        }
       } catch (error) {
         console.error("❌ Course fetch error:", error);
       }
     };
 
     fetchCourseDetails();
-  }, [dispatch, courseIds, attendanceState?.data]);
+  }, [dispatch, JSON.stringify(courseIds)]);
 
-  // Helper function to get the last attended date
-  const getLastAttendedDate = (attendanceRecords: any[]) => {
+  console.log("🎯 Attendance State:", attendanceState);
+  console.log("🎯 Course State:", courseState);
+
+  // ✅ Add this helper function to get the last attended date
+  const getLastAttendedDate = (attendanceRecords: any[]): string => {
     if (!attendanceRecords || attendanceRecords.length === 0) return "Never attended";
-    
-    // Find the last present date
-    const presentRecords = attendanceRecords.filter(record => record.status === "present");
-    if (presentRecords.length === 0) return "Never attended";
-    
-    // Sort by date and get the most recent
-    const sortedRecords = presentRecords.sort((a, b) => 
-      new Date(b.date).getTime() - new Date(a.date).getTime()
+
+    const presentRecords = attendanceRecords.filter(
+      (record) => record.status === "present"
     );
-    
+    if (presentRecords.length === 0) return "Never attended";
+
+    const sortedRecords = [...presentRecords].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+
     const lastDate = new Date(sortedRecords[0].date);
     return lastDate.toLocaleDateString();
   };
 
-  // Calculate last accessed time (you might want to get this from your API)
-  const getLastAccessed = () => {
-    // This is a placeholder - replace with actual logic from your data
+  const getLastAccessed = (): string => {
     return "2 days ago";
   };
 
-  console.log("🎯 Mapped Courses:", mappedCourses);
-  console.log("🎯 Attendance State:", attendanceState);
-  console.log("🎯 Course State:", courseState);
+  const mappedCourses: any[] = [];
+
+  attendanceState?.data?.forEach((attendanceItem: AttendanceItem) => {
+    // Check if this attendance item matches the single course
+    if (courseData && courseData._id === attendanceItem.courseId) {
+      const totalSessions = attendanceItem.totalDays;
+      const sessionsCompleted = attendanceItem.totalPresent;
+      const progress = totalSessions > 0 ? (sessionsCompleted / totalSessions) * 100 : 0;
+
+      mappedCourses.push({
+        title: courseData.title,
+        date: getLastAttendedDate(attendanceItem.attendance), // Fixed: Add this function
+        sessionsCompleted,
+        totalSessions,
+        progress,
+        eligible: progress >= 75
+      });
+    }
+  });
+
+  console.log("mapp", mappedCourses);
+
+  
+
+  // Use mappedCourses instead of profile.attendance
+  const displayData = mappedCourses.length > 0 ? mappedCourses : [];
 
   return (
     <div className="flex flex-col items-center">
-      {mappedCourses.length > 0 ? (
-        mappedCourses.map((course, index) => (
+      {displayData.length > 0 ? (
+        displayData.map((course, index) => (
           <CourseProgressCard
             key={index}
             title={course.title}
