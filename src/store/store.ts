@@ -8,7 +8,6 @@ import profileReducer from "../features/profile/profileSlice";
 import notificationReducer from "../redux/Notification/notificationSlice";
 import instituteReducer from "../redux/Institute/instituteSlice";
 import SettingSlice from '../features/settings/reducers/SettingSlice'
-import { Settings } from "lucide-react";
 
 const store = configureStore({
   reducer: {

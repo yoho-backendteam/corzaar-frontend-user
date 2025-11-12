@@ -81,9 +81,7 @@ export const Payments: React.FC = () => {
       try {
         const id = "68fc9551b9818562f4a3299c";
         const result = await dispatch(getAllPaymentData(id));
-        console.log("Payment result:", result);
         
-        // ✅ FIX: Access result directly, not result.payload
         if (result?.success === true) {
           toast.success(result.message);
         } else {

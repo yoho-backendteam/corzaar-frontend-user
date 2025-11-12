@@ -32,7 +32,6 @@ import {
 export const getAllPaymentData = (params: string) => async(dispatch: AppDispatch): Promise<PaymentResponse | undefined> => {
   try {
     const response = await getAllPayment(params);
-    console.log("payment response", response);
     if (response) {
       dispatch(getPayment(response));
     }
@@ -46,7 +45,6 @@ export const getAllPaymentData = (params: string) => async(dispatch: AppDispatch
 export const getAllFavData = (userId: string) => async(dispatch: AppDispatch): Promise<FavResponse | undefined> => {
   try {
     const response = await getFavlist(userId);
-    console.log("Favorites thunk response:", response);
     if (response) {
       dispatch(getFav(response));
     }
@@ -60,7 +58,6 @@ export const getAllFavData = (userId: string) => async(dispatch: AppDispatch): P
 export const getProfileData = (userId: string) => async(dispatch: AppDispatch): Promise<ProfileResponse | undefined> => {
   try {
     const response = await getProfileById(userId);
-    console.log("profile response", response);
     if (response) {
       dispatch(getProfile(response.data));
     }
@@ -74,7 +71,6 @@ export const getProfileData = (userId: string) => async(dispatch: AppDispatch): 
 export const getPortfolioData = (params: string) => async(dispatch: AppDispatch): Promise<PortfolioResponse | undefined> => {
   try {
     const response = await getPortfolio(params);
-    console.log("portfolio response", response);
     if (response) {
       dispatch(setPortfolio(response));
     }
@@ -88,7 +84,6 @@ export const getPortfolioData = (params: string) => async(dispatch: AppDispatch)
 export const setProfileData = (params: string) => async (dispatch: AppDispatch): Promise<ProfileResponse | undefined> => {
   try {
     const response = await getProfileById(params);
-    console.log("profile by id response", response);
     if (response) {
       dispatch(setProfile(response));
     }
@@ -102,7 +97,6 @@ export const setProfileData = (params: string) => async (dispatch: AppDispatch):
 export const setActivityData = (params: string) => async(dispatch: AppDispatch): Promise<ActivityResponse | undefined> => {
   try {
     const response = await getActivity(params);
-    console.log("activity thunk response:", response);
     if (response) {
       dispatch(setActivity(response));
     }
@@ -116,7 +110,6 @@ export const setActivityData = (params: string) => async(dispatch: AppDispatch):
 export const setAttendanceData = (params: string) => async(dispatch: AppDispatch): Promise<AttendanceResponse | undefined> => {
   try {
     const response = await getStudentAttendance(params);
-    console.log("attendance response", response);
     if (response) {
       dispatch(setAttendance(response));
     }
@@ -130,7 +123,6 @@ export const setAttendanceData = (params: string) => async(dispatch: AppDispatch
 export const setCoursesById = (params: string) => async(dispatch: AppDispatch): Promise<CourseResponse | undefined> => {
   try {
     const response: CourseResponse | undefined = await getCoursesId(params);
-    console.log("Courses thunk response:", response);
     
     if (response) {
       // Use type assertion to fix the type mismatch

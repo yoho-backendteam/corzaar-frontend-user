@@ -6,7 +6,7 @@ import { COLORS } from "../../../../Constants/uiconstants";
 import { toast } from "react-toastify";
 import type { AppDispatch } from "../../../../store/store";
 import { getAllFavData, setCoursesById } from "../../../../features/settings/reducers/settingThunks";
-import { courseIdSelect, favSelect } from "../../../../features/settings/reducers/settingSelectors";
+import { favSelect } from "../../../../features/settings/reducers/settingSelectors";
 import type { CombinedFavoriteItem, FavResponse } from "../../../../features/settings/types/settingTypes";
 
 // ---------- CARD PROPS ----------
@@ -84,10 +84,6 @@ export const Favorites: React.FC = () => {
 
   // Redux selectors
   const favoritesData: FavResponse | null = useSelector(favSelect);
-  const courseData = useSelector(courseIdSelect);
-
-  console.log("Favorites data from Redux:", favoritesData);
-  console.log("Course data from Redux:", courseData);
 
   // ---------- Fetch favorites ----------
   useEffect(() => {
@@ -96,13 +92,12 @@ export const Favorites: React.FC = () => {
         setLoading(true);
         const userId = "68fb72ea19c3430ef1c8d3e6";
         const result = await dispatch(getAllFavData(userId));
-        console.log("Fetch favorites result:", result);
+        if(result?.success === true) {
+          toast.success(result.message)
+        }
       } catch (error: unknown) {
-        const message =
-          error instanceof Error
-            ? error.message
-            : "An unknown error occurred while fetching favorites";
-        toast.error(message);
+        const errorMessage = error instanceof Error ? error.message : "An error occurred";
+        toast.error(errorMessage);
       }
     };
 
@@ -115,23 +110,18 @@ useEffect(() => {
     const items = favoritesData?.data?.items ?? [];
 
     if (items.length === 0) {
-      console.log("No favorite items found");
       setLoading(false);
       return;
     }
-
-    console.log("Favorite items to process:", items);
 
     try {
       const combinedData: CombinedFavoriteItem[] = [];
 
       for (const favItem of items) {
         try {
-          console.log(`Fetching course details for: ${favItem.courseId}`);
           const courseResponse = await dispatch(setCoursesById(favItem.courseId));
 
-          // ✅ FIX: Access data directly, not through payload
-          const course = courseResponse?.data; // Remove .payload
+          const course = courseResponse?.data; 
           if (!course) {
             console.warn(`No course data found for courseId: ${favItem.courseId}`);
             continue;
@@ -158,8 +148,6 @@ useEffect(() => {
           console.error(`Error fetching course ${favItem.courseId}:`, error);
         }
       }
-
-      console.log("Combined favorites data:", combinedData);
       setCombinedFavorites(combinedData);
     } catch (error) {
       console.error("Error combining favorite data:", error);

@@ -19,7 +19,6 @@ export const Settingprofile = () => {
   
 
   const profile = useAppSelector((state) => state.profile);
-  console.log("Profile DATA", profile);
 
   const tabs = [
     { label: "Overview", content: <Overview /> },

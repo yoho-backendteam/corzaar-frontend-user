@@ -137,7 +137,7 @@ export interface UIProfileState {
 
 export interface ActivityResponse {
   success: boolean;
-  message: string;
+  Message: string;
   Data: ActivityItem[];
 }
 

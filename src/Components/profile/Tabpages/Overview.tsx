@@ -9,6 +9,7 @@ import { setActivityData, setProfileData } from "../../../features/settings/redu
 import { activitySelect, profileSelect } from "../../../features/settings/reducers/settingSelectors";
 import { formatDate } from "../../../utils/helper";
 import type { UIProfileState, ActivityItem } from "../../../features/settings/types/settingTypes";
+import { toast } from "react-toastify";
 
 export const Overview: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,10 +19,13 @@ export const Overview: React.FC = () => {
     const fetchProfile = async (): Promise<void> => {
       try {
         const id = "68fb60f726d15f4ca736ff1d";
-        await dispatch(setProfileData(id));
+       const profile =  await dispatch(setProfileData(id));
+        if(profile?.success === true){
+          toast.success(profile?.message)
+        }
       } catch (error: unknown) {
         if (error instanceof Error) {
-          console.error("Profile fetch error:", error.message);
+          toast.error(`Profile fetch error: ${error.message}`);
         }
       }
     };
@@ -36,11 +40,13 @@ export const Overview: React.FC = () => {
     const fetchActivity = async (): Promise<void> => {
       try {
         const id = "6901e07f903ec14f1b04539e";
-        await dispatch(setActivityData(id));
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          console.error("Activity fetch error:", error.message);
+        const act = await dispatch(setActivityData(id));
+        if(act?.success === true){
+          toast.success(act?.Message)
         }
+        
+      } catch (error: unknown) {
+            toast.error(`error as Error ${error}`);
       }
     };
 
@@ -48,7 +54,6 @@ export const Overview: React.FC = () => {
   }, [dispatch]);
 
   const activityData = useSelector(activitySelect);
-  console.log("aci",activityData);
   
 
   // Mock UI profile data (replace with actual data from your store)

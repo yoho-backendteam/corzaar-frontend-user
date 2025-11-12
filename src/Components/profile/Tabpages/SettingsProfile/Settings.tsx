@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { setAttendanceData, setProfileData } from "../../../../features/settings/reducers/settingThunks";
 import { profileSelect } from "../../../../features/settings/reducers/settingSelectors";
 import type { ProfileResponse } from "../../../../features/settings/types/settingTypes";
+import { toast } from "react-toastify";
 
 export const Settings: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -20,10 +21,13 @@ export const Settings: React.FC = () => {
     const fetchProfileData = async (): Promise<void> => {
       try {
         const id = "68fb60f726d15f4ca736ff1d";
-        await dispatch(setProfileData(id));
+        const profile = await dispatch(setProfileData(id));
+        if(profile?.success === true){
+                  toast.success(profile?.message)
+                }
       } catch (error: unknown) {
         if (error instanceof Error) {
-          console.error("Profile fetch error:", error.message);
+          toast.error(`Profile fetch error: ${error.message}`);
         }
       }
     };
