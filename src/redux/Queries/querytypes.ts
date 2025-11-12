@@ -16,4 +16,5 @@ export interface QueryState {
   loading: boolean;
   error: string | null;
   success: boolean;
+  queries: any[];
 }

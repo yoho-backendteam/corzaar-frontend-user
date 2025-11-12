@@ -7,7 +7,7 @@ export const sendQuery = async (data:any) => {
   }
 };
 
-export const getAllQueries = async (params:any) => {
+export const getQueries = async (params:any) => {
   const response = await Client.QueryService.getQueries(params);
   if (response) {
     return response;

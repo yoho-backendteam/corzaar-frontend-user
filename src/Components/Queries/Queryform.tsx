@@ -5,17 +5,22 @@ import {
   selectQueryLoading,
   selectQuerySuccess,
 } from "../../redux/Queries/queryselector";
-import { sendQueryThunk } from "../../redux/Queries/querythunks";
+import { fetchQueriesThunk, sendQueryThunk } from "../../redux/Queries/querythunks";
 import { categories } from "../../redux/Queries/querydata";
 import sndimg from "../../assets/send.png";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { useEffect } from "react";
+import { type RootState } from "../../store/store";
 
 export default function ContactForm() {
   const dispatch = useDispatch<any>();
   const form = useSelector(selectContactForm);
   const loading = useSelector(selectQueryLoading);
   const success = useSelector(selectQuerySuccess);
+
+const queries = useSelector((state: RootState) => state.query.queries);
+
+console.log(queries,"asdfghjklmgd")
 
 useEffect(() => {
   if (!localStorage.getItem("userId")) {
@@ -25,6 +30,16 @@ useEffect(() => {
     localStorage.setItem("userRole", "Admin");
   }
 }, []);
+
+useEffect(() => {
+  const senderId = localStorage.getItem("userId");
+  const senderRole = localStorage.getItem("userRole");
+
+  if (senderId && senderRole) {
+    dispatch(fetchQueriesThunk({ senderId, senderRole }));
+  }
+}, [dispatch]);
+
 
 
 
@@ -50,15 +65,15 @@ useEffect(() => {
     senderid: senderId,         
     senderrole: senderRole,    
     query: form.message,        
-    // subject: form.subject,
-    // category: form.category,
-    // fullName: form.fullName,
-    // email: form.email,
-    // phone: form.phone,
+    subject: form.subject,
+    category: form.category,
+    fullName: form.fullName,
+    email: form.email,
+    phone: form.phone,
   };
 
   console.log("Sending payload:", payload);
-  dispatch(sendQueryThunk(payload));
+  dispatch(sendQueryThunk(payload as any));
 };
 
 

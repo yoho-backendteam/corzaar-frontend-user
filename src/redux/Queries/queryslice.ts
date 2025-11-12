@@ -1,7 +1,6 @@
-// src/redux/Queries/queryslice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { QueryFormData, QueryState } from "./querytypes";
-import { sendQueryThunk } from "./querythunks";
+import type { QueryState } from "./querytypes";
+import { sendQueryThunk,fetchQueriesThunk } from "./querythunks";
 
 const initialState: QueryState = {
   form: {
@@ -15,9 +14,11 @@ const initialState: QueryState = {
     message: "",
     query: ""
   },
+  
   loading: false,
   error: null,
   success: false,
+  queries: [],
 };
 
 const querySlice = createSlice({
@@ -48,7 +49,26 @@ const querySlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       });
+
+
+builder
+  //  Add new handlers for fetchQueriesThunk
+  .addCase(fetchQueriesThunk.pending, (state) => {
+    state.loading = true;
+  })
+  .addCase(fetchQueriesThunk.fulfilled, (state, action) => {
+    state.loading = false;
+    state.queries = action.payload;
+  })
+  .addCase(fetchQueriesThunk.rejected, (state, action) => {
+    state.loading = false;
+    state.error = action.payload as string;
+  });
+
   },
+
+
+  
 });
 
 export const { updateField, resetForm } = querySlice.actions;

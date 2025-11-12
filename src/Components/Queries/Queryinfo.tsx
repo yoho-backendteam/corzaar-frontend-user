@@ -29,29 +29,29 @@ export default function ContactInfo() {
                     )}
 
                     <div className="min-w-0 flex-1 overflow-hidden">
-  <h4 className="whitespace-normal break-word" style={{ ...FONTS.regular2 }}>
-    {item.title}
-  </h4>
+                        <h4 className="whitespace-normal break-word" style={{ ...FONTS.regular2 }}>
+                            {item.title}
+                        </h4>
 
-  {item.value.split("\n").map((line, i) => (
-    <p
-      key={i}
-      className="whitespace-normal break-word text-sm"
-      style={{ ...FONTS.regular1, color: COLORS.primary_gray }}
-    >
-      {line}
-    </p>
-  ))}
+                        {item.value.split("\n").map((line, i) => (
+                            <p
+                                key={i}
+                                className="whitespace-normal break-word text-sm"
+                                style={{ ...FONTS.regular1, color: COLORS.primary_gray }}
+                            >
+                                {line}
+                            </p>
+                        ))}
 
-  {item.desc && (
-    <p
-      className="whitespace-normal break-word text-sm"
-      style={{ ...FONTS.boldHeading2, color: COLORS.primary_gray }}
-    >
-      {item.desc}
-    </p>
-  )}
-</div>
+                        {item.desc && (
+                            <p
+                                className="whitespace-normal break-word text-sm"
+                                style={{ ...FONTS.boldHeading2, color: COLORS.primary_gray }}
+                            >
+                                {item.desc}
+                            </p>
+                        )}
+                    </div>
 
                 </div>
             ))}

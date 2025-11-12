@@ -1,6 +1,5 @@
-// src/redux/Queries/querythunks.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import Client, { QueryService } from "../../apis";
+import { QueryService } from "../../apis";
 import type { QueryFormData } from "./querytypes";
 
 export const sendQueryThunk = createAsyncThunk(
@@ -33,28 +32,26 @@ export const sendQueryThunk = createAsyncThunk(
   }
 );
 
+
+// get
 export const fetchQueriesThunk = createAsyncThunk(
-  "query/fetchQueries",
-  async (_, { rejectWithValue }) => {
+  "queries/fetchAll",
+  async (
+    { senderId, senderRole }: { senderId: string; senderRole: string },
+    { rejectWithValue }
+  ) => {
     try {
-    
-    const senderId = "6911e5ff6d24e24cd43b4f0a";
-      const senderRole = "User";
-
-
-      if (!senderId || !senderRole) {
-        return rejectWithValue("Missing sender ID or sender role. Please log in again.");
-      }
-
+      // ✅ Pass as two arguments now
       const response = await QueryService.getQueries(senderId, senderRole);
-      console.log("Fetched queries:", response.data);
-
+      console.log("Fetched Queries:", response.data);
       return response.data;
     } catch (error: any) {
-      console.error("API Error:", error.response?.data || error.message);
-      return rejectWithValue(error.response?.data?.Message || "Something went wrong");
+      console.error("Error fetching queries:", error);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
+
+
 
 
