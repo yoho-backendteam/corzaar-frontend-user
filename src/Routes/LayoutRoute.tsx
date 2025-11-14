@@ -22,14 +22,14 @@ const LayoutRoute: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-
         <Route path="/login" element={<SignIn />} />
         <Route path="/student-register" element={<StudentRegistration />} />
+
         <Route
           path="/*"
           element={
             <>
-              <Navbar />
+              <Navbar /> 
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Courses" element={<Courses />} />
@@ -37,13 +37,16 @@ const LayoutRoute: React.FC = () => {
                 <Route path="/institute/:id" element={<InstituteDetails />} />
                 {/* <Route path="/Institutes" element={<Institutes />} /> */}
                 <Route path="/Offers" element={<OfferPage />} />
-                <Route path="/cartPage" element={<CartPage />} />
+                <Route path="/Queries" element={<ContactPage />} />
+                
+
                 <Route path="/notificationPage" element={<NotificationPage />} />
                 <Route path="/profilePage" element={<ProfilePage />} />
-                <Route path="/Queries" element={<ContactPage />} />
                 <Route path="/settingprofile" element={<Settingprofile />} />
                 <Route path="/Portfolio" element={<Portfolio />} />
                 <Route path="/Mycourse" element={<CartPage />} />
+                <Route path="/cartPage" element={<CartPage />} />
+
               </Routes>
             </>
           }
