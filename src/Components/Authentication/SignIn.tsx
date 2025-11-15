@@ -199,7 +199,9 @@ const SignIn = () => {
 
             {/* Form Area */}
             <div className="flex flex-col items-center transition-all duration-300 w-full">
-              {method === "password" && <SignInPassword />}
+              {method === "password" && <SignInPassword onSuccess={function (): void {
+                throw new Error("Function not implemented.");
+              }} />}
               {method === "otp" && otpStep === "enter-phone" && (
                 <SendOTP
                   goToOtp={handleSendOTP}
@@ -207,7 +209,9 @@ const SignIn = () => {
                   setPhoneNumber={setPhoneNumber}
                 />
               )}
-              {method === "otp" && otpStep === "enter-otp" && <OTPVerification goBack={() => setOtpStep("enter-phone")} />}
+              {method === "otp" && otpStep === "enter-otp" && <OTPVerification goBack={() => setOtpStep("enter-phone")} onSuccess={function (): void {
+                throw new Error("Function not implemented.");
+              }} />}
             </div>
           </div>
 

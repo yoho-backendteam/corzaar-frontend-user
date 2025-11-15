@@ -9,9 +9,10 @@ interface SendOTPProps {
 }
 
 const SendOTP: React.FC<SendOTPProps> = ({ goToOtp, phoneNumber, setPhoneNumber }) => {
+  const [phone, setPhone] = useState("");
   return (
     <div className="w-full">
-      {error && (
+      {/* {error && (
         <div
           className="mb-4 p-2 rounded text-sm text-center"
           style={{
@@ -22,7 +23,7 @@ const SendOTP: React.FC<SendOTPProps> = ({ goToOtp, phoneNumber, setPhoneNumber 
         >
           {error}
         </div>
-      )}
+      )} */}
 
       <label style={{ ...(FONTS.medium as any), fontSize: "14px", color: COLORS.C_DIV_Title }}>
         Phone Number
@@ -38,7 +39,7 @@ const SendOTP: React.FC<SendOTPProps> = ({ goToOtp, phoneNumber, setPhoneNumber 
           style={FONTS.regular as any}
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          disabled={loading}
+        // disabled={loading}
         />
       </div>
 
@@ -52,10 +53,11 @@ const SendOTP: React.FC<SendOTPProps> = ({ goToOtp, phoneNumber, setPhoneNumber 
           backgroundColor: COLORS.primary_red,
           color: COLORS.primary_white
         }}
-        onClick={handleSendOTP}
-        disabled={loading}
+      // onClick={handleSendOTP}
+      // disabled={loading}
       >
-        {loading ? "Sending OTP..." : "Send OTP"}
+        Send OTP
+        {/* {loading ? "Sending OTP..." : "Send OTP"} */}
       </button>
     </div>
   );
