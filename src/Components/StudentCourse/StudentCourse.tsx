@@ -247,56 +247,6 @@ export default function ExploreCourses() {
           ))}
         </div>
 
-        <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 mt-4 p-3 sm:p-4 bg-gray-100 rounded-lg">
-          <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-            <input
-              type="text"
-              placeholder="Branch ID"
-              className="px-3 py-2 border rounded text-sm w-full max-w-[120px] sm:max-w-[140px]"
-              value={branchId}
-              onChange={(e) => setBranchId(e.target.value)}
-            />
-            <button
-              onClick={handleFetchByBranch}
-              className="px-3 py-2 bg-green-500 text-white rounded text-sm hover:bg-green-600 transition-colors whitespace-nowrap flex-1 sm:flex-none"
-            >
-              Fetch by Branch
-            </button>
-          </div>
-
-          <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-            <input
-              type="text"
-              placeholder="Institute ID"
-              className="px-3 py-2 border rounded text-sm w-full max-w-[120px] sm:max-w-[140px]"
-              value={instituteId}
-              onChange={(e) => setInstituteId(e.target.value)}
-            />
-            <button
-              onClick={handleFetchByInstitute}
-              className="px-3 py-2 bg-purple-500 text-white rounded text-sm hover:bg-purple-600 transition-colors whitespace-nowrap flex-1 sm:flex-none"
-            >
-              Fetch by Institute
-            </button>
-          </div>
-
-          <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-            <input
-              type="text"
-              placeholder="Course ID"
-              className="px-3 py-2 border rounded text-sm w-full max-w-[120px] sm:max-w-[140px]"
-              value={courseId}
-              onChange={(e) => setCourseId(e.target.value)}
-            />
-            <button
-              onClick={handleFetchById}
-              className="px-3 py-2 bg-orange-500 text-white rounded text-sm hover:bg-orange-600 transition-colors whitespace-nowrap flex-1 sm:flex-none"
-            >
-              Fetch by ID
-            </button>
-          </div>
-        </div>
-
         <p
           className="font-medium mt-3 sm:mt-4 text-sm sm:text-base"
           style={{

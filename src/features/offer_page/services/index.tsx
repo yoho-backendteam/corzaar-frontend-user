@@ -1,4 +1,4 @@
-import Client from '../../../api/index2';
+import Client from '../../../api/index';
 
 
 export const getOfferService = async () => {

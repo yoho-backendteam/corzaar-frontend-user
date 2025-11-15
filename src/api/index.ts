@@ -1,5 +1,6 @@
 import httpClient from "../api/httpclient";
 import { API_END_POINTS } from "../api/endpoints";
+import type { addtocartTypes } from "../userHomeTypes/types";
 import type { Institute } from "../types/institute";
 
 class Client {
@@ -198,6 +199,23 @@ class Client {
     delete: (courseId: string, userId: string) => httpClient.delete(API_END_POINTS.Cart.deleteone.replace(':id', courseId), { data: { userId } }
     ),
   };
+
+   user_home = {
+          getall: () => httpClient.get(API_END_POINTS.user_home.getalloffers),
+          getallcourses: () => httpClient.get(API_END_POINTS.user_home.getallcourses),
+          gettrendingcourses: () => httpClient.get(API_END_POINTS.user_home.gettrendingcourses),
+          getallinstitutes: () => httpClient.get(API_END_POINTS.user_home.getallinstitutes),
+          getcategories: () => httpClient.get(API_END_POINTS.user_home.getcategories),
+          addtokart: (data:addtocartTypes) => httpClient.post(API_END_POINTS.user_home.addtokart, data)
+  
+  
+      }
+  
+      offer = {
+          getalloffers: () => httpClient.get(API_END_POINTS.offer.getalloffers),
+          getofferbyid: (id: string) => httpClient.get(API_END_POINTS.offer.getofferbyid.replace(":id", id)),
+  
+      }
 }
 
 export default new Client();

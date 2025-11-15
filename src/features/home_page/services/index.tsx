@@ -1,4 +1,4 @@
-import Client from '../../../api/index2';
+import Client from '../../../api/index';
 import type { addtocartTypes } from '../../../userHomeTypes/types';
 
 

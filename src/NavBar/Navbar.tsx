@@ -16,6 +16,8 @@ import notify from "../assets/images/notification.png";
 import profileimg from "../assets/images/profileimg.png";
 import logout from "../assets/images/export.svg";
 import { COLORS, FONTS } from "../Constants/uiconstants";
+import { IoMdLogIn } from "react-icons/io";
+import { useAuth } from "../context/context";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,6 +25,7 @@ const Navbar: React.FC = () => {
   const [location, setLocation] = useState("Mumbai, India");
   const [showProfile, setShowProfile] = useState(false);
   const navigate = useNavigate();
+  const {isAuthenticated} = useAuth()
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
@@ -76,7 +79,7 @@ const Navbar: React.FC = () => {
               (name) => (
                 <NavLink
                   key={name}
-                  to={`/${name === "Home" ? "Home" : name.toLowerCase()}`}
+                  to={`/${name === "Home" ? "" : name.toLowerCase()}`}
                   style={({ isActive }) => ({
                     color: isActive
                       ? COLORS.primary_white
@@ -145,13 +148,15 @@ const Navbar: React.FC = () => {
             </div>
 
           
+              {
+                  isAuthenticated && 
             <div className="hidden xl:flex items-center gap-4">
               <Link to="/cartPage">
                 <img
                   src={carticon}
                   className="rounded-full p-2 w-10 h-10"
                   style={{ background: COLORS.primary_yellow }}
-                />
+                  />
               </Link>
               <Link to="/notificationPage">
                 <img
@@ -161,8 +166,18 @@ const Navbar: React.FC = () => {
                 />
               </Link>
             </div>
+              }
 
-           
+            {
+              !isAuthenticated ?
+             <Link to="/login">
+                <div
+                  className={`flex items-center rounded-full p-2 w-10 h-10 cursor-pointer bg-[${COLORS.primary_red}]`}
+                >
+                  <IoMdLogIn className="text-white h-10 w-10"/>
+                </div>
+             </Link> 
+             :
             <div className="relative" ref={profileRef}>
               <img
                 src={profileimg}
@@ -209,6 +224,9 @@ const Navbar: React.FC = () => {
                 </div>
               )}
             </div>
+            }
+
+           
 
            
             <button
