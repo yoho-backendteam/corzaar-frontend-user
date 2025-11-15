@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
+import { GetLocalstorage } from "../utils/helper";
 
 const Axios = axios.create({
     baseURL: import.meta.env.VITE_PUBLIC_API_URL,
@@ -10,9 +11,10 @@ const Axios = axios.create({
 });
 
 Axios.interceptors.request.use((config: any) => {
-    // if (token) {
-    //     config.headers["Authorization"] = `Token ${token}`
-    // }
+    const token = GetLocalstorage("cu_t_a")
+    if (token) {
+        config.headers["Authorization"] = `${token}`
+    }
     return config
 })
 

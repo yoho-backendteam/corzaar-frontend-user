@@ -3,17 +3,20 @@ import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { otpVerify } from "../../features/userlogin/reducers/service";
+import { useAuth } from "../../context/context";
+import { GetLocalstorage, RemoveLocalstorage } from "../../utils/helper";
 
 interface OTPVerificationProps {
   goBack: () => void;
-  onSuccess: () => void;
 }
 
 const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
   const navigate = useNavigate();
   const [otpValues, setOtpValues] = useState<string[]>(Array(6).fill(""));
+  const { login } = useAuth()
 
-  const otpToken = localStorage.getItem("token");
+  const storedOtp = GetLocalstorage("generatedOtp");
+  const token = GetLocalstorage("token")?.toString()
 
   const handleChange = (index: number, value: string) => {
     if (!/^\d*$/.test(value)) return;
@@ -35,40 +38,56 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
   };
 
   const handleVerify = async () => {
-    if (!otpToken) {
-      toast.error("Invalid session. Please resend OTP.");
-      goBack();
-      return;
-    }
+    const enteredOtp = otpValues.join("");
 
-    const otpInput = otpValues.join("");
-    if (otpInput.length < 6) {
+    if (enteredOtp.length < 6) {
       toast.error("Please enter the complete 6-digit OTP.");
       return;
     }
 
-    try {
-      const response = await otpVerify.verifyOTP(otpToken, otpInput);
+    if (!storedOtp) {
+      toast.error("OTP expired or missing. Please resend.");
+      goBack();
+      return;
+    }
 
-      if (response.status) {
-        localStorage.removeItem("token");
-        toast.success("OTP verified successfully!");
-        navigate("/Home");
+    const response = await otpVerify(token, enteredOtp)
+
+    if (response?.status) {
+      const token = response?.data?.token || ""
+      login(token)
+      if (!response?.reg) {
+        navigate("/student-register")
       } else {
-        toast.error(response.message || "Invalid OTP. Please try again.");
+        navigate('/')
       }
-    } catch (err) {
-      console.error(err);
-      toast.error("OTP verification failed. Try again.");
+      RemoveLocalstorage("generatedOtp")
+      RemoveLocalstorage("token")
+    } else {
+      console.log(response)
     }
   };
 
   return (
     <div className="w-full">
-      <label style={{ ...FONTS.medium, fontSize: "14px", color: COLORS.C_DIV_Title } as any}>
+      <label
+        style={{
+          ...FONTS.medium,
+          fontSize: "14px",
+          color: COLORS.C_DIV_Title,
+        } as any}
+      >
         Enter OTP
       </label>
-
+      <p
+        style={{
+          ...FONTS.regular,
+          fontSize: "14px",
+          color: COLORS.C_DIV_Title,
+        } as any}
+      >
+        OTP for Demo {storedOtp}
+      </p>
 
       <div className="flex flex-wrap justify-center gap-4 my-3 w-full mx-auto">
         {otpValues.map((val, i) => (
@@ -87,14 +106,13 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
       </div>
 
       <button
-        className="w-full py-2 rounded-md font-semibold text-sm mb-3 border transition-opacity disabled:opacity-50"
+        className="w-full py-2 rounded-md font-semibold text-sm mb-3 border"
         style={{
           borderColor: COLORS.primary_gray,
           color: COLORS.primary_black,
           backgroundColor: COLORS.primary_white,
         }}
         onClick={goBack}
-        disabled={loading}
       >
         Change Number
       </button>

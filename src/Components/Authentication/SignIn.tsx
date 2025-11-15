@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,35 +12,53 @@ import { resetOTP } from "../../features/userlogin/reducers/otpslice";
 import { sendOTPThunk } from "../../features/userlogin/reducers/otpthunks";
 import type { AppDispatch } from "../../store/store";
 import { Lock, Phone } from "lucide-react";
-import type { OTPResponse } from "../../features/userlogin/types/otptypes";
-
-
+// import { loginWithEmailThunk } from "../../features/userlogin/reducers/auththunk.ts";
+import type { LoginResponse, LoginThunkAction, OTPResponse, OTPThunkResult } from "../../features/userlogin/types/otptypes";
+import { LoginWithEmail } from "../../features/userlogin/reducers/service";
+// import { useAuth } from "../../hooks/userlogin/authhooks";
 
 const SignIn = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  // const otpData = useSelector((state: RootState) => state.loginotp.data);
-
+  // UI State
   const [method, setMethod] = useState<"password" | "otp">("password");
-  const [otpStep, setOtpStep] = useState<"enter-phone" | "enter-otp">("enter-phone");
+  const [otpStep, setOtpStep] = useState<"enter-phone" | "enter-otp">(
+    "enter-phone"
+  );
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSendOTP = async () => {
-    if (!phoneNumber) return toast.error("Phone number is required");
-    const resultAction = await dispatch(sendOTPThunk({ phoneNumber }));
+  // const { triggerLogin } = useAuth();
 
-    if (resultAction.payload && (resultAction.payload as OTPResponse).data?.token) {
-      localStorage.setItem('token', (resultAction.payload as OTPResponse).data?.token || '');
+
+  const handleSendOTP = async (): Promise<void> => {
+    if (!phoneNumber) {
+      toast.error("Phone number is required");
+      return;
     }
 
+    const resultAction = await dispatch(sendOTPThunk({ phoneNumber })) as OTPThunkResult;
+
     if (sendOTPThunk.fulfilled.match(resultAction)) {
-      toast.success((resultAction.payload as OTPResponse).message);
+      const payload: OTPResponse = resultAction.payload;
+
+      // if (payload.data?.token) {
+      //   localStorage.setItem("token", payload.data.token);
+      // }
+
+      // if (payload.generatedOtp) {
+      //   localStorage.setItem("generatedOtp", payload.generatedOtp);
+      // }
+
+      toast.success(payload.message);
       setOtpStep("enter-otp");
     } else {
-      const errorMessage = typeof resultAction.payload === 'string'
-        ? resultAction.payload
-        : "Failed to send OTP";
+      const errorMessage =
+        typeof resultAction.payload === "string"
+          ? resultAction.payload
+          : "Failed to send OTP";
       toast.error(errorMessage);
     }
   };
@@ -77,7 +96,8 @@ const SignIn = () => {
               marginBottom: "1rem",
             }}
           >
-            Welcome Back to your <br className="hidden md:block" /> Learning Journey
+            Welcome Back to your <br className="hidden md:block" /> Learning
+            Journey
           </h2>
 
           <p
@@ -87,14 +107,15 @@ const SignIn = () => {
               marginBottom: "2rem",
             }}
           >
-            Access thousands of courses and continue your education anytime, anywhere.
+            Access thousands of courses and continue your education anytime,
+            anywhere.
           </p>
 
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
             {[
               { count: "10K+", label: "Courses" },
               { count: "50K+", label: "Students" },
-              { count: "500+", label: "Instructors" }
+              { count: "500+", label: "Instructors" },
             ].map((item, i) => (
               <div
                 key={i}
@@ -131,10 +152,8 @@ const SignIn = () => {
         {/* Right Auth Panel */}
         <div
           className="w-full md:w-1/2 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between"
-          className="w-full md:w-1/2 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between"
           style={{
             backgroundColor: COLORS.primary_white,
-            minHeight: "520px",
             minHeight: "520px",
           }}
         >
@@ -147,7 +166,7 @@ const SignIn = () => {
                 marginBottom: "0.5rem",
               }}
             >
-              Sign In
+              Join now
             </h2>
 
             <p
@@ -171,13 +190,19 @@ const SignIn = () => {
                 }}
                 className="flex-1 py-2 rounded-l-md font-semibold text-sm transition-all"
                 style={{
-                  backgroundColor: method === "password" ? COLORS.primary_red : COLORS.primary_white,
-                  color: method === "password" ? COLORS.primary_white : COLORS.primary_red,
+                  backgroundColor:
+                    method === "password"
+                      ? COLORS.primary_red
+                      : COLORS.primary_white,
+                  color:
+                    method === "password"
+                      ? COLORS.primary_white
+                      : COLORS.primary_red,
                   border: `1px solid ${COLORS.primary_red}`,
                 }}
               >
                 <Lock className="inline mr-2 w-4 h-4" />
-                Password
+                Sign In
               </button>
 
               <button
@@ -187,21 +212,28 @@ const SignIn = () => {
                 }}
                 className="flex-1 py-2 rounded-r-md font-semibold text-sm transition-all"
                 style={{
-                  backgroundColor: method === "otp" ? COLORS.primary_red : COLORS.primary_white,
-                  color: method === "otp" ? COLORS.primary_white : COLORS.primary_red,
+                  backgroundColor:
+                    method === "otp"
+                      ? COLORS.primary_red
+                      : COLORS.primary_white,
+                  color:
+                    method === "otp"
+                      ? COLORS.primary_white
+                      : COLORS.primary_red,
                   border: `1px solid ${COLORS.primary_red}`,
                 }}
               >
                 <Phone className="inline mr-2 w-4 h-4" />
-                OTP
+                Sign Up / Sign In
               </button>
             </div>
 
             {/* Form Area */}
             <div className="flex flex-col items-center transition-all duration-300 w-full">
-              {method === "password" && <SignInPassword onSuccess={function (): void {
-                throw new Error("Function not implemented.");
-              }} />}
+              {method === "password" && (
+                <SignInPassword />
+              )}
+
               {method === "otp" && otpStep === "enter-phone" && (
                 <SendOTP
                   goToOtp={handleSendOTP}
@@ -209,9 +241,9 @@ const SignIn = () => {
                   setPhoneNumber={setPhoneNumber}
                 />
               )}
-              {method === "otp" && otpStep === "enter-otp" && <OTPVerification goBack={() => setOtpStep("enter-phone")} onSuccess={function (): void {
-                throw new Error("Function not implemented.");
-              }} />}
+              {method === "otp" && otpStep === "enter-otp" && (
+                <OTPVerification goBack={() => setOtpStep("enter-phone")} />
+              )}
             </div>
           </div>
 
@@ -221,7 +253,7 @@ const SignIn = () => {
           >
             Don’t have an account?{" "}
             <button
-              onClick={() => navigate("/student-register")}
+              onClick={() => setMethod("otp")}
               style={{
                 color: COLORS.primary_red,
                 fontWeight: 600,

@@ -29,10 +29,11 @@ class Client {
 
   loginEndpoint = {
     postotp: (phoneNumber: string) =>
-      httpClient.post(API_END_POINTS.login.post, { phoneNumber })
+      httpClient.post(API_END_POINTS.login.post, { phoneNumber }),
+    rootlogin: (data: { email: string, password: string }) => httpClient.post(API_END_POINTS.login.rootpost, data)
   }
   verifyOtpEndpoint = {
-    postverifyotp: (token: string, otp: string,) =>
+    postverifyotp: (token: string | undefined, otp: string,) =>
       httpClient.post(API_END_POINTS.otpverify.post, { token, otp })
   }
   createCourse(data: any) {
@@ -200,22 +201,22 @@ class Client {
     ),
   };
 
-   user_home = {
-          getall: () => httpClient.get(API_END_POINTS.user_home.getalloffers),
-          getallcourses: () => httpClient.get(API_END_POINTS.user_home.getallcourses),
-          gettrendingcourses: () => httpClient.get(API_END_POINTS.user_home.gettrendingcourses),
-          getallinstitutes: () => httpClient.get(API_END_POINTS.user_home.getallinstitutes),
-          getcategories: () => httpClient.get(API_END_POINTS.user_home.getcategories),
-          addtokart: (data:addtocartTypes) => httpClient.post(API_END_POINTS.user_home.addtokart, data)
-  
-  
-      }
-  
-      offer = {
-          getalloffers: () => httpClient.get(API_END_POINTS.offer.getalloffers),
-          getofferbyid: (id: string) => httpClient.get(API_END_POINTS.offer.getofferbyid.replace(":id", id)),
-  
-      }
+  user_home = {
+    getall: () => httpClient.get(API_END_POINTS.user_home.getalloffers),
+    getallcourses: () => httpClient.get(API_END_POINTS.user_home.getallcourses),
+    gettrendingcourses: () => httpClient.get(API_END_POINTS.user_home.gettrendingcourses),
+    getallinstitutes: () => httpClient.get(API_END_POINTS.user_home.getallinstitutes),
+    getcategories: () => httpClient.get(API_END_POINTS.user_home.getcategories),
+    addtokart: (data: addtocartTypes) => httpClient.post(API_END_POINTS.user_home.addtokart, data)
+
+
+  }
+
+  offer = {
+    getalloffers: () => httpClient.get(API_END_POINTS.offer.getalloffers),
+    getofferbyid: (id: string) => httpClient.get(API_END_POINTS.offer.getofferbyid.replace(":id", id)),
+
+  }
 }
 
 export default new Client();

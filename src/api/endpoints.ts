@@ -13,8 +13,8 @@ export const API_END_POINTS = {
     searchById: "/api/:id/search",
   },
 
-  login: { post: "/users/login" },
-  otpverify: { post: "/users/verify-otp" },
+  login: { post: "/auth/api/users/login", rootpost: "/auth/api/users/root-login" },
+  otpverify: { post: "/auth/api/share/verify-otp" },
   course: {
     create: `${BASE_COURSE_URL}/`,
     getAll: `${BASE_COURSE_URL}/`,
@@ -83,7 +83,7 @@ export const API_END_POINTS = {
     getAll: `/student/api/cart`,
     deleteone: `/student/api/cart/remove/:id` // here id is courseid from the item
   },
-  
+
   user_home: {
     getalloffers: "/open/other/api/offer",
     getallcourses: "/open/course/api/courses/all",
@@ -96,6 +96,6 @@ export const API_END_POINTS = {
   offer: {
     getalloffers: "/open/other/api/offer",
     getofferbyid: "/open/other/api/offer/:id",
-  }  
+  }
 };
 

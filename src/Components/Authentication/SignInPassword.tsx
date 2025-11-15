@@ -1,18 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { Mail, Lock } from "lucide-react";
 import { useAuth } from "../../context/context";
+import { LoginWithEmail } from "../../features/userlogin/reducers/service";
+import { toast } from "react-toastify";
 
-interface SignInPasswordProps {
-  onSuccess: () => void;
-}
-
-const SignInPassword: React.FC<SignInPasswordProps> = ({ onSuccess }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+const SignInPassword: React.FC = () => {
   const { login } = useAuth();
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,11 +25,16 @@ const SignInPassword: React.FC<SignInPasswordProps> = ({ onSuccess }) => {
     setError("");
 
     try {
-      // Accept any email/password combination
-      // In a real app, you would validate with your backend here
-      login(email, password);
-      onSuccess();
-    } catch (err) {
+      const resultAction: any = await LoginWithEmail(email, password)
+      console.log(resultAction)
+
+      if (resultAction?.status) {
+        login(resultAction?.data)
+        toast.success(resultAction?.message)
+      } else {
+        toast.error(resultAction?.message)
+      }
+    } catch (err: unknown) {
       setError('Login failed. Please try again.');
     } finally {
       setLoading(false);
@@ -48,10 +50,10 @@ const SignInPassword: React.FC<SignInPasswordProps> = ({ onSuccess }) => {
   return (
     <div className="w-full">
       {error && (
-        <div 
+        <div
           className="mb-4 p-2 rounded text-sm text-center"
-          style={{ 
-            backgroundColor: '#FEE2E2', 
+          style={{
+            backgroundColor: '#FEE2E2',
             color: COLORS.primary_red,
             border: `1px solid ${COLORS.primary_red}`
           }}
@@ -102,9 +104,9 @@ const SignInPassword: React.FC<SignInPasswordProps> = ({ onSuccess }) => {
         onClick={handleSignIn}
         disabled={loading}
         className="w-full py-2 rounded-md font-semibold text-sm transition-opacity disabled:opacity-50"
-        style={{ 
-          backgroundColor: COLORS.primary_red, 
-          color: COLORS.primary_white 
+        style={{
+          backgroundColor: COLORS.primary_red,
+          color: COLORS.primary_white
         }}
       >
         {loading ? "Signing In..." : "Sign In"}

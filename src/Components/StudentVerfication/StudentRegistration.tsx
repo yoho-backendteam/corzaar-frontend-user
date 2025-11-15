@@ -95,8 +95,8 @@ const StudentRegistration: React.FC = () => {
                     backgroundColor: isCompleted
                       ? COLORS.secondary_green
                       : isActive
-                      ? COLORS.primary_red
-                      : COLORS.primary_white,
+                        ? COLORS.primary_red
+                        : COLORS.primary_white,
                     color:
                       isCompleted || isActive
                         ? COLORS.primary_white
@@ -145,7 +145,7 @@ const StudentRegistration: React.FC = () => {
               borderRadius: "3px",
               transition: "width 0.3s ease",
             }}
-          
+
           />
         </div>
       </div>
@@ -166,20 +166,20 @@ const StudentRegistration: React.FC = () => {
           ...FONTS.medium as any,
           backgroundColor: COLORS.primary_red,
           color: COLORS.primary_yellow,
-        
+
           padding: "8px 16px",
-         
+
           fontWeight: 600,
         }}
         className="rounded-full items-center justify-center flex-wrap inline-flex"
       >
-    <img
-            src={star}
-            alt="star"
-            className="h-5 w-5 mr-2"
-         
-         />
-  Professional Enrollment
+        <img
+          src={star}
+          alt="star"
+          className="h-5 w-5 mr-2"
+
+        />
+        Professional Enrollment
       </div>
 
       <h1
@@ -187,9 +187,9 @@ const StudentRegistration: React.FC = () => {
           ...(FONTS.boldHeading as any),
           color: COLORS.primary_red,
           marginTop: "10px",
-          
+
         }}
-         
+
       >
         Student Registration
       </h1>
@@ -235,16 +235,16 @@ const StudentRegistration: React.FC = () => {
           <button
             onClick={() => {
               if (step === 4) {
-                navigate("/Home");
+                navigate("/");
               } else {
                 setStep((s) => Math.min(4, s + 1));
               }
             }}
             className="flex items-center justify-center gap-2 px-6 py-2 rounded-md font-semibold transition-all"
-           style={{
-             backgroundColor: step === 4 ? COLORS.secondary_green : COLORS.primary_red,
+            style={{
+              backgroundColor: step === 4 ? COLORS.secondary_green : COLORS.primary_red,
               color: COLORS.primary_white,
-  }}
+            }}
           >
             {step === 4 ? (
               <>

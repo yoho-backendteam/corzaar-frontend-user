@@ -19,10 +19,10 @@ export interface SendOTPProps {
 
 // Add this interface for OTP verification
 export interface OTPVerifyResponse {
+  reg: any;
   status: boolean;
   message: string;
   data?: {
-    user: any; // Replace 'any' with your actual user type
-    accessToken: string;
+    token: string
   };
 }

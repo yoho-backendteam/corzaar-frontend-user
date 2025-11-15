@@ -20,7 +20,7 @@ const PublicRoute: React.FC<PublicRouteProps> = ({ children }) => {
 
   if (isAuthenticated) {
     // Redirect to home if already authenticated
-    return <Navigate to="/Home" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;

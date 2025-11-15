@@ -17,19 +17,24 @@ import ExploreInstitutes from '../Component/Institutes/ExploreInstitutes';
 import InstituteDetails from '../Component/Institutes/InstituteDetails';
 import ContactPage from '../Components/Queries/Querypage';
 import NotificationPage from '../Pages/NotificationPage';
+import { useAuth } from '../context/context';
 
 const LayoutRoute: React.FC = () => {
+  const { isAuthenticated } = useAuth()
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<SignIn />} />
-        <Route path="/student-register" element={<StudentRegistration />} />
+        {
+          isAuthenticated &&
+          <Route path="/student-register" element={<StudentRegistration />} />
+        }
 
         <Route
           path="/*"
           element={
             <>
-              <Navbar /> 
+              <Navbar />
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Courses" element={<Courses />} />
@@ -38,7 +43,7 @@ const LayoutRoute: React.FC = () => {
                 {/* <Route path="/Institutes" element={<Institutes />} /> */}
                 <Route path="/Offers" element={<OfferPage />} />
                 <Route path="/Queries" element={<ContactPage />} />
-                
+
 
                 <Route path="/notificationPage" element={<NotificationPage />} />
                 <Route path="/profilePage" element={<ProfilePage />} />
