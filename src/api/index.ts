@@ -1,4 +1,4 @@
-import httpClient from "../api/httpclient";
+import httpClient from "./httpClients";
 import { API_END_POINTS } from "../api/endpoints";
 import type { addtocartTypes } from "../userHomeTypes/types";
 import type { Institute } from "../types/institute";
