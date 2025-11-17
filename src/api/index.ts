@@ -25,6 +25,12 @@ class Client {
 
     searchById: (id: string) =>
       httpClient.get(API_END_POINTS.instituteManagement.searchById.replace(":id", id)),
+
+    nearme: (params: { latitude: number; longitude: number }) =>
+      httpClient.get(
+        `${API_END_POINTS.instituteManagement.nearme}?latitude=${params.latitude}&longitude=${params.longitude}`
+      ),
+
   };
 
   loginEndpoint = {
@@ -39,7 +45,6 @@ class Client {
   createCourse(data: any) {
     return httpClient.post(API_END_POINTS.course.create, data);
   }
-
   getAllCourses() {
     return httpClient.get(API_END_POINTS.course.getAll);
   }
@@ -70,6 +75,10 @@ class Client {
 
   searchCourses(query: string) {
     return httpClient.get(`${API_END_POINTS.course.search}?query=${query}`);
+  }
+
+  getFilterCourse(params: any) {
+    return httpClient.get(API_END_POINTS.course.filtercourse, { params });
   }
 
   getCategories() {

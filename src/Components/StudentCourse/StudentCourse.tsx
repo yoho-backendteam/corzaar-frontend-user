@@ -1,5 +1,3 @@
-"use client";
-
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { ChevronDown, SearchIcon, X } from "lucide-react";
@@ -9,12 +7,10 @@ import { COLORS, FONTS } from "../../Constants/uiconstants";
 import filter from "../../assets/Image/fillteryl.png";
 import {
   fetchCourses,
-  fetchCourseById,
-  fetchCoursesByBranch,
   fetchTrendingCourses,
   fetchFeaturedCourses,
-  fetchCoursesByInstitute,
   fetchAllDetailedCourses,
+  filterCourses,
 } from "../../Components/Redux/courseThunks";
 import type { RootState, AppDispatch } from "../../store/store";
 
@@ -26,25 +22,12 @@ const sortOptions = [
   "Newest",
 ];
 
-const filterOptions = [
-  { id: "all", label: "All Courses", action: fetchCourses },
-  { id: "trending", label: "Trending Courses", action: fetchTrendingCourses },
-  { id: "featured", label: "Featured Courses", action: fetchFeaturedCourses },
-  {
-    id: "detailed",
-    label: "Detailed Courses",
-    action: fetchAllDetailedCourses,
-  },
-];
-
 export default function ExploreCourses() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState("Most Popular");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
-  const [branchId, setBranchId] = useState("");
-  const [instituteId, setInstituteId] = useState("");
-  const [courseId, setCourseId] = useState("");
+  const [appliedFilters, setAppliedFilters] = useState<any>(null);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -58,6 +41,7 @@ export default function ExploreCourses() {
 
   const handleFilterChange = (filterId: string) => {
     setActiveFilter(filterId);
+    setAppliedFilters(null);
 
     switch (filterId) {
       case "all":
@@ -77,22 +61,17 @@ export default function ExploreCourses() {
     }
   };
 
-  const handleFetchByBranch = () => {
-    if (branchId.trim()) {
-      dispatch(fetchCoursesByBranch(branchId));
-    }
+  const handleApplyFilters = (filters: any) => {
+    console.log("Applying filters:", filters);
+    setAppliedFilters(filters);
+    setActiveFilter(""); 
+    dispatch(filterCourses(filters));
   };
 
-  const handleFetchByInstitute = () => {
-    if (instituteId.trim()) {
-      dispatch(fetchCoursesByInstitute(instituteId));
-    }
-  };
-
-  const handleFetchById = () => {
-    if (courseId.trim()) {
-      dispatch(fetchCourseById(courseId));
-    }
+  const handleResetFilters = () => {
+    setAppliedFilters(null);
+    setActiveFilter("all");
+    dispatch(fetchCourses());
   };
 
   const handleSortChange = (option: string) => {
@@ -109,7 +88,8 @@ export default function ExploreCourses() {
       course.title?.toLowerCase().includes(query) ||
       course.description?.toLowerCase().includes(query) ||
       course.instituteName?.toLowerCase().includes(query) ||
-      course.category?.toLowerCase().includes(query)
+      course.category?.primary?.toLowerCase().includes(query) ||
+      course.category?.secondary?.toLowerCase().includes(query)
     );
   });
 
@@ -121,9 +101,9 @@ export default function ExploreCourses() {
         case "Highest Rated":
           return (b.rating || 0) - (a.rating || 0);
         case "Price Low to High":
-          return (a.price || 0) - (b.price || 0);
+          return (a.pricing?.price || 0) - (b.pricing?.price || 0);
         case "Price High to Low":
-          return (b.price || 0) - (a.price || 0);
+          return (b.pricing?.price || 0) - (a.pricing?.price || 0);
         case "Newest":
           return (
             new Date(b.createdAt || 0).getTime() -
@@ -233,7 +213,12 @@ export default function ExploreCourses() {
         </div>
 
         <div className="flex flex-wrap gap-2 mt-4 sm:mt-6">
-          {filterOptions.map((filter) => (
+          {[
+            { id: "all", label: "All Courses" },
+            { id: "trending", label: "Trending Courses" },
+            { id: "featured", label: "Featured Courses" },
+            { id: "detailed", label: "Detailed Courses" },
+          ].map((filter) => (
             <button
               key={filter.id}
               onClick={() => handleFilterChange(filter.id)}
@@ -268,6 +253,8 @@ export default function ExploreCourses() {
             <FilterSidebar
               onFilterChange={handleFilterChange}
               activeFilter={activeFilter}
+              onApplyFilters={handleApplyFilters}
+              onResetFilters={handleResetFilters}
             />
           </div>
         </aside>
@@ -287,6 +274,14 @@ export default function ExploreCourses() {
               <FilterSidebar
                 onFilterChange={handleFilterChange}
                 activeFilter={activeFilter}
+                onApplyFilters={(filters) => {
+                  handleApplyFilters(filters);
+                  setIsSidebarOpen(false);
+                }}
+                onResetFilters={() => {
+                  handleResetFilters();
+                  setIsSidebarOpen(false);
+                }}
               />
             </div>
           </div>

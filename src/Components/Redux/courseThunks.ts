@@ -351,3 +351,91 @@ export const deleteCourseReview = createAsyncThunk(
     }
   }
 );
+
+export const filterCourses = createAsyncThunk(
+  "course/filter",
+  async (filters: {
+    categories?: string[];
+    levels?: string[];
+    minRating?: number;
+    priceRange?: { min: number; max: number };
+    modes?: string[];
+    locationRadius?: number;
+    page?: number;
+    limit?: number;
+  }, { rejectWithValue }) => {
+    try {
+      const params: any = {
+        page: filters.page || 1,
+        limit: filters.limit || 10,
+      };
+
+      if (filters.categories && filters.categories.length > 0) {
+        params.categories = filters.categories.join(',');
+      }
+
+      if (filters.levels && filters.levels.length > 0) {
+        params.levels = filters.levels.join(',');
+      }
+
+      if (filters.minRating) {
+        params.minRating = filters.minRating;
+      }
+
+      if (filters.priceRange) {
+        if (filters.priceRange.min !== undefined) {
+          params.minPrice = filters.priceRange.min;
+        }
+        if (filters.priceRange.max !== undefined) {
+          params.maxPrice = filters.priceRange.max;
+        }
+      }
+
+      if (filters.modes && filters.modes.length > 0) {
+        params.modes = filters.modes.join(',');
+      }
+
+      if (filters.locationRadius) {
+        params.locationRadius = filters.locationRadius;
+        const userLocation = getUserLocation();
+        if (userLocation) {
+          params.latitude = userLocation.latitude;
+          params.longitude = userLocation.longitude;
+        }
+      }
+
+      const res = await CourseClient.getFilterCourse(params);
+      return normalizeResponse(res);
+    } catch (error: any) {
+      return rejectWithValue(
+        error?.response?.data?.message || "Failed to filter courses"
+      );
+    }
+  }
+);
+
+function getUserLocation() {
+  const savedLocation = localStorage.getItem('userLocation');
+  if (savedLocation) {
+    return JSON.parse(savedLocation);
+  }
+  if (navigator.geolocation) {
+    return new Promise((resolve) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const location = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          localStorage.setItem('userLocation', JSON.stringify(location));
+          resolve(location);
+        },
+        () => {
+          resolve(null);
+        }
+      );
+    });
+  }
+
+  return null;
+}
