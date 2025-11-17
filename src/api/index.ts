@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpClient from "./httpClients";
 import { API_END_POINTS } from "../api/endpoints";
 import type { addtocartTypes } from "../userHomeTypes/types";
 import type { Institute } from "../types/institute";
+import type { StudentFormType } from "../types/studentForm";
 
 class Client {
   instituteManagement = {
@@ -30,7 +32,8 @@ class Client {
   loginEndpoint = {
     postotp: (phoneNumber: string) =>
       httpClient.post(API_END_POINTS.login.post, { phoneNumber }),
-    rootlogin: (data: { email: string, password: string }) => httpClient.post(API_END_POINTS.login.rootpost, data)
+    rootlogin: (data: { email: string, password: string }) => httpClient.post(API_END_POINTS.login.rootpost, data),
+    profile: (data: StudentFormType) => httpClient.post(API_END_POINTS.login.profile, data)
   }
   verifyOtpEndpoint = {
     postverifyotp: (token: string | undefined, otp: string,) =>
@@ -216,6 +219,15 @@ class Client {
     getalloffers: () => httpClient.get(API_END_POINTS.offer.getalloffers),
     getofferbyid: (id: string) => httpClient.get(API_END_POINTS.offer.getofferbyid.replace(":id", id)),
 
+  }
+
+  QueryService = {
+
+    sendQuery: (data: any) => httpClient.post(API_END_POINTS.Query.POST, data),
+
+    getQueries: (params?: any, _senderRole?: string) => httpClient.get(API_END_POINTS.Query.GET, params),
+
+    adminReply: (data: any) => httpClient.post(API_END_POINTS.Query.adminPOST, data),
   }
 }
 

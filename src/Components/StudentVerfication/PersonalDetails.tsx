@@ -11,7 +11,7 @@ interface PersonalDetailsProps {
   studentForm: StudentFormType
 }
 
-const PersonalDetails: React.FC<PersonalDetailsProps> = ({ InputField, handelPersonalInfo, studentForm }) => {
+const PersonalDetails: React.FC<PersonalDetailsProps> = ({ handelPersonalInfo, studentForm }) => {
 
   return (
     <div>
@@ -110,12 +110,6 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ InputField, handelPer
           />
         </div>
 
-        <InputField
-          label="Gender"
-          value={studentForm?.personalInfo?.gender}
-          placeholder="mail"
-          onChange={(e: any) => handelPersonalInfo("gender", e)}
-        />
         <div className="w-full">
           <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
             Gender

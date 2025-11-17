@@ -11,7 +11,7 @@ interface EmergencyContactProps {
   studentForm: StudentFormType
 }
 
-const EmergencyContact: React.FC<EmergencyContactProps> = ({ InputField, handelemgInfo, studentForm }) => {
+const EmergencyContact: React.FC<EmergencyContactProps> = ({ handelemgInfo, studentForm }) => {
 
 
 
@@ -31,24 +31,46 @@ const EmergencyContact: React.FC<EmergencyContactProps> = ({ InputField, handele
             <h2 style={{ ...FONTS.SHOPPING_CART_Title, color: COLORS.C_DIV_Title, marginBottom: "8px" }}>
               Contact Name
             </h2>
-            <InputField
-              label=""
-              placeholder="Select Name"
-              value={studentForm?.personalInfo?.emergencyContact?.name}
-              onChange={(e: any) => handelemgInfo("name", e)}
-            />
+            <div className="w-full">
+              <input
+                type="text"
+                placeholder="name"
+                value={studentForm?.personalInfo?.emergencyContact?.name}
+                style={{
+                  width: "100%",
+                  padding: "12px",
+                  border: "none",
+                  borderRadius: "6px",
+                  fontSize: "16px",
+                  outline: "none",
+                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+                }}
+                onChange={(e: any) => handelemgInfo("name", e)}
+              />
+            </div>
           </div>
 
           <div className="flex-1">
             <h2 style={{ ...FONTS.SHOPPING_CART_Title, color: COLORS.C_DIV_Title, marginBottom: "8px" }}>
               Relationship
             </h2>
-            <InputField
-              label=""
-              placeholder="Select Relationship"
-              value={studentForm?.personalInfo?.emergencyContact?.relationship}
-              onChange={(e: any) => handelemgInfo("relationship", e)}
-            />
+            <div className="w-full">
+              <input
+                type="text"
+                placeholder="relationship"
+                value={studentForm?.personalInfo?.emergencyContact?.relationship}
+                style={{
+                  width: "100%",
+                  padding: "12px",
+                  border: "none",
+                  borderRadius: "6px",
+                  fontSize: "16px",
+                  outline: "none",
+                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+                }}
+                onChange={(e: any) => handelemgInfo("relationship", e)}
+              />
+            </div>
           </div>
 
         </div>
@@ -59,23 +81,45 @@ const EmergencyContact: React.FC<EmergencyContactProps> = ({ InputField, handele
             <h2 style={{ ...FONTS.SHOPPING_CART_Title, color: COLORS.C_DIV_Title, marginBottom: "8px" }}>
               Phone Number
             </h2>
-            <InputField
-              label=""
-              placeholder="Select Phone"
-              value={studentForm?.personalInfo?.emergencyContact?.phone}
-              onChange={(e: any) => handelemgInfo("phone", e)}
-            />
+            <div className="w-full">
+              <input
+                type="text"
+                placeholder="phone"
+                value={studentForm?.personalInfo?.emergencyContact?.phone}
+                style={{
+                  width: "100%",
+                  padding: "12px",
+                  border: "none",
+                  borderRadius: "6px",
+                  fontSize: "16px",
+                  outline: "none",
+                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+                }}
+                onChange={(e: any) => handelemgInfo("phone", e)}
+              />
+            </div>
           </div>
           <div className="flex-1">
             <h2 style={{ ...FONTS.SHOPPING_CART_Title, color: COLORS.C_DIV_Title, marginBottom: "8px" }}>
               Email
             </h2>
-            <InputField
-              label=""
-              placeholder="Select Email"
-              value={studentForm?.personalInfo?.emergencyContact?.email}
-              onChange={(e: any) => handelemgInfo("email", e)}
-            />
+            <div className="w-full">
+              <input
+                type="text"
+                placeholder="email"
+                value={studentForm?.personalInfo?.emergencyContact?.email}
+                style={{
+                  width: "100%",
+                  padding: "12px",
+                  border: "none",
+                  borderRadius: "6px",
+                  fontSize: "16px",
+                  outline: "none",
+                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+                }}
+                onChange={(e: any) => handelemgInfo("email", e)}
+              />
+            </div>
           </div>
         </div>
 

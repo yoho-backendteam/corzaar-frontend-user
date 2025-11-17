@@ -10,7 +10,7 @@ interface AddressProps {
   setSameAddress: () => void;
 }
 
-const Address: React.FC<AddressProps> = ({ InputField, handelAddressInfo, studentForm, setSameAddress }) => (
+const Address: React.FC<AddressProps> = ({ handelAddressInfo, studentForm, setSameAddress }) => (
   <div>
     <h2 style={{ ...FONTS.S_Cart_title, color: COLORS.C_DIV_Title }} className="flex items-center gap-2">
       <HiOutlineLocationMarker size={38} className="rounded-full p-2 sm:p-3 md:p-2" style={{ background: COLORS.primary_red, color: COLORS.primary_white }} />  Address Information
@@ -39,12 +39,26 @@ const Address: React.FC<AddressProps> = ({ InputField, handelAddressInfo, studen
           gap: "20px",
         }}
       >
-        <InputField
-          label="Street Address"
-          placeholder="Select Address"
-          value={studentForm?.personalInfo?.address?.permanent?.street}
-          onChange={(e: any) => handelAddressInfo("street", "permanent", e)}
-        />
+        <div className="w-full">
+          <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
+            Street Address
+          </label>
+          <input
+            type="text"
+            placeholder="street"
+            value={studentForm?.personalInfo?.address?.permanent?.street}
+            style={{
+              width: "100%",
+              padding: "12px",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "16px",
+              outline: "none",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onChange={(e: any) => handelAddressInfo("street", "permanent", e)}
+          />
+        </div>
       </div>
 
       <div
@@ -55,30 +69,90 @@ const Address: React.FC<AddressProps> = ({ InputField, handelAddressInfo, studen
           marginTop: "20px",
         }}
       >
-        <InputField
-          label="City"
-          placeholder="Select City"
-          value={studentForm?.personalInfo?.address?.permanent?.city}
-          onChange={(e: any) => handelAddressInfo("city", "permanent", e)}
-        />
-        <InputField
-          label="State"
-          placeholder="Select State"
-          value={studentForm?.personalInfo?.address?.permanent?.state}
-          onChange={(e: any) => handelAddressInfo("state", "permanent", e)}
-        />
-        <InputField
-          label="Zip Code"
-          placeholder="Select Zip Code"
-          value={studentForm?.personalInfo?.address?.permanent?.zipCode}
-          onChange={(e: any) => handelAddressInfo("zipCode", "permanent", e)}
-        />
-        <InputField
-          label="Country"
-          placeholder="Select Country"
-          value={studentForm?.personalInfo?.address?.permanent?.country}
-          onChange={(e: any) => handelAddressInfo("country", "permanent", e)}
-        />
+        <div className="w-full">
+          <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
+            City
+          </label>
+          <input
+            type="text"
+            placeholder="city"
+            value={studentForm?.personalInfo?.address?.permanent?.city}
+            style={{
+              width: "100%",
+              padding: "12px",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "16px",
+              outline: "none",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onChange={(e: any) => handelAddressInfo("city", "permanent", e)}
+          />
+        </div>
+
+        <div className="w-full">
+          <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
+            State
+          </label>
+          <input
+            type="text"
+            placeholder="state"
+            value={studentForm?.personalInfo?.address?.permanent?.state}
+            style={{
+              width: "100%",
+              padding: "12px",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "16px",
+              outline: "none",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onChange={(e: any) => handelAddressInfo("state", "permanent", e)}
+          />
+        </div>
+
+        <div className="w-full">
+          <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
+            Zip Code
+          </label>
+          <input
+            type="text"
+            placeholder="zip code"
+            value={studentForm?.personalInfo?.address?.permanent?.zipCode}
+            style={{
+              width: "100%",
+              padding: "12px",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "16px",
+              outline: "none",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onChange={(e: any) => handelAddressInfo("zipCode", "permanent", e)}
+          />
+        </div>
+
+        <div className="w-full">
+          <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
+            Country
+          </label>
+          <input
+            type="text"
+            placeholder="country"
+            value={studentForm?.personalInfo?.address?.permanent?.country}
+            style={{
+              width: "100%",
+              padding: "12px",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "16px",
+              outline: "none",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onChange={(e: any) => handelAddressInfo("country", "permanent", e)}
+          />
+        </div>
+
       </div>
     </div>
 
@@ -122,12 +196,27 @@ const Address: React.FC<AddressProps> = ({ InputField, handelAddressInfo, studen
           gap: "20px",
         }}
       >
-        <InputField
-          label="Street Address"
-          placeholder="Select Address"
-          value={studentForm?.personalInfo?.address?.current?.street}
-          onChange={(e: any) => handelAddressInfo("street", "current", e)}
-        />
+        <div className="w-full">
+          <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
+            Street Address
+          </label>
+          <input
+            type="text"
+            placeholder="street"
+            value={studentForm?.personalInfo?.address?.current?.street}
+            style={{
+              width: "100%",
+              padding: "12px",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "16px",
+              outline: "none",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onChange={(e: any) => handelAddressInfo("street", "current", e)}
+          />
+        </div>
+
       </div>
 
       <div
@@ -138,30 +227,90 @@ const Address: React.FC<AddressProps> = ({ InputField, handelAddressInfo, studen
           marginTop: "20px",
         }}
       >
-        <InputField
-          label="City"
-          placeholder="Select City"
-          value={studentForm?.personalInfo?.address?.current?.city}
-          onChange={(e: any) => handelAddressInfo("city", "current", e)}
-        />
-        <InputField
-          label="State"
-          placeholder="Select State"
-          value={studentForm?.personalInfo?.address?.current?.state}
-          onChange={(e: any) => handelAddressInfo("state", "current", e)}
-        />
-        <InputField
-          label="Zip Code"
-          placeholder="Select Zip Code"
-          value={studentForm?.personalInfo?.address?.current?.zipCode}
-          onChange={(e: any) => handelAddressInfo("zipcode", "current", e)}
-        />
-        <InputField
-          label="Country"
-          placeholder="Select Country"
-          value={studentForm?.personalInfo?.address?.current?.country}
-          onChange={(e: any) => handelAddressInfo("country", "current", e)}
-        />
+        <div className="w-full">
+          <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
+            City
+          </label>
+          <input
+            type="text"
+            placeholder="city"
+            value={studentForm?.personalInfo?.address?.current?.city}
+            style={{
+              width: "100%",
+              padding: "12px",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "16px",
+              outline: "none",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onChange={(e: any) => handelAddressInfo("city", "current", e)}
+          />
+        </div>
+
+        <div className="w-full">
+          <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
+            State
+          </label>
+          <input
+            type="text"
+            placeholder="state"
+            value={studentForm?.personalInfo?.address?.current?.state}
+            style={{
+              width: "100%",
+              padding: "12px",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "16px",
+              outline: "none",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onChange={(e: any) => handelAddressInfo("state", "current", e)}
+          />
+        </div>
+
+        <div className="w-full">
+          <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
+            Zip Code
+          </label>
+          <input
+            type="text"
+            placeholder="zip code"
+            value={studentForm?.personalInfo?.address?.current?.zipCode}
+            style={{
+              width: "100%",
+              padding: "12px",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "16px",
+              outline: "none",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onChange={(e: any) => handelAddressInfo("zipCode", "current", e)}
+          />
+        </div>
+
+        <div className="w-full">
+          <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
+            Country
+          </label>
+          <input
+            type="text"
+            placeholder="country"
+            value={studentForm?.personalInfo?.address?.current?.country}
+            style={{
+              width: "100%",
+              padding: "12px",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "16px",
+              outline: "none",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onChange={(e: any) => handelAddressInfo("country", "current", e)}
+          />
+        </div>
+
       </div>
     </div>
   </div>

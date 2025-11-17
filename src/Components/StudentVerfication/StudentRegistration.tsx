@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import star from '../../assets/images/magic-starYellow.png'
 import type { StudentFormType } from "../../types/studentForm";
 import { toast } from "react-toastify";
+import { RegisterForm } from "../../features/profile";
 
 
 const StudentRegistration: React.FC = () => {
@@ -120,6 +121,19 @@ const StudentRegistration: React.FC = () => {
 
   }
 
+  async function HandelSubmitForm() {
+    try {
+      const data = await RegisterForm(regform)
+      if (data?.success) {
+        toast.success(data?.message)
+        navigate("/course")
+      } else {
+        toast.warn(data?.message)
+      }
+    } catch (error) {
+      console.error("handel submit form error", error)
+    }
+  }
 
 
 
@@ -347,7 +361,8 @@ const StudentRegistration: React.FC = () => {
           <button
             onClick={() => {
               if (step === 4) {
-                navigate("/");
+                HandelSubmitForm()
+                // navigate("/");
               } else {
                 setStep((s) => Math.min(4, s + 1));
               }

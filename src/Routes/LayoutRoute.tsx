@@ -25,10 +25,7 @@ const LayoutRoute: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<SignIn />} />
-        {
-          isAuthenticated &&
-          <Route path="/student-register" element={<StudentRegistration />} />
-        }
+        <Route path="/student-register" element={<StudentRegistration />} />
 
         <Route
           path="/*"

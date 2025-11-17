@@ -1,6 +1,5 @@
 // src/redux/Queries/querythunks.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import Client, { QueryService } from "../../apis";
 import type { QueryFormData } from "./querytypes";
 
 export const sendQueryThunk = createAsyncThunk(
@@ -8,7 +7,7 @@ export const sendQueryThunk = createAsyncThunk(
   async (form: QueryFormData, { rejectWithValue }) => {
     try {
       const senderid = localStorage.getItem("userId");
-      const senderrole = localStorage.getItem("userRole"); 
+      const senderrole = localStorage.getItem("userRole");
 
       if (!senderid || !senderrole) {
         return rejectWithValue("Missing sender ID or sender role. Please log in again.");
@@ -37,8 +36,8 @@ export const fetchQueriesThunk = createAsyncThunk(
   "query/fetchQueries",
   async (_, { rejectWithValue }) => {
     try {
-    
-    const senderId = "6911e5ff6d24e24cd43b4f0a";
+
+      const senderId = "6911e5ff6d24e24cd43b4f0a";
       const senderRole = "User";
 
 

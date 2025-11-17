@@ -17,7 +17,11 @@ export const API_END_POINTS = {
     post: "/student/api/student_management/create"
   },
 
-  login: { post: "/auth/api/users/login", rootpost: "/auth/api/users/root-login" },
+  login: {
+    post: "/auth/api/users/login",
+    rootpost: "/auth/api/users/root-login",
+    profile: "/student/api/student_management/create"
+  },
   otpverify: { post: "/auth/api/share/verify-otp" },
   course: {
     create: `${BASE_COURSE_URL}/`,
@@ -100,6 +104,12 @@ export const API_END_POINTS = {
   offer: {
     getalloffers: "/open/other/api/offer",
     getofferbyid: "/open/other/api/offer/:id",
-  }
+  },
+
+  Query: {
+    POST: "/api/querysend",
+    GET: "/api/queryview",
+    adminPOST: "/api/adminreplay",
+  },
 };
 
