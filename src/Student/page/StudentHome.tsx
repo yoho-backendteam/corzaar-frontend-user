@@ -15,7 +15,7 @@ import { FaArrowRight } from "react-icons/fa";
 import teacher from '../../assets/teacher4.png'
 
 
-const StudentHome:React.FC = () => {
+const StudentHome: React.FC = () => {
   const { stats } = useSelector(
     (state: RootState) => state.studentHome
   );
@@ -58,7 +58,7 @@ const StudentHome:React.FC = () => {
 
       {/* Content Wrapper */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold  mb-4" style={{color: COLORS.primary_red}}>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold  mb-4" style={{ color: COLORS.primary_red }}>
           Learn from the Best Institutes, Anywhere
         </h1>
 
@@ -74,22 +74,22 @@ const StudentHome:React.FC = () => {
             Explore Courses
             <FaArrowRight className="mt-1.5 ml-2" />
           </button>
-<button
-  className="group  flex items-center bg-white px-6 py-2.5 rounded-lg font-semibold 
+          <button
+            className="group  flex items-center bg-white px-6 py-2.5 rounded-lg font-semibold 
   transition-all duration-300 border"
-  style={{
-    borderColor: COLORS.primary_red,
-    color: COLORS.primary_red,
-  }}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.backgroundColor = COLORS.primary_red;
-    e.currentTarget.style.color = "white";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.backgroundColor = "white";
-    e.currentTarget.style.color = COLORS.primary_red;
-  }}
->
+            style={{
+              borderColor: COLORS.primary_red,
+              color: COLORS.primary_red,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = COLORS.primary_red;
+              e.currentTarget.style.color = "white";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "white";
+              e.currentTarget.style.color = COLORS.primary_red;
+            }}
+          >
             <img
               src={teacher}
               alt="teacher"
@@ -101,7 +101,7 @@ const StudentHome:React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <p className="mb-3" style={{...(FONTS.boldHeading4),color:COLORS.primary_red}}>
+          <p className="mb-3" style={{ ...(FONTS.boldHeading4), color: COLORS.primary_red }}>
             Quick Filters
           </p>
           <div className="flex flex-wrap justify-center gap-2">
@@ -110,7 +110,7 @@ const StudentHome:React.FC = () => {
                 key={i}
                 onClick={() => handleScroll(item.target)}
                 className="bg-white px-4 py-2 rounded-full font-medium shadow hover:bg-red-50 transition"
-              style={{color: COLORS.primary_red}}>
+                style={{ color: COLORS.primary_red }}>
                 {item.label}
               </button>
             ))}
@@ -121,28 +121,28 @@ const StudentHome:React.FC = () => {
         {/* Stats Section */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 max-w-5xl mx-auto mb-16">
           <div className="bg-white px-6 py-6 rounded-xl shadow text-center">
-            <h2 className="text-2xl md:text-3xl font-bold " style={{color: COLORS.primary_red}}>
+            <h2 className="text-2xl md:text-3xl font-bold " style={{ color: COLORS.primary_red }}>
               {stats.students.toLocaleString()}+
             </h2>
-            <p className=" mt-3" style={{color: COLORS.primary_gray}}>Students</p>
+            <p className=" mt-3" style={{ color: COLORS.primary_gray }}>Students</p>
           </div>
           <div className="bg-white px-6 py-6 rounded-xl shadow text-center">
-            <h2 className="text-2xl md:text-3xl font-bold" style={{color: COLORS.primary_red}}>
+            <h2 className="text-2xl md:text-3xl font-bold" style={{ color: COLORS.primary_red }}>
               {stats.courses}+
             </h2>
-            <p className=" mt-3" style={{color: COLORS.primary_gray}}>Courses</p>
+            <p className=" mt-3" style={{ color: COLORS.primary_gray }}>Courses</p>
           </div>
           <div className="bg-white px-6 py-6 rounded-xl shadow text-center">
-            <h2 className="text-2xl md:text-3xl font-bold" style={{color: COLORS.primary_red}}>
+            <h2 className="text-2xl md:text-3xl font-bold" style={{ color: COLORS.primary_red }}>
               {stats.institutes}+
             </h2>
-            <p className=" mt-3" style={{color: COLORS.primary_gray}}>Institutes</p>
+            <p className=" mt-3" style={{ color: COLORS.primary_gray }}>Institutes</p>
           </div>
           <div className="bg-white px-6 py-6 rounded-xl shadow text-center">
-            <h2 className="text-2xl md:text-3xl font-bold" style={{color: COLORS.primary_red}}>
+            <h2 className="text-2xl md:text-3xl font-bold" style={{ color: COLORS.primary_red }}>
               {stats.ratings}/5
             </h2>
-            <p className=" mt-3" style={{color: COLORS.primary_gray}}>Ratings</p>
+            <p className=" mt-3" style={{ color: COLORS.primary_gray }}>Ratings</p>
           </div>
         </div>
       </div>

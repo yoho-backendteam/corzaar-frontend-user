@@ -199,9 +199,10 @@ class Client {
   }
 
   StudentCart = {
-    getAll: (params: { userId: string }) => httpClient.get(API_END_POINTS.Cart.getAll, params),
+    getAll: () => httpClient.get(API_END_POINTS.Cart.getAll),
     delete: (courseId: string, userId: string) => httpClient.delete(API_END_POINTS.Cart.deleteone.replace(':id', courseId), { data: { userId } }
     ),
+    addtocart: (params: string) => httpClient.post(API_END_POINTS.Cart.addtocart.replace(":id", params))
   };
 
   user_home = {

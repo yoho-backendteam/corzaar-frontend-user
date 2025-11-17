@@ -5,6 +5,8 @@ import { Star, Heart, Clock, Users } from "lucide-react";
 import enroll from "../../assets/Image/enroll.png";
 import cart from "../../assets/Image/cart.png";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
+import { AddtoCartService } from "../../features/cart/services";
+import { toast } from "react-toastify";
 
 interface Course {
   _id: string;
@@ -34,6 +36,15 @@ interface Course {
 export default function CourseCard({ course }: { course: Course }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [imageError, setImageError] = useState(false);
+
+  async function handelAddtoCart(id: string) {
+    const response = await AddtoCartService(id)
+    if (response?.success) {
+      toast.success("course added your cart")
+    } else {
+      toast.warn("try again, something error.")
+    }
+  }
 
   const handleHeartClick = () => {
     setIsFavorite(!isFavorite);
@@ -306,6 +317,7 @@ export default function CourseCard({ course }: { course: Course }) {
                   padding: "10px 16px",
                   fontFamily: FONTS.medium?.fontFamily,
                 }}
+                onClick={() => handelAddtoCart(course?._id)}
               >
                 <img src={cart} alt="cart" className="w-4 h-4" />
                 Add To Cart

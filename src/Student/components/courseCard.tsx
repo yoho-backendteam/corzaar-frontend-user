@@ -10,6 +10,8 @@ import { FaHeart } from "react-icons/fa";
 import enroll from '../../assets/clipboard-tick.png'
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import type { CourseCardProps } from "../../userHomeTypes/types";
+import { AddtoCartService } from "../../features/cart/services";
+import { toast } from "react-toastify";
 // import { useDispatch } from "react-redux";
 // import type { AppDispatch } from "../../store/store";
 // import { addtokartThunk } from "../../features/home_page/reducers/homeThunk";
@@ -20,6 +22,16 @@ import type { CourseCardProps } from "../../userHomeTypes/types";
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   // const dispatch = useDispatch<AppDispatch>();
+
+  async function handelAddtoCart(id: string) {
+    const response = await AddtoCartService(id)
+    if (response?.success) {
+      toast.success("course added your cart")
+    } else {
+      toast.warn("try again, something error.")
+    }
+  }
+
 
   const handleFavoriteToggle = () => {
     setIsFavorite((prev) => !prev);
@@ -43,24 +55,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   };
 
   const oldPrice = (course?.pricing?.price * 0.05) + course?.pricing?.price
-
-  const handleAddtokart = async() =>{
-    try {
-      // const payload = {
-      //    userId:"" ,
-      // courseId:"",
-      // title:"",
-      // price:"", 
-      // discount :0, 
-      // instituteId:"",
-      // payment:"",
-      // billing:""
-      // }
-      // await dispatch(addtokartThunk(payload))
-    } catch (error) {
-      console.log("failed to addtokart",error)
-    }
-  }
 
   return (
     <div className="relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 p-2 rounded-2xl"
@@ -177,7 +171,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             <img src={enroll} alt="" className="font-bold ml-1 h-5" />
           </button>
         ) : (
-          <button className=" text-black text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-[#FFD400] transition" style={{ background: COLORS.primary_yellow }} onClick = {()=>handleAddtokart()}>
+          <button className=" text-black text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-[#FFD400] transition" style={{ background: COLORS.primary_yellow }} onClick={() => handelAddtoCart(course?._id)}>
             <ShoppingCart className="w-4 h-4" />
             Add To Cart
           </button>

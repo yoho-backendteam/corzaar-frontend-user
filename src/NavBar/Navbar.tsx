@@ -195,7 +195,7 @@ const Navbar: React.FC = () => {
                       <ul className="space-y-3 text-gray-700">
                         <Link to="Portfolio" onClick={() => setShowProfile(false)}>
                           <li className="flex items-center gap-2 hover:text-black cursor-pointer">
-                            <FiUser size={16} /> My Profile
+                            <FiUser size={16} /> My Portfolio
                           </li>
                         </Link>
                         <Link to="Mycourse" onClick={() => setShowProfile(false)}>

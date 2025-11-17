@@ -1,14 +1,17 @@
 import Client from "../../../api/index";
 
-export const getStudentCart = async (userId:string) => {
-  const response = await Client.StudentCart.getAll({ userId });
-  console.log("response:", response);
+export const getStudentCart = async () => {
+  const response = await Client.StudentCart.getAll();
   return response;
 };
 
 export const cartdeleteservices = async (courseId: string, userId: string) => {
   const response = await Client.StudentCart.delete(courseId, userId);
-  console.log("cart delete:", response);
   return response;
 };
+
+export const AddtoCartService = async (params: string) => {
+  const response = await Client.StudentCart.addtocart(params)
+  return response.data
+}
 

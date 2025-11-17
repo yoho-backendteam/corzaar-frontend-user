@@ -15,14 +15,10 @@ const Student_cart = () => {
     const dispatch = useDispatch<AppDispatch>();
     const cartItems = useSelector(Getcart);
     const cartData = cartItems?.data;
-    console.log("cartItem :", cartData);
-
-    const userid = "6903227b1c60e593f8740475";
-
 
     useEffect(() => {
-        dispatch(getStudentCartThunks(userid));
-    }, []);
+        dispatch(getStudentCartThunks());
+    }, [dispatch]);
 
     const handleDelete = async (courseId: string) => {
         console.log("courseid ---->", courseId);

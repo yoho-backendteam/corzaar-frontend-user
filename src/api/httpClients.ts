@@ -37,7 +37,7 @@ class HttpClient {
         const reponse = Axios.get(url, { params });
         return reponse;
     }
-    async post(url: string, data: any, params?: any) {
+    async post(url: string, data?: any, params?: any) {
         const response = Axios.post(url, data, { params });
         return response;
     }
