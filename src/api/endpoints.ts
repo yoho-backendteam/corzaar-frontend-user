@@ -13,6 +13,10 @@ export const API_END_POINTS = {
     searchById: "/api/:id/search",
   },
 
+  studentRegister: {
+    post: "/student/api/student_management/create"
+  },
+
   login: { post: "/auth/api/users/login", rootpost: "/auth/api/users/root-login" },
   otpverify: { post: "/auth/api/share/verify-otp" },
   course: {

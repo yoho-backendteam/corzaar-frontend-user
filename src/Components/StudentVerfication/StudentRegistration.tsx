@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState, type ChangeEvent } from "react";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import StudentInfo from "./StudentInfo";
 import PersonalDetails from "./PersonalDetails";
@@ -10,16 +11,125 @@ import { LuUserRound } from "react-icons/lu";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import star from '../../assets/images/magic-starYellow.png'
+import type { StudentFormType } from "../../types/studentForm";
+import { toast } from "react-toastify";
 
 
 const StudentRegistration: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
+  const [regform, setregform] = useState<StudentFormType>({
+    personalInfo: {
+      firstName: "",
+      lastName: "",
+      fullName: "",
+      email: "",
+      dateOfBirth: "",
+      gender: "",
+      address: {
+        permanent: {
+          street: "",
+          city: "",
+          state: "",
+          zipCode: "",
+          country: ""
+        },
+        current: {
+          street: "",
+          city: "",
+          state: "",
+          zipCode: "",
+          country: ""
+        }
+      },
+      emergencyContact: {
+        name: "",
+        relationship: "",
+        phone: "",
+        email: ""
+      }
+    }
+  });
 
-  const InputField: React.FC<{ label: string; placeholder?: string; value?: string }> = ({
+  // function handelChangeInput(key: string, e: ChangeEvent<HTMLInputElement>) {
+  //   try {
+  //     e.preventDefault()
+  //     const value = e.target.value
+
+  //     setregform((prev: StudentFormType) => ({ ...prev, [key]: value }))
+  //   } catch (error) {
+  //     console.error(error, "handel change events")
+  //   }
+  // }
+
+  function handelPersonalInfo(key: keyof StudentFormType, e: ChangeEvent<HTMLInputElement>) {
+    try {
+      const value = e.target.value
+
+      setregform((prev: StudentFormType) => ({ ...prev, personalInfo: { ...prev?.personalInfo, [key]: value } }))
+    } catch (error) {
+      console.error(error, "handel change events")
+    }
+  }
+  function handelAddressInfo(key: keyof StudentFormType, types: 'permanent' | 'current', e: ChangeEvent<HTMLInputElement>) {
+    try {
+      const value = e.target.value
+
+      setregform((prev: StudentFormType) => ({ ...prev, personalInfo: { ...prev?.personalInfo, address: { ...prev?.personalInfo?.address, [types]: { ...prev?.personalInfo?.address?.[types], [key]: value } } } }))
+
+    } catch (error) {
+      console.error(error, "handel change events")
+    }
+  }
+  function handelEmergcylInfo(key: keyof StudentFormType, e: ChangeEvent<HTMLInputElement>) {
+    try {
+      const value = e.target.value
+
+      setregform((prev: StudentFormType) => ({ ...prev, personalInfo: { ...prev?.personalInfo, emergencyContact: { ...prev?.personalInfo?.emergencyContact, [key]: value } } }))
+    } catch (error) {
+      console.error(error, "handel change events")
+    }
+  }
+
+  function SetSameAddress() {
+
+    const data = regform?.personalInfo?.address?.permanent
+
+    if (data?.city == "") {
+      toast.warn("to fill permanent address")
+    } else if (data?.country == "") {
+      toast.warn("to fill permanent address")
+    } else if (data?.state == "") {
+      toast.warn("to fill permanent address")
+    } else if (data?.street == "") {
+      toast.warn("to fill permanent address")
+    } else if (data?.zipCode == "") {
+      toast.warn("to fill permanent address")
+    } else {
+      setregform((prev) => ({
+        ...prev,
+        personalInfo: {
+          ...prev?.personalInfo,
+          address: {
+            ...prev?.personalInfo?.address,
+            current: prev?.personalInfo?.address?.permanent
+          }
+        }
+      }))
+    }
+
+  }
+
+
+
+
+
+  const InputField: React.FC<{ label: string; placeholder?: string; value?: string, onChange?: any, ref?: any }> = ({
     label,
     placeholder,
     value,
+    onChange,
+    ref
   }) => (
     <div className="w-full">
       <label style={{ ...(FONTS.medium as any), display: "block", marginBottom: "6px" }}>
@@ -28,7 +138,7 @@ const StudentRegistration: React.FC = () => {
       <input
         type="text"
         placeholder={placeholder}
-        defaultValue={value}
+        value={value}
         style={{
           width: "100%",
           padding: "12px",
@@ -38,6 +148,8 @@ const StudentRegistration: React.FC = () => {
           outline: "none",
           boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
         }}
+        onChange={onChange}
+        ref={ref}
       />
     </div>
   );
@@ -209,10 +321,10 @@ const StudentRegistration: React.FC = () => {
         }}
         className="w-full mx-auto max-w-[95%] sm:max-w-[700px] md:max-w-[900px] px-4 sm:px-6 md:px-10 py-6 sm:py-8 md:py-10 flex flex-col flex-wrap"
       >
-        {step === 1 && <StudentInfo />}
-        {step === 2 && <PersonalDetails InputField={InputField} SelectField={SelectField} />}
-        {step === 3 && <Address InputField={InputField} />}
-        {step === 4 && <EmergencyContact InputField={InputField} />}
+        {step === 1 && <StudentInfo studentForm={regform} handelpersonalInfo={handelPersonalInfo} />}
+        {step === 2 && <PersonalDetails studentForm={regform} handelPersonalInfo={handelPersonalInfo} InputField={InputField} SelectField={SelectField} />}
+        {step === 3 && <Address setSameAddress={SetSameAddress} studentForm={regform} handelAddressInfo={handelAddressInfo} InputField={InputField} />}
+        {step === 4 && <EmergencyContact studentForm={regform} handelemgInfo={handelEmergcylInfo} InputField={InputField} />}
 
         <div className="flex flex-wrap justify-between gap-3 mt-6">
           <button
