@@ -43,7 +43,7 @@ const StudentHome: React.FC = () => {
       style={{ background: COLORS.primary_yellow, fontFamily: FONTS.regular.fontFamily }}
     >
       {/* ================= HERO SECTION ================ */}
-      <div className=" w-screen h-203 bg-[#FFDD00]  overflow-hidden  ">
+      <div className=" w-screen  h-203 xs:h-300  sm:h-220 md:h-132 lg:h-150      bg-[#FFDD00]  overflow-hidden  ">
 
         {/* Badge */}
         <div className="flex justify-start  px-10 ">
@@ -68,7 +68,7 @@ const StudentHome: React.FC = () => {
               Learn from the Best Institutes, Anywhere
             </h1>
 
-            <p style={{...FONTS.nummedium4 as any}} className="text-[#707070] text-base sm:text-lg md:text-xl  mb-3">
+            <p style={{ ...FONTS.nummedium4 as any }} className="text-[#707070] text-base sm:text-lg md:text-xl  mb-3">
               Upskill with trusted courses designed by leading academies.
               Join {stats.students.toLocaleString()}+ students
               learning from top educators.
@@ -78,7 +78,7 @@ const StudentHome: React.FC = () => {
             <div className="flex flex-wrap gap-4 mb-8">
               <button
                 className="flex items-center text-[#ffffff] px-6 py-3 rounded-lg font-semibold "
-                style={{ background: COLORS.primary_red ,...FONTS.nummedium4 as any}} 
+                style={{ background: COLORS.primary_red, ...FONTS.nummedium4 as any }}
               >
                 Explore Courses
                 <FaArrowRight className="ml-2 mt-0.5" />
@@ -86,7 +86,7 @@ const StudentHome: React.FC = () => {
 
               <button
                 className="group flex items-center px-6 py-3 rounded-lg font-semibold border transition-all duration-300"
-                style={{ borderColor: COLORS.primary_red, color: COLORS.primary_red ,background:COLORS.primary_white ,}}
+                style={{ borderColor: COLORS.primary_red, color: COLORS.primary_red, background: COLORS.primary_white, }}
               >
                 <img
                   src={teacher}
@@ -100,7 +100,7 @@ const StudentHome: React.FC = () => {
             {/* Quick Filters */}
             <p
               className="text-xl font-semibold mb-3 "
-              style={{ color: COLORS.primary_red , ...FONTS.boldHeading4 as any}}
+              style={{ color: COLORS.primary_red, ...FONTS.boldHeading4 as any }}
             >
               Quick Filters
             </p>
@@ -110,8 +110,8 @@ const StudentHome: React.FC = () => {
                 <button
                   key={i}
                   onClick={() => handleScroll(item.target)}
-                  className="bg-white px-3 py-2 rounded-full font-medium shadow hover:bg-red-50 transition"
-                  style={{ color: COLORS.primary_red ,...FONTS.regular1 as any }}
+                  className="bg-[#FFFBE1] px-3 py-2 rounded-full font-medium shadow hover:bg-red-50 transition"
+                  style={{ color: COLORS.primary_red, ...FONTS.regular1 as any }}
                 >
                   {item.label}
                 </button>
@@ -119,68 +119,54 @@ const StudentHome: React.FC = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5  sm:gap-33 ">
-              <div className="bg-[#FFFBE1] w-37 h-24 px-3 py-4 rounded-xl shadow text-center">
-                <h2 className="text-3xl font-bold" style={{ color: COLORS.primary_red  }}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 lg:w-150 xl:w-160 sm:gap-33 md:gap-0 md:px-2  ">
+              <div className="bg-[#FFFBE1] w-33  h-22 px-3 py-4 md:h-22 md:w-26 rounded-xl shadow text-center">
+                <h2 className="text-3xl font-bold" style={{ color: COLORS.primary_red, ...FONTS.boldHeading3 }}>
                   {stats.students.toLocaleString()}+
                 </h2>
-                <p style={{...FONTS.nummedium11 as any }} className="mt-2 text-[#707070]">Student</p>
+                <p style={{ ...FONTS.nummedium11 as any }} className="mt-2 text-[#707070]">Student</p>
               </div>
 
-              <div className="bg-[#FFFBE1] w-37 h-24 px-6 py-4 rounded-xl shadow text-center">
-                <h2 className="text-3xl font-bold" style={{ color: COLORS.primary_red }}>
+              <div className="bg-[#FFFBE1] w-33 h-22 px-6 py-4 md:h-22 md:w-26 rounded-xl shadow text-center">
+                <h2 className="text-3xl font-bold" style={{ color: COLORS.primary_red,...FONTS.boldHeading3 }}>
                   {stats.courses}+
                 </h2>
-                <p style={{...FONTS.nummedium11 as any }} className="mt-2 text-[#707070]">Course</p>
+                <p style={{ ...FONTS.nummedium11 as any }} className="mt-2 text-[#707070]">Course</p>
               </div>
 
-              <div className="bg-[#FFFBE1] w-37 h-24 px-6 py-4 rounded-xl shadow text-center">
-                <h2 className="text-3xl font-bold" style={{ color: COLORS.primary_red }}>
+              <div className="bg-[#FFFBE1] w-33 h-22  px-6 py-4 md:h-22 md:w-26 rounded-xl shadow text-center">
+                <h2 className="text-3xl font-bold" style={{ color: COLORS.primary_red,...FONTS.boldHeading3 }}>
                   {stats.institutes}+
                 </h2>
-                <p style={{...FONTS.nummedium11 as any }} className="mt-2 text-[#707070]">Institutes</p>
+                <p style={{ ...FONTS.nummedium11 as any }} className="mt-2 text-[#707070]">Institutes</p>
               </div>
 
-              <div className="bg-[#FFFBE1] w-37 h-24 px-6 py-4 rounded-xl shadow text-center">
-                <h2 className="text-3xl font-bold" style={{ color: COLORS.primary_red }}>
+              <div className="bg-[#FFFBE1] w-33 h-22 px-6 py-4 md:h-22 md:w-26   rounded-xl shadow text-center">
+                <h2 className="text-3xl font-bold" style={{ color: COLORS.primary_red ,...FONTS.boldHeading3 }}>
                   {stats.ratings}/5
                 </h2>
-                <p style={{...FONTS.nummedium11 as any }} className="mt-2 text-[#707070]">Ratings</p>
+                <p style={{ ...FONTS.nummedium11 as any }} className="mt-2 text-[#707070]">Ratings</p>
               </div>
             </div>
 
           </div>
 
           {/* ------------- RIGHT SIDE IMAGE ------------- */}
-          <div className="relative w-full flex  ">
+          <div className=" w-180 ml-30 flex  ">
 
-            {/* EXACT 796×796 ROTATED CIRCLE FROM FIGMA */}
-            {/* <div
-    className="absolute hidden lg:block"
-    style={{
-      width: "796px",
-      height: "796px",
-      backgroundColor: "#FFD500",
-      borderRadius: "50%",
-      top: "108px",
-      left: "781px",
-      transform: "rotate(-180deg)",
-      opacity: 1,
-      zIndex: 1,
-    }}
-  ></div> */}
+           
 
             {/* GIRL IMAGE EXACTLY LIKE FIGMA – FULL 796px IMAGE */}
-            <div className="h-[500px] flex items-end justify-end  w-225 mb-80 -mr-200">
+            <div  className="h-[500px] flex items-end justify-end  w-screen  mb-80 md:w-screen md:mr-20 xl:mr-20 ">
               <img
-              src={girl}
-              alt="girl"
-              className="relative z-10 rounded-tl-full rounded-tr-full object-cover object-right "
-              style={{
-                width: "670px",
-                height: "540px",
-              }}
-            />
+                src={girl} 
+                alt="girl"
+                className=" z-10 rounded-tl-full rounded-tr-full object-cover object-right   "
+                style={{
+                  width: "670px",
+                  height: "540px",
+                }}
+              />
             </div>
           </div>
         </div>
