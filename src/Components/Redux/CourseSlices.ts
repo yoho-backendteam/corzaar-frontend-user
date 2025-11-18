@@ -7,6 +7,7 @@ import {
   updateCourse,
   deleteCourse,
   fetchCoursesByBranch,
+  filterCourses,
 } from "./courseThunks";
 
 interface Course {
@@ -112,6 +113,20 @@ const courseSlice = createSlice({
     builder.addCase(fetchCoursesByBranch.fulfilled, (state, action) => {
       state.courses = Array.isArray(action.payload) ? action.payload : [];
     });
+    builder
+      .addCase(filterCourses.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(filterCourses.fulfilled, (state, action) => {
+        state.loading = false;
+        state.courses = Array.isArray(action.payload) ? action.payload : [];
+        state.success = "Filters applied successfully";
+      })
+      .addCase(filterCourses.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 

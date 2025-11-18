@@ -35,7 +35,7 @@ const store = configureStore({
     loginotp: loginotpReducer,
     query: querySlice,
     SettingSlice: SettingSlice,
-    cartreducer: cartreducer
+    cartreducer: cartreducer,
   },
 
 })

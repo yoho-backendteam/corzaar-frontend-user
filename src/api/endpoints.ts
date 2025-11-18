@@ -1,6 +1,7 @@
 const BASE_API_URL = import.meta.env.VITE_PUBLIC_API_URL;
 
 const BASE_COURSE_URL = `${BASE_API_URL}/open/course/api/courses`;
+
 export const API_END_POINTS = {
   instituteManagement: {
     base: "/api/",
@@ -11,6 +12,8 @@ export const API_END_POINTS = {
     getStudentsByInstitute: "/api/getall/:id/students",
     getCoursesByInstitute: "/api/getall/:id/courses",
     searchById: "/api/:id/search",
+    nearme: "/open/merchant/api/getnearby",
+
   },
 
   studentRegister: {
@@ -26,6 +29,7 @@ export const API_END_POINTS = {
   course: {
     create: `${BASE_COURSE_URL}/`,
     getAll: `${BASE_COURSE_URL}/`,
+    filtercourse: `${BASE_COURSE_URL}/filter`,
     getAllDetailed: `${BASE_COURSE_URL}/all`,
     getById: (id: string) => `${BASE_COURSE_URL}/getCourseById/${id}`,
     update: (id: string) => `${BASE_COURSE_URL}/${id}`,
