@@ -70,7 +70,7 @@ const SpecialPromotions = () => {
         )) : (
           <div className="col-span-full flex justify-center items-center h-40">
             <p className="text-center font-bold text-md text-gray-600">
-              "No promotions available"
+              "No promotions available" 
             </p>
           </div>
         )}

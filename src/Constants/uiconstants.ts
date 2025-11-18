@@ -148,6 +148,13 @@ export const FONTS = {
     fontStyle: 'normal',
     fontSize: '16px',
   },
+  nummedium1: {
+    fontFamily: '"Source Serif 4", serif',
+    fontOpticalSizing: 'auto',
+    fontWeight: 500,
+    fontStyle: 'normal',
+    fontSize: '17px',
+  },
   mediumm: {
     fontFamily: '"Source Serif 4", serif',
     fontOpticalSizing: 'auto',
@@ -175,6 +182,13 @@ export const FONTS = {
     fontStyle: 'normal',
     fontSize: '16px',
   },
+  boldHeadingggg1: {
+    fontFamily: '"Source Serif 4", serif',
+    fontOpticalSizing: 'auto',
+    fontWeight: 700,
+    fontStyle: 'normal',
+    fontSize: '40px',
+  },
   boldHeadingg3: {
     fontFamily: '"Source Serif 4", serif',
     fontOpticalSizing: 'auto',
@@ -196,12 +210,20 @@ export const FONTS = {
     fontStyle: 'normal',
     fontSize: '14px',
   },
-  nummedium1: {
+  nummedium11: {
+    fontFamily: '"Source Serif 4", serif',
+    fontOpticalSizing: 'auto',
+    fontWeight: 400,
+    fontStyle: 'normal',
+    fontSize: '18px',
+  },
+  
+  nummedium4: {
     fontFamily: '"Source Serif 4", serif',
     fontOpticalSizing: 'auto',
     fontWeight: 500,
     fontStyle: 'normal',
-    fontSize: '14px',
+    fontSize: '16px',
   },
 };
 

@@ -163,7 +163,7 @@ const Navbar: React.FC = () => {
               </button>
             </div>
 
-            <div
+            {/* <div
               className="hidden md:flex items-center p-2 rounded w-48"
               style={{ background: "#FFFBD3" }}
             >
@@ -174,7 +174,7 @@ const Navbar: React.FC = () => {
                 className="w-full bg-transparent outline-none text-sm"
                 style={{ color: COLORS.primary_gray }}
               />
-            </div>
+            </div> */}
 
             {isAuthenticated && (
               <div className="hidden xl:flex items-center gap-4">
