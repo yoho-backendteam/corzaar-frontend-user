@@ -17,10 +17,8 @@ import ExploreInstitutes from '../Component/Institutes/ExploreInstitutes';
 import InstituteDetails from '../Component/Institutes/InstituteDetails';
 import ContactPage from '../Components/Queries/Querypage';
 import NotificationPage from '../Pages/NotificationPage';
-import { useAuth } from '../context/context';
 
 const LayoutRoute: React.FC = () => {
-  const { isAuthenticated } = useAuth()
   return (
     <BrowserRouter>
       <Routes>
@@ -34,20 +32,20 @@ const LayoutRoute: React.FC = () => {
               <Navbar />
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/Courses" element={<Courses />} />
-                <Route path="/Institutes" element={<ExploreInstitutes />} />
+                <Route path="/courses" element={<Courses />} />
+                <Route path="/institutes" element={<ExploreInstitutes />} />
                 <Route path="/institute/:id" element={<InstituteDetails />} />
                 {/* <Route path="/Institutes" element={<Institutes />} /> */}
-                <Route path="/Offers" element={<OfferPage />} />
-                <Route path="/Queries" element={<ContactPage />} />
+                <Route path="/offers" element={<OfferPage />} />
+                <Route path="/queries" element={<ContactPage />} />
 
 
-                <Route path="/notificationPage" element={<NotificationPage />} />
-                <Route path="/profilePage" element={<ProfilePage />} />
-                <Route path="/settingprofile" element={<Settingprofile />} />
-                <Route path="/Portfolio" element={<Portfolio />} />
-                <Route path="/Mycourse" element={<CartPage />} />
-                <Route path="/cartPage" element={<CartPage />} />
+                <Route path="/notification" element={<NotificationPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/setting" element={<Settingprofile />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/mycourse" element={<CartPage />} />
+                <Route path="/cart" element={<CartPage />} />
 
               </Routes>
             </>

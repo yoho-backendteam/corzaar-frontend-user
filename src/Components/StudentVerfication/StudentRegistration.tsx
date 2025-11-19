@@ -126,7 +126,7 @@ const StudentRegistration: React.FC = () => {
       const data = await RegisterForm(regform)
       if (data?.success) {
         toast.success(data?.message)
-        navigate("/course")
+        navigate("/courses")
       } else {
         toast.warn(data?.message)
       }

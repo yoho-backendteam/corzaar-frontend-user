@@ -120,11 +120,11 @@ const Navbar: React.FC = () => {
             className="hidden xl:flex items-center gap-2 flex-wrap text-center"
             style={FONTS.regular as any}
           >
-            {["Home", "Courses", "Institutes", "Offers", "Queries"].map(
+            {["home", "courses", "institutes", "offers", "queries"].map(
               (name) => (
                 <NavLink
                   key={name}
-                  to={`/${name === "Home" ? "" : name.toLowerCase()}`}
+                  to={`/${name === "home" ? "" : name.toLowerCase()}`}
                   style={({ isActive }) => ({
                     color: isActive
                       ? COLORS.primary_white
@@ -178,14 +178,14 @@ const Navbar: React.FC = () => {
 
             {isAuthenticated && (
               <div className="hidden xl:flex items-center gap-4">
-                <Link to="/cartPage">
+                <Link to="/cart">
                   <img
                     src={carticon}
                     className="rounded-full p-2 w-10 h-10"
                     style={{ background: COLORS.primary_yellow }}
                   />
                 </Link>
-                <Link to="/notificationPage">
+                <Link to="/notification">
                   <img
                     src={notify}
                     className="rounded-full p-2 w-10 h-10 cursor-pointer"
@@ -233,7 +233,7 @@ const Navbar: React.FC = () => {
                       </Link>
 
                       <Link
-                        to="/settingprofile"
+                        to="/setting"
                         onClick={() => setShowProfile(false)}
                       >
                         <li className="flex items-center gap-2 hover:text-black cursor-pointer">
