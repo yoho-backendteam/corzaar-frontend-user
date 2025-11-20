@@ -17,6 +17,7 @@ import ExploreInstitutes from '../Component/Institutes/ExploreInstitutes';
 import InstituteDetails from '../Component/Institutes/InstituteDetails';
 import ContactPage from '../Components/Queries/Querypage';
 import NotificationPage from '../Pages/NotificationPage';
+import Courseview from '../Components/StudentCourse/Courseview';
 
 const LayoutRoute: React.FC = () => {
   return (
@@ -33,6 +34,7 @@ const LayoutRoute: React.FC = () => {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/courses" element={<Courses />} />
+                <Route path="/courses/view/:id" element={<Courseview />} />
                 <Route path="/institutes" element={<ExploreInstitutes />} />
                 <Route path="/institute/:id" element={<InstituteDetails />} />
                 {/* <Route path="/Institutes" element={<Institutes />} /> */}
