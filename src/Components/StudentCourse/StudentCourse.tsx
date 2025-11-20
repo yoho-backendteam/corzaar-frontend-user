@@ -1,5 +1,7 @@
+
+
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ChevronDown, SearchIcon, X } from "lucide-react";
 import CourseCard from "../../Components/StudentCourse/CourseCard";
 import FilterSidebar from "../../Components/StudentCourse/FilterSidebars";
@@ -22,6 +24,8 @@ const sortOptions = [
   "Newest",
 ];
 
+const DEFAULT_LIMIT = 10;
+
 export default function ExploreCourses() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState("Most Popular");
@@ -29,23 +33,68 @@ export default function ExploreCourses() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [appliedFilters, setAppliedFilters] = useState<any>(null);
 
+  // pagination local state
+  const [page, setPage] = useState<number>(1);
+  const [limit] = useState<number>(DEFAULT_LIMIT);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [totalItems, setTotalItems] = useState<number>(0);
+
   const dispatch = useDispatch<AppDispatch>();
 
-  const { courses, loading, error } = useSelector(
-    (state: RootState) => state.course
-  );
 
+  const courseState = useSelector((state: RootState) => state.course);
+  const { courses = [], loading, error } = courseState;
+
+
+  const fetchCoursesPage = async (pageNumber = 1) => {
+    try {
+      const actionResult: any = await dispatch(
+        // @ts-ignore allow dynamic arg; adapt thunk if needed
+        fetchCourses({ page: pageNumber, limit })
+      );
+
+     
+      const payload = actionResult?.payload ?? actionResult;
+
+      if (payload) {
+       
+        if (payload.data && Array.isArray(payload.data)) {
+          setTotalPages(Number(payload.totalPages ?? 1));
+          setTotalItems(Number(payload.total ?? payload.data.length ?? 0));
+          setPage(Number(payload.page ?? pageNumber));
+        } else if (Array.isArray(payload)) {
+ 
+          setTotalPages(1);
+          setTotalItems(payload.length);
+          setPage(pageNumber);
+        }
+      } else {
+        const reduxPage = (courseState as any).page;
+        const reduxTotalPages = (courseState as any).totalPages;
+        const reduxTotal = (courseState as any).total;
+        if (reduxPage) setPage(Number(reduxPage));
+        if (reduxTotalPages) setTotalPages(Number(reduxTotalPages));
+        if (reduxTotal) setTotalItems(Number(reduxTotal));
+      }
+    } catch (err) {
+      console.error("Failed to fetch courses page", err);
+    }
+  };
+
+  
   useEffect(() => {
-    dispatch(fetchCourses());
-  }, [dispatch]);
+    fetchCoursesPage(page);
+  }, [dispatch, page, limit]);
 
+ 
   const handleFilterChange = (filterId: string) => {
     setActiveFilter(filterId);
     setAppliedFilters(null);
+    setPage(1); 
 
     switch (filterId) {
       case "all":
-        dispatch(fetchCourses());
+        fetchCoursesPage(1);
         break;
       case "trending":
         dispatch(fetchTrendingCourses());
@@ -57,7 +106,7 @@ export default function ExploreCourses() {
         dispatch(fetchAllDetailedCourses());
         break;
       default:
-        dispatch(fetchCourses());
+        fetchCoursesPage(1);
     }
   };
 
@@ -65,36 +114,46 @@ export default function ExploreCourses() {
     console.log("Applying filters:", filters);
     setAppliedFilters(filters);
     setActiveFilter(""); 
-    dispatch(filterCourses(filters));
+    setPage(1);
+    dispatch(filterCourses({ ...filters, page: 1, limit }));
   };
 
   const handleResetFilters = () => {
     setAppliedFilters(null);
     setActiveFilter("all");
-    dispatch(fetchCourses());
+    setPage(1);
+    fetchCoursesPage(1);
   };
 
   const handleSortChange = (option: string) => {
     setSelectedSort(option);
     const details = document.querySelector("details");
     if (details) details.removeAttribute("open");
-  };
+     };
 
-  const filteredCourses = courses.filter((course: any) => {
-    if (!searchQuery.trim()) return true;
+  
+  const filteredCourses = useMemo(() => {
+    if (!Array.isArray(courses)) return [];
+
+    if (!searchQuery.trim()) return courses;
 
     const query = searchQuery.toLowerCase();
-    return (
-      course.title?.toLowerCase().includes(query) ||
-      course.description?.toLowerCase().includes(query) ||
-      course.instituteName?.toLowerCase().includes(query) ||
-      course.category?.primary?.toLowerCase().includes(query) ||
-      course.category?.secondary?.toLowerCase().includes(query)
-    );
-  });
+    return courses.filter((course: any) => {
+      return (
+        course.title?.toLowerCase().includes(query) ||
+        course.description?.toLowerCase().includes(query) ||
+        course.instituteName?.toLowerCase().includes(query) ||
+        course.category?.primary?.toLowerCase().includes(query) ||
+        (Array.isArray(course.category?.secondary) &&
+          course.category.secondary.join(" ").toLowerCase().includes(query))
+      );
+    });
+  }, [courses, searchQuery]);
 
-  const sortedAndFilteredCourses = [...filteredCourses].sort(
-    (a: any, b: any) => {
+ 
+  const sortedAndFilteredCourses = useMemo(() => {
+    const arr = [...filteredCourses];
+    arr.sort((a: any, b: any) => {
       switch (selectedSort) {
         case "Most Popular":
           return (b.popularity || 0) - (a.popularity || 0);
@@ -112,9 +171,32 @@ export default function ExploreCourses() {
         default:
           return 0;
       }
-    }
-  );
+    });
+    return arr;
+  }, [filteredCourses, selectedSort]);
 
+  
+  const goToPage = (num: number) => {
+    if (num < 1 || num > totalPages) return;
+    setPage(num);
+    
+  };
+
+  const prevPage = () => goToPage(Math.max(1, page - 1));
+  const nextPage = () => goToPage(Math.min(totalPages, page + 1));
+
+  
+  useEffect(() => {
+    const reduxTotalPages = (courseState as any).totalPages;
+    const reduxTotal = (courseState as any).total;
+    const reduxPage = (courseState as any).page;
+
+    if (reduxTotalPages) setTotalPages(Number(reduxTotalPages));
+    if (reduxTotal) setTotalItems(Number(reduxTotal));
+    if (reduxPage) setPage(Number(reduxPage));
+  }, []);
+
+  
   return (
     <div
       className="min-h-screen w-full flex flex-col"
@@ -218,16 +300,16 @@ export default function ExploreCourses() {
             { id: "trending", label: "Trending Courses" },
             { id: "featured", label: "Featured Courses" },
             { id: "detailed", label: "Detailed Courses" },
-          ].map((filter) => (
+          ].map((filterBtn) => (
             <button
-              key={filter.id}
-              onClick={() => handleFilterChange(filter.id)}
-              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm transition-colors ${activeFilter === filter.id
+              key={filterBtn.id}
+              onClick={() => handleFilterChange(filterBtn.id)}
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm transition-colors ${activeFilter === filterBtn.id
                 ? "bg-blue-500 text-white"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
             >
-              {filter.label}
+              {filterBtn.label}
             </button>
           ))}
         </div>
@@ -243,7 +325,7 @@ export default function ExploreCourses() {
             ? "Loading courses..."
             : error
               ? `Failed to load courses: ${error}`
-              : `${sortedAndFilteredCourses.length} Courses Found`}
+              : `${totalItems ?? sortedAndFilteredCourses.length} Courses Found`}
         </p>
       </header>
 
@@ -336,6 +418,107 @@ export default function ExploreCourses() {
             ))}
         </section>
       </main>
+
+     
+      <div className="flex justify-center items-center gap-2 py-6 px-4">
+        <button
+          onClick={prevPage}
+          disabled={page === 1 || loading}
+          className={`px-4 py-2 rounded border ${page === 1 || loading
+            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+            : "bg-white hover:bg-gray-100"
+            }`}
+        >
+          Prev
+        </button>
+
+        <div className="flex items-center gap-2">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((pNum) => {
+            
+            const showAll = totalPages <= 7;
+            const inRange =
+              pNum === 1 ||
+              pNum === totalPages ||
+              (pNum >= page - 2 && pNum <= page + 2);
+
+            if (!showAll && !inRange) {
+             
+              return null;
+            }
+
+            const isActive = pNum === page;
+            return (
+              <button
+                key={pNum}
+                onClick={() => goToPage(pNum)}
+                className={`px-3 py-1 rounded ${isActive ? "bg-[#ED1C24] text-white" : "bg-white hover:bg-gray-100"
+                  }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {pNum}
+              </button>
+            );
+          })}
+
+       
+          {!Array.from({ length: totalPages }).every((_, i) => {
+            const pNum = i + 1;
+            return (
+              totalPages <= 7 ||
+              pNum === 1 ||
+              pNum === totalPages ||
+              (pNum >= page - 2 && pNum <= page + 2)
+            );
+          }) && (
+            <div className="flex items-center gap-2">
+             
+              <button
+                onClick={() => goToPage(1)}
+                className={`px-3 py-1 rounded ${page === 1 ? "bg-black text-white" : "bg-white hover:bg-gray-100"
+                  }`}
+              >
+                1
+              </button>
+
+              {page - 3 > 1 && <span className="px-2">...</span>}
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter((pNum) => pNum >= page - 2 && pNum <= page + 2)
+                .map((pNum) => (
+                  <button
+                    key={`w-${pNum}`}
+                    onClick={() => goToPage(pNum)}
+                    className={`px-3 py-1 rounded ${pNum === page ? "bg-[#ED1C24] text-white" : "bg-white hover:bg-gray-100"
+                      }`}
+                  >
+                    {pNum}
+                  </button>
+                ))}
+
+              {page + 3 < totalPages && <span className="px-2">...</span>}
+
+              <button
+                onClick={() => goToPage(totalPages)}
+                className={`px-3 py-1 rounded ${page === totalPages ? "bg-black text-white" : "bg-white hover:bg-gray-100"
+                  }`}
+              >
+                {totalPages}
+              </button>
+            </div>
+          )}
+        </div>
+
+        <button
+          onClick={nextPage}
+          disabled={page === totalPages || loading}
+          className={`px-4 py-2 rounded border ${page === totalPages || loading
+            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+            : "bg-white hover:bg-gray-100"
+            }`}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }

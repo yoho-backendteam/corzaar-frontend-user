@@ -1,7 +1,7 @@
 import type { AppDispatch } from "../../../store/store";
 import type { addtocartTypes } from "../../../userHomeTypes/types";
-import { addtokartService, getCategoriesService, getCourseService, getInstituteService, getOfferService, getTrendingCourseService } from "../services";
-import { getCategoryData, getCourseData, getInstituteData, getOfferData, postaddtokart, trendingCourseData } from "./homeSlice";
+import { addtokartService, getCategoriesService, getCoursebyidService, getCourseService, getInstituteService, getOfferService, getTrendingCourseService } from "../services";
+import { getCategoryData, getCoursebyid, getCourseData, getInstituteData, getOfferData, postaddtokart, trendingCourseData } from "./homeSlice";
 
 export const getOfferThunk = () => async (dispatch: AppDispatch) => {
   try {
@@ -74,6 +74,20 @@ export const addtokartThunk = (data:addtocartTypes) => async (dispatch: AppDispa
       dispatch(postaddtokart(response?.data));
     }
     return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+
+export const getCoursebyidThunk = (params:string) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await getCoursebyidService(params);
+    if (response) {
+      dispatch(getCoursebyid(response?.data?.data));
+      return response;
+    }
   } catch (error) {
     console.error(error);
   }

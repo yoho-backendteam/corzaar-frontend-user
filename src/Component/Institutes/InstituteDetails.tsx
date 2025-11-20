@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { fetchInstituteById } from "../../features/institute/reducers/thunks";
@@ -31,6 +31,8 @@ const InstituteDetails: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const institute = useSelector(selectInstitute);
   const { loading, error } = useSelector((state: RootState) => state.institute);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (id) dispatch(fetchInstituteById(id));
@@ -61,6 +63,16 @@ const InstituteDetails: React.FC = () => {
 
   return (
     <div className="bg-[#FFDD00] min-h-screen">
+
+      <div className="pt-5 px-4">
+  <button
+    onClick={() => navigate(-1)}
+    className="flex items-center gap-2 text-black bg-white px-4 py-2 rounded-md shadow hover:shadow-md transition font-medium mb-2"
+  >
+    ← Back
+  </button>
+</div>
+
       {/* Banner */}
       <div className="relative h-60">
         <img
