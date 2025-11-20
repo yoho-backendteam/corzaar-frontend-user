@@ -71,7 +71,6 @@ const Checkout = () => {
   const [selectedPayment, setSelectedPayment] = useState("card");
   const navigate = useNavigate();
 
-
   return (
     <div
       className="min-h-screen p-6"
@@ -79,12 +78,15 @@ const Checkout = () => {
     >
       <div className="flex flex-col gap-3">
         {/* HEADER */}
-        <div className="flex items-center gap-4 "
-        >
+        <div className="flex items-center gap-4 ">
           <button
             className="rounded-full p-3 shadow-md cursor-pointer flex items-center justify-center hover:scale-105 transition-transform"
-            style={{ backgroundColor: COLORS.primary_white,borderWidth:2, borderColor:COLORS.primary_red }}
-             onClick={() => navigate(-1)}
+            style={{
+              backgroundColor: COLORS.primary_white,
+              borderWidth: 2,
+              borderColor: COLORS.primary_red,
+            }}
+            onClick={() => navigate(-1)}
           >
             <IoIosArrowBack size={15} style={{ color: COLORS.primary_red }} />
           </button>
@@ -222,6 +224,7 @@ const Checkout = () => {
                       borderWidth: 2,
                       borderColor: COLORS.primary_red,
                     }}
+                    onClick={() => navigate(-1)}
                   >
                     Back to Cart
                   </button>
