@@ -6,10 +6,14 @@ import { selectInstituteData } from "../../features/home_page/reducers/homeSelec
 import { useEffect } from "react";
 import { getInstituteThunk } from "../../features/home_page/reducers/homeThunk";
 import type { Institute } from "../../userHomeTypes/types";
+import { fetchInstituteById } from "../../features/institute/reducers/thunks";
+import { useNavigate, useParams } from "react-router-dom";
 
 const PopularInstitute = () => {
   const institutes = useSelector<RootState, Institute[]>(selectInstituteData);
   const dispatch = useDispatch<AppDispatch>();
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getInstitutes = async () => {
@@ -22,6 +26,9 @@ const PopularInstitute = () => {
     getInstitutes();
   }, [dispatch]);
 
+  useEffect(() => {
+    if (id) dispatch(fetchInstituteById(id));
+  }, [dispatch, id]);
 
   const displayedInstitutes = institutes?.slice(0, 4);
 
@@ -46,6 +53,7 @@ const PopularInstitute = () => {
           {displayedInstitutes.map((institute) => (
             <div
               key={institute?._id}
+    onClick={() => navigate(`/institute/${institute?._id}`)}
               className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
             >
               {/* Image */}
