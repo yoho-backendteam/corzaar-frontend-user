@@ -230,6 +230,20 @@ export const FONTS = {
     fontStyle: 'normal',
     fontSize: '16px',
   },
+  nummedium5: {
+    fontFamily: '"Source Serif 4", serif',
+    fontOpticalSizing: 'auto',
+    fontWeight: 400,
+    fontStyle: 'normal',
+    fontSize: '14px',
+  },
+  nummedium6: {
+    fontFamily: '"Source Serif 4", serif',
+    fontOpticalSizing: 'auto',
+    fontWeight: 400,
+    fontStyle: 'normal',
+    fontSize: '10px',
+  },
 };
 
 

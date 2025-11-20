@@ -7,6 +7,7 @@ import cart from "../../assets/Image/cart.png";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { AddtoCartService } from "../../features/cart/services";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 interface Course {
   _id: string;
@@ -44,6 +45,12 @@ export default function CourseCard({ course }: { course: Course }) {
     } else {
       toast.warn("try again, something error.")
     }
+  }
+
+  const navigate = useNavigate();
+
+  const handleOpen =() => {
+    navigate(`/courses/view/${course._id}`)
   }
 
   const handleHeartClick = () => {
@@ -109,7 +116,7 @@ export default function CourseCard({ course }: { course: Course }) {
         fontStyle: FONTS.regular?.fontStyle,
       }}
     >
-      <div className="relative w-full">
+      <div onClick={handleOpen} className="relative w-full">
         <img
           src={imageError ? '/fallback-course-image.jpg' : (course.thumbnail || '/fallback-course-image.jpg')}
           alt={course.title}
@@ -145,7 +152,7 @@ export default function CourseCard({ course }: { course: Course }) {
         </button>
       </div>
 
-      <div className="flex flex-row justify-between items-start w-full">
+      <div onClick={handleOpen} className="flex flex-row justify-between items-start w-full">
         <span
           className="text-xs font-semibold px-3 py-1.5 rounded"
           style={{
@@ -172,7 +179,7 @@ export default function CourseCard({ course }: { course: Course }) {
       </div>
 
       <div className="flex flex-col items-start w-full gap-3 md:gap-4">
-        <div className="flex flex-col items-start gap-2 w-full">
+        <div onClick={handleOpen} className="flex flex-col items-start gap-2 w-full">
           <h2
             className="line-clamp-2"
             style={{
@@ -199,6 +206,7 @@ export default function CourseCard({ course }: { course: Course }) {
         </div>
 
         <p
+          onClick={handleOpen}
           className="line-clamp-1"
           style={{
             color: COLORS.primary_black,
@@ -210,7 +218,7 @@ export default function CourseCard({ course }: { course: Course }) {
           {course.instituteId || "Institute"}
         </p>
 
-        <div className="flex flex-row justify-between items-center w-full">
+        <div onClick={handleOpen} className="flex flex-row justify-between items-center w-full">
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1">
               <Star size={16} style={{ color: "#FFD700" }} fill="#FFD700" />
@@ -267,7 +275,7 @@ export default function CourseCard({ course }: { course: Course }) {
         </div>
 
         <div className="flex flex-col w-full mt-2 gap-3">
-          <div className="flex justify-between items-center w-full">
+          <div onClick={handleOpen} className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
               <p
                 style={{
