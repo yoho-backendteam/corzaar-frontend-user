@@ -50,7 +50,7 @@ export default function CourseCard({ course }: { course: Course }) {
   const navigate = useNavigate();
 
   const handleOpen =() => {
-    navigate("/courses/view/:id")
+    navigate(`/courses/view/${course._id}`)
   }
 
   const handleHeartClick = () => {

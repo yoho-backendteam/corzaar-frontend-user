@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Star, Users, Clock, Globe, CheckCircle, MapPin, Mail, Phone, Award } from 'lucide-react';
 import { COLORS, FONTS } from '../../Constants/uiconstants';
 import { useNavigate } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 
 interface CourseData {
   title: string;
@@ -75,27 +76,28 @@ const Courseview: React.FC = () => {
   return (
     <div style={{backgroundColor : COLORS.primary_yellow}} className="min-h-screen ">
       {/* Header */}
-      <header className="bg-[#ED1C24]/90 backdrop-blur-sm border-b ">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-4">
-          <button onClick={ ()=> navigate(-1)} className="flex cursor-pointer items-center gap-2 text-white hover:text-black transition">
-            <span>←</span>
+      <header className="bg-[#ED1C24]/90 backdrop-blur-sm ">
+        <div className=" mx-auto px-4 py-4 flex items-center gap-4">
+          <button style={{...FONTS.nummedium4 as any }}  onClick={ ()=> navigate(-1)} className="flex cursor-pointer items-center gap-1 bg-white p-1.5 rounded-xl text-[#ED1C24] hover:text-black transition">
+            <FaArrowLeft />
+            <span className='text-black'></span>
             <span>Back to Courses</span>
           </button>
         </div>
       </header>
 
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2">
             <div className="space-y-4">
               {/* Badges */}
               <div className="flex gap-2">
-                <span className="px-3 py-1 bg-blue-600 text-white text-xs rounded-full">
+                <span style={{...FONTS.nummedium4 as any }} className="px-3 py-1 bg-white text-[#ED1C24] border border-[#ED1C24] text-xs rounded-full">
                   Best Seller
                 </span>
-                <span className="px-3 py-1 bg-slate-700 text-slate-200 text-xs rounded-full">
+                <span style={{...FONTS.nummedium4 as any }} className="px-3 py-1 bg-white text-[#ED1C24] border border-[#ED1C24] text-xs rounded-full">
                   Marketing
                 </span>
               </div>
@@ -137,7 +139,7 @@ const Courseview: React.FC = () => {
                 className={`pb-4 px-2 font-medium transition cursor-pointer ${
                   activeTab === 'overview'
                     ? 'text-[#ED1C24] border-b-2 border-[#ED1C24]'
-                    : 'text-[#000000] hover:text-[#ffffff]'
+                    : 'text-[#000000] hover:text-[#ED1C24]'
                 }`}
               >
                 Overview
@@ -147,7 +149,7 @@ const Courseview: React.FC = () => {
                 className={`pb-4 px-2 font-medium transition cursor-pointer ${
                   activeTab === 'curriculum'
                 ? 'text-[#ED1C24] border-b-2 border-[#ED1C24]'
-                    : 'text-[#000000] hover:text-[#ffffff]'
+                    : 'text-[#000000] hover:text-[#ED1C24]'
                 }`}
               >
                 Curriculum
@@ -157,7 +159,7 @@ const Courseview: React.FC = () => {
                 className={`pb-4 px-2 font-medium transition cursor-pointer ${
                   activeTab === 'reviews'
                 ? 'text-[#ED1C24] border-b-2 border-[#ED1C24]'
-                    : 'text-[#000000] hover:text-[#ffffff]'
+                    : 'text-[#000000] hover:text-[#ED1C24]'
                 }`}
               >
                 Reviews
@@ -210,7 +212,9 @@ const Courseview: React.FC = () => {
               {activeTab === 'reviews' && (
                 <div className="border border-[#ED1C24] bg-white rounded-lg p-8">
                   <h2 style={{...FONTS.S_Cart_subtitle as any, color:COLORS.primary_red}} className=" mb-6" >Student Reviews</h2>
-                  <p style={{ ...FONTS.nummedium4 as any , color: COLORS.primary_black}}>No reviews yet. Be the first to review this course!</p>
+                  <p style={{ ...FONTS.nummedium4 as any , color: COLORS.primary_black}}>No reviews yet. Be the first to review this course!
+Your feedback helps future learners make informed decisions.
+Share your experience and help us improve this course.</p>
                 </div>
               )}
             </div>
@@ -242,7 +246,7 @@ const Courseview: React.FC = () => {
                     <MapPin className="w-3 h-3 " />
                     <span>Boston, MA, USA</span>
                   </div>
-                  <div style={{...FONTS.nummedium6 as any, color:COLORS.primary_black}} className="flex items-center gap-2" >
+                  <div style={{...FONTS.nummedium6 as any, color:COLORS.primary_black}} className="flex items-center gap-2 " >
                     <Mail className="w-3 h-3 " />
                     <a href="mailto:hello@businessacademy.com" className="hover:text-blue-600">
                       hello@businessacademy.com

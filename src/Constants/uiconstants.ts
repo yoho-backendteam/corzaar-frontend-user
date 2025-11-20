@@ -237,7 +237,7 @@ export const FONTS = {
     fontOpticalSizing: 'auto',
     fontWeight: 400,
     fontStyle: 'normal',
-    fontSize: '12px',
+    fontSize: '10px',
   },
 };
 
