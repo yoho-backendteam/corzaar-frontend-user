@@ -6,3 +6,4 @@ export const selectTrendingCourseData = (state: RootState) => state.home.trendin
 export const selectInstituteData = (state: RootState) => state.home.instituteData;
 export const selectCategoryData = (state: RootState) => state.home.categoryData;
 export const selectAddtokart = (state: RootState) => state.home.addtokart;
+export const selectCoursebyid = (state: RootState) => state.home.coursebyid;

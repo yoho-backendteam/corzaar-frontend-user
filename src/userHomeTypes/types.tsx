@@ -56,9 +56,10 @@ export interface Course {
 
 
 export interface CourseCardProps {
+  _id?: string;
   course: {
     id: number;
-      _id:string
+    _id:string
     
     title: string;
     category: {
