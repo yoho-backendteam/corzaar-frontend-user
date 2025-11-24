@@ -15,3 +15,7 @@ export const AddtoCartService = async (params: string) => {
   return response.data
 }
 
+export const PlaceOrderService = async (cartId: string) => {
+  const response = await Client.CourseBuying({ cartId })
+  return response?.data
+}

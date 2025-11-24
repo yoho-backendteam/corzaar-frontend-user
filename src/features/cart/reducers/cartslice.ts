@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit"; 
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface Review {
   rating: number;
@@ -7,7 +7,7 @@ export interface Review {
 }
 
 export interface CourseContent {
-  totalDuration: number; 
+  totalDuration: number;
 }
 
 export interface CourseData {
@@ -26,16 +26,16 @@ export interface CartItem {
   discountPrice?: number;
 }
 
-export interface CartInfo {
-  datas: CourseData[];
-  cart: {
-    items: CartItem[];
-  };
-}
+// export interface CartInfo {
+//   datas: CourseData[];
+//   cart: {
+//     items: CartItem[];
+//   };
+// }
 
 // --- Slice State Type ---
 interface CartState {
-  data: CartInfo | null; // use CartInfo type
+  data: any | null; // use CartInfo type
 }
 
 // --- Initial State ---
@@ -48,10 +48,10 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    getcart: (state, action: PayloadAction<CartInfo>) => {
+    getcart: (state, action) => {
       state.data = action.payload;
     },
-    deletecart: (state, action: PayloadAction<CartInfo>) => {
+    deletecart: (state, action) => {
       state.data = action.payload;
     },
   },

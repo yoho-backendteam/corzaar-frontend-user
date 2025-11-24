@@ -116,5 +116,9 @@ export const API_END_POINTS = {
     GET: "/api/queryview",
     adminPOST: "/api/adminreplay",
   },
+
+  payment: {
+    create: "/payment/api/student/create"
+  }
 };
 

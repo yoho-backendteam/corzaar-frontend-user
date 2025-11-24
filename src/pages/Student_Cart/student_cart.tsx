@@ -18,7 +18,6 @@ const Student_cart = () => {
   const dispatch = useDispatch<AppDispatch>();
   const cartItems = useSelector(Getcart);
   const cartData = cartItems?.data;
-  console.log("cartItem :", cartData);
 
   const userid = "6903227b1c60e593f8740475";
 
@@ -105,8 +104,8 @@ const Student_cart = () => {
                         Ratings:
                         {item?.data?.reviews && item?.data?.reviews.length > 0
                           ? item?.data?.reviews.map(
-                              (r: { rating: number }) => r.rating
-                            )
+                            (r: { rating: number }) => r.rating
+                          )
                           : "N/A"}
                       </p>
                     </div>
@@ -191,7 +190,11 @@ const Student_cart = () => {
             <button
               className="w-full flex items-center justify-center gap-2 py-3 rounded-md text-white font-semibold"
               style={{ backgroundColor: COLORS.primary_red }}
-              onClick={() => navigate("/checkout")}
+              onClick={() => navigate("/checkout", {
+                state: {
+                  cartId: cartData?._id
+                }
+              })}
             >
               Proceed To Checkout <FaArrowRightLong />
             </button>

@@ -6,6 +6,9 @@ import { getCoursebyidThunk } from '../../features/home_page/reducers/homeThunk'
 import type { AppDispatch } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCoursebyid } from '../../features/home_page/reducers/homeSelector';
+import { FaArrowLeft } from 'react-icons/fa';
+import { AddtoCartService } from '../../features/cart/services';
+import { toast } from 'react-toastify';
 
 export interface CourseData {
   title: string;
@@ -57,8 +60,15 @@ const Courseview: React.FC = () => {
     }
   }, [dispatch]);
 
+  async function handelAddtoCart(id: string) {
+    const response = await AddtoCartService(id)
+    if (response?.success) {
+      toast.success("course added your cart")
+    } else {
+      toast.warn("try again, something error.")
+    }
+  }
 
-  console.log(coursebyid, "id")
 
 
   // Sample course data based on your structure
@@ -103,10 +113,10 @@ const Courseview: React.FC = () => {
   return (
     <div style={{ backgroundColor: COLORS.primary_yellow }} className="min-h-screen ">
       {/* Header */}
-      <header className="bg-[#ED1C24]/90 backdrop-blur-sm border-b ">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-4">
-          <button onClick={() => navigate(-1)} className="flex cursor-pointer items-center gap-2 text-white hover:text-black transition">
-            <span>←</span>
+      <header className="bg-[#ED1C24]/90 backdrop-blur-sm ">
+        <div className="mx-auto px-4 py-4 flex items-center gap-4">
+          <button style={{ ...FONTS.nummedium4 as any }} onClick={() => navigate(-1)} className="flex cursor-pointer items-center gap-1 bg-white p-1.5 rounded-xl text-[#ED1C24] hover:text-black transition">
+            <FaArrowLeft />
             <span>Back to Courses</span>
           </button>
         </div>
@@ -155,8 +165,9 @@ const Courseview: React.FC = () => {
                 </div>
                 <div style={{ color: COLORS.primary_black, ...FONTS.nummedium4 as any }} className="flex items-center gap-2 ">
                   <Globe className="w-5 h-5" />
-                  <span> {coursebyid?.language}</span>
+                  <span>{coursebyid?.language}</span>
                 </div>
+
                 <div className="mt-12">
                   <div style={{ color: COLORS.primary_red, ...FONTS.boldHeading4 as any }}>
                     <div className="flex gap-8 ">
@@ -164,7 +175,7 @@ const Courseview: React.FC = () => {
                         onClick={() => setActiveTab('overview')}
                         className={`pb-4 px-2 font-medium transition cursor-pointer ${activeTab === 'overview'
                           ? 'text-[#ED1C24] border-b-2 border-[#ED1C24]'
-                          : 'text-[#000000] hover:text-[#ffffff]'
+                          : 'text-[#000000] hover:text-[#ED1C24]'
                           }`}
                       >
                         Overview
@@ -173,7 +184,7 @@ const Courseview: React.FC = () => {
                         onClick={() => setActiveTab('curriculum')}
                         className={`pb-4 px-2 font-medium transition cursor-pointer ${activeTab === 'curriculum'
                           ? 'text-[#ED1C24] border-b-2 border-[#ED1C24]'
-                          : 'text-[#000000] hover:text-[#ffffff]'
+                          : 'text-[#000000] hover:text-[#ED1C24]'
                           }`}
                       >
                         Curriculum
@@ -182,7 +193,7 @@ const Courseview: React.FC = () => {
                         onClick={() => setActiveTab('reviews')}
                         className={`pb-4 px-2 font-medium transition cursor-pointer ${activeTab === 'reviews'
                           ? 'text-[#ED1C24] border-b-2 border-[#ED1C24]'
-                          : 'text-[#000000] hover:text-[#ffffff]'
+                          : 'text-[#000000] hover:text-[#ED1C24]'
                           }`}
                       >
                         Reviews
@@ -253,6 +264,7 @@ const Courseview: React.FC = () => {
                                   {/* Name */}
                                   <p
                                     className="text-[15px] sm:text-base mb-1"
+                                    style={{ color: COLORS.primary_black, ...FONTS.nummedium4 as any }}
                                   >
                                     {review?.name || "No Username"}
                                   </p>
@@ -264,8 +276,8 @@ const Courseview: React.FC = () => {
 
                                   {/* Comment */}
                                   <p
-
                                     className="text-sm sm:text-[15px] leading-relaxed"
+                                    style={{ color: COLORS.primary_black, ...FONTS.nummedium4 as any }}
                                   >
                                     {review?.comment || "No comments"}
                                   </p>
@@ -273,7 +285,7 @@ const Courseview: React.FC = () => {
                                   {/* Date */}
                                   <p
                                     className="text-xs sm:text-sm mt-3"
-                                    style={{ color: COLORS.primary_black }}
+                                    style={{ color: COLORS.primary_black, ...FONTS.nummedium4 as any }}
                                   >
                                     {review?.createdAt || "No date available"}
                                   </p>
@@ -282,13 +294,12 @@ const Courseview: React.FC = () => {
                             </div>
                           ) : (
                             <div className="py-6 text-center">
-                              <p >
+                              <p style={{ color: COLORS.primary_black, ...FONTS.nummedium4 as any }}>
                                 No reviews yet. Be the first to review this course!
                               </p>
                             </div>
                           )}
                         </div>
-
                       )}
                     </div>
 
@@ -360,7 +371,7 @@ const Courseview: React.FC = () => {
                   </span>
                 </div>
 
-                <button style={{ ...FONTS.nummedium4 as any, color: COLORS.primary_white, backgroundColor: COLORS.primary_black }} className="w-full py-3 rounded-lg hover:bg-slate-800 transition">
+                <button onClick={() => handelAddtoCart(coursebyid?._id)} style={{ ...FONTS.nummedium4 as any, color: COLORS.primary_white, backgroundColor: COLORS.primary_black }} className="w-full py-3 rounded-lg hover:bg-slate-800 transition">
                   Add to Cart
                 </button>
 

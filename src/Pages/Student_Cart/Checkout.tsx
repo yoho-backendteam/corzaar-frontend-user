@@ -7,7 +7,8 @@ import { MdOutlineQrCode2 } from "react-icons/md";
 import { AiOutlineBank } from "react-icons/ai";
 import { LuWallet } from "react-icons/lu";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { PlaceOrderService } from "../../features/cart/services";
 
 const PAYMENT_METHODS = [
   {
@@ -70,6 +71,21 @@ const Checkout = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedPayment, setSelectedPayment] = useState("card");
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const cartId = state?.cartId;
+
+  async function handelPlaceOrder() {
+    try {
+      const response = await PlaceOrderService(cartId)
+      if (response?.success) {
+        toast.success(response?.message)
+      } else {
+        toast.error(response?.message)
+      }
+    } catch (error) {
+      console.error("handel place order", error)
+    }
+  }
 
   return (
     <div
@@ -108,9 +124,9 @@ const Checkout = () => {
                 style={
                   currentStep >= 1
                     ? {
-                        backgroundColor: COLORS.primary_red,
-                        color: COLORS.primary_white,
-                      }
+                      backgroundColor: COLORS.primary_red,
+                      color: COLORS.primary_white,
+                    }
                     : { backgroundColor: COLORS.primary_white }
                 }
               >
@@ -145,9 +161,9 @@ const Checkout = () => {
                 style={
                   currentStep >= 2
                     ? {
-                        backgroundColor: COLORS.primary_red,
-                        color: COLORS.primary_white,
-                      }
+                      backgroundColor: COLORS.primary_red,
+                      color: COLORS.primary_white,
+                    }
                     : { backgroundColor: COLORS.primary_white }
                 }
               >
@@ -334,11 +350,7 @@ const Checkout = () => {
                   </button>
 
                   <button
-                    onClick={() => {
-                      toast.success(
-                        "Payment Successful! Your order has been placed."
-                      );
-                    }}
+                    onClick={handelPlaceOrder}
                     className="flex-1 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 font-medium cursor-pointer shadow-[0_0_15px_0_rgba(0,0,0,0.08)]"
                     style={{
                       backgroundColor: COLORS.green,
