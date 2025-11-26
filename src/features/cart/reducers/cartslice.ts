@@ -21,9 +21,23 @@ export interface CourseData {
 }
 
 export interface CartItem {
+  _id: string;
   courseId: string;
   price: number;
   discountPrice?: number;
+   title?: string;
+  category?: string;
+  shortDescription?: string;
+
+  instituteId?: {
+    logo?: string;
+    name?: string;
+  };
+
+  pricing?: {
+    price?: number;
+    discountPrice?: number;
+  };
 }
 
 // export interface CartInfo {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
@@ -9,6 +9,7 @@ import { LuWallet } from "react-icons/lu";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PlaceOrderService } from "../../features/cart/services";
+import type { CartItem } from "../../features/cart/reducers/cartslice";
 
 const PAYMENT_METHODS = [
   {
@@ -73,6 +74,9 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const cartId = state?.cartId;
+  const orderedItems = state?.cartItem || [];
+  const pricing = state?.pricing || 0;
+  const discount = state?.discount || 0;
 
   async function handelPlaceOrder() {
     try {
@@ -199,37 +203,47 @@ const Checkout = () => {
                   Review Your Order
                 </h2>
 
-                {/* ONE BOX for ALL ITEMS */}
                 <div className="bg-white p-6 rounded-lg shadow-[0_0_15px_0_rgba(0,0,0,0.08)]">
                   <h3 className="font-semibold mb-4">
-                    Order Items ({ORDER_ITEMS.length} Courses)
+                    Order Items ({orderedItems.length} Courses)
                   </h3>
 
-                  {/* list of items */}
-                  <div className="space-y-6">
-                    {ORDER_ITEMS.map((item) => (
-                      <div key={item.id} className="flex items-center gap-4">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-20 h-20 rounded-lg object-cover"
-                        />
-                        <div>
-                          <h4 className="font-medium">{item.title}</h4>
-                          <p className="text-sm text-gray-600">
-                            {item.category}
-                          </p>
-                          <p
-                            className="font-semibold mt-1"
-                            style={{ color: COLORS.secondary_green }}
-                          >
-                            ${item.price}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                {orderedItems.length > 0 ? (
+  <div className="space-y-2 bg-gray-200 rounded-2xl p-2">
+    {orderedItems.map((item: CartItem, index: number) => (
+      <div
+        key={index}
+        className="flex items-center p-5 gap-4 bg-white rounded-2xl"
+      >
+        <img
+          src={item?.instituteId?.logo}
+          alt={item.title}
+          className="w-20 h-20 rounded-lg object-cover"
+        />
+
+        <div>
+          <h4 className="font-medium">{item?.title}</h4>
+
+          <p className="text-sm text-gray-600">
+            {item?.category || "Course Category"}
+          </p>
+
+          <p
+            className="font-semibold mt-1"
+            style={{ color: COLORS.secondary_green }}
+          >
+            ₹{item?.pricing?.price || 0}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+) : (
+  <p className="text-gray-600">Select courses in your cart.</p>
+)}
+
                 </div>
+
 
                 <div className="flex gap-4 mt-8">
                   <button
@@ -364,25 +378,24 @@ const Checkout = () => {
             )}
           </div>
 
-          {/* SIDEBAR PRICE DETAILS */}
           <div className="lg:col-span-1" style={{ ...FONTS.medium }}>
             <div className="bg-white p-6 rounded-lg border sticky top-6 shadow-[0_0_15px_0_rgba(0,0,0,0.08)]">
               <h3 className="font-semibold mb-4">Price Details</h3>
 
               <div className="space-y-3">
                 <div className="flex justify-between text-gray-600">
-                  <span>Price ({ORDER_ITEMS.length} items)</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span>Price ({orderedItems.length} items)</span>
+                  <span>${pricing?.subtotal}</span>
                 </div>
 
                 <div className="flex justify-between text-gray-600">
-                  <span>Tax (10%)</span>
-                  <span>${tax.toFixed(2)}</span>
+                  <span>Discount</span>
+                  <span>${discount.discountAmount}</span>
                 </div>
 
                 <div className="border-t pt-3 flex justify-between font-semibold text-lg">
                   <span>Total Amount</span>
-                  <span>${totalAmount.toFixed(2)}</span>
+                  <span>${pricing.subtotal}</span>
                 </div>
 
                 <div className="bg-green-50 text-green-700 p-3 rounded-lg text-sm">
