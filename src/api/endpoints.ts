@@ -113,7 +113,7 @@ export const API_END_POINTS = {
 
   Query: {
     POST: "/api/querysend",
-    GET: "/api/queryview",
+    GET: "reports/api/query/queryview./:senderId/:senderRole",
     adminPOST: "/api/adminreplay",
   },
 

@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { updateField } from "../../redux/Queries/queryslice";
 import {
-  selectContactForm,
   selectQueryLoading,
   selectQuerySuccess,
 } from "../../redux/Queries/queryselector";
@@ -10,10 +9,12 @@ import { categories } from "../../redux/Queries/querydata";
 import sndimg from "../../assets/send.png";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { useEffect } from "react";
+import { selectQueryData } from "../../features/queries/reducer/querySelector";
+import { getQueryThunk } from "../../features/queries/reducer/queryThunk";
 
 export default function ContactForm() {
   const dispatch = useDispatch<any>();
-  const form = useSelector(selectContactForm);
+  const form = useSelector(selectQueryData);
   const loading = useSelector(selectQueryLoading);
   const success = useSelector(selectQuerySuccess);
 
@@ -27,6 +28,20 @@ useEffect(() => {
 }, []);
 
 
+
+ useEffect(() => {
+    const getAllQueries = async () => {
+      try {
+        await dispatch(getQueryThunk());
+      } catch (error) {
+        console.error("Error in fetching queries:", error);
+      }
+    };
+
+    getAllQueries();
+  }, [dispatch]);
+
+console.log(form,"form")
 
   const change = (f: string, v: string) =>
     dispatch(updateField({ field: f, value: v }));
