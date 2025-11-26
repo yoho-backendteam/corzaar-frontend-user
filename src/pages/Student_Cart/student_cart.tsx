@@ -152,7 +152,7 @@ const Student_cart = () => {
             <div className="flex justify-between font-semibold text-lg mb-4">
               <p>Total</p>
               <p>₹{cartData?.pricing?.total || 0}</p>
-            </div>
+             </div>
 
             <button
               className="w-full flex items-center justify-center gap-2 py-3 rounded-md text-white font-semibold"
@@ -160,11 +160,11 @@ const Student_cart = () => {
               onClick={() =>
                 navigate("/checkout", {
                   state: { 
-                    cartId: cartData?._id, 
+                    cartId:   cartData?._id, 
                     cartItem: cartData?.items,
-                    pricing: cartData?.pricing,
-                    discount: cartData?.coupon },
-                   
+                    pricing:  cartData?.pricing,
+                    discount: cartData?.coupon
+                  },   
                 })
               }
             >

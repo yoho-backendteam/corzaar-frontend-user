@@ -406,7 +406,7 @@ const Checkout = () => {
               <div className="mt-6 flex items-start gap-2 text-sm text-gray-600">
                 <IoMdCheckmarkCircleOutline
                   size={20}
-                  className="text-green-600 flex-shrink-0"
+                  className="text-green-700 flex-shrink-0"
                   style={{ color: COLORS.green }}
                 />
                 <div>
