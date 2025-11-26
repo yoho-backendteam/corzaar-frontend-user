@@ -68,7 +68,7 @@ const TrendingCourse = () => {
           </p>
         </div>
         <button
-          className="w-[70px] sm:w-[80px] md:w-[89px] h-[32px] sm:h-[34px] md:h-[36px] gap-2 sm:gap-[10px] text-white font-semibold py-1 sm:py-2 px-3 sm:px-4 rounded-[4px] text-xs sm:text-sm md:text-base transition-all duration-300 whitespace-nowrap"
+          className="w-[70px] sm:w-20 md:w-[89px] h-8 sm:h-[34px] md:h-9 gap-2 sm:gap-2.5 text-white font-semibold py-1 sm:py-2 px-3 sm:px-4 rounded-[4px] text-xs sm:text-sm md:text-base transition-all duration-300 whitespace-nowrap"
           style={{
             ...(FONTS.boldHeadingg3 as any),
             backgroundColor: COLORS.primary_red,
@@ -97,7 +97,7 @@ const TrendingCourse = () => {
         {trendingCourses.map((course) => (
           <div
             key={course.id}
-            className="flex shrink-0 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[420px] h-auto sm:h-[580px] md:h-[600px] lg:h-[612px] p-2 sm:p-3 md:p-4 gap-3 sm:gap-4 md:gap-5 rounded-[16px] snap-center"
+            className="flex shrink-0 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[420px] h-auto sm:h-[580px] md:h-[600px] lg:h-[612px] p-2 sm:p-3 md:p-4 gap-3 sm:gap-4 md:gap-5 rounded-2xl snap-center"
           >
             <CourseCard course={course} />
           </div>

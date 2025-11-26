@@ -23,7 +23,7 @@ const Footer = () => {
             Join thousands of Students already learning on CORZAAR
           </p>
           <button
-            className="bg-white font-semibold rounded-[4px] px-4 sm:px-[16px] py-2 sm:py-[12px] w-full max-w-[213px] h-[44px] sm:h-[48px] flex items-center justify-center gap-2 sm:gap-[10px] mx-auto border transition"
+            className="bg-white font-semibold rounded-sm px-4 sm:px-4 py-2 sm:py-3 w-full max-w-[213px] h-11 sm:h-12 flex items-center justify-center gap-2 sm:gap-[10px] mx-auto border transition"
             style={{ color: COLORS.primary_red }}
           >
             Explore All Courses →

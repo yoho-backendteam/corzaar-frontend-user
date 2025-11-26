@@ -32,8 +32,8 @@ const Category = () => {
           {categories.map((category) => (
             <div
               key={category.id}
-              className="bg-white rounded-[12px] shadow-md hover:shadow-lg transition-all duration-300 text-center cursor-pointer 
-                                w-full max-w-[280px] sm:max-w-[300px] md:w-[308px] h-[84px] sm:h-[90px] md:h-[94px] p-3 sm:p-[12px] px-4 sm:px-[16px] 
+              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center cursor-pointer 
+                                w-full max-w-[280px] sm:max-w-[300px] md:w-[308px] h-[84px] sm:h-[90px] md:h-[94px] p-3 sm:p-3 px-4 sm:px-4
                                 border border-gray-200 flex flex-col justify-center gap-2 sm:gap-3 mx-auto"
             >
               <h3 className="text-base sm:text-lg font-semibold text-black">

@@ -88,7 +88,7 @@ const RecommendedCourse: React.FC = () => {
           {topCourses.map((course) => (
             <div
               key={course.id}
-              className="flex shrink-0 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[420px] h-auto sm:h-[580px] md:h-[600px] lg:h-[612px] p-2 sm:p-3 md:p-4 gap-3 sm:gap-4 md:gap-5 rounded-[16px] snap-center"
+              className="flex shrink-0 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[420px] h-auto sm:h-[580px] md:h-[600px] lg:h-[612px] p-2 sm:p-3 md:p-4 gap-3 sm:gap-4 md:gap-5 rounded-2xl snap-center"
             >
               <CourseCard course={course} />
             </div>

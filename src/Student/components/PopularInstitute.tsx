@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Star, MapPin } from "lucide-react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";

@@ -115,9 +115,9 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
       {/* Content */}
       <div className="p-3 sm:p-4 md:p-5 text-left">
         {/* Category & Type */}
-        <div className="flex items-center justify-between gap-2 sm:gap-[10px] mb-3">
+        <div className="flex items-center justify-between gap-2 sm:gap-2.5 mb-3">
           <span
-            className="w-auto min-w-[80px] sm:w-[101px] h-[28px] sm:h-[32px] py-1 sm:py-2 px-2 sm:px-4 rounded-[4px] text-center text-xs sm:text-sm"
+            className="w-auto min-w-20 sm:w-[101px] h-7 sm:h-8 py-1 sm:py-2 px-2 sm:px-4 rounded-sm text-center text-xs sm:text-sm"
             style={{
               ...(FONTS.mediummm as any),
               background: COLORS.primary_red,
@@ -128,7 +128,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </span>
 
           <span
-            className="w-auto min-w-[80px] sm:w-[101px] h-[28px] sm:h-[32px] py-1 sm:py-2 px-2 sm:px-4 rounded-[4px] border text-center text-xs font-medium"
+            className="w-auto min-w-20 sm:w-[101px] h-7 sm:h-8 py-1 sm:py-2 px-2 sm:px-4 rounded-sm border text-center text-xs font-medium"
             style={{ ...(FONTS.mediummm as any), color: COLORS.primary_red }}
           >
             {course.type}
@@ -234,7 +234,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         {/* Button */}
         {course.enrolled ? (
           <button
-            className="w-full h-[40px] sm:h-[45px] gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-white text-xs sm:text-sm font-semibold flex items-center justify-center hover:bg-red-700 transition"
+            className="w-full h-10 sm:h-[45px] gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-white text-xs sm:text-sm font-semibold flex items-center justify-center hover:bg-red-700 transition"
             style={{ background: COLORS.primary_red }}
           >
             Already Enrolled

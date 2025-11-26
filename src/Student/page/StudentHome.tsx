@@ -80,15 +80,15 @@ const StudentHome: React.FC = () => {
         {/* CTA Buttons */}
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
           <button
-            className="flex items-center justify-center w-[160px] sm:w-[170px] md:w-[188px] h-[42px] sm:h-[45px] md:h-[48px] gap-2 sm:gap-[10px] text-white py-2 sm:py-3 px-3 sm:px-4 rounded-[4px] font-semibold transition hover:bg-red-700 text-sm sm:text-base"
+            className="flex items-center justify-center w-40 sm:w-[170px] md:w-[188px] h-[42px] sm:h-[45px] md:h-12 gap-2 sm:gap-2.5 text-white py-2 sm:py-3 px-3 sm:px-4 rounded-sm font-semibold transition hover:bg-red-700 text-sm sm:text-base"
             style={{ background: COLORS.primary_red }}
           >
             Explore Courses
-            <FaArrowRight className="mt-[2px] sm:mt-[6px]" />
+            <FaArrowRight className="mt-0.5 sm:mt-1.5" />
           </button>
 
           <button
-            className="group flex items-center justify-center w-[150px] sm:w-[160px] md:w-[184px] h-[42px] sm:h-[45px] md:h-[48px] gap-2 sm:gap-[10px] bg-white py-2 sm:py-3 px-3 sm:px-4 rounded-[4px] font-semibold 
+            className="group flex items-center justify-center w-[150px] sm:w-40 md:w-[184px] h-[42px] sm:h-[45px] md:h-12 gap-2 sm:gap-2.5 bg-white py-2 sm:py-3 px-3 sm:px-4 rounded-sm font-semibold 
   transition-all duration-300 border whitespace-nowrap text-sm sm:text-base"
             style={{
               borderColor: COLORS.primary_red,
@@ -124,7 +124,7 @@ const StudentHome: React.FC = () => {
               <button
                 key={i}
                 onClick={() => handleScroll(item.target)}
-                className="flex items-center justify-center w-[110px] sm:w-[120px] md:w-[129px] h-[32px] sm:h-[34px] md:h-[36px] gap-1 sm:gap-2 bg-white px-3 sm:px-4 rounded-full font-medium shadow transition whitespace-nowrap text-xs sm:text-sm"
+                className="flex items-center justify-center w-[110px] sm:w-[120px] md:w-[129px] h-8 sm:h-[34px] md:h-9 gap-1 sm:gap-2 bg-white px-3 sm:px-4 rounded-full font-medium shadow transition whitespace-nowrap text-xs sm:text-sm"
                 style={{ color: COLORS.primary_red }}
               >
                 {item.label}
@@ -135,7 +135,7 @@ const StudentHome: React.FC = () => {
 
         {/* Stats Section */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-5xl mx-auto mt-6 sm:mt-8">
-          <div className="flex flex-col items-center justify-center w-full max-w-[140px] sm:max-w-[160px] md:max-w-[180px] lg:max-w-[200px] h-[80px] sm:h-[90px] md:h-[100px] lg:h-[105px] gap-2 sm:gap-3 bg-white py-2 sm:py-3 px-2 sm:px-4 rounded-[12px] shadow text-center">
+          <div className="flex flex-col items-center justify-center w-full max-w-[140px] sm:max-w-40 md:max-w-[180px] lg:max-w-[200px] h-20 sm:h-[90px] md:h-[100px] lg:h-[105px] gap-2 sm:gap-3 bg-white py-2 sm:py-3 px-2 sm:px-4 rounded-xl shadow text-center">
             <h2
               className="text-xl sm:text-2xl md:text-3xl font-bold"
               style={{ color: COLORS.primary_red }}
@@ -150,7 +150,7 @@ const StudentHome: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-col items-center justify-center w-full max-w-[140px] sm:max-w-[160px] md:max-w-[180px] lg:max-w-[200px] h-[80px] sm:h-[90px] md:h-[100px] lg:h-[105px] gap-2 sm:gap-3 bg-white py-2 sm:py-3 px-2 sm:px-4 rounded-[12px] shadow text-center">
+          <div className="flex flex-col items-center justify-center w-full max-w-[140px] sm:max-w-40 md:max-w-[180px] lg:max-w-[200px] h-20 sm:h-[90px] md:h-[100px] lg:h-[105px] gap-2 sm:gap-3 bg-white py-2 sm:py-3 px-2 sm:px-4 rounded-xl shadow text-center">
             <h2
               className="text-xl sm:text-2xl md:text-3xl font-bold"
               style={{ color: COLORS.primary_red }}
@@ -165,7 +165,7 @@ const StudentHome: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-col items-center justify-center w-full max-w-[140px] sm:max-w-[160px] md:max-w-[180px] lg:max-w-[200px] h-[80px] sm:h-[90px] md:h-[100px] lg:h-[105px] gap-2 sm:gap-3 bg-white py-2 sm:py-3 px-2 sm:px-4 rounded-[12px] shadow text-center">
+          <div className="flex flex-col items-center justify-center w-full max-w-[140px] sm:max-w-40 md:max-w-[180px] lg:max-w-[200px] h-20 sm:h-[90px] md:h-[100px] lg:h-[105px] gap-2 sm:gap-3 bg-white py-2 sm:py-3 px-2 sm:px-4 rounded-xl shadow text-center">
             <h2
               className="text-xl sm:text-2xl md:text-3xl font-bold"
               style={{ color: COLORS.primary_red }}
@@ -180,7 +180,7 @@ const StudentHome: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-col items-center justify-center w-full max-w-[140px] sm:max-w-[160px] md:max-w-[180px] lg:max-w-[200px] h-[80px] sm:h-[90px] md:h-[100px] lg:h-[105px] gap-2 sm:gap-3 bg-white py-2 sm:py-3 px-2 sm:px-4 rounded-[12px] shadow text-center">
+          <div className="flex flex-col items-center justify-center w-full max-w-[140px] sm:max-w-40 md:max-w-[180px] lg:max-w-[200px] h-20 sm:h-[90px] md:h-[100px] lg:h-[105px] gap-2 sm:gap-3 bg-white py-2 sm:py-3 px-2 sm:px-4 rounded-xl shadow text-center">
             <h2
               className="text-xl sm:text-2xl md:text-3xl font-bold"
               style={{ color: COLORS.primary_red }}
