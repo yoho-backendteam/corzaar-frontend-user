@@ -5,8 +5,8 @@ const BASE_COURSE_URL = `${BASE_API_URL}/open/course/api/courses`;
 export const API_END_POINTS = {
   instituteManagement: {
     base: "/api/",
-    getAll: "/open/merchant/api/getall",
-    getById: "/open/merchant/api/getbyid/:id",
+    getAll: "/api/getall",
+    getById: "/api/getbyid/:id",
     updateById: "/api/update/:id",
     deleteById: "/api/delete/:id",
     getStudentsByInstitute: "/api/getall/:id/students",
@@ -112,9 +112,13 @@ export const API_END_POINTS = {
   },
 
   Query: {
-    POST: "/api/query/querysend",
+    POST: "/reports/api/query/querysend",
     GET: "/api/queryview",
     adminPOST: "/api/adminreplay",
   },
+
+  payment: {
+    create: "/payment/api/student/create"
+  }
 };
 

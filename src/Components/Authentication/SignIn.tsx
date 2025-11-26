@@ -22,7 +22,7 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   // UI State
-  const [method, setMethod] = useState<"password" | "otp">("password");
+  const [method, setMethod] = useState<"password" | "otp">("otp");
   const [otpStep, setOtpStep] = useState<"enter-phone" | "enter-otp">(
     "enter-phone"
   );
@@ -182,7 +182,7 @@ const SignIn = () => {
 
             {/* Method Toggle */}
             <div className="flex mb-6">
-              <button
+              {/* <button
                 onClick={() => {
                   setMethod("password");
                   setOtpStep("enter-phone");
@@ -203,7 +203,7 @@ const SignIn = () => {
               >
                 <Lock className="inline mr-2 w-4 h-4" />
                 Sign In
-              </button>
+              </button> */}
 
               <button
                 onClick={() => {

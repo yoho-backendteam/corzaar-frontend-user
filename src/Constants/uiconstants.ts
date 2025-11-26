@@ -9,7 +9,12 @@ export const COLORS = {
   secondary_gray: '#5F5F5F1A',
   C_Image: "#D9D9D9",
   C_DIV_Title: "#0A0A0A",
-  C_delete: "#ED1C241A"
+  C_delete: "#ED1C241A",
+  green: '#38A169',
+  light_gray: '#F7FAFC',
+  blue: '#3182CE',
+  Light_green: '#E6FFFA',
+
 };
 
 // uiConstants.js
@@ -224,6 +229,20 @@ export const FONTS = {
     fontWeight: 500,
     fontStyle: 'normal',
     fontSize: '16px',
+  },
+  nummedium5: {
+    fontFamily: '"Source Serif 4", serif',
+    fontOpticalSizing: 'auto',
+    fontWeight: 400,
+    fontStyle: 'normal',
+    fontSize: '14px',
+  },
+  nummedium6: {
+    fontFamily: '"Source Serif 4", serif',
+    fontOpticalSizing: 'auto',
+    fontWeight: 400,
+    fontStyle: 'normal',
+    fontSize: '10px',
   },
 };
 

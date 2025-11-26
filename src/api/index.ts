@@ -35,6 +35,10 @@ class Client {
 
   };
 
+  CourseBuying(data: { cartId: string }) {
+    return httpClient.post(API_END_POINTS.payment.create, data)
+  }
+
   loginEndpoint = {
     postotp: (phoneNumber: string) =>
       httpClient.post(API_END_POINTS.login.post, { phoneNumber }),

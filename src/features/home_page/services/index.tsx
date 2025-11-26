@@ -84,3 +84,18 @@ export const addtokartService = async (data:addtocartTypes) => {
     }
 
 };
+
+
+
+export const getCoursebyidService = async (params:string) => {
+    const response = await Client.getCourseById(params);
+    try {
+        if (response) {
+            return response;
+        }
+    } catch (error) {
+        console.error("Error in getallcourse:", error);
+        return null;
+    }
+
+};

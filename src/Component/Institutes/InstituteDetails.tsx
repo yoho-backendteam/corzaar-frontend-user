@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { fetchInstituteById } from "../../features/institute/reducers/thunks";
@@ -26,11 +26,14 @@ import course from "../../assets/course.png";
 import heart from "../../assets/heart.png";
 import { FONTS } from "../../Constants/uiconstants";
 
+
 const InstituteDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
   const institute = useSelector(selectInstitute);
   const { loading, error } = useSelector((state: RootState) => state.institute);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (id) dispatch(fetchInstituteById(id));
@@ -61,6 +64,16 @@ const InstituteDetails: React.FC = () => {
 
   return (
     <div className="bg-[#FFDD00] min-h-screen">
+
+      <div className="pt-5 px-4">
+  <button
+    onClick={() => navigate(-1)}
+    className="flex items-center gap-2 text-black bg-white px-4 py-2 rounded-md shadow hover:shadow-md transition font-medium mb-2"
+  >
+    ← Back
+  </button>
+</div>
+
       {/* Banner */}
       <div className="relative h-60">
         <img
@@ -160,93 +173,94 @@ const InstituteDetails: React.FC = () => {
           >
             Courses
           </h2>
-
-        {Array.isArray(institute.courses) && institute.courses.length > 0 ? (
+          
+          {Array.isArray(institute.courses) && institute.courses.length > 0 ? (
   <div className="space-y-6 w-full">
     {institute.courses.map((course) => (
       <div
         key={course.id}
         className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
       >
-                  <div className="relative">
-                    <img
-                      src={course.image || robo}
-                      alt={course.title}
-                      className="w-full h-60 object-cover"
-                    />
-                    <div className="absolute top-3 left-3 bg-[#ED1C24] text-white text-xs px-3 py-1 rounded-md shadow-md">
-                      40% OFF
-                    </div>
-                    <div className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md">
-                      <img src={heart} alt="heart" className="w-5 h-5" />
-                    </div>
-                  </div>
+        <div className="relative">
+          <img
+            src={course.image || robo}
+            alt={course.title}
+            className="w-full h-60 object-cover"
+          />
+          <div className="absolute top-3 left-3 bg-[#ED1C24] text-white text-xs px-3 py-1 rounded-md shadow-md">
+            40% OFF
+          </div>
+          <div className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-md">
+            <img src={heart} alt="heart" className="w-5 h-5" />
+          </div>
+        </div>
 
-                  <div className="p-5">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="bg-[#ED1C24] text-white text-xs px-2 py-1 rounded">
-                        Technology
-                      </span>
-                      <span className="text-xs px-2 py-1 border border-[#ED1C24] rounded text-[#ED1C24]">
-                        {course.level || "Beginner"}
-                      </span>
-                    </div>
+        <div className="p-5">
+          <div className="flex justify-between items-center mb-2">
+            <span className="bg-[#ED1C24] text-white text-xs px-2 py-1 rounded">
+              Technology
+            </span>
+            <span className="text-xs px-2 py-1 border border-[#ED1C24] rounded text-[#ED1C24]">
+              {course.level || "Beginner"}
+            </span>
+          </div>
 
-                    <h3
-                      style={FONTS.boldHeadingg2 as React.CSSProperties}
-                      className="font-semibold text-[#000000]"
-                    >
-                      {course.title}
-                    </h3>
+          <h3
+            style={FONTS.boldHeadingg2 as React.CSSProperties}
+            className="font-semibold text-[#000000]"
+          >
+            {course.title}
+          </h3>
 
-                    <p className="text-sm text-[#707070] mt-1">
-                      {course.description || "No description"}
-                    </p>
+          <p className="text-sm text-[#707070] mt-1">
+            {course.description || "No description"}
+          </p>
 
-                    <div className="flex items-center gap-4 text-gray-700 text-sm mt-2">
-                      <div className="flex items-center gap-1">
-                        <img src={star} alt="rating" className="w-4 h-4" />
-                        <span>{course.rating || "N/A"}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <img src={student} alt="students" className="w-4 h-4" />
-                        <span>{course.students || 0}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <img src={clock} alt="weeks" className="w-4 h-4" />
-                        <span>{course.weeks || 0} Weeks</span>
-                      </div>
-                    </div>
-
-                    <div className="flex justify-between items-center mt-3">
-                      <div>
-                        <span className="text-lg font-bold text-[#000000]">
-                          ₹{course.price || 0}
-                        </span>
-                        {course.oldPrice && (
-                          <span className="text-[#707070] ml-3 line-through text-sm">
-                            ₹{course.oldPrice}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    <button
-                      className={`mt-3 px-4 py-2 w-full text-sm font-medium rounded-md ${
-                        course.enrolled
-                          ? "bg-[#ED1C24] text-[#FFFFFF]"
-                          : "bg-[#FFDD00] text-[#000000]"
-                      }`}
-                    >
-                      {course.enrolled ? "Already Enrolled" : "Add To Cart"}
-                    </button>
-                  </div>
-                </div>
-              ))}
+          <div className="flex items-center gap-4 text-gray-700 text-sm mt-2">
+            <div className="flex items-center gap-1">
+              <img src={star} alt="rating" className="w-4 h-4" />
+              <span>{course.rating || "N/A"}</span>
             </div>
-          ) : (
-            <p className="text-[#707070]">No courses found.</p>
-          )}
+            <div className="flex items-center gap-1">
+              <img src={student} alt="students" className="w-4 h-4" />
+              <span>{course.students || 0}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <img src={clock} alt="weeks" className="w-4 h-4" />
+              <span>{course.weeks || 0} Weeks</span>
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center mt-3">
+            <div>
+              <span className="text-lg font-bold text-[#000000]">
+                ₹{course.price || 0}
+              </span>
+              {course.oldPrice && (
+                <span className="text-[#707070] ml-3 line-through text-sm">
+                  ₹{course.oldPrice}
+                </span>
+              )}
+            </div>
+          </div>
+
+          <button
+            className={`mt-3 px-4 py-2 w-full text-sm font-medium rounded-md ${
+              course.enrolled
+                ? "bg-[#ED1C24] text-[#FFFFFF]"
+                : "bg-[#FFDD00] text-[#000000]"
+            }`}
+          >
+            {course.enrolled ? "Already Enrolled" : "Add To Cart"}
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+) : (
+  <p className="text-[#707070]">No courses for this Institute.</p>
+)}
+
         </div>
 
         {/* Right Side - Contact + Stats */}
