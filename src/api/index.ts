@@ -4,6 +4,7 @@ import { API_END_POINTS } from "../api/endpoints";
 import type { addtocartTypes } from "../userHomeTypes/types";
 import type { Institute } from "../types/institute";
 import type { StudentFormType } from "../types/studentForm";
+import type { CreateNotificationPayload, UpdateNotificationPayload } from "../features/notification/notificationtype";
 
 class Client {
   instituteManagement = {
@@ -243,6 +244,32 @@ class Client {
 
     adminReply: (data: any) => httpClient.post(API_END_POINTS.Query.adminPOST, data),
   }
+
+  notifications = {
+    create: (data: CreateNotificationPayload) =>
+      httpClient.post(API_END_POINTS.notification.create, data),
+
+    getAll: () =>
+      httpClient.get(API_END_POINTS.notification.getAll),
+
+    getByType: (type: string) =>
+      httpClient.get(API_END_POINTS.notification.getByType.replace(":type", type)),
+
+    getById: (id: string) =>
+      httpClient.get(API_END_POINTS.notification.getById.replace(":id", id)),
+
+    update: (id: string, data: UpdateNotificationPayload) =>
+      httpClient.put(API_END_POINTS.notification.update.replace(":id", id), data),
+
+    markAsRead: (id: string) =>
+         httpClient.patch(API_END_POINTS.notification.markAsRead.replace(":id", id), {}),
+
+    delete: (id: string) =>
+      httpClient.delete(API_END_POINTS.notification.delete.replace(":id", id)),
+
+    webShow: (data: any) =>
+      httpClient.post(API_END_POINTS.notification.webShow, data),
+  };
 }
 
 export default new Client();
