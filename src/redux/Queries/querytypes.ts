@@ -1,15 +1,16 @@
 
 export interface QueryFormData {
-  senderid: string;
-  senderrole:string,
-  query: string;
-  fullName: string;
-  email: string;
-  phone: string;
-  category: string;
-  subject: string;
-  message: string;
+  senderId: string;
+  senderRole: string;
+  query?: string;
+  fullName?: string;
+  email?: string;
+  phone?: string;
+  category?: string;
+  subject?: string;
+  message?: string;
 }
+
 
 export interface QueryState {
   form: QueryFormData;

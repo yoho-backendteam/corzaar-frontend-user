@@ -112,7 +112,7 @@ export const API_END_POINTS = {
   },
 
   Query: {
-    POST: "/api/querysend",
+    POST: "/api/query/querysend",
     GET: "/api/queryview",
     adminPOST: "/api/adminreplay",
   },

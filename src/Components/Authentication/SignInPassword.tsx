@@ -26,7 +26,7 @@ const SignInPassword: React.FC = () => {
 
     try {
       const resultAction: any = await LoginWithEmail(email, password)
-      console.log(resultAction)
+      console.log(resultAction, 'loginnnnn')
 
       if (resultAction?.status) {
         login(resultAction?.data)
