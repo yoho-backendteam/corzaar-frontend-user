@@ -55,6 +55,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
 
     if (response?.status) {
       const token = response?.data?.token || ""
+      console.log("token",token)
       login(token)
       if (!response?.reg) {
         navigate("/student-register")

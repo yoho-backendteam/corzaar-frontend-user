@@ -19,7 +19,7 @@ export const Settings: React.FC = () => {
   useEffect(() => {
     const fetchProfileData = async (): Promise<void> => {
       try {
-        const id = "68fb60f726d15f4ca736ff1d";
+        const id = "691d8d28340440bf767c5b1d";
         await dispatch(setProfileData(id));
       } catch (error: unknown) {
         if (error instanceof Error) {
@@ -37,7 +37,7 @@ export const Settings: React.FC = () => {
   useEffect(() => {
     const fetchAttendanceData = async (): Promise<void> => {
       try {
-        const id = "68fb60f726d15f4ca736ff1d";
+        const id = "691d8d28340440bf767c5b1d";
         await dispatch(setAttendanceData(id));
       } catch (error: unknown) {
         if (error instanceof Error) {

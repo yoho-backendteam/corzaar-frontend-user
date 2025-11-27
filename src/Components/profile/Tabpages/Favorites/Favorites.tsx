@@ -86,7 +86,7 @@ export const Favorites = () => {
     const fetchFavorites = async () => {
       try {
         setLoading(true);
-        const userId = "68fb72ea19c3430ef1c8d3e6";
+        const userId = "691d8d28340440bf767c5b1d";
         await dispatch(getAllFavData(userId));
       } catch (error: unknown) {
         toast.error(error as string);
