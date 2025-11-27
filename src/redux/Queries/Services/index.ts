@@ -1,4 +1,4 @@
-import Client from "../../../apis/index"; 
+import Client from "../../../api/index"; 
 
 export const sendQuery = async (data:any) => {
   const response = await Client.QueryService.sendQuery(data);
@@ -7,8 +7,8 @@ export const sendQuery = async (data:any) => {
   }
 };
 
-export const getAllQueries = async (params:any) => {
-  const response = await Client.QueryService.getQueries(params);
+export const getAllQueries = async (senderId:string, senderRole:string) => {
+  const response = await Client.QueryService.getQueries(senderId, senderRole);
   if (response) {
     return response;
   }

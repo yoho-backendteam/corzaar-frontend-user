@@ -9,7 +9,8 @@ import { sendQueryThunk } from "../../redux/Queries/querythunks";
 import { categories } from "../../redux/Queries/querydata";
 import sndimg from "../../assets/send.png";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
-import { useEffect } from "react";
+
+
 
 export default function ContactForm() {
   const dispatch = useDispatch<any>();
@@ -17,45 +18,37 @@ export default function ContactForm() {
   const loading = useSelector(selectQueryLoading);
   const success = useSelector(selectQuerySuccess);
 
-useEffect(() => {
-  if (!localStorage.getItem("userId")) {
-    localStorage.setItem("userId", "6901fcc5876fa6b7e3dc8584");
-  }
-  if (!localStorage.getItem("userRole")) {
-    localStorage.setItem("userRole", "Admin");
-  }
-}, []);
-
-
 
   const change = (f: string, v: string) =>
     dispatch(updateField({ field: f, value: v }));
 
  const handleSend = () => {
-  const senderId = localStorage.getItem("userId");
-  const senderRole = localStorage.getItem("userRole"); 
+  const senderId = "query sender"
+  const senderRole = "User"
   
-
-  if (!senderId) {
-    alert("Missing sender ID. Please log in again.");
-    return;
-  }
-
-  if (!senderRole) {
-    alert("Missing sender role. Please log in again.");
-    return;
-  }
-
   const payload = {
-    senderid: senderId,         
-    senderrole: senderRole,    
-    query: form.message,        
-    // subject: form.subject,
-    // category: form.category,
-    // fullName: form.fullName,
-    // email: form.email,
-    // phone: form.phone,
-  };
+  senderId: senderId,
+  senderRole: senderRole,
+
+  // REQUIRED object for backend
+  queries: {
+    senderRole,
+    query: form.message,
+    response: "",
+    status: "incompleted",
+    date: new Date(),
+  },
+
+  // Keep message for UI/TS
+  message: form.message,
+
+  fullName: form.fullName,
+  email: form.email,
+  phone: form.phone,
+  subject: form.subject,
+  category: form.category,
+};
+
 
   console.log("Sending payload:", payload);
   dispatch(sendQueryThunk(payload));

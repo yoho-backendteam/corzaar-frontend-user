@@ -5,8 +5,8 @@ import { sendQueryThunk } from "./querythunks";
 
 const initialState: QueryState = {
   form: {
-    senderid: "",
-    senderrole: "",
+    senderId: "",
+    senderRole: "",
     fullName: "",
     email: "",
     phone: "",

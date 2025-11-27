@@ -3,7 +3,7 @@ import dealsSlice from "../features/deals/dealsSlice"
 import coursesSlice from "../features/courses/courseSlice"
 // import coursesSlice from "../features/courses/courseSlice"
 import courseSlice from "../Components/Redux/CourseSlices";
-import courseReducer from "../Components/Redux/CourseSlice";
+// import courseReducer from "../Components/Redux/CourseSlice";
 import contactReducer from "../redux/Queries/queryslice";
 import studentHomeReducer from '../Student/redux/studentSlice'
 import profileReducer from "../features/profile/profileSlice";
@@ -18,6 +18,7 @@ import loginotpReducer from "../features/userlogin/reducers/otpslice";
 import querySlice from "../redux/Queries/queryslice";
 import SettingSlice from '../features/settings/reducers/SettingSlice'
 import cartreducer from "../features/cart/reducers/cartslice"
+import queryreducer from "../features/queries/reducer/querySlice"
 
 const store = configureStore({
   reducer: {
@@ -36,6 +37,7 @@ const store = configureStore({
     query: querySlice,
     SettingSlice: SettingSlice,
     cartreducer: cartreducer,
+    queryreducer : queryreducer
   },
 
 })
