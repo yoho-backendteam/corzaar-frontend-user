@@ -72,11 +72,11 @@ export const API_END_POINTS = {
       getAll: "/payment/api/student/all/payments"
     },
     fav: {
-      get: "/student/api/cart/fav/get"
+      get: "/api/cart/fav/get"
     },
     profile: {
       get: "users/profile",
-      getById: "/student/api/student_management/getbyid/:id"
+      getById: "/api/student_management/getbyid/:id"
     },
     portfolio: {
       get: "/student/api/student_management/getBatch/:id"
