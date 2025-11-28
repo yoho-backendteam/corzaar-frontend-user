@@ -21,11 +21,11 @@ export const API_END_POINTS = {
   },
 
   login: {
-    post: "/auth/api/users/login",
+    post: "/api/users/login",
     rootpost: "/auth/api/users/root-login",
     profile: "/student/api/student_management/create"
   },
-  otpverify: { post: "/auth/api/share/verify-otp" },
+  otpverify: { post: "/api/share/verify-otp" },
   course: {
     create: `${BASE_COURSE_URL}/`,
     getAll: `${BASE_COURSE_URL}/`,
@@ -87,9 +87,10 @@ export const API_END_POINTS = {
     attendance: {
       get: "/student/api/attendance/all-student"
     },
-    courses: {
-      getById: "/student/api/courses/getCoursesId/:id"
-    }
+   courses: {
+  getById: "/api/enrollment/getByUserId/:userId"
+}
+
   },
   Cart: {
     getAll: `/student/api/cart`,
