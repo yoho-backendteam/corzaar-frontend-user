@@ -15,11 +15,23 @@ import Payments from "../Components/profile/Tabpages/Payment/Payments";
 import Favorites from "../Components/profile/Tabpages/Favorites/Favorites";
 import Settings from "../Components/profile/Tabpages/SettingsProfile/Settings";
 import { Portfolio } from "../Components/profile/Tabpages/Portfolio/PortfolioPage";
+import type { AppDispatch } from "../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setProfileData } from "../features/settings/reducers/settingThunks";
+import { profileSelect } from "../features/settings/reducers/settingSelectors";
 export const Settingprofile = () => {
   
 
-  const profile = useAppSelector((state) => state.profile);
-  console.log("Profile DATA", profile);
+  const dispatch = useDispatch<AppDispatch>();
+
+  // Fetch profile data
+  useEffect(() => {
+    const id = "691d8d28340440bf767c5b1d";
+    dispatch(setProfileData(id));
+  }, [dispatch]);
+
+  const profileData = useSelector(profileSelect);
 
   const tabs = [
     { label: "Overview", content: <Overview /> },
@@ -49,26 +61,16 @@ export const Settingprofile = () => {
       }}
     >
       <div className="w-full flex h-full p-10 flex-col gap-8">
-        <ProfileHeader
-          title={profile.title}
-          verified={profile.verified}
-          description={profile.description}
-          ratings={profile.ratings}
-          courses={profile.courses}
-          students={profile.students}
-          location={profile.location}
-          tags={profile.tags}
-          onEdit={() => alert("Edit profile clicked")}
-        />
+       <ProfileHeader
+  title={
+    profileData?.data?.personalInfo
+      ? `${profileData.data.personalInfo.firstName} ${profileData.data.personalInfo.lastName}`
+      : "Student Name"
+  }
+  image={profileData?.data?.profilePicture}
+/>
         <div className="grid lg:grid-cols-4  md:grid-cols-2  gap-4 justify-between flex-wrap">
-          {profile.stats.map((item, index) => (
-            <ProfileSlide
-              key={index}
-              icon={iconMap[item.icon] || icon}
-              label={item.label}
-              value={item.value}
-            />
-          ))}
+          
         </div>
         <ProfileTabs tabs={tabs} />
       </div>
