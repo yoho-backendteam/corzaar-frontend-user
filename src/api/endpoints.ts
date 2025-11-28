@@ -87,9 +87,10 @@ export const API_END_POINTS = {
     attendance: {
       get: "/student/api/attendance/all-student"
     },
-    courses: {
-      getById: "/student/api/courses/getCoursesId/:id"
-    }
+   courses: {
+  getById: "/api/enrollment/getByUserId/:userId"
+}
+
   },
   Cart: {
     getAll: `/student/api/cart`,

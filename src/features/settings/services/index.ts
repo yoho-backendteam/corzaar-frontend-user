@@ -84,12 +84,12 @@ export const getStudentAttendance = async (studentId: string): Promise<Attendanc
   }
 };
 
-export const getCoursesId = async(params: string): Promise<CoursesIdResponse | undefined> => {
+export const getCoursesId = async (id: string): Promise<CoursesIdResponse | undefined> => {
   try {
-    const response = await axios.get(`http://localhost:3004/api/courses/getCourseById/${params}`);
-    return response.data;
+    const response = await Client.courses.getById(id);
+    return response?.data;
   } catch (error) {
-    console.log("courses error:", error);
+    console.log("getCoursesId error:", error);
     return undefined;
   }
-}
+};

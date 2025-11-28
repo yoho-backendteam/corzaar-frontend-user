@@ -206,10 +206,12 @@ class Client {
     get: (params: string) =>
       httpClient.get(API_END_POINTS.student.attendance.get.replace(":studentId", params))
   }
-  courses = {
-    getById: (params: string) =>
-      httpClient.get(API_END_POINTS.student.courses.getById.replace(":id", params))
-  }
+courses = {
+  getById: (userId: string) =>
+    httpClient.get(
+      API_END_POINTS.student.courses.getById.replace(":userId", userId)
+    )
+};
 
   StudentCart = {
     getAll: () => httpClient.get(API_END_POINTS.Cart.getAll),

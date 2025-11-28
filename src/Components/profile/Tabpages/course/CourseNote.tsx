@@ -5,29 +5,26 @@ import { COLORS } from "../../../../Constants/uiconstants";
 interface CourseCardProps {
   image?: string;
   title: string;
-  instructor: string;
-  progress: number;
+  description?: string;
   category: string;
-  lastAccessed: string;
-  buttonLabel?: string;
-  buttonColor?: string;
+  price: number;
+  currency: string;
 }
 
 export const CourseCard: React.FC<CourseCardProps> = ({
   image = "",
   title,
-  instructor,
-  progress,
+  description = "No description available",
   category,
-  lastAccessed,
-  buttonLabel = "Already Enrolled",
-  buttonColor = COLORS.primary_red,
+  price,
+  currency,
 }) => {
   return (
     <div
-      className=" rounded-xl shadow-md p-5 flex flex-col md:flex-row gap-5 items-center md:items-start transition hover:shadow-lg"
+      className="rounded-xl shadow-md p-5 flex flex-col md:flex-row gap-5 items-center md:items-start transition hover:shadow-lg"
       style={{ backgroundColor: COLORS.primary_white }}
     >
+      {/* Thumbnail */}
       <div
         className="w-40 h-36 rounded-lg overflow-hidden flex items-center justify-center"
         style={{ backgroundColor: `${COLORS.primary_gray}4A` }}
@@ -35,24 +32,40 @@ export const CourseCard: React.FC<CourseCardProps> = ({
         {image ? (
           <img src={image} alt={title} className="w-full h-full object-cover" />
         ) : (
-          <div className=" text-sm" style={{ color: `${COLORS.primary_gray}` }}>
+          <div className="text-sm" style={{ color: COLORS.primary_gray }}>
             No Image
           </div>
         )}
       </div>
 
-      {/* Course Details */}
+      {/* Details */}
       <div className="flex-1 flex flex-col justify-between w-full">
         {/* Header */}
         <div className="flex justify-between items-start">
-          <div>
-            <h3 className="text-lg font-semibold "
-            style={{ color: COLORS.primary_gray }}>{title}</h3>
-            <p className="text-sm "
-            style={{ color: COLORS.primary_gray }}>{instructor}</p>
+          <div className="w-[80%]">
+            <h3
+              className="text-lg font-semibold"
+              style={{ color: COLORS.primary_gray }}
+            >
+              {title}
+            </h3>
+
+            {/* NEW — DESCRIPTION */}
+            <p
+              className="text-sm mt-1 line-clamp-2"
+              style={{ color: COLORS.primary_gray }}
+            >
+              {description}
+            </p>
+
+            {/* Static instructor */}
+            <p className="text-sm mt-1" style={{ color: COLORS.primary_gray }}>
+              Instructor not available
+            </p>
           </div>
+
           <span
-            className="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-md font-medium"
+            className="text-xs px-3 py-1 rounded-md font-medium"
             style={{
               color: COLORS.primary_gray,
               backgroundColor: `${COLORS.primary_gray}4A`,
@@ -62,32 +75,21 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           </span>
         </div>
 
-        {/* Progress */}
-        <div className="mt-3">
-          <div className="flex justify-between">
-            <p className="text-sm  mb-1" style={{ color: COLORS.primary_gray }}>
-              Progress {progress}%
-            </p>
-            <p className="text-xs " style={{ color: COLORS.primary_gray }}>
-              Last accessed {lastAccessed}
-            </p>
-          </div>
-          <div className="w-full  h-2 rounded-full"
-          style={{ backgroundColor: `${COLORS.secondary_gray}2A` }}>
-            <div
-              className="bg-[#707070] h-2 rounded-full transition-all duration-500"
-              style={{ width: `${progress}%` ,backgroundColor: COLORS.primary_gray }}
-            ></div>
-          </div>
-        </div>
+        {/* Price */}
+        <p
+          className="text-sm mt-2"
+          style={{ color: COLORS.primary_gray }}
+        >
+          Price: {price} {currency}
+        </p>
 
-        {/* Footer */}
+        {/* Button */}
         <div className="flex justify-between items-center mt-3">
           <button
             className="text-white text-sm px-4 py-2 rounded-md flex items-center gap-2 font-medium transition-all"
-            style={{ backgroundColor: buttonColor }}
+            style={{ backgroundColor: COLORS.primary_red }}
           >
-            {buttonLabel}
+            Already Enrolled
             <img
               src={click}
               alt=""
