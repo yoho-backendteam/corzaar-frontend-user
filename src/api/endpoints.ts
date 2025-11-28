@@ -88,7 +88,7 @@ export const API_END_POINTS = {
       get: "/student/api/attendance/all-student"
     },
    courses: {
-  getById: "/api/enrollment/getByUserId/:userId"
+  getById: "/student/api/enrollment/getByUserId/:userId"
 }
 
   },
