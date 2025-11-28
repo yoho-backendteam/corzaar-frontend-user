@@ -72,23 +72,23 @@ export const API_END_POINTS = {
       getAll: "/payment/api/student/all/payments"
     },
     fav: {
-      get: "/api/cart/fav/get"
+       get: `/api/cart/fav/getinstitute/:userId`,
     },
     profile: {
       get: "users/profile",
       getById: "/api/student_management/getbyid/:id"
     },
     portfolio: {
-      get: "/student/api/student_management/getBatch/:id"
+      get: "/api/student_management/getBatch/:id"
     },
     activity: {
       get: "/logs/api/activity/:userid"
     },
     attendance: {
-      get: "/merchant/api/attendance/all-student"
+      get: "/api/attendance/all-student"
     },
     courses: {
-      getById: "/course/api/courses/getCoursesId/:id"
+      getById: "/api/courses/getCoursesId/:id"
     }
   },
   Cart: {

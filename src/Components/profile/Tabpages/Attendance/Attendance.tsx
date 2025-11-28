@@ -4,7 +4,7 @@ import { CourseProgressCard } from "./Progresscard";
 import { attendanceSelect, courseIdSelect } from "../../../../features/settings/reducers/settingSelectors";
 import { useEffect, useMemo, useState } from "react";
 import type { AppDispatch } from "../../../../store/store";
-import { setAttendanceData, setCoursesById } from "../../../../features/settings/reducers/settingThunks";
+import { setAttendanceData, getCoursesById } from "../../../../features/settings/reducers/settingThunks";
 
 export const Attendance = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -45,7 +45,7 @@ export const Attendance = () => {
       try {
         const coursePromises = courseIds.map(async (id: string) => {
           if (id) {
-            const response = await dispatch(setCoursesById(id));
+            const response = await dispatch(getCoursesById(id));
             return response?.data;
           }
           return null;

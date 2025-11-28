@@ -1,26 +1,47 @@
 import { CourseCard } from "./CourseNote";
-import { useAppSelector } from "../../../../hooks/reduxhooks";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxhooks";
 import { COLORS } from "../../../../Constants/uiconstants";
+import { useEffect, useState } from "react";
+import { getCoursesById } from "../../../../features/settings/reducers/settingThunks";
 
 export const Mycourse = () => {
-  const profile = useAppSelector((state) => state.profile);
+  const dispatch = useAppDispatch();
+  const [course, setCourse] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const courseId = "691d8d28340440bf767c5b1d";
+
+    // Dispatch the thunk and handle the result
+    dispatch(getCoursesById(courseId))
+      .then((res: any) => {
+        if (res.payload?.message === "Course not found") {
+          setCourse(null);
+        } else {
+          setCourse(res.payload); // store fetched course
+        }
+      })
+      .finally(() => setLoading(false));
+  }, [dispatch]);
+
+  if (loading) {
+    return <p className="text-sm" style={{ color: COLORS.primary_gray }}>Loading...</p>;
+  }
 
   return (
     <div className="flex flex-col gap-6">
-      {profile.coursesList && profile.coursesList.length > 0 ? (
-        profile.coursesList.map((course, index) => (
-          <CourseCard
-            key={index}
-            title={course.title}
-            instructor={course.instructor}
-            progress={course.progress}
-            category={course.category}
-            lastAccessed={course.lastAccessed}
-          />
-        ))
+      {course ? (
+        <CourseCard
+          title={course.title}
+          instructor={course.instructor}
+          progress={course.progress}
+          category={course.category}
+          lastAccessed={course.lastAccessed}
+        />
       ) : (
-        <p className="text-sm"
-        style={{color:COLORS.primary_gray}}>No courses found.</p>
+        <p className="text-sm" style={{ color: COLORS.primary_gray }}>
+          No courses found.
+        </p>
       )}
     </div>
   );

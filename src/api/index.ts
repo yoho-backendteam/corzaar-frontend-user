@@ -181,7 +181,7 @@ class Client {
   }
    fav = {
     get: (userId: string) =>
-      httpClient.post(API_END_POINTS.student.fav.get, { userId })
+      httpClient.get(API_END_POINTS.student.fav.get.replace(":userId",userId))
 
   }
   profile = {

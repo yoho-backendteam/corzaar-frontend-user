@@ -126,7 +126,7 @@ export const setAttendanceData = (params: string) => async(dispatch: AppDispatch
   }
 } 
 
-export const setCoursesById = (params: string) => async(dispatch: AppDispatch): Promise<CoursesIdResponse | undefined> => {
+export const getCoursesById = (params: string) => async(dispatch: AppDispatch): Promise<CoursesIdResponse | undefined> => {
   try {
     const response = await getCoursesId(params);
     console.log("courses thunk response:", response);

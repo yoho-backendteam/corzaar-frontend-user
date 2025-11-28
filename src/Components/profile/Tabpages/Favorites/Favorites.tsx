@@ -5,7 +5,7 @@ import { COLORS } from "../../../../Constants/uiconstants";
 import { useAppSelector } from "../../../../hooks/reduxhooks";
 import type { AppDispatch } from "../../../../store/store";
 import { useEffect, useState } from "react";
-import { getAllFavData, setCoursesById } from "../../../../features/settings/reducers/settingThunks";
+import { getAllFavData, getCoursesById } from "../../../../features/settings/reducers/settingThunks";
 import { toast } from "react-toastify";
 import { courseIdSelect, favSelect } from "../../../../features/settings/reducers/settingSelectors";
 
@@ -106,7 +106,7 @@ export const Favorites = () => {
           for (const favItem of favoritesData.data.data.items) {
             try {
               // Fetch course details for each favorite item
-              const courseResponse = await dispatch(setCoursesById(favItem.courseId));
+              const courseResponse = await dispatch(getCoursesById(favItem.courseId));
               console.log("cour",courseResponse)
               
               if (courseResponse?.data) {
