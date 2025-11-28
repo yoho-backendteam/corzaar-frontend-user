@@ -18,7 +18,7 @@ export const Portfolio: React.FC = () => {
     (async () => {
       try {
         
-        const id = "68fb60f726d15f4ca736ff1d";
+        const id = "691d8d28340440bf767c5b1d";
         const data = await dispatch(getPortfolioData(id));
         const pay = data?.data
         // if(pay.success === true)

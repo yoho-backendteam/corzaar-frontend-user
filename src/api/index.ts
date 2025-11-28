@@ -179,9 +179,9 @@ class Client {
     getAll: (params: string) =>
       httpClient.get(API_END_POINTS.student.payment.getAll.replace(":id", params))
   }
-  fav = {
+   fav = {
     get: (userId: string) =>
-      httpClient.post(API_END_POINTS.student.fav.get, { userId })
+      httpClient.get(API_END_POINTS.student.fav.get.replace(":userId",userId))
 
   }
   profile = {
