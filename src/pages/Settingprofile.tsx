@@ -40,7 +40,7 @@ export const Settingprofile = () => {
     { label: "Attendance", content: <Attendance /> },
     { label: "Payments", content: <Payments /> },
     { label: "Favorites", content: <Favorites /> },
-    { label: "Settings", content: <Settings /> },
+    // { label: "Settings", content: <Settings /> },
   ];
   const iconMap: Record<string, string> = {
     "icon.png": icon,
