@@ -10,8 +10,8 @@ export const cartdeleteservices = async (courseId: string, userId: string) => {
   return response;
 };
 
-export const AddtoCartService = async (params: string) => {
-  const response = await Client.StudentCart.addtocart(params)
+export const AddtoCartService = async (params: string, batchId?: string) => {
+  const response = await Client.StudentCart.addtocart(params, batchId)
   return response.data
 }
 

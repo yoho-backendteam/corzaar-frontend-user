@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { Star, Users, Clock, Globe, CheckCircle, MapPin, Mail, Phone, Award } from 'lucide-react';
 import { COLORS, FONTS } from '../../Constants/uiconstants';
@@ -9,6 +10,8 @@ import { selectCoursebyid } from '../../features/home_page/reducers/homeSelector
 import { FaArrowLeft } from 'react-icons/fa';
 import { AddtoCartService } from '../../features/cart/services';
 import { toast } from 'react-toastify';
+import { BatchModal } from './batchs/SelectBatchCard';
+import { getBatchBycourseId } from '../../features/courses/service';
 
 export interface CourseData {
   title: string;
@@ -41,6 +44,7 @@ const Courseview: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'curriculum' | 'reviews'>('overview');
   const dispatch = useDispatch<AppDispatch>();
   const coursebyid: CourseData = useSelector(selectCoursebyid);
+  const [SelectedCourse, setSelectedCourse] = useState<any>(null);
 
   const { id } = useParams();
 
@@ -109,6 +113,22 @@ const Courseview: React.FC = () => {
   const calculateDiscount = (original: number, current: number): number => {
     return Math.round(((original - current) / original) * 100);
   };
+
+  const handelSlectedCourse = async (courseId: string) => {
+    const { data } = await getBatchBycourseId(courseId)
+
+    if (data.length == 0) {
+      return toast.warn("there is no batch available")
+    }
+
+    setSelectedCourse(data)
+
+  }
+
+  const handelcloseModel = () => {
+    setSelectedCourse(null)
+  }
+
 
   return (
     <div style={{ backgroundColor: COLORS.primary_yellow }} className="min-h-screen ">
@@ -371,7 +391,7 @@ const Courseview: React.FC = () => {
                   </span>
                 </div>
 
-                <button onClick={() => handelAddtoCart(coursebyid?._id)} style={{ ...FONTS.nummedium4 as any, color: COLORS.primary_white, backgroundColor: COLORS.primary_black }} className="w-full py-3 rounded-lg hover:bg-slate-800 transition">
+                <button onClick={() => handelSlectedCourse(coursebyid?._id)} style={{ ...FONTS.nummedium4 as any, color: COLORS.primary_white, backgroundColor: COLORS.primary_black }} className="w-full py-3 rounded-lg hover:bg-slate-800 transition">
                   Add to Cart
                 </button>
 
@@ -402,6 +422,13 @@ const Courseview: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <BatchModal
+        isOpen={SelectedCourse !== null}
+        onClose={handelcloseModel}
+        course={SelectedCourse}
+        gotoCart={() => navigate("/cart")}
+      />
     </div>
   );
 };

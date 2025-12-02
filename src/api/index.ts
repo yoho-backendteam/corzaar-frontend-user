@@ -179,9 +179,9 @@ class Client {
     getAll: (params: string) =>
       httpClient.get(API_END_POINTS.student.payment.getAll.replace(":id", params))
   }
-   fav = {
+  fav = {
     get: (userId: string) =>
-      httpClient.get(API_END_POINTS.student.fav.get.replace(":userId",userId))
+      httpClient.get(API_END_POINTS.student.fav.get.replace(":userId", userId))
 
   }
   profile = {
@@ -206,18 +206,18 @@ class Client {
     get: (params: string) =>
       httpClient.get(API_END_POINTS.student.attendance.get.replace(":studentId", params))
   }
-courses = {
-  getById: (userId: string) =>
-    httpClient.get(
-      API_END_POINTS.student.courses.getById.replace(":userId", userId)
-    )
-};
+  courses = {
+    getById: (userId: string) =>
+      httpClient.get(
+        API_END_POINTS.student.courses.getById.replace(":userId", userId)
+      )
+  };
 
   StudentCart = {
     getAll: () => httpClient.get(API_END_POINTS.Cart.getAll),
     delete: (courseId: string, userId: string) => httpClient.delete(API_END_POINTS.Cart.deleteone.replace(':id', courseId), { data: { userId } }
     ),
-    addtocart: (params: string) => httpClient.post(API_END_POINTS.Cart.addtocart.replace(":id", params))
+    addtocart: (params: string, batchId: string) => httpClient.post(API_END_POINTS.Cart.addtocart.replace(":id", params).replace(":batchId", batchId))
   };
 
   user_home = {
@@ -244,6 +244,10 @@ courses = {
     getQueries: (params?: any, _senderRole?: string) => httpClient.get(API_END_POINTS.Query.GET, params),
 
     adminReply: (data: any) => httpClient.post(API_END_POINTS.Query.adminPOST, data),
+  }
+
+  batch = {
+    getbycourse: (id: string) => httpClient.get(API_END_POINTS.batch.getByCourseId.replace(":courseId", id))
   }
 }
 

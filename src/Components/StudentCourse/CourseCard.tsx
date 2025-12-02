@@ -34,22 +34,13 @@ interface Course {
   enrolled?: boolean;
 }
 
-export default function CourseCard({ course }: { course: Course }) {
+export default function CourseCard({ course, SelectedCourse }: { course: Course, SelectedCourse: (id: string) => void }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  async function handelAddtoCart(id: string) {
-    const response = await AddtoCartService(id)
-    if (response?.success) {
-      toast.success("course added your cart")
-    } else {
-      toast.warn("try again, something error.")
-    }
-  }
-
   const navigate = useNavigate();
 
-  const handleOpen =() => {
+  const handleOpen = () => {
     navigate(`/courses/view/${course._id}`)
   }
 
@@ -325,7 +316,7 @@ export default function CourseCard({ course }: { course: Course }) {
                   padding: "10px 16px",
                   fontFamily: FONTS.medium?.fontFamily,
                 }}
-                onClick={() => handelAddtoCart(course?._id)}
+                onClick={() => SelectedCourse(course?._id)}
               >
                 <img src={cart} alt="cart" className="w-4 h-4" />
                 Add To Cart

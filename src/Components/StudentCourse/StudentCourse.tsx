@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, batch } from "react-redux";
 import { useState, useEffect, useMemo } from "react";
 import { ChevronDown, SearchIcon, X } from "lucide-react";
 import CourseCard from "../../Components/StudentCourse/CourseCard";
@@ -15,6 +16,10 @@ import {
   filterCourses,
 } from "../../Components/Redux/courseThunks";
 import type { RootState, AppDispatch } from "../../store/store";
+import { BatchModal } from "./batchs/SelectBatchCard";
+import { getBatchBycourseId } from "../../features/courses/service";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const sortOptions = [
   "Most Popular",
@@ -41,9 +46,13 @@ export default function ExploreCourses() {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const navigate = useNavigate()
+
 
   const courseState = useSelector((state: RootState) => state.course);
   const { courses = [], loading, error } = courseState;
+
+  const [SelectedCourse, setSelectedCourse] = useState<any>(null);
 
 
   const fetchCoursesPage = async (pageNumber = 1) => {
@@ -53,17 +62,17 @@ export default function ExploreCourses() {
         fetchCourses({ page: pageNumber, limit })
       );
 
-     
+
       const payload = actionResult?.payload ?? actionResult;
 
       if (payload) {
-       
+
         if (payload.data && Array.isArray(payload.data)) {
           setTotalPages(Number(payload.totalPages ?? 1));
           setTotalItems(Number(payload.total ?? payload.data.length ?? 0));
           setPage(Number(payload.page ?? pageNumber));
         } else if (Array.isArray(payload)) {
- 
+
           setTotalPages(1);
           setTotalItems(payload.length);
           setPage(pageNumber);
@@ -81,16 +90,16 @@ export default function ExploreCourses() {
     }
   };
 
-  
+
   useEffect(() => {
     fetchCoursesPage(page);
   }, [dispatch, page, limit]);
 
- 
+
   const handleFilterChange = (filterId: string) => {
     setActiveFilter(filterId);
     setAppliedFilters(null);
-    setPage(1); 
+    setPage(1);
 
     switch (filterId) {
       case "all":
@@ -113,7 +122,7 @@ export default function ExploreCourses() {
   const handleApplyFilters = (filters: any) => {
     console.log("Applying filters:", filters);
     setAppliedFilters(filters);
-    setActiveFilter(""); 
+    setActiveFilter("");
     setPage(1);
     dispatch(filterCourses({ ...filters, page: 1, limit }));
   };
@@ -129,9 +138,9 @@ export default function ExploreCourses() {
     setSelectedSort(option);
     const details = document.querySelector("details");
     if (details) details.removeAttribute("open");
-     };
+  };
 
-  
+
   const filteredCourses = useMemo(() => {
     if (!Array.isArray(courses)) return [];
 
@@ -150,7 +159,7 @@ export default function ExploreCourses() {
     });
   }, [courses, searchQuery]);
 
- 
+
   const sortedAndFilteredCourses = useMemo(() => {
     const arr = [...filteredCourses];
     arr.sort((a: any, b: any) => {
@@ -175,17 +184,17 @@ export default function ExploreCourses() {
     return arr;
   }, [filteredCourses, selectedSort]);
 
-  
+
   const goToPage = (num: number) => {
     if (num < 1 || num > totalPages) return;
     setPage(num);
-    
+
   };
 
   const prevPage = () => goToPage(Math.max(1, page - 1));
   const nextPage = () => goToPage(Math.min(totalPages, page + 1));
 
-  
+
   useEffect(() => {
     const reduxTotalPages = (courseState as any).totalPages;
     const reduxTotal = (courseState as any).total;
@@ -196,7 +205,23 @@ export default function ExploreCourses() {
     if (reduxPage) setPage(Number(reduxPage));
   }, []);
 
-  
+
+  const handelSlectedCourse = async (courseId: string) => {
+    const { data } = await getBatchBycourseId(courseId)
+
+    if (data.length == 0) {
+      return toast.warn("there is no batch available")
+    }
+
+    setSelectedCourse(data)
+
+  }
+
+  const handelcloseModel = () => {
+    setSelectedCourse(null)
+  }
+
+
   return (
     <div
       className="min-h-screen w-full flex flex-col"
@@ -413,13 +438,13 @@ export default function ExploreCourses() {
             !error &&
             sortedAndFilteredCourses.map((course: any) => (
               <div key={course.id || course._id} className="relative group">
-                <CourseCard course={course} />
+                <CourseCard course={course} SelectedCourse={handelSlectedCourse} />
               </div>
             ))}
         </section>
       </main>
 
-     
+
       <div className="flex justify-center items-center gap-2 py-6 px-4">
         <button
           onClick={prevPage}
@@ -434,7 +459,7 @@ export default function ExploreCourses() {
 
         <div className="flex items-center gap-2">
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((pNum) => {
-            
+
             const showAll = totalPages <= 7;
             const inRange =
               pNum === 1 ||
@@ -442,7 +467,7 @@ export default function ExploreCourses() {
               (pNum >= page - 2 && pNum <= page + 2);
 
             if (!showAll && !inRange) {
-             
+
               return null;
             }
 
@@ -460,7 +485,7 @@ export default function ExploreCourses() {
             );
           })}
 
-       
+
           {!Array.from({ length: totalPages }).every((_, i) => {
             const pNum = i + 1;
             return (
@@ -470,42 +495,42 @@ export default function ExploreCourses() {
               (pNum >= page - 2 && pNum <= page + 2)
             );
           }) && (
-            <div className="flex items-center gap-2">
-             
-              <button
-                onClick={() => goToPage(1)}
-                className={`px-3 py-1 rounded ${page === 1 ? "bg-black text-white" : "bg-white hover:bg-gray-100"
-                  }`}
-              >
-                1
-              </button>
+              <div className="flex items-center gap-2">
 
-              {page - 3 > 1 && <span className="px-2">...</span>}
+                <button
+                  onClick={() => goToPage(1)}
+                  className={`px-3 py-1 rounded ${page === 1 ? "bg-black text-white" : "bg-white hover:bg-gray-100"
+                    }`}
+                >
+                  1
+                </button>
 
-              {Array.from({ length: totalPages }, (_, i) => i + 1)
-                .filter((pNum) => pNum >= page - 2 && pNum <= page + 2)
-                .map((pNum) => (
-                  <button
-                    key={`w-${pNum}`}
-                    onClick={() => goToPage(pNum)}
-                    className={`px-3 py-1 rounded ${pNum === page ? "bg-[#ED1C24] text-white" : "bg-white hover:bg-gray-100"
-                      }`}
-                  >
-                    {pNum}
-                  </button>
-                ))}
+                {page - 3 > 1 && <span className="px-2">...</span>}
 
-              {page + 3 < totalPages && <span className="px-2">...</span>}
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter((pNum) => pNum >= page - 2 && pNum <= page + 2)
+                  .map((pNum) => (
+                    <button
+                      key={`w-${pNum}`}
+                      onClick={() => goToPage(pNum)}
+                      className={`px-3 py-1 rounded ${pNum === page ? "bg-[#ED1C24] text-white" : "bg-white hover:bg-gray-100"
+                        }`}
+                    >
+                      {pNum}
+                    </button>
+                  ))}
 
-              <button
-                onClick={() => goToPage(totalPages)}
-                className={`px-3 py-1 rounded ${page === totalPages ? "bg-black text-white" : "bg-white hover:bg-gray-100"
-                  }`}
-              >
-                {totalPages}
-              </button>
-            </div>
-          )}
+                {page + 3 < totalPages && <span className="px-2">...</span>}
+
+                <button
+                  onClick={() => goToPage(totalPages)}
+                  className={`px-3 py-1 rounded ${page === totalPages ? "bg-black text-white" : "bg-white hover:bg-gray-100"
+                    }`}
+                >
+                  {totalPages}
+                </button>
+              </div>
+            )}
         </div>
 
         <button
@@ -519,6 +544,13 @@ export default function ExploreCourses() {
           Next
         </button>
       </div>
+
+      <BatchModal
+        isOpen={SelectedCourse !== null}
+        onClose={handelcloseModel}
+        course={SelectedCourse}
+        gotoCart={() => navigate("/cart")}
+      />
     </div>
   );
 }

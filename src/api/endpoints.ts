@@ -21,11 +21,11 @@ export const API_END_POINTS = {
   },
 
   login: {
-    post: "/api/users/login",
+    post: "/auth/api/users/login",
     rootpost: "/auth/api/users/root-login",
     profile: "/student/api/student_management/create"
   },
-  otpverify: { post: "/api/share/verify-otp" },
+  otpverify: { post: "/auth/api/share/verify-otp" },
   course: {
     create: `${BASE_COURSE_URL}/`,
     getAll: `${BASE_COURSE_URL}/`,
@@ -59,6 +59,10 @@ export const API_END_POINTS = {
       `${BASE_COURSE_URL}/${courseId}/content/${contentId}`,
   },
 
+  batch: {
+    getByCourseId: "/course/api/course/:courseId/batch/"
+  },
+
   cart: {
     fav: {
       add: `${BASE_API_URL}/student/api/cart/fav/add`,
@@ -72,7 +76,7 @@ export const API_END_POINTS = {
       getAll: "/payment/api/student/all/payments"
     },
     fav: {
-       get: `/student/api/cart/fav/getinstitute/:userId`,
+      get: `/student/api/cart/fav/getinstitute/:userId`,
     },
     profile: {
       get: "users/profile",
@@ -87,14 +91,14 @@ export const API_END_POINTS = {
     attendance: {
       get: "/student/api/attendance/all-student"
     },
-   courses: {
-  getById: "/api/enrollment/getByUserId/:userId"
-}
+    courses: {
+      getById: "/api/enrollment/getByUserId/:userId"
+    }
 
   },
   Cart: {
     getAll: `/student/api/cart`,
-    addtocart: "/student/api/cart/addtocart/:id",
+    addtocart: "/student/api/cart/addtocart/:id/:batchId",
     deleteone: `/student/api/cart/remove/:id`
   },
 
