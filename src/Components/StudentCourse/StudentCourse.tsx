@@ -302,7 +302,7 @@ export default function ExploreCourses() {
                     <button
                       key={option}
                       onClick={() => handleSortChange(option)}
-                      className={`flex items-center px-3 py-2.5 gap-4 rounded transition-colors hover:bg-gray-100 w-full text-left ${selectedSort === option ? "bg-gray-100 font-medium" : ""
+                      className={`flex items-center cursor-pointer px-3 py-2.5 gap-4 rounded transition-colors hover:bg-gray-100 w-full text-left ${selectedSort === option ? "bg-gray-100 font-medium" : ""
                         }`}
                       style={{
                         color: COLORS.primary_gray,
@@ -329,7 +329,7 @@ export default function ExploreCourses() {
             <button
               key={filterBtn.id}
               onClick={() => handleFilterChange(filterBtn.id)}
-              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm transition-colors ${activeFilter === filterBtn.id
+              className={`px-3 py-1.5 sm:px-4 cursor-pointer sm:py-2 rounded-full text-xs sm:text-sm transition-colors ${activeFilter === filterBtn.id
                 ? "bg-blue-500 text-white"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}

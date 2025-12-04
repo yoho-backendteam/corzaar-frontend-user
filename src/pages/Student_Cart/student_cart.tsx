@@ -20,6 +20,9 @@ const Student_cart = () => {
   const dispatch = useDispatch<AppDispatch>();
   const cartItems = useSelector(Getcart);
 
+  console.log(cartItems,"cart items");
+  
+
   const cartData = cartItems?.data;
 
   const userid = "6903227b1c60e593f8740475";

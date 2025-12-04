@@ -53,10 +53,16 @@ const Navbar: React.FC = () => {
   // Reverse geocode function using Nominatim OpenStreetMap API
   const reverseGeocode = async (lat: number, lon: number) => {
     try {
+      console.log("entry");
+      
       const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`
       );
+      console.log(response,"response");
+      
       const data = await response.json();
+      console.log(data,"overall data");
+      
       const city =
         data.address.city ||
         data.address.town ||

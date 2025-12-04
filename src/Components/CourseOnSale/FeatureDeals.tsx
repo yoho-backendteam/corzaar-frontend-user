@@ -92,7 +92,7 @@ const FeaturedDeals: React.FC = () => {
                   {deal?.description}
                 </p>
 
-                <div className="mt-3 flex items-center border border-amber-400 rounded px-2 py-1 justify-between">
+                <div className="mt-3 flex  items-center border border-amber-400 rounded px-2 py-1 justify-between">
                   <span
                     className="flex gap-2 items-center"
                     style={FONTS.regular as object}
@@ -148,7 +148,7 @@ const FeaturedDeals: React.FC = () => {
 
                 <div>
                   <button
-                    className="mt-4 w-full py-2 rounded"
+                    className="mt-4 cursor-pointer w-full py-2 rounded"
                     style={{
                       ...(FONTS.boldHeading4 as object),
                       color: COLORS.primary_white,

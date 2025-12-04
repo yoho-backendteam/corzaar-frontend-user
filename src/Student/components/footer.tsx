@@ -19,7 +19,7 @@ const Footer = () => {
           <p className="text-base md:text-lg mb-8">
             Join thousands of Students already learning on CORZAAR
           </p>
-          <button className="bg-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition flex items-center justify-center gap-2 mx-auto" style={{ color: COLORS.primary_red }}
+          <button className="bg-white font-semibold cursor-pointer px-6 py-3 rounded-lg hover:bg-gray-100 transition flex items-center justify-center gap-2 mx-auto" style={{ color: COLORS.primary_red }}
             onClick={() => navigate("/courses")} >
             Explore All Courses →
           </button>
@@ -85,7 +85,7 @@ const Footer = () => {
                 className="border border-gray-400 rounded-md px-3 py-2 text-sm w-full"
               />
               <button
-                className="text-white px-4 py-2 rounded-md transition"
+                className="text-white cursor-pointer px-4 py-2 rounded-md transition"
                 style={{ background: COLORS.primary_red }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = "#b31218")}
                 onMouseLeave={(e) => (e.currentTarget.style.background = COLORS.primary_red)}

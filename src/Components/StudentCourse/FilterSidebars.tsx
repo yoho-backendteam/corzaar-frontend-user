@@ -207,7 +207,7 @@ export default function FilterSidebar({
             <button
               key={filter.id}
               onClick={() => onFilterChange?.(filter.id)}
-              className={`px-2 py-1 rounded text-sm transition-colors ${
+              className={`px-2 py-1 rounded cursor-pointer text-sm transition-colors ${
                 activeFilter === filter.id
                   ? "bg-blue-500 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -241,7 +241,7 @@ export default function FilterSidebar({
             >
               <input
                 type="checkbox"
-                className="mr-2 accent-red-600"
+                className="mr-2 cursor-pointer accent-red-600"
                 checked={selectedCategories.includes(category.name)}
                 onChange={(e) =>
                   handleCategoryChange(category.name, e.target.checked)
@@ -271,7 +271,7 @@ export default function FilterSidebar({
           <label>
             <input
               type="checkbox"
-              className="mr-2 accent-red-600"
+              className="mr-2 cursor-pointer accent-red-600"
               checked={selectedLevels.includes("beginner")}
               onChange={(e) => handleLevelChange("Beginner", e.target.checked)}
             />
@@ -280,7 +280,7 @@ export default function FilterSidebar({
           <label>
             <input
               type="checkbox"
-              className="mr-2 accent-red-600"
+              className="mr-2 cursor-pointer accent-red-600"
               checked={selectedLevels.includes("intermediate")}
               onChange={(e) =>
                 handleLevelChange("Intermediate", e.target.checked)
@@ -291,7 +291,7 @@ export default function FilterSidebar({
           <label>
             <input
               type="checkbox"
-              className="mr-2 accent-red-600"
+              className="mr-2 cursor-pointer accent-red-600"
               checked={selectedLevels.includes("advanced")}
               onChange={(e) => handleLevelChange("Advanced", e.target.checked)}
             />
@@ -322,7 +322,7 @@ export default function FilterSidebar({
             <label key={rating} className="flex items-center">
               <input
                 type="checkbox"
-                className="mr-2 accent-red-600"
+                className="mr-2 cursor-pointer accent-red-600"
                 checked={minRating === rating}
                 onChange={(e) => handleRatingChange(rating, e.target.checked)}
               />
@@ -364,7 +364,7 @@ export default function FilterSidebar({
         </p>
         <input
           type="range"
-          className="w-full accent-red-600"
+          className="w-full cursor-pointer accent-red-600"
           min="1"
           max="100"
           value={locationRadius}
@@ -390,7 +390,7 @@ export default function FilterSidebar({
         </p>
         <input
           type="range"
-          className="w-full accent-red-600"
+          className="w-full cursor-pointer accent-red-600"
           min="0"
           max="5000"
           step="100"
@@ -422,7 +422,7 @@ export default function FilterSidebar({
           <label>
             <input
               type="checkbox"
-              className="mr-2 accent-red-600"
+              className="mr-2 cursor-pointer accent-red-600"
               checked={selectedModes.includes("online")}
               onChange={(e) => handleModeChange("Online", e.target.checked)}
             />
@@ -431,7 +431,7 @@ export default function FilterSidebar({
           <label>
             <input
               type="checkbox"
-              className="mr-2 accent-red-600"
+              className="mr-2 cursor-pointer accent-red-600"
               checked={selectedModes.includes("offline")}
               onChange={(e) => handleModeChange("Offline", e.target.checked)}
             />
@@ -440,7 +440,7 @@ export default function FilterSidebar({
           <label>
             <input
               type="checkbox"
-              className="mr-2 accent-red-600"
+              className="mr-2 cursor-pointer accent-red-600"
               checked={selectedModes.includes("hybrid")}
               onChange={(e) => handleModeChange("Hybrid", e.target.checked)}
             />
@@ -451,7 +451,7 @@ export default function FilterSidebar({
 
       <button
         onClick={handleApplyFilters}
-        className="w-full mt-4 rounded-md py-2 mb-2 border transition-all duration-300 hover:shadow-md"
+        className="w-full cursor-pointer mt-4 rounded-md py-2 mb-2 border transition-all duration-300 hover:shadow-md"
         style={{
           backgroundColor: COLORS.primary_white,
           color: COLORS.primary_red,
@@ -473,7 +473,7 @@ export default function FilterSidebar({
 
       <button
         onClick={handleResetFilters}
-        className="w-full rounded-md py-2 border transition-all duration-300 hover:shadow-md"
+        className="w-full cursor-pointer rounded-md py-2 border transition-all duration-300 hover:shadow-md"
         style={{
           backgroundColor: COLORS.primary_white,
           color: COLORS.primary_red,

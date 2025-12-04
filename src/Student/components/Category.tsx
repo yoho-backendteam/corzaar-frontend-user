@@ -75,7 +75,7 @@ const Category = () => {
           {limitedCategories.map((cat) => (
             <div
               key={cat.primary}
-              className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 text-center py-10 cursor-pointer"
+              className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 text-center py-10 "
             >
               <h3 className="text-lg font-semibold text-black mb-2">
                 {cat.primary}

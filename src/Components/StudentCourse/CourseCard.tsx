@@ -309,7 +309,7 @@ export default function CourseCard({ course, SelectedCourse }: { course: Course,
               </button>
             ) : (
               <button
-                className="flex items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors w-full text-center"
+                className="flex items-center cursor-pointer justify-center gap-2 rounded-lg text-sm font-semibold transition-colors w-full text-center"
                 style={{
                   backgroundColor: COLORS.primary_yellow,
                   color: COLORS.primary_black,

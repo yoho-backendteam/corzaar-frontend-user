@@ -20,6 +20,8 @@ import { toast } from "react-toastify";
 
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
+  console.log(course,"courses");
+  
   const [isFavorite, setIsFavorite] = useState(false);
   // const dispatch = useDispatch<AppDispatch>();
 
@@ -164,14 +166,14 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         </div>
 
         {/* Button */}
-        {course?.enrolled ? (
-          <button className=" text-white text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-red-700 transition" style={{ background: COLORS.primary_red }}>
+        {course?.isactive ===true ? (
+          <button className=" text-white cursor-pointer text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-red-700 transition" style={{ background: COLORS.primary_red }}>
 
             Already Enrolled
             <img src={enroll} alt="" className="font-bold ml-1 h-5" />
           </button>
         ) : (
-          <button className=" text-black text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-[#FFD400] transition" style={{ background: COLORS.primary_yellow }} onClick={() => handelAddtoCart(course?._id)}>
+          <button className=" text-black cursor-pointer text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-[#FFD400] transition" style={{ background: COLORS.primary_yellow }} onClick={() => handelAddtoCart(course?._id)}>
             <ShoppingCart className="w-4 h-4" />
             Add To Cart
           </button>

@@ -82,13 +82,13 @@ const ExploreInstitutes: React.FC = () => {
       </div>
 
       {/* Categories */}
-      <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 md:gap-5 lg:gap-7 mt-6">
+      <div className="flex flex-wrap  justify-center md:justify-start gap-2 sm:gap-3 md:gap-5 lg:gap-7 mt-6">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => dispatch(setActiveCategory(cat))}
             style={FONTS.tabheading as React.CSSProperties}
-            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border text-xs sm:text-sm md:text-base font-medium transition-all duration-200
+            className={`px-3 cursor-pointer sm:px-4 py-1.5 sm:py-2 rounded-lg border text-xs sm:text-sm md:text-base font-medium transition-all duration-200
               ${
                 activeCategory === cat
                   ? "bg-[#ED1C24] text-white border-[#ED1C24]"
@@ -109,7 +109,7 @@ const ExploreInstitutes: React.FC = () => {
       </h2>
 
       {/* Institutes Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 mt-6">
+      <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 mt-6">
         {filteredInstitutes?.map((inst) => (
           <div
             key={inst._id}
@@ -214,7 +214,7 @@ const ExploreInstitutes: React.FC = () => {
               {/* View Courses Button */}
               <button
                 onClick={() => navigate(`/institute/${inst._id}`)}
-                className="mt-4 sm:mt-5 bg-[#ED1C24] text-white font-medium py-2 rounded-md w-full flex items-center justify-center gap-2 text-sm sm:text-base hover:bg-[#d0181f] transition-colors"
+                className="mt-4 cursor-pointer sm:mt-5 bg-[#ED1C24] text-white font-medium py-2 rounded-md w-full flex items-center justify-center gap-2 text-sm sm:text-base hover:bg-[#d0181f] transition-colors"
               >
                 View Courses{" "}
                 <img src={teacher} alt="teacher" className="w-4 h-4 sm:w-5 sm:h-5" />

@@ -141,9 +141,9 @@ export default function ContactForm() {
       ></textarea>
 
       {/* Submit Button */}
-      <div className="text-right py-11.5">
+      <div className="text-right  py-11.5">
         <button
-          className="bg-[#ED1C24] px-6 py-3 text-white rounded-lg flex items-center gap-3 float-right"
+          className="bg-[#ED1C24] px-6 py-3 cursor-pointer text-white rounded-lg flex items-center gap-3 float-right"
           onClick={handleSend}
           disabled={loading}
         >

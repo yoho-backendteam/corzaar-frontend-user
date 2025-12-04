@@ -87,6 +87,7 @@ export interface CourseCardProps {
     ];
     students: number;
     duration: string;
+    isactive:boolean
   };
 }
 

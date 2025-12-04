@@ -56,7 +56,7 @@ const CoursesOnSale: React.FC = () => {
               </div>
 
               <button
-                className="flex justify-center items-center gap-1 mt-4 w-full py-2 rounded hover:bg-red-700 transition"
+                className="flex cursor-pointer justify-center items-center gap-3 mt-4 w-full py-2 rounded hover:bg-red-700 transition"
                style={{ ...(FONTS.regular as any), color: COLORS.primary_white , background : COLORS.primary_red}}>
               
                 View Courses <LuGraduationCap />
