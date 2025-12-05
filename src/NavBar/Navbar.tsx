@@ -2,10 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import {
   FiMenu,
   FiX,
-  FiSearch,
   FiMapPin,
-  FiUser,
-  FiShoppingCart,
 } from "react-icons/fi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
@@ -226,7 +223,7 @@ const Navbar: React.FC = () => {
                     <p className="text-gray-500 text-sm mb-4">Student</p>
 
                     <ul className="space-y-3 text-gray-700">
-                      <Link to="Portfolio" onClick={() => setShowProfile(false)}>
+                      {/* <Link to="Portfolio" onClick={() => setShowProfile(false)}>
                         <li className="flex items-center gap-2 hover:text-black cursor-pointer">
                           <FiUser size={16} /> My Profile
                         </li>
@@ -236,7 +233,7 @@ const Navbar: React.FC = () => {
                         <li className="flex items-center gap-2 hover:text-black cursor-pointer">
                           <FiShoppingCart size={16} /> My Courses
                         </li>
-                      </Link>
+                      </Link> */}
 
                       <Link
                         to="/setting"

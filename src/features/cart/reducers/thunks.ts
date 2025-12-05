@@ -1,6 +1,6 @@
 import type { AppDispatch } from "../../../store/store";
 import { cartdeleteservices, getStudentCart } from "../services";
-import { getcart } from "./cartslice";
+import { deletecart, getcart } from "./cartslice";
 
 
 export const getStudentCartThunks = () => async (dispatch: AppDispatch) => {
@@ -18,7 +18,7 @@ export const cartdeletethunks = (courseId: string, userId: string) => async (dis
   try {
     const response = await cartdeleteservices(courseId, userId);
     console.log("Deleted successfully:", response);
-    await dispatch(getStudentCartThunks(userId));
+    await dispatch(deletecart(userId));
     return response;
   } catch (error) {
     console.error("Error in cartdeletethunks:", error);
