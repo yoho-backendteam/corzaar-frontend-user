@@ -20,6 +20,7 @@ import { useAuth } from "../context/context";
 import { toast } from "react-toastify";
 
 const Navbar: React.FC = () => {
+  
   const [menuOpen, setMenuOpen] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const { isAuthenticated, logout } = useAuth();
@@ -32,23 +33,22 @@ const Navbar: React.FC = () => {
     return localStorage.getItem("userLocation") || "Fetching...";
   });
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      )
-        if (
-          profileRef.current &&
-          !profileRef.current.contains(event.target as Node)
-        ) {
-          setShowProfile(false);
-        }
-    };
+ useEffect(() => {
+  const handleClickOutside = (e: MouseEvent) => {
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+      setShowProfile(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
+
 
   // Reverse geocode function using Nominatim OpenStreetMap API
   const reverseGeocode = async (lat: number, lon: number) => {
@@ -97,7 +97,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div>
+    <div >
       <nav
         className="shadow-md sticky top-0 z-50 w-full"
         style={{ ...(FONTS.regular as any), background: COLORS.primary_white }}
@@ -220,17 +220,17 @@ const Navbar: React.FC = () => {
                     <p className="text-gray-500 text-sm mb-4">Student</p>
 
                     <ul className="space-y-3 text-gray-700">
-                      <Link to="Portfolio" onClick={() => setShowProfile(false)}>
+                      {/* <Link to="Portfolio" onClick={() => setShowProfile(false)}>
                         <li className="flex items-center gap-2 hover:text-black cursor-pointer">
                           <FiUser size={16} /> My Profile
                         </li>
-                      </Link>
+                      </Link> */}
 
-                      <Link to="Mycourse" onClick={() => setShowProfile(false)}>
+                      {/* <Link to="Mycourse" onClick={() => setShowProfile(false)}>
                         <li className="flex items-center gap-2 hover:text-black cursor-pointer">
                           <FiShoppingCart size={16} /> My Courses
                         </li>
-                      </Link>
+                      </Link> */}
 
                       <Link
                         to="/setting"
