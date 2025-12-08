@@ -93,7 +93,7 @@ const TrendingCourse = () => {
           </p>
         </div>
         <button
-          className="text-white font-semibold px-4 py-2 rounded-lg transition duration-300"
+          className="text-white font-semibold px-4 py-2 rounded-lg transition cursor-pointer duration-300"
           style={{ background: COLORS.primary_red }}
           onClick={() => navigate("/courses")}
           onMouseEnter={(e) =>
@@ -117,7 +117,7 @@ const TrendingCourse = () => {
           {/* Left Arrow */}
           <button
             onClick={() => scroll("left")}
-            className="hidden md:flex absolute left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
+            className="cursor-pointer hidden md:flex absolute left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
           >
             <ChevronLeft
               className="w-6 h-6"
@@ -134,7 +134,7 @@ const TrendingCourse = () => {
               <div
                 key={course.id || course._id || index} 
                  onClick={() => { handleOpen(course?._id) }}
-                className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
+                className="flex-shrink-0 w-[85%] sm:w-[45%] cursor-pointer md:w-[30%] lg:w-[31%] snap-center"
               >
                 <CourseCard course={course} />
               </div>
@@ -144,7 +144,7 @@ const TrendingCourse = () => {
           {/* Right Arrow */}
           <button
             onClick={() => scroll("right")}
-            className="hidden md:flex absolute right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
+            className="cursor-pointer hidden md:flex absolute right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
           >
             <ChevronRight
               className="w-6 h-6"

@@ -8,13 +8,14 @@ import logocap from "../../assets/images/logocap.png";
 import SignInPassword from "../../Components/Authentication/SignInPassword";
 import SendOTP from "../../Components/Authentication/SendOTP";
 import OTPVerification from "../../Components/Authentication/OTPVerification";
-import { resetOTP } from "../../features/userlogin/reducers/otpslice";
+// import { resetOTP } from "../../features/userlogin/reducers/otpslice";
 import { sendOTPThunk } from "../../features/userlogin/reducers/otpthunks";
 import type { AppDispatch } from "../../store/store";
 import { Lock, Phone } from "lucide-react";
 // import { loginWithEmailThunk } from "../../features/userlogin/reducers/auththunk.ts";
-import type { LoginResponse, LoginThunkAction, OTPResponse, OTPThunkResult } from "../../features/userlogin/types/otptypes";
-import { LoginWithEmail } from "../../features/userlogin/reducers/service";
+import type { 
+  LoginResponse, LoginThunkAction, OTPResponse, OTPThunkResult } from "../../features/userlogin/types/otptypes";
+// import { LoginWithEmail } from "../../features/userlogin/reducers/service";
 // import { useAuth } from "../../hooks/userlogin/authhooks";
 
 const SignIn = () => {

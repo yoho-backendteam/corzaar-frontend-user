@@ -120,7 +120,6 @@ export default function ExploreCourses() {
   };
 
   const handleApplyFilters = (filters: any) => {
-    console.log("Applying filters:", filters);
     setAppliedFilters(filters);
     setActiveFilter("");
     setPage(1);

@@ -31,7 +31,7 @@ const SendOTP: React.FC<SendOTPProps> = ({ goToOtp, phoneNumber, setPhoneNumber 
       </p>
 
       <button
-        className="w-full py-2 rounded-md font-semibold text-sm"
+        className="w-full py-2 rounded-md font-semibold text-sm cursor-pointer"
         style={{ backgroundColor: COLORS.primary_red, color: COLORS.primary_white }}
         onClick={goToOtp}
       >

@@ -48,7 +48,7 @@ const RecommendedCourse = () => {
   // const itemsPerPage = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
   // const totalPages = Math.ceil(RecommendCourses.length / itemsPerPage);
 
-  console.log(RecommendCourses, 'coursesss')
+  // console.log(RecommendCourses, 'coursesss')
 
   return (
     <section className="md:px-12 lg:px-20 overflow-hidden relative">
@@ -81,7 +81,7 @@ const RecommendedCourse = () => {
             <div
               key={index}
               onClick={() => { handleOpen(course)}}
-              className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
+              className="flex-shrink-0 w-[85%] cursor-pointer sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
             >
               <CourseCard course={course as unknown as CourseCardProps["course"]} />
             </div>

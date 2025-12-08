@@ -3,13 +3,19 @@ import { MapPin } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { COLORS } from "../../Constants/uiconstants";
-import { selectInstituteData } from "../../features/home_page/reducers/homeSelector";
-import { getInstituteThunk } from "../../features/home_page/reducers/homeThunk";
-import type { Institute } from "../../userHomeTypes/types";
+import { selectCourseData, selectInstituteData } from "../../features/home_page/reducers/homeSelector";
+import { getCourseThunk, getInstituteThunk } from "../../features/home_page/reducers/homeThunk";
+import type { Course, Institute } from "../../userHomeTypes/types";
 
 const ExpertsInstitute = () => {
   const institutes = useSelector<RootState, Institute[]>(selectInstituteData);
   const dispatch = useDispatch<AppDispatch>();
+  
+  const topCourses = useSelector<RootState, Course[]>(selectCourseData);
+   useEffect(() => {
+        dispatch(getCourseThunk()).catch((err) => console.error(err));
+      }, [dispatch]);
+  
 
   useEffect(() => {
     const getInstitutes = async () => {
@@ -62,9 +68,8 @@ const ExpertsInstitute = () => {
                   className="mt-3 text-sm mb-3"
                   style={{ color: COLORS.primary_gray }}
                 >
-                  {Array.isArray(institute?.courses)
-                    ? `${institute?.courses.length} courses`
-                    : `${institute?.courses || 0} courses`}
+                  {`${topCourses?.filter((i) => i?.instituteId === institute?._id).length}
+                     courses`}
                 </p>
 
                 <div

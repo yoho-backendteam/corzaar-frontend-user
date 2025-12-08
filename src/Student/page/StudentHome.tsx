@@ -99,7 +99,7 @@ const StudentHome: React.FC = () => {
 
             {/* Quick Filters */}
             <p
-              className="text-xl font-semibold mb-3 "
+              className="text-xl font-semibold mb-3  "
               style={{ color: COLORS.primary_red, ...FONTS.boldHeading4 as any }}
             >
               Quick Filters
@@ -110,7 +110,7 @@ const StudentHome: React.FC = () => {
                 <button
                   key={i}
                   onClick={() => handleScroll(item.target)}
-                  className="bg-[#FFFBE1] px-3 py-2 rounded-full font-medium shadow hover:bg-red-50 transition"
+                  className="bg-[#FFFBE1] px-3 py-2 cursor-pointer rounded-full font-medium shadow hover:bg-red-50 transition"
                   style={{ color: COLORS.primary_red, ...FONTS.regular1 as any }}
                 >
                   {item.label}

@@ -107,7 +107,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
       </div>
 
       <button
-        className="w-full py-2 rounded-md font-semibold text-sm mb-3 border"
+        className="w-full py-2 rounded-md font-semibold text-sm mb-3 border cursor-pointer"
         style={{
           borderColor: COLORS.primary_gray,
           color: COLORS.primary_black,

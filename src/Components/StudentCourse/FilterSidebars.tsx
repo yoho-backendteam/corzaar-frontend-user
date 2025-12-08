@@ -73,8 +73,6 @@ export default function FilterSidebar({
       locationRadius: locationRadius !== 50 ? locationRadius : undefined,
       priceRange: priceRange.max !== 5000 ? priceRange : undefined,
     };
-
-    console.log("Applied filters:", filters);
     onApplyFilters?.(filters);
   };
   // Inside FilterSidebar component, add useEffect for location
@@ -136,7 +134,6 @@ export default function FilterSidebar({
       }
     });
 
-    console.log("Reset all filters");
     onResetFilters?.();
   };
 

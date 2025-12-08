@@ -260,7 +260,7 @@ const Navbar: React.FC = () => {
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-2xl xl:hidden"
+              className="text-2xl xl:hidden cursor-pointer"
               style={{ color: COLORS.primary_gray, ...(FONTS.medium as any) }}
             >
               {menuOpen ? <FiX /> : <FiMenu />}
@@ -270,7 +270,7 @@ const Navbar: React.FC = () => {
 
         {menuOpen && (
           <div
-            className="xl:hidden flex flex-col items-center gap-4 py-4 border-t w-full"
+            className="xl:hidden flex flex-col items-center gap-4 py-4 border-t w-full "
             style={{ background: COLORS.primary_white }}
           >
             {["Home", "Courses", "Institutes", "Offers", "Queries"].map((name) => (
@@ -278,7 +278,7 @@ const Navbar: React.FC = () => {
                 key={name}
                 to={`/${name === "Home" ? "" : name.toLowerCase()}`}
                 onClick={() => setMenuOpen(false)}
-                className="hover:text-red-600"
+                className="hover:text-red-600 "
                 style={{ color: COLORS.primary_gray }}
               >
                 {name}

@@ -70,7 +70,7 @@ const TopCourse = () => {
           </p>
         </div>
         <button
-          className="text-white font-semibold px-4 py-2 rounded-lg"
+          className="text-white font-semibold px-4 py-2 cursor-pointer rounded-lg"
           style={{ background: COLORS.primary_red }}
           onClick={() => navigate("/courses")}
           onMouseEnter={(e) => (e.currentTarget.style.background = "#b01218")}
@@ -89,7 +89,7 @@ const TopCourse = () => {
           {totalPages > 1 && (
             <button
               onClick={() => scroll("left")}
-              className="hidden md:flex absolute left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
+              className="cursor-pointer hidden md:flex absolute left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
             >
               <ChevronLeft className="w-6 h-6 " style={{ color: COLORS.primary_gray }} />
             </button>
@@ -104,7 +104,7 @@ const TopCourse = () => {
               <div
                 key={course?.id ?? index}
                   onClick={() => { handleOpen(course?._id) }}
-                className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
+                className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] cursor-pointer snap-center"
               >
                 <CourseCard course={course} />
               </div>
@@ -115,7 +115,7 @@ const TopCourse = () => {
           {totalPages > 1 && (
             <button
               onClick={() => scroll("right")}
-              className="hidden md:flex absolute right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
+              className="cursor-pointer hidden md:flex absolute right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
             >
               <ChevronRight className="w-6 h-6 " style={{ color: COLORS.primary_red }} />
             </button>

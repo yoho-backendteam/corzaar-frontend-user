@@ -171,7 +171,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             <img src={enroll} alt="" className="font-bold ml-1 h-5" />
           </button>
         ) : (
-          <button className=" text-black text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-[#FFD400] transition" style={{ background: COLORS.primary_yellow }} onClick={() => handelAddtoCart(course?._id)}>
+          <button className=" text-black text-sm cursor-pointer font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-[#FFD400] transition" style={{ background: COLORS.primary_yellow }} onClick={() => handelAddtoCart(course?._id)}>
             <ShoppingCart className="w-4 h-4" />
             Add To Cart
           </button>

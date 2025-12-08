@@ -17,24 +17,28 @@ import website from "../../assets/website.png";
 import linkedin from "../../assets/linkedin.png";
 import teacher from "../../assets/teacher.png";
 import { useNavigate } from "react-router-dom";
-import type { AppDispatch } from "../../store/store";
+import type { AppDispatch, RootState } from "../../store/store";
+import type { Course } from "../../userHomeTypes/types";
+import { selectCourseData } from "../../features/home_page/reducers/homeSelector";
+import { getCourseThunk } from "../../features/home_page/reducers/homeThunk";
 
 const ExploreInstitutes: React.FC = () => {
   const navigate = useNavigate();
 
   const filteredInstitutes = useSelector(selectFilteredInstitutes);
+  const topCourses = useSelector<RootState, Course[]>(selectCourseData);
   const activeCategory = useSelector(selectActiveCategory);
   const search = useSelector(selectSearch);
   const dispatch = useDispatch<AppDispatch>();
+
+   useEffect(() => {
+      dispatch(getCourseThunk()).catch((err) => console.error(err));
+    }, [dispatch]);
 
   // Fetch all institutes on mount
   useEffect(() => {
     dispatch(fetchInstitutes());
   }, [dispatch]);
-  
-
-
-
   
 
   const categories = [
@@ -145,7 +149,8 @@ const ExploreInstitutes: React.FC = () => {
                 <img src={star} alt="Rating" className="w-4 h-4" />
                 <span>{inst.statistics?.averageRating || "N/A"}</span>
                 <img src={hat} alt="Courses" className="w-4 h-4" />
-                <span>{inst.statistics?.totalCourses || 0} Courses</span>
+                <span>{`${topCourses?.filter((i) => i?.instituteId === inst?._id).length}
+                     courses`}</span>
                 <img src={student} alt="Students" className="w-4 h-4" />
                 <span>{inst.statistics?.totalStudents || 0} Students</span>
               </div>
@@ -214,7 +219,7 @@ const ExploreInstitutes: React.FC = () => {
               {/* View Courses Button */}
               <button
                 onClick={() => navigate(`/institute/${inst._id}`)}
-                className="mt-4 sm:mt-5 bg-[#ED1C24] text-white font-medium py-2 rounded-md w-full flex items-center justify-center gap-2 text-sm sm:text-base hover:bg-[#d0181f] transition-colors"
+                className="cursor-pointer mt-4 sm:mt-5 bg-[#ED1C24] text-white font-medium py-2 rounded-md w-full flex items-center justify-center gap-2 text-sm sm:text-base hover:bg-[#d0181f] transition-colors"
               >
                 View Courses{" "}
                 <img src={teacher} alt="teacher" className="w-4 h-4 sm:w-5 sm:h-5" />
