@@ -215,9 +215,9 @@ class Client {
 
   StudentCart = {
     getAll: () => httpClient.get(API_END_POINTS.Cart.getAll),
-    delete: (courseId: string, userId: string) => httpClient.delete(API_END_POINTS.Cart.deleteone.replace(':id', courseId), { data: { userId } }
+    delete: (courseId: string) => httpClient.delete(API_END_POINTS.Cart.deleteone.replace(':id', courseId),
     ),
-    addtocart: (params: string, batchId: string) => httpClient.post(API_END_POINTS.Cart.addtocart.replace(":id", params).replace(":batchId", batchId))
+    addtocart: (params: string, batchId: string | undefined) => httpClient.post(API_END_POINTS.Cart.addtocart.replace(":id", params).replace(":batchId", batchId || ""))
   };
 
   user_home = {
@@ -241,7 +241,7 @@ class Client {
 
     sendQuery: (data: any) => httpClient.post(API_END_POINTS.Query.POST, data),
 
-    getQueries: (params?: any, _senderRole?: string) => httpClient.get(API_END_POINTS.Query.GET, params),
+    getQueries: (params?: any) => httpClient.get(API_END_POINTS.Query.GET, params),
 
     adminReply: (data: any) => httpClient.post(API_END_POINTS.Query.adminPOST, data),
   }

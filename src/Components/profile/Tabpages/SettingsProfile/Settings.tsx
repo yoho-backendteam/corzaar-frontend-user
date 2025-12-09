@@ -54,7 +54,7 @@ export const Settings: React.FC = () => {
   return (
     <div className="space-y-6">
       <Personinformation profile={profileData} />
-      <AttendanceOverview />
+      <AttendanceOverview attendance={attendance} />
       <Notification />
       <PrivacySetting />
 
@@ -81,17 +81,17 @@ export const Settings: React.FC = () => {
       </div>
 
       {/* Danger Zone */}
-      <div 
+      <div
         className="rounded-2xl shadow p-6"
         style={{ backgroundColor: COLORS.primary_white }}
       >
-        <h2 
+        <h2
           className="text-lg font-semibold mb-2"
           style={{ color: COLORS.primary_red }}
         >
           Danger Zone
         </h2>
-        <p 
+        <p
           className="text-sm mb-4"
           style={{ color: COLORS.primary_gray }}
         >

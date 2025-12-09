@@ -4,12 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { COLORS } from "../../Constants/uiconstants";
 import { selectInstituteData } from "../../features/home_page/reducers/homeSelector";
-import { getInstituteThunk } from "../../features/home_page/reducers/homeThunk";
+import { getCourseThunk, getInstituteThunk } from "../../features/home_page/reducers/homeThunk";
 import type { Institute } from "../../userHomeTypes/types";
 
 const ExpertsInstitute = () => {
   const institutes = useSelector<RootState, Institute[]>(selectInstituteData);
   const dispatch = useDispatch<AppDispatch>();
+
+  // const topCourses = useSelector<RootState, Course[]>(selectCourseData);
+  useEffect(() => {
+    dispatch(getCourseThunk()).catch((err) => console.error(err));
+  }, [dispatch]);
+
 
   useEffect(() => {
     const getInstitutes = async () => {
@@ -63,7 +69,7 @@ const ExpertsInstitute = () => {
                 onClick={() => scroll("left")}
                 className="hidden cursor-pointer md:flex absolute left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
               >
-                <ChevronLeft className="w-6 h-6 "  />
+                <ChevronLeft className="w-6 h-6 " />
               </button>
             )}
 

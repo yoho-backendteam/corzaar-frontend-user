@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 
-import { useSelector, useDispatch, batch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useMemo } from "react";
 import { ChevronDown, SearchIcon, X } from "lucide-react";
 import CourseCard from "../../Components/StudentCourse/CourseCard";
@@ -36,7 +36,7 @@ export default function ExploreCourses() {
   const [selectedSort, setSelectedSort] = useState("Most Popular");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
-  const [appliedFilters, setAppliedFilters] = useState<any>(null);
+  const [, setAppliedFilters] = useState<any>(null);
 
   // pagination local state
   const [page, setPage] = useState<number>(1);
@@ -120,7 +120,6 @@ export default function ExploreCourses() {
   };
 
   const handleApplyFilters = (filters: any) => {
-    console.log("Applying filters:", filters);
     setAppliedFilters(filters);
     setActiveFilter("");
     setPage(1);

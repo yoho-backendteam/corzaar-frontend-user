@@ -2,18 +2,21 @@ import { MapPin } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
 import { COLORS } from "../../Constants/uiconstants";
-import { selectInstituteData } from "../../features/home_page/reducers/homeSelector";
+import { selectCourseData, selectInstituteData } from "../../features/home_page/reducers/homeSelector";
 import { useEffect } from "react";
-import { getInstituteThunk } from "../../features/home_page/reducers/homeThunk";
+import { getCourseThunk, getInstituteThunk } from "../../features/home_page/reducers/homeThunk";
 import type { Institute } from "../../userHomeTypes/types";
 import { fetchInstituteById } from "../../features/institute/reducers/thunks";
 import { useNavigate, useParams } from "react-router-dom";
+import type { Course } from "../../userHomeTypes/types";
 
 const PopularInstitute = () => {
   const institutes = useSelector<RootState, Institute[]>(selectInstituteData);
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const topCourses = useSelector<RootState, Course[]>(selectCourseData);
+
 
   useEffect(() => {
     const getInstitutes = async () => {
@@ -25,6 +28,10 @@ const PopularInstitute = () => {
     };
     getInstitutes();
   }, [dispatch]);
+
+  useEffect(() => {
+      dispatch(getCourseThunk()).catch((err) => console.error(err));
+    }, [dispatch]);
 
   useEffect(() => {
     if (id) dispatch(fetchInstituteById(id));
@@ -72,9 +79,8 @@ const PopularInstitute = () => {
                   className="mt-3 text-sm mb-3"
                   style={{ color: COLORS.primary_gray }}
                 >
-                  {Array.isArray(institute?.courses)
-                    ? `${institute?.courses.length} courses`
-                    : `${institute?.courses || 0} courses`}
+                  {`${topCourses?.filter((i) => i?.instituteId === institute?._id).length}
+                     courses`}
                 </p>
 
 

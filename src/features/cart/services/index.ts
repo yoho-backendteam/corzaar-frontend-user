@@ -5,8 +5,8 @@ export const getStudentCart = async () => {
   return response;
 };
 
-export const cartdeleteservices = async (courseId: string, userId: string) => {
-  const response = await Client.StudentCart.delete(courseId, userId);
+export const cartdeleteservices = async (courseId: string) => {
+  const response = await Client.StudentCart.delete(courseId);
   return response;
 };
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
-import { Star, Users, Clock, Globe, CheckCircle, MapPin, Mail, Phone, Award } from 'lucide-react';
+import { Star, Users, Clock, Globe, CheckCircle, MapPin, Mail, Phone, Award, X } from 'lucide-react';
 import { COLORS, FONTS } from '../../Constants/uiconstants';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCoursebyidThunk } from '../../features/home_page/reducers/homeThunk';
@@ -8,12 +8,20 @@ import type { AppDispatch } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCoursebyid } from '../../features/home_page/reducers/homeSelector';
 import { FaArrowLeft } from 'react-icons/fa';
-import { AddtoCartService } from '../../features/cart/services';
+// import { AddtoCartService } from '../../features/cart/services';
 import { toast } from 'react-toastify';
 import { BatchModal } from './batchs/SelectBatchCard';
 import { getBatchBycourseId } from '../../features/courses/service';
+import SignInPassword from '../Authentication/SignInPassword';
+import SendOTP from '../Authentication/SendOTP';
+import { sendOTPThunk } from '../../features/userlogin/reducers/otpthunks';
+import type { OTPResponse } from '../../features/userlogin/types/otptypes';
+import { otpVerify } from "../../features/userlogin/reducers/service";
+import { useAuth } from "../../context/context";
+import { GetLocalstorage, RemoveLocalstorage } from "../../utils/helper";
 
 export interface CourseData {
+  _id?: string;
   title: string;
   shortDescription: string;
   duration: number;
@@ -40,40 +48,191 @@ export interface CourseData {
   };
 }
 
+
+interface OTPVerificationProps {
+  goBack: () => void;
+}
+
+
+
 const Courseview: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'curriculum' | 'reviews'>('overview');
   const dispatch = useDispatch<AppDispatch>();
   const coursebyid: CourseData = useSelector(selectCoursebyid);
   const [SelectedCourse, setSelectedCourse] = useState<any>(null);
+  const [showLogin, setShowlogin] = useState(false)
+  const [method, setMethod] = useState<"password" | "otp">("otp");
+  const [otpStep, setOtpStep] = useState<"enter-phone" | "enter-otp">(
+    "enter-phone"
+  );
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const { id } = useParams();
 
-  const fetchCourseById = async () => {
-    try {
-      const response = await dispatch(getCoursebyidThunk(id ? id : ''));
-      return response;
-    } catch (error) {
-      console.error("Error fetching course:", error);
-      return null;
+  const handleSendOTP = async (): Promise<void> => {
+    if (!phoneNumber) {
+      toast.error("Phone number is required");
+      return;
+    }
+
+    const resultAction = await dispatch(sendOTPThunk({ phoneNumber })) as any;
+
+    if (sendOTPThunk.fulfilled.match(resultAction)) {
+      const payload: OTPResponse = resultAction.payload;
+
+      toast.success(payload.message);
+      setOtpStep("enter-otp");
+    } else {
+      const errorMessage =
+        typeof resultAction.payload === "string"
+          ? resultAction.payload
+          : "Failed to send OTP";
+      toast.error(errorMessage);
     }
   };
 
+
   useEffect(() => {
+    const fetchCourseById = async () => {
+      try {
+        const response = await dispatch(getCoursebyidThunk(id ? id : ''));
+        return response;
+      } catch (error) {
+        console.error("Error fetching course:", error);
+        return null;
+      }
+    };
     if (id) {
       fetchCourseById();
     }
-  }, [dispatch]);
+  }, [dispatch, id]);
 
-  async function handelAddtoCart(id: string) {
-    const response = await AddtoCartService(id)
-    if (response?.success) {
-      toast.success("course added your cart")
-    } else {
-      toast.warn("try again, something error.")
-    }
-  }
+  // async function handelAddtoCart(id: string) {
+  //   const response = await AddtoCartService(id)
+  //   if (response?.success) {
+  //     toast.success("course added your cart")
+  //   } else {
+  //     toast.warn("try again, something error.")
+  //   }
+  // }
 
+  const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
 
+    const [otpValues, setOtpValues] = useState<string[]>(Array(6).fill(""));
+    const { login } = useAuth()
+
+    const storedOtp = GetLocalstorage("generatedOtp");
+    const token = GetLocalstorage("token")?.toString()
+
+    const handleChange = (index: number, value: string) => {
+      if (!/^\d*$/.test(value)) return;
+      const newOtp = [...otpValues];
+      newOtp[index] = value;
+      setOtpValues(newOtp);
+
+      if (value && index < 5) {
+        const nextInput = document.getElementById(`otp-${index + 1}`);
+        nextInput?.focus();
+      }
+    };
+
+    const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Backspace" && !otpValues[index] && index > 0) {
+        const prevInput = document.getElementById(`otp-${index - 1}`);
+        prevInput?.focus();
+      }
+    };
+
+    const handleVerify = async () => {
+      const enteredOtp = otpValues.join("");
+
+      if (enteredOtp.length < 6) {
+        toast.error("Please enter the complete 6-digit OTP.");
+        return;
+      }
+
+      if (!storedOtp) {
+        toast.error("OTP expired or missing. Please resend.");
+        goBack();
+        return;
+      }
+
+      const response = await otpVerify(token, enteredOtp)
+
+      if (response?.status) {
+        const token = response?.data?.token || ""
+        login(token)
+        if (!response?.reg) {
+          setShowlogin(false)
+        } else {
+          setShowlogin(false)
+        }
+        RemoveLocalstorage("generatedOtp")
+        RemoveLocalstorage("token")
+      } else {
+        console.log(response)
+      }
+    };
+
+    return (
+      <div className="w-full">
+        <label
+          style={{
+            ...FONTS.medium,
+            fontSize: "14px",
+            color: COLORS.C_DIV_Title,
+          } as any}
+        >
+          Enter OTP
+        </label>
+        <p
+          style={{
+            ...FONTS.regular,
+            fontSize: "14px",
+            color: COLORS.C_DIV_Title,
+          } as any}
+        >
+          OTP for Demo {typeof storedOtp === 'string' ? storedOtp : String(storedOtp || '')}
+        </p>
+
+        <div className="flex flex-wrap justify-center gap-4 my-3 w-full mx-auto">
+          {otpValues.map((val, i) => (
+            <input
+              key={i}
+              id={`otp-${i}`}
+              type="text"
+              maxLength={1}
+              value={val}
+              onChange={(e) => handleChange(i, e.target.value)}
+              onKeyDown={(e) => handleKeyDown(i, e)}
+              className="flex-1 min-w-1 max-w-8 h-9 border rounded-md text-center text-base sm:text-lg outline-none"
+              style={{ borderColor: COLORS.primary_gray }}
+            />
+          ))}
+        </div>
+
+        <button
+          className="w-full py-2 rounded-md font-semibold text-sm mb-3 border cursor-pointer"
+          style={{
+            borderColor: COLORS.primary_gray,
+            color: COLORS.primary_black,
+            backgroundColor: COLORS.primary_white,
+          }}
+          onClick={goBack}
+        >
+          Change Number
+        </button>
+
+        <button
+          onClick={handleVerify}
+          className="w-full py-2 rounded-md font-semibold text-sm cursor-pointer"
+          style={{ backgroundColor: COLORS.primary_red, color: COLORS.primary_white }}
+        >
+          Verify & Sign In
+        </button>
+      </div>
+    );
+  };
 
   // Sample course data based on your structure
   const courseData: CourseData = {
@@ -110,18 +269,27 @@ const Courseview: React.FC = () => {
     return `${weeks} weeks`;
   };
 
-  const calculateDiscount = (original: number, current: number): number => {
-    return Math.round(((original - current) / original) * 100);
-  };
+  // const calculateDiscount = (original: number, current: number): number => {
+  //   return Math.round(((original - current) / original) * 100);
+  // };
+
 
   const handelSlectedCourse = async (courseId: string) => {
-    const { data } = await getBatchBycourseId(courseId)
+    try {
 
-    if (data.length == 0) {
-      return toast.warn("there is no batch available")
+      const { data } = await getBatchBycourseId(courseId)
+
+      console.log(data, "add to")
+
+      if (data.length == 0) {
+        return toast.warn("there is no batch available")
+      }
+
+      setSelectedCourse(data)
+    } catch (error) {
+      console.error(error)
+      setShowlogin(true);
     }
-
-    setSelectedCourse(data)
 
   }
 
@@ -264,7 +432,7 @@ const Courseview: React.FC = () => {
                       )}
 
                       {activeTab === 'reviews' && (
-                        <div className="border border-[#ED1C24] bg-white rounded-[16px] p-6 sm:p-8 shadow-sm">
+                        <div className="border border-[#ED1C24] bg-white rounded-2xl p-6 sm:p-8 shadow-sm">
                           {/* Title */}
                           <h2
                             style={{ ...FONTS.S_Cart_subtitle, color: COLORS.primary_red }}
@@ -373,7 +541,7 @@ const Courseview: React.FC = () => {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-2xl overflow-hidden sticky top-4">
               {/* Course Image */}
-              <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+              <div className="aspect-video bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                 <img
                   src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=450&fit=crop"
                   alt="Course preview"
@@ -391,7 +559,7 @@ const Courseview: React.FC = () => {
                   </span>
                 </div>
 
-                <button onClick={() => handelSlectedCourse(coursebyid?._id)} style={{ ...FONTS.nummedium4 as any, color: COLORS.primary_white, backgroundColor: COLORS.primary_black }} className="w-full py-3 rounded-lg hover:bg-slate-800 transition">
+                <button onClick={() => handelSlectedCourse(coursebyid?._id || "")} style={{ ...FONTS.nummedium4 as any, color: COLORS.primary_white, backgroundColor: COLORS.primary_black }} className="w-full py-3 rounded-lg hover:bg-slate-800 transition cursor-pointer">
                   Add to Cart
                 </button>
 
@@ -429,6 +597,115 @@ const Courseview: React.FC = () => {
         course={SelectedCourse}
         gotoCart={() => navigate("/cart")}
       />
+      {showLogin && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div
+            className="w-full md:w-1/4 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between"
+            style={{
+              backgroundColor: COLORS.primary_white,
+              minHeight: "420px",
+            }}
+          >
+            <div>
+              <div className='flex justify-between'>
+                <h2
+                  style={{
+                    ...(FONTS.boldHeading as any),
+                    fontSize: "20px",
+                    color: COLORS.primary_black,
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Join now
+                </h2>
+                <p className='cursor-pointer'
+                  onClick={() => setShowlogin(false)}
+                  style={{
+                    ...(FONTS.boldHeading as any),
+                    fontSize: "20px",
+                    color: COLORS.primary_red,
+                    marginBottom: "0.5rem",
+                  }}><X className='w-6 h-6 text-black hover:text-[#ED1C24]' /></p>
+              </div>
+              <p
+                style={{
+                  ...(FONTS.regular as any),
+                  color: COLORS.primary_gray,
+                  marginBottom: "1.5rem",
+                  fontSize: "14px",
+                }}
+              >
+                Choose your preferred method to sign in to your account
+              </p>
+
+              <div className="flex mb-6">
+                <button
+                  onClick={() => {
+                    setMethod("otp");
+                    setOtpStep("enter-phone");
+                  }}
+                  className="flex-1 py-2 rounded-r-md font-semibold text-sm transition-all cursor-pointer"
+                  style={{
+                    backgroundColor:
+                      method === "otp"
+                        ? COLORS.primary_red
+                        : COLORS.primary_white,
+                    color:
+                      method === "otp"
+                        ? COLORS.primary_white
+                        : COLORS.primary_red,
+                    border: `1px solid ${COLORS.primary_red}`,
+                  }}
+                >
+                  <Phone className="inline mr-2 w-4 h-4 cursor-pointer" />
+                  Sign Up / Sign In
+                </button>
+              </div>
+
+              <div className="flex flex-col items-center transition-all duration-300 w-full">
+                {method === "password" && (
+                  <SignInPassword />
+                )}
+
+                {method === "otp" && otpStep === "enter-phone" && (
+                  <SendOTP
+                    goToOtp={handleSendOTP}
+                    phoneNumber={phoneNumber}
+                    setPhoneNumber={setPhoneNumber}
+                  />
+                )}
+
+                {method === "otp" && otpStep === "enter-otp" && (
+                  <OTPVerification goBack={() => setOtpStep("enter-phone")} />
+                )}
+              </div>
+            </div>
+
+            <p
+              className="text-center mt-4 text-sm"
+              style={{ color: COLORS.primary_gray }}
+            >
+              Don’t have an account?{" "}
+              <button
+                className='cursor-pointer'
+                onClick={() => setMethod("otp")}
+                style={{
+                  color: COLORS.primary_red,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  fontSize: "inherit",
+                }}
+              >
+                Sign up now
+              </button>
+            </p>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

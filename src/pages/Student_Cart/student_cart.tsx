@@ -1,5 +1,4 @@
 import { COLORS, FONTS } from "../../Constants/uiconstants";
-import { FaTrash } from "react-icons/fa";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { LuClock4 } from "react-icons/lu";
@@ -20,8 +19,8 @@ const Student_cart = () => {
   const dispatch = useDispatch<AppDispatch>();
   const cartItems = useSelector(Getcart);
 
-  console.log(cartItems,"cart items");
-  
+  console.log(cartItems, "cart items");
+
 
   const cartData = cartItems?.data;
 
@@ -29,11 +28,11 @@ const Student_cart = () => {
 
   useEffect(() => {
     dispatch(getStudentCartThunks());
-  }, []);
+  }, [dispatch]);
 
   const handleDelete = async (courseId: string) => {
     try {
-    
+
       await dispatch(cartdeletethunks(courseId, userid));
     } catch (err) {
       console.error("Error deleting course:", err);
@@ -47,14 +46,14 @@ const Student_cart = () => {
           Shopping Cart
         </h1>
 
-      
+
         <h5 style={{ ...FONTS.S_Cart_subtitle, color: COLORS.primary_gray }}>
           {cartData?.items?.length || 0} Courses in Cart
         </h5>
       </div>
 
       <div className="flex flex-col lg:flex-row w-full gap-5 mt-2">
-     
+
         <div
           style={{ height: "100vh" }}
           className="lg:w-[65%] w-full overflow-y-auto"
@@ -65,11 +64,11 @@ const Student_cart = () => {
                 key={index}
                 className="flex flex-col sm:flex-row items-start justify-between w-full bg-white shadow-md p-4 rounded-xl gap-3 sm:gap-4 lg:gap-5 mb-4"
               >
-             
+
                 <div className="overflow-hidden w-full sm:w-32 md:w-36 lg:w-40 sm:h-32 md:h-36 lg:h-40 mx-auto sm:mx-0">
                   <img
                     src={
-                      item?.instituteId?.logo }
+                      item?.instituteId?.logo}
                     alt={item?.title}
                     className="w-full h-full rounded-2xl object-cover"
                     style={{ backgroundColor: COLORS.C_Image }}
@@ -96,13 +95,13 @@ const Student_cart = () => {
                     </p>
                   </div>
 
-          
+
                   <div className="flex flex-col items-end gap-2 mt-3">
                     <button
                       onClick={() => handleDelete(item?._id)}
                       className="text-red-500"
                     >
-                     <img src={deleteIcon} alt="" />
+                      <img src={deleteIcon} alt="" />
                     </button>
 
                     <div className="flex gap-2 sm:gap-3">
@@ -155,19 +154,19 @@ const Student_cart = () => {
             <div className="flex justify-between font-semibold text-lg mb-4">
               <p>Total</p>
               <p>₹{cartData?.pricing?.total || 0}</p>
-             </div>
+            </div>
 
             <button
               className="w-full flex items-center justify-center gap-2 py-3 rounded-md text-white font-semibold"
               style={{ backgroundColor: COLORS.primary_red }}
               onClick={() =>
                 navigate("/checkout", {
-                  state: { 
-                    cartId:   cartData?._id, 
+                  state: {
+                    cartId: cartData?._id,
                     cartItem: cartData?.items,
-                    pricing:  cartData?.pricing,
+                    pricing: cartData?.pricing,
                     discount: cartData?.coupon
-                  },   
+                  },
                 })
               }
             >

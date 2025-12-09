@@ -1,10 +1,10 @@
 import React from 'react'
-import Student_cart from "../Pages/Student_Cart/student_cart"
+import Student_cart from "../pages/Student_Cart/student_cart"
 
-const CartPage:React.FC = () => {
+const CartPage: React.FC = () => {
   return (
     <div>
-        <Student_cart/>
+      <Student_cart />
     </div>
   )
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useRef, useEffect } from "react";
 import {
   FiMenu,
@@ -17,11 +18,12 @@ import { useAuth } from "../context/context";
 import { toast } from "react-toastify";
 
 const Navbar: React.FC = () => {
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const { isAuthenticated, logout } = useAuth();
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  // const dropdownRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
 
   // Initialize location from localStorage or default "Fetching..."
@@ -30,36 +32,35 @@ const Navbar: React.FC = () => {
   });
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      )
-        if (
-          profileRef.current &&
-          !profileRef.current.contains(event.target as Node)
-        ) {
-          setShowProfile(false);
-        }
+    const handleClickOutside = (e: MouseEvent) => {
+
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setShowProfile(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
+
+
 
   // Reverse geocode function using Nominatim OpenStreetMap API
   const reverseGeocode = async (lat: number, lon: number) => {
     try {
       console.log("entry");
-      
+
       const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`
       );
-      console.log(response,"response");
-      
+      console.log(response, "response");
+
       const data = await response.json();
-      console.log(data,"overall data");
-      
+      console.log(data, "overall data");
+
       const city =
         data.address.city ||
         data.address.town ||
@@ -72,6 +73,7 @@ const Navbar: React.FC = () => {
       toast.success("Location found: " + city);
     } catch (error) {
       toast.error("Failed to get location name");
+      console.error(error)
       setLocation("Unknown location");
     }
   };
@@ -100,7 +102,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div>
+    <div >
       <nav
         className="shadow-md sticky top-0 z-50 w-full"
         style={{ ...(FONTS.regular as any), background: COLORS.primary_white }}
@@ -123,11 +125,11 @@ const Navbar: React.FC = () => {
             className="hidden xl:flex items-center gap-2 flex-wrap text-center"
             style={FONTS.regular as any}
           >
-            {["home", "courses", "institutes", "offers", "queries"].map(
+            {["home", "courses", "institutes", "offers", isAuthenticated ? "queries" : null].map(
               (name) => (
                 <NavLink
                   key={name}
-                  to={`/${name === "home" ? "" : name.toLowerCase()}`}
+                  to={`/${name === "home" ? "" : name?.toLowerCase()}`}
                   style={({ isActive }) => ({
                     color: isActive
                       ? COLORS.primary_white
@@ -227,9 +229,9 @@ const Navbar: React.FC = () => {
                         <li className="flex items-center gap-2 hover:text-black cursor-pointer">
                           <FiUser size={16} /> My Profile
                         </li>
-                      </Link>
+                      </Link> */}
 
-                      <Link to="Mycourse" onClick={() => setShowProfile(false)}>
+                      {/* <Link to="Mycourse" onClick={() => setShowProfile(false)}>
                         <li className="flex items-center gap-2 hover:text-black cursor-pointer">
                           <FiShoppingCart size={16} /> My Courses
                         </li>
@@ -263,7 +265,7 @@ const Navbar: React.FC = () => {
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-2xl xl:hidden"
+              className="text-2xl xl:hidden cursor-pointer"
               style={{ color: COLORS.primary_gray, ...(FONTS.medium as any) }}
             >
               {menuOpen ? <FiX /> : <FiMenu />}
@@ -273,7 +275,7 @@ const Navbar: React.FC = () => {
 
         {menuOpen && (
           <div
-            className="xl:hidden flex flex-col items-center gap-4 py-4 border-t w-full"
+            className="xl:hidden flex flex-col items-center gap-4 py-4 border-t w-full "
             style={{ background: COLORS.primary_white }}
           >
             {["Home", "Courses", "Institutes", "Offers", "Queries"].map((name) => (
@@ -281,7 +283,7 @@ const Navbar: React.FC = () => {
                 key={name}
                 to={`/${name === "Home" ? "" : name.toLowerCase()}`}
                 onClick={() => setMenuOpen(false)}
-                className="hover:text-red-600"
+                className="hover:text-red-600 "
                 style={{ color: COLORS.primary_gray }}
               >
                 {name}

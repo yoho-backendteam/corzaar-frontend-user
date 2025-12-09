@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/redux/Queries/queryslice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { QueryFormData, QueryState } from "./querytypes";
+import type { QueryState } from "./querytypes";
 import { sendQueryThunk } from "./querythunks";
 
 const initialState: QueryState = {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import {
   Heart,
@@ -20,8 +21,8 @@ import { toast } from "react-toastify";
 
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
-  console.log(course,"courses");
-  
+  ;
+
   const [isFavorite, setIsFavorite] = useState(false);
   // const dispatch = useDispatch<AppDispatch>();
 
@@ -126,7 +127,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         </p>
 
         {/* Ratings, Students, Duration */}
-        {course?.reviews?.length ? course?.reviews?.map((review, index) => (
+        {course?.reviews?.length ? course?.reviews?.map((review: any, index: number) => (
           <div className="flex items-center text-sm  mb-4" style={{ color: COLORS.primary_gray }} key={index}>
             <div className="flex gap-3 items-center mr-4">
               <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
@@ -166,7 +167,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         </div>
 
         {/* Button */}
-        {course?.isactive ===true ? (
+        {course?.isactive === true ? (
           <button className=" text-white cursor-pointer text-sm font-semibold px-4 py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:bg-red-700 transition" style={{ background: COLORS.primary_red }}>
 
             Already Enrolled

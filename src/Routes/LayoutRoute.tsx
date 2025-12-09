@@ -1,23 +1,23 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../Pages/Home";
-import Courses from "../Pages/Courses";
+import Home from "../pages/Home";
+import Courses from "../pages/Courses";
 // import Institutes from '../pages/Institutes';
-import OfferPage from "../Pages/offersPages";
+import OfferPage from "../pages/offersPages";
 // import Queries from '../Pages/Queries';
 import Navbar from "../NavBar/Navbar";
-import CartPage from "../Pages/CartPage";
+import CartPage from "../pages/CartPage";
 // import NotificationPage from '../Pages/NotificationPage';
-import ProfilePage from "../Pages/ProfilePage";
-import { Settingprofile } from "../Pages/Settingprofile";
+import ProfilePage from "../pages/ProfilePage";
+import { Settingprofile } from "../pages/Settingprofile";
 import { Portfolio } from "../Components/profile/Tabpages/Portfolio/PortfolioPage";
 import SignIn from "../Components/Authentication/SignIn";
 import StudentRegistration from "../Components/StudentVerfication/StudentRegistration";
 import ExploreInstitutes from "../Component/Institutes/ExploreInstitutes";
 import InstituteDetails from "../Component/Institutes/InstituteDetails";
 import ContactPage from "../Components/Queries/Querypage";
-import NotificationPage from "../Pages/NotificationPage";
-import Checkout from "../Pages/Student_Cart/Checkout";
+import NotificationPage from "../pages/NotificationPage";
+import Checkout from "../pages/Student_Cart/Checkout";
 import Courseview from '../Components/StudentCourse/Courseview';
 
 const LayoutRoute: React.FC = () => {

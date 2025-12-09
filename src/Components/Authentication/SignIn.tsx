@@ -1,25 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import logocap from "../../assets/images/logocap.png";
 import SignInPassword from "../../Components/Authentication/SignInPassword";
 import SendOTP from "../../Components/Authentication/SendOTP";
 import OTPVerification from "../../Components/Authentication/OTPVerification";
-import { resetOTP } from "../../features/userlogin/reducers/otpslice";
+// import { resetOTP } from "../../features/userlogin/reducers/otpslice";
 import { sendOTPThunk } from "../../features/userlogin/reducers/otpthunks";
 import type { AppDispatch } from "../../store/store";
-import { Lock, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 // import { loginWithEmailThunk } from "../../features/userlogin/reducers/auththunk.ts";
-import type { LoginResponse, LoginThunkAction, OTPResponse, OTPThunkResult } from "../../features/userlogin/types/otptypes";
-import { LoginWithEmail } from "../../features/userlogin/reducers/service";
+import type { OTPResponse } from "../../features/userlogin/types/otptypes";
+// import { LoginWithEmail } from "../../features/userlogin/reducers/service";
 // import { useAuth } from "../../hooks/userlogin/authhooks";
 
 const SignIn = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // UI State
   const [method, setMethod] = useState<"password" | "otp">("otp");
@@ -27,8 +27,8 @@ const SignIn = () => {
     "enter-phone"
   );
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
   // const { triggerLogin } = useAuth();
 
@@ -39,7 +39,7 @@ const SignIn = () => {
       return;
     }
 
-    const resultAction = await dispatch(sendOTPThunk({ phoneNumber })) as OTPThunkResult;
+    const resultAction = await dispatch(sendOTPThunk({ phoneNumber })) as any;
 
     if (sendOTPThunk.fulfilled.match(resultAction)) {
       const payload: OTPResponse = resultAction.payload;

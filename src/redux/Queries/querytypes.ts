@@ -17,6 +17,7 @@ export interface QueryFormData {
   phone?: string;
   subject?: string;
   category?: string;
+  query?: string
 }
 
 

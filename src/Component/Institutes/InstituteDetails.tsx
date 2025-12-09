@@ -11,7 +11,7 @@ import {
   Globe,
 } from "lucide-react";
 
-import robo from "../../assets/robo.png";
+// import robo from "../../assets/robo.png";
 import laptop from "../../assets/laptop.png";
 import icon from "../../assets/icon.png";
 import star from "../../assets/star.png";
@@ -25,6 +25,9 @@ import ratingicon from "../../assets/ratingicon.png";
 import course from "../../assets/course.png";
 import heart from "../../assets/heart.png";
 import { FONTS } from "../../Constants/uiconstants";
+import type { Course } from "../../userHomeTypes/types";
+import { selectCourseData } from "../../features/home_page/reducers/homeSelector";
+import { getCourseThunk } from "../../features/home_page/reducers/homeThunk";
 
 const InstituteDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -32,11 +35,22 @@ const InstituteDetails: React.FC = () => {
   const institute = useSelector(selectInstitute);
   const { loading, error } = useSelector((state: RootState) => state.institute);
   const navigate = useNavigate();
+  const topCourses = useSelector<RootState, Course[]>(selectCourseData);
 
+  useEffect(() => {
+    dispatch(getCourseThunk()).catch((err) => console.error(err));
+  }, [dispatch]);
 
   useEffect(() => {
     if (id) dispatch(fetchInstituteById(id));
   }, [dispatch, id]);
+
+  const filterCourse = topCourses?.filter((i) => i?.instituteId === id)
+  console.log("fil", filterCourse)
+
+  const handleOpen = (id: string) => {
+    navigate(`/courses/view/${id}`)
+  }
 
   if (loading)
     return (
@@ -59,19 +73,19 @@ const InstituteDetails: React.FC = () => {
       </div>
     );
 
-    
+
 
   return (
     <div className="bg-[#FFDD00] min-h-screen">
 
       <div className="pt-5 px-4">
-  <button
-    onClick={() => navigate(-1)}
-    className="flex items-center gap-2 text-black bg-white px-4 py-2 rounded-md shadow hover:shadow-md transition font-medium mb-2"
-  >
-    ← Back
-  </button>
-</div>
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-black bg-white px-4 py-2 rounded-md shadow hover:shadow-md transition font-medium mb-2"
+        >
+          ← Back
+        </button>
+      </div>
 
       {/* Banner */}
       <div className="relative h-60">
@@ -151,7 +165,7 @@ const InstituteDetails: React.FC = () => {
             <img src={star} alt="Rating" className="w-4 h-4" />
             <span>{institute.statistics?.averageRating || "N/A"}</span>
             <img src={hat} alt="Courses" className="w-4 h-4" />
-            <span>{institute.statistics?.totalCourses || 0} Courses</span>
+            <span>{filterCourse?.length || 0} Courses</span>
             <img src={student} alt="Students" className="w-4 h-4" />
             <span>{institute.statistics?.totalStudents || 0} Students</span>
             <img src={map} alt="Location" className="w-4 h-4" />
@@ -173,16 +187,16 @@ const InstituteDetails: React.FC = () => {
             Courses
           </h2>
 
-        {Array.isArray(institute.courses) && institute.courses.length > 0 ? (
-  <div className="space-y-6 w-full">
-    {institute.courses.map((course) => (
-      <div
-        key={course.id}
-        className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
-      >
+          {Array.isArray(filterCourse) && filterCourse.length > 0 ? (
+            <div className="space-y-6 w-full grid grid-cols-3 gap-3">
+              {filterCourse.map((course) => (
+                <div
+                  key={course._id}
+                  className=" bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+                >
                   <div className="relative">
                     <img
-                      src={course.image || robo}
+                      src={course.image || undefined}
                       alt={course.title}
                       className="w-full h-60 object-cover"
                     />
@@ -197,7 +211,7 @@ const InstituteDetails: React.FC = () => {
                   <div className="p-5">
                     <div className="flex justify-between items-center mb-2">
                       <span className="bg-[#ED1C24] text-white text-xs px-2 py-1 rounded">
-                        Technology
+                        {course.category.primary || "Beginner"}
                       </span>
                       <span className="text-xs px-2 py-1 border border-[#ED1C24] rounded text-[#ED1C24]">
                         {course.level || "Beginner"}
@@ -233,7 +247,7 @@ const InstituteDetails: React.FC = () => {
                     <div className="flex justify-between items-center mt-3">
                       <div>
                         <span className="text-lg font-bold text-[#000000]">
-                          ₹{course.price || 0}
+                          ₹{course.pricing.price || 0}
                         </span>
                         {course.oldPrice && (
                           <span className="text-[#707070] ml-3 line-through text-sm">
@@ -244,11 +258,11 @@ const InstituteDetails: React.FC = () => {
                     </div>
 
                     <button
-                      className={`mt-3 px-4 py-2 w-full text-sm font-medium rounded-md ${
-                        course.enrolled
-                          ? "bg-[#ED1C24] text-[#FFFFFF]"
-                          : "bg-[#FFDD00] text-[#000000]"
-                      }`}
+                      onClick={() => { handleOpen(course?._id) }}
+                      className={`mt-3 px-4 py-2 w-full text-sm font-medium cursor-pointer rounded-md ${course.enrolled
+                        ? "bg-[#ED1C24] text-[#FFFFFF]"
+                        : "bg-[#FFDD00] text-[#000000]"
+                        }`}
                     >
                       {course.enrolled ? "Already Enrolled" : "Add To Cart"}
                     </button>

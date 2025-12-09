@@ -7,11 +7,11 @@ export const sendQueryThunk = createAsyncThunk(
   "query/sendQuery",
   async (form: QueryFormData, { rejectWithValue }) => {
     try {
-    
+
 
       const payload = {
         ...form,
-      
+
       };
 
       console.log("Sending query payload:", payload);
@@ -44,7 +44,7 @@ export const fetchQueriesThunk = createAsyncThunk(
         return rejectWithValue("Missing sender ID or sender role. Please log in again.");
       }
 
-      const response = await getAllQueries(senderId, senderRole);
+      const response = await getAllQueries(senderId);
       if (!response) {
         console.error("No response from getAllQueries");
         return rejectWithValue("No response from server");

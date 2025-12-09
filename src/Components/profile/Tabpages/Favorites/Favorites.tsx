@@ -1,20 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
 import image1 from "../../../../assets/profile/images/image1.png";
 import image2 from "../../../../assets/profile/images/image2.png";
 import { COLORS } from "../../../../Constants/uiconstants";
-import { useAppSelector } from "../../../../hooks/reduxhooks";
+// import { useAppSelector } from "../../../../hooks/reduxhooks";
 import type { AppDispatch } from "../../../../store/store";
 import { useEffect, useState } from "react";
 import { getAllFavData, getCoursesById } from "../../../../features/settings/reducers/settingThunks";
 import { toast } from "react-toastify";
-import { courseIdSelect, favSelect } from "../../../../features/settings/reducers/settingSelectors";
+import { favSelect } from "../../../../features/settings/reducers/settingSelectors";
 
 type FavoriteCardProps = {
   image: any;
   category: string;
   title: string;
   institute: string;
-  description : string;
+  description: string;
   price: string;
   oldPrice?: string;
   buttonLabel: string;
@@ -24,7 +25,7 @@ const FavoriteCard = ({
   image,
   category,
   title,
-  institute,
+  // institute,
   description,
   price,
   oldPrice,
@@ -78,8 +79,8 @@ export const Favorites = () => {
   const [loading, setLoading] = useState(true);
 
   // Get favorites and course data from Redux store
-  const favoritesData = useSelector(favSelect);
-  const courseData = useSelector(courseIdSelect);
+  const favoritesData: any = useSelector(favSelect);
+  // const courseData = useSelector(courseIdSelect);
 
   // Fetch favorites data
   useEffect(() => {
@@ -107,13 +108,13 @@ export const Favorites = () => {
             try {
               // Fetch course details for each favorite item
               const courseResponse = await dispatch(getCoursesById(favItem.courseId));
-              console.log("cour",courseResponse)
-              
+              console.log("cour", courseResponse)
+
               if (courseResponse?.data) {
-                const course = courseResponse.data;
-                console.log("cpusre",course.data.description);
-                
-                
+                const course: any = courseResponse.data;
+                console.log("cpusre", course.data.description);
+
+
                 combinedData.push({
                   courseId: favItem.courseId,
                   title: favItem.title || course.title,
@@ -121,8 +122,8 @@ export const Favorites = () => {
                   discountPrice: favItem.discountPrice ? favItem.price : undefined,
                   merchantId: favItem.merchantId,
                   category: course.category?.primary || "Programming",
-                  institute:course.data.instituteId || "Institute Name", 
-                  description:  course.data.description || course.data.shortDescription,
+                  institute: course.data.instituteId || "Institute Name",
+                  description: course.data.description || course.data.shortDescription,
                   thumbnail: course.thumbnail
                 });
               }
@@ -147,12 +148,12 @@ export const Favorites = () => {
       fetchCourseDetails();
     }
   }, [favoritesData, dispatch]);
-  console.log("comb",combinedFavorites)
+  console.log("comb", combinedFavorites)
 
-  const imageMap: Record<string, string> = {
-    "image1.png": image1,
-    "image2.png": image2,
-  };
+  // const imageMap: Record<string, string> = {
+  //   "image1.png": image1,
+  //   "image2.png": image2,
+  // };
 
   // Get fallback image based on course title or use default
   const getCourseImage = (course: CombinedFavoriteItem) => {
@@ -176,7 +177,7 @@ export const Favorites = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 justify-items-center">
       {combinedFavorites.length > 0 ? (
-        combinedFavorites.map((course, index) => (
+        combinedFavorites.map((course) => (
           <FavoriteCard
             key={course.courseId}
             image={getCourseImage(course)}

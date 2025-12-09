@@ -1,17 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { COLORS } from "../../../../../Constants/uiconstants";
-import type { PersonInformationProps } from "../../../../../features/settings/types/settingTypes";
+// import type { PersonInformationProps } from "../../../../../features/settings/types/settingTypes";
 
-export const Personinformation = ({ profile }: PersonInformationProps) => {
+export const Personinformation = ({ profile }: any) => {
   console.log(profile, "infr");
   console.log("infr");
 
   return (
-    <div 
+    <div
       className="rounded-2xl shadow p-6 mb-6"
       style={{ backgroundColor: COLORS.primary_white }}
     >
       <h2 className="text-xl font-bold mb-2">Account Overview</h2>
-      <p 
+      <p
         className="text-xs mb-4"
         style={{ color: COLORS.primary_gray }}
       >
@@ -26,7 +27,7 @@ export const Personinformation = ({ profile }: PersonInformationProps) => {
             <input
               type="text"
               value={profile?.data?.studentName || ""}
-              className="p-2 text-sm" 
+              className="p-2 text-sm"
               style={{ color: COLORS.primary_gray }}
               readOnly
             />

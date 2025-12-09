@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
 import { useAppSelector } from "../../../../hooks/reduxhooks";
 import { CourseProgressCard } from "./Progresscard";
@@ -41,7 +42,7 @@ export const Attendance = () => {
   useEffect(() => {
     const fetchCourseDetails = async () => {
       if (!courseIds || courseIds.length === 0) return;
-      
+
       try {
         const coursePromises = courseIds.map(async (id: string) => {
           if (id) {
@@ -51,14 +52,14 @@ export const Attendance = () => {
           return null;
         });
 
-        const courseDetails = await Promise.all(coursePromises);
+        const courseDetails: any = await Promise.all(coursePromises);
         console.log("📘 All Course Data:", courseDetails[0]);
-        
+
         // Map attendance data with course details
         const mappedData = attendanceState?.data?.map((attendanceItem: any, index: number) => {
-          const courseDetail = courseDetails[index].data;
-          console.log("course",courseDetail);
-          
+          const courseDetail = courseDetails?.[index]?.data;
+          console.log("course", courseDetail);
+
           if (!courseDetail) return null;
 
           const totalSessions = attendanceItem.totalDays;
@@ -71,12 +72,12 @@ export const Attendance = () => {
             sessionsCompleted: sessionsCompleted,
             totalSessions: totalSessions,
             progress: progress,
-            eligible: progress >= 75 
+            eligible: progress >= 75
           };
         }).filter(Boolean);
 
         setMappedCourses(mappedData || []);
-        
+
       } catch (error) {
         console.error("❌ Course fetch error:", error);
       }
@@ -88,16 +89,16 @@ export const Attendance = () => {
   // Helper function to get the last attended date
   const getLastAttendedDate = (attendanceRecords: any[]) => {
     if (!attendanceRecords || attendanceRecords.length === 0) return "Never attended";
-    
+
     // Find the last present date
     const presentRecords = attendanceRecords.filter(record => record.status === "present");
     if (presentRecords.length === 0) return "Never attended";
-    
+
     // Sort by date and get the most recent
-    const sortedRecords = presentRecords.sort((a, b) => 
+    const sortedRecords = presentRecords.sort((a, b) =>
       new Date(b.date).getTime() - new Date(a.date).getTime()
     );
-    
+
     const lastDate = new Date(sortedRecords[0].date);
     return lastDate.toLocaleDateString();
   };

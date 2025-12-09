@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
@@ -112,7 +112,7 @@ const Checkout = () => {
           </button>
 
           <h1
-            className=" font-bold !text-xl"
+            className=" font-bold text-xl!"
             style={{ ...FONTS.medium, color: COLORS.primary_red }}
           >
             Checkout
@@ -208,39 +208,39 @@ const Checkout = () => {
                     Order Items ({orderedItems.length} Courses)
                   </h3>
 
-                {orderedItems.length > 0 ? (
-  <div className="space-y-2 bg-gray-200 rounded-2xl p-2">
-    {orderedItems.map((item: CartItem, index: number) => (
-      <div
-        key={index}
-        className="flex items-center p-5 gap-4 bg-white rounded-2xl"
-      >
-        <img
-          src={item?.instituteId?.logo}
-          alt={item.title}
-          className="w-20 h-20 rounded-lg object-cover"
-        />
+                  {orderedItems.length > 0 ? (
+                    <div className="space-y-2 bg-gray-200 rounded-2xl p-2">
+                      {orderedItems.map((item: CartItem, index: number) => (
+                        <div
+                          key={index}
+                          className="flex items-center p-5 gap-4 bg-white rounded-2xl"
+                        >
+                          <img
+                            src={item?.instituteId?.logo}
+                            alt={item.title}
+                            className="w-20 h-20 rounded-lg object-cover"
+                          />
 
-        <div>
-          <h4 className="font-medium">{item?.title}</h4>
+                          <div>
+                            <h4 className="font-medium">{item?.title}</h4>
 
-          <p className="text-sm text-gray-600">
-            {item?.category || "Course Category"}
-          </p>
+                            <p className="text-sm text-gray-600">
+                              {item?.category || "Course Category"}
+                            </p>
 
-          <p
-            className="font-semibold mt-1"
-            style={{ color: COLORS.secondary_green }}
-          >
-            ₹{item?.pricing?.price || 0}
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
-) : (
-  <p className="text-gray-600">Select courses in your cart.</p>
-)}
+                            <p
+                              className="font-semibold mt-1"
+                              style={{ color: COLORS.secondary_green }}
+                            >
+                              ₹{item?.pricing?.price || 0}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-gray-600">Select courses in your cart.</p>
+                  )}
 
                 </div>
 
@@ -406,7 +406,7 @@ const Checkout = () => {
               <div className="mt-6 flex items-start gap-2 text-sm text-gray-600">
                 <IoMdCheckmarkCircleOutline
                   size={20}
-                  className="text-green-700 flex-shrink-0"
+                  className="text-green-700 shrink-0"
                   style={{ color: COLORS.green }}
                 />
                 <div>

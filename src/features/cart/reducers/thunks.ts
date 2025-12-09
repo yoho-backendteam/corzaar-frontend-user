@@ -16,7 +16,7 @@ export const getStudentCartThunks = () => async (dispatch: AppDispatch) => {
 
 export const cartdeletethunks = (courseId: string, userId: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await cartdeleteservices(courseId, userId);
+    const response = await cartdeleteservices(courseId);
     console.log("Deleted successfully:", response);
     await dispatch(deletecart(userId));
     return response;

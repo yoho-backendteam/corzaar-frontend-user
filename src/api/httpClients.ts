@@ -34,27 +34,27 @@ Axios.interceptors.response.use(
 
 class HttpClient {
     async get(url: string, params?: any) {
-        const reponse = Axios.get(url, { params });
+        const reponse = await Axios.get(url, { params });
         return reponse;
     }
     async post(url: string, data?: any, params?: any) {
-        const response = Axios.post(url, data, { params });
+        const response = await Axios.post(url, data, { params });
         return response;
     }
     async patch(url: string, data: any) {
-        const response = Axios.patch(url, data);
+        const response = await Axios.patch(url, data);
         return response;
     }
     async put(url: string, data: any, params?: string) {
-        const response = Axios.put(url, data, { params });
+        const response = await Axios.put(url, data, { params });
         return response;
     }
     async delete(url: string, params?: string) {
-        const response = Axios.delete(url, { params });
+        const response = await Axios.delete(url, { params });
         return response;
     }
     async uploadFile(url: string, data: any) {
-        const response = Axios.post(url, data, {
+        const response = await Axios.post(url, data, {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
         return response;

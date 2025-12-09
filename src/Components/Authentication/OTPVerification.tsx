@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +16,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
   const [otpValues, setOtpValues] = useState<string[]>(Array(6).fill(""));
   const { login } = useAuth()
 
-  const storedOtp = GetLocalstorage("generatedOtp");
+  const storedOtp: any = GetLocalstorage("generatedOtp");
   const token = GetLocalstorage("token")?.toString()
 
   const handleChange = (index: number, value: string) => {
@@ -55,7 +56,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
 
     if (response?.status) {
       const token = response?.data?.token || ""
-      console.log("token",token)
+      console.log("token", token)
       login(token)
       if (!response?.reg) {
         navigate("/student-register")
@@ -87,7 +88,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
           color: COLORS.C_DIV_Title,
         } as any}
       >
-        OTP for Demo {storedOtp}
+        OTP for Demo `${storedOtp || ""}`
       </p>
 
       <div className="flex flex-wrap justify-center gap-4 my-3 w-full mx-auto">
@@ -107,7 +108,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
       </div>
 
       <button
-        className="w-full py-2 rounded-md font-semibold text-sm mb-3 border"
+        className="w-full py-2 rounded-md font-semibold text-sm mb-3 border cursor-pointer"
         style={{
           borderColor: COLORS.primary_gray,
           color: COLORS.primary_black,

@@ -1,36 +1,36 @@
-import React, { useEffect } from "react";
+import React from "react";
 import arrow from "../../../../assets/profile/icons/arrow.png";
 import icon from "../../../../assets/profile/icons/icons.png";
 import ache from "../../../../assets/profile/icons/check.png";
 import { useAppSelector } from "../../../../hooks/reduxhooks";
 import { COLORS } from "../../../../Constants/uiconstants";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch } from "../../../../store/store";
-import { getPortfolioData } from "../../../../features/settings/reducers/settingThunks";
+import { useSelector } from "react-redux";
+// import type { AppDispatch } from "../../../../store/store";
+// import { getPortfolioData } from "../../../../features/settings/reducers/settingThunks";
 import { portSelect } from "../../../../features/settings/reducers/settingSelectors";
 
 export const Portfolio: React.FC = () => {
 
-      const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
 
 
-  useEffect(() => {
-    (async () => {
-      try {
-        
-        const id = "691d8d28340440bf767c5b1d";
-        const data = await dispatch(getPortfolioData(id));
-        const pay = data?.data
-        // if(pay.success === true)
-        //   toast.success(pay.message)
-      } catch (error : unknown) {
-          // toast.error(error as Error["message"])
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+
+  //       const id = "691d8d28340440bf767c5b1d";
+  //       const data = await dispatch(getPortfolioData(id));
+  //       const pay = data?.data
+  //       // if(pay.success === true)
+  //       //   toast.success(pay.message)
+  //     } catch (error : unknown) {
+  //         // toast.error(error as Error["message"])
+  //     }
+  //   })();
+  // }, []);
 
   const profile2 = useSelector(portSelect)
-  console.log("portfoilki",profile2)
+  console.log("portfoilki", profile2)
 
 
   const profile = useAppSelector((state) => state.profile);

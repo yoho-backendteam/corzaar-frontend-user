@@ -17,25 +17,29 @@ import website from "../../assets/website.png";
 import linkedin from "../../assets/linkedin.png";
 import teacher from "../../assets/teacher.png";
 import { useNavigate } from "react-router-dom";
-import type { AppDispatch } from "../../store/store";
+import type { AppDispatch, RootState } from "../../store/store";
+import type { Course } from "../../userHomeTypes/types";
+import { selectCourseData } from "../../features/home_page/reducers/homeSelector";
+import { getCourseThunk } from "../../features/home_page/reducers/homeThunk";
 
 const ExploreInstitutes: React.FC = () => {
   const navigate = useNavigate();
 
   const filteredInstitutes = useSelector(selectFilteredInstitutes);
+  const topCourses = useSelector<RootState, Course[]>(selectCourseData);
   const activeCategory = useSelector(selectActiveCategory);
   const search = useSelector(selectSearch);
   const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getCourseThunk()).catch((err) => console.error(err));
+  }, [dispatch]);
 
   // Fetch all institutes on mount
   useEffect(() => {
     dispatch(fetchInstitutes());
   }, [dispatch]);
-  
 
-
-
-  
 
   const categories = [
     "All Categories",
@@ -69,7 +73,7 @@ const ExploreInstitutes: React.FC = () => {
       </div>
 
       {/* Search Bar */}
-       <div className="relative mt-6 w-full max-w-2xl mx-auto md:mx-0">
+      <div className="relative mt-6 w-full max-w-2xl mx-auto md:mx-0">
         <Search className="absolute left-3 top-3 text-[#707070]" size={18} />
         <input
           style={FONTS.regular as React.CSSProperties}
@@ -89,10 +93,9 @@ const ExploreInstitutes: React.FC = () => {
             onClick={() => dispatch(setActiveCategory(cat))}
             style={FONTS.tabheading as React.CSSProperties}
             className={`px-3 cursor-pointer sm:px-4 py-1.5 sm:py-2 rounded-lg border text-xs sm:text-sm md:text-base font-medium transition-all duration-200
-              ${
-                activeCategory === cat
-                  ? "bg-[#ED1C24] text-white border-[#ED1C24]"
-                  : "bg-white text-[#ED1C24] border-[#ED1C24] hover:bg-[#ED1C24]/10"
+              ${activeCategory === cat
+                ? "bg-[#ED1C24] text-white border-[#ED1C24]"
+                : "bg-white text-[#ED1C24] border-[#ED1C24] hover:bg-[#ED1C24]/10"
               }`}
           >
             {cat}
@@ -145,7 +148,8 @@ const ExploreInstitutes: React.FC = () => {
                 <img src={star} alt="Rating" className="w-4 h-4" />
                 <span>{inst.statistics?.averageRating || "N/A"}</span>
                 <img src={hat} alt="Courses" className="w-4 h-4" />
-                <span>{inst.statistics?.totalCourses || 0} Courses</span>
+                <span>{`${topCourses?.filter((i) => i?.instituteId === inst?._id).length}
+                     courses`}</span>
                 <img src={student} alt="Students" className="w-4 h-4" />
                 <span>{inst.statistics?.totalStudents || 0} Students</span>
               </div>

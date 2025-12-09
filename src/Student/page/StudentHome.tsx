@@ -99,7 +99,7 @@ const StudentHome: React.FC = () => {
 
             {/* Quick Filters */}
             <p
-              className="text-xl font-semibold mb-3 "
+              className="text-xl font-semibold mb-3  "
               style={{ color: COLORS.primary_red, ...FONTS.boldHeading4 as any }}
             >
               Quick Filters

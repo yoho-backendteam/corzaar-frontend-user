@@ -16,12 +16,12 @@ const TopCourse = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
 
-     const handleOpen = (id: string) => {
+  const handleOpen = (id: string) => {
     navigate(`/courses/view/${id}`)
   }
 
-  
-  
+
+
 
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const TopCourse = () => {
           </p>
         </div>
         <button
-          className="text-white cursor-pointer font-semibold px-4 py-2 rounded-lg"
+          className="text-white font-semibold px-4 py-2 rounded-lg"
           style={{ background: COLORS.primary_red }}
           onClick={() => navigate("/courses")}
           onMouseEnter={(e) => (e.currentTarget.style.background = "#b01218")}
@@ -92,7 +92,7 @@ const TopCourse = () => {
           {totalPages > 1 && (
             <button
               onClick={() => scroll("left")}
-              className="hidden cursor-pointer md:flex absolute left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
+              className="hidden md:flex absolute left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
             >
               <ChevronLeft className="w-6 h-6 " style={{ color: COLORS.primary_gray }} />
             </button>
@@ -103,10 +103,10 @@ const TopCourse = () => {
             ref={scrollRef}
             className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
           >
-            {itemsToShow?.map((course,index) => (
+            {itemsToShow?.map((course, index) => (
               <div
                 key={course?.id ?? index}
-                  onClick={() => { handleOpen(course?._id) }}
+                onClick={() => { handleOpen(course?._id) }}
                 className="shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
               >
                 <CourseCard course={course} />
@@ -118,7 +118,7 @@ const TopCourse = () => {
           {totalPages > 1 && (
             <button
               onClick={() => scroll("right")}
-              className="hidden cursor-pointer md:flex absolute right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
+              className="hidden md:flex absolute right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
             >
               <ChevronRight className="w-6 h-6 " style={{ color: COLORS.primary_red }} />
             </button>

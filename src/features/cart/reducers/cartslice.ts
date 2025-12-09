@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface Review {
   rating: number;
@@ -25,7 +25,7 @@ export interface CartItem {
   courseId: string;
   price: number;
   discountPrice?: number;
-   title?: string;
+  title?: string;
   category?: string;
   shortDescription?: string;
 

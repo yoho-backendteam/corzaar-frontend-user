@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from "react";
 import { COLORS } from "../../../../Constants/uiconstants";
 import { getAllPaymentData } from "../../../../features/settings/reducers/settingThunks";
@@ -80,7 +81,7 @@ export const Payments: React.FC = () => {
     (async () => {
       try {
         const id = "68fc9551b9818562f4a3299c";
-        const result = await dispatch(getAllPaymentData(id));
+        const result: any = await dispatch(getAllPaymentData(id));
 
         const pay = result?.payload;
         if (pay?.success === true) {

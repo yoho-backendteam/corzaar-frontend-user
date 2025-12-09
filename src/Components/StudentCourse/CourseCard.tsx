@@ -5,8 +5,8 @@ import { Star, Heart, Clock, Users } from "lucide-react";
 import enroll from "../../assets/Image/enroll.png";
 import cart from "../../assets/Image/cart.png";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
-import { AddtoCartService } from "../../features/cart/services";
-import { toast } from "react-toastify";
+// import { AddtoCartService } from "../../features/cart/services";
+// import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 interface Course {

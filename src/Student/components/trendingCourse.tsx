@@ -16,7 +16,7 @@ const TrendingCourse = () => {
     : []; // ✅ prevents .slice() error
 
 
-     const handleOpen = (id: string) => {
+  const handleOpen = (id: string) => {
     navigate(`/courses/view/${id}`)
   }
 
@@ -132,8 +132,8 @@ const TrendingCourse = () => {
           >
             {itemsToShow.map((course, index) => (
               <div
-                key={course.id || course._id || index} 
-                 onClick={() => { handleOpen(course?._id) }}
+                key={course.id || course._id || index}
+                onClick={() => { handleOpen(course?._id) }}
                 className="shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
               >
                 <CourseCard course={course} />
@@ -157,11 +157,10 @@ const TrendingCourse = () => {
             {Array.from({ length: totalPages }).map((_, i) => (
               <div
                 key={i}
-                className={`h-3 rounded-full transition-all duration-500 ease-in-out ${
-                  i === activeIndex
+                className={`h-3 rounded-full transition-all duration-500 ease-in-out ${i === activeIndex
                     ? "w-10"
                     : "bg-white opacity-70 w-3"
-                }`}
+                  }`}
                 style={{
                   background:
                     i === activeIndex ? COLORS.primary_red : "white",

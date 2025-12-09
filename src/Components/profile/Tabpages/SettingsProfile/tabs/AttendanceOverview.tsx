@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { COLORS } from "../../../../../Constants/uiconstants";
 
@@ -51,13 +52,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 );
 
 type AttendanceOverviewProps = {
-  attendance: Array<{
-    label: string;
-    progress: number;
-    sessionsCompleted: number;
-    totalSessions: number;
-    date?: string;
-  }> | null;
+  attendance: any
 };
 
 export const AttendanceOverview: React.FC<AttendanceOverviewProps> = ({
@@ -76,7 +71,7 @@ export const AttendanceOverview: React.FC<AttendanceOverviewProps> = ({
       </p>
 
       {hasAttendance ? (
-        attendance!.map((item, i) => (
+        attendance!.map((item: any, i: number) => (
           <ProgressBar
             key={i}
             label={item.label}

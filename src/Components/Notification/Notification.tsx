@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {selectFilteredNotifications,selectUnreadCount,selectTotalCount,} from "../../redux/Notification/notificationSelector";
-import {markAsRead,deleteNotification,markAllAsRead,setFilter,} from "../../redux/Notification/notificationSlice";
+import { selectFilteredNotifications, selectUnreadCount, selectTotalCount, } from "../../redux/Notification/notificationSelector";
+import { markAsRead, deleteNotification, markAllAsRead, setFilter, } from "../../redux/Notification/notificationSlice";
 import { Trash2, CheckCheck } from "lucide-react";
 import ViewNotification from "./ViewNotification";
 import bellicon from "../../assets/Notification/bellicon.png";
@@ -19,10 +20,10 @@ const Notification: React.FC = () => {
     <div className="bg-yellow-400 min-h-screen px-4 sm:px-6 md:px-10 py-6">
       <div className="flex flex-col gap-4 md:flex-row justify-between items-start md:items-center mb-6 space-y-3 md:space-y-0">
         <div>
-          <h1 className="text-xl md:text-2xl font-semibold text-black"style={{ ...FONTS.boldHeading }}>
+          <h1 className="text-xl md:text-2xl font-semibold text-black" >
             Notifications
           </h1>
-          <p className="text-sm text-gray-700" style={{ ...FONTS.regular }}>
+          <p className="text-sm text-gray-700">
             Stay updated with your courses and activities
           </p>
         </div>
@@ -39,11 +40,11 @@ const Notification: React.FC = () => {
         <div className="flex justify-between items-center bg-white p-4 rounded-md shadow">
           <div className="flex items-center gap-2">
             <img src={bellicon} className="w-7 h-7" />
-            <span className="text-sm md:text-base font-medium"style={{ ...FONTS.medium }}>
+            <span className="text-sm md:text-base font-medium" style={{ ...FONTS.medium }}>
               Unread
             </span>
           </div>
-          <span className="text-lg font-bold"style={{ ...FONTS.boldHeading }}>
+          <span className="text-lg font-bold">
             {unreadCount}
           </span>
         </div>
@@ -55,7 +56,7 @@ const Notification: React.FC = () => {
               Total
             </span>
           </div>
-          <span className="text-lg font-bold" style={{ ...FONTS.boldHeading }}>
+          <span className="text-lg font-bold">
             {totalCount}
           </span>
         </div>
@@ -74,8 +75,8 @@ const Notification: React.FC = () => {
             {f === "all"
               ? `All (${totalCount})`
               : f === "unread"
-              ? `Unread (${unreadCount})`
-              : `Read (${totalCount - unreadCount})`}
+                ? `Unread (${unreadCount})`
+                : `Read (${totalCount - unreadCount})`}
           </button>
         ))}
       </div>
@@ -84,11 +85,10 @@ const Notification: React.FC = () => {
         {notifications.map((n) => (
           <div
             key={n.id}
-            className={`bg-white p-4 rounded-md shadow border-l-4 border-t-[1px] border-b-[1px] flex flex-col sm:flex-row justify-between sm:items-center gap-3 sm:gap-4
-              ${
-                n.type === "offer"
-                  ? "border-[#9810FA]"
-                  : n.type === "payment" || n.type === "completed"
+            className={`bg-white p-4 rounded-md shadow border-l-4 border-t border-b flex flex-col sm:flex-row justify-between sm:items-center gap-3 sm:gap-4
+              ${n.type === "offer"
+                ? "border-[#9810FA]"
+                : n.type === "payment" || n.type === "completed"
                   ? "border-[#00A63E]"
                   : "border-[#155DFC]"
               }`}>
@@ -98,10 +98,10 @@ const Notification: React.FC = () => {
                 <h2 className="font-semibold text-gray-800 text-sm sm:text-base" style={{ ...FONTS.medium }}>
                   {n.title}
                 </h2>
-                <p className=" text-sm text-gray-600 leading-snug" style={{ ...FONTS.regular }}>
+                <p className=" text-sm text-gray-600 leading-snug">
                   {n.message}
                 </p>
-                <p className="text-xs text-gray-400 mt-2"style={{ ...FONTS.medium }}>
+                <p className="text-xs text-gray-400 mt-2" style={{ ...FONTS.medium }}>
                   {n.time}
                 </p>
               </div>

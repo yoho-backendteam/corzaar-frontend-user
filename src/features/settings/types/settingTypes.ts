@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Payment types
 export type Payment = {
   remarks: string;
@@ -55,6 +56,8 @@ export interface AcademicInfo {
 }
 
 export interface PersonalInfo {
+  lastName: any;
+  firstName: any;
   address: {
     permanent: Address;
     current: Address;
@@ -87,7 +90,7 @@ export interface ProfileData {
 }
 
 export interface ProfileResponse {
-  success: boolean;
+  success: any;
   data: ProfileData;
   message?: string;
 }
@@ -137,7 +140,8 @@ export interface UIProfileState {
 
 export interface ActivityResponse {
   success: boolean;
-  message: string;
+  message?: string;
+  Message?: string
   Data: ActivityItem[];
 }
 
@@ -229,7 +233,7 @@ export interface SettingState {
   favData: FavResponse | null;
   profileData: ProfileData | null;
   port: PortfolioResponse | null;
-  setData: ProfileResponse | null;
+  setData: ProfileResponse | any | null;
   activityData: ActivityResponse | null;
   attendanceData: AttendanceResponse | null;
   coursesIdData: CoursesIdResponse | null;

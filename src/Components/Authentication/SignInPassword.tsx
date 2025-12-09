@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { Mail, Lock } from "lucide-react";
 import { useAuth } from "../../context/context";
@@ -35,7 +35,7 @@ const SignInPassword: React.FC = () => {
         toast.error(resultAction?.message)
       }
     } catch (err: unknown) {
-      setError('Login failed. Please try again.');
+      setError(`Login failed. Please try again. ${err}`);
     } finally {
       setLoading(false);
     }

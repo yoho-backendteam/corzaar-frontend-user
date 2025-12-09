@@ -63,7 +63,7 @@ const StudentRegistration: React.FC = () => {
   //   }
   // }
 
-  function handelPersonalInfo(key: keyof StudentFormType, e: ChangeEvent<HTMLInputElement>) {
+  function handelPersonalInfo(key: string, e: ChangeEvent<HTMLInputElement>) {
     try {
       const value = e.target.value
 
@@ -72,7 +72,7 @@ const StudentRegistration: React.FC = () => {
       console.error(error, "handel change events")
     }
   }
-  function handelAddressInfo(key: keyof StudentFormType, types: 'permanent' | 'current', e: ChangeEvent<HTMLInputElement>) {
+  function handelAddressInfo(key: string, types: 'permanent' | 'current', e: ChangeEvent<HTMLInputElement>) {
     try {
       const value = e.target.value
 
@@ -82,7 +82,7 @@ const StudentRegistration: React.FC = () => {
       console.error(error, "handel change events")
     }
   }
-  function handelEmergcylInfo(key: keyof StudentFormType, e: ChangeEvent<HTMLInputElement>) {
+  function handelEmergcylInfo(key: string, e: ChangeEvent<HTMLInputElement>) {
     try {
       const value = e.target.value
 

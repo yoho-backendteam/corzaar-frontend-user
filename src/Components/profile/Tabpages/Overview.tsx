@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { COLORS, FONTS } from "../../../Constants/uiconstants";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../../store/store";
+import type { AppDispatch } from "../../../store/store";
 import tick from "../../../assets/profile/icons/Container.png";
 
 import { setActivityData, setProfileData } from "../../../features/settings/reducers/settingThunks";
@@ -235,40 +235,40 @@ export const Overview: React.FC = () => {
       </div>
 
       {/* Recent Activity */}
-     {/* Recent Activity */}
-<div className="p-6 rounded-xl shadow-sm" style={{ backgroundColor: COLORS.primary_white }}>
-  <h3 className="text-xl font-semibold mb-4">Recent Activity</h3>
+      {/* Recent Activity */}
+      <div className="p-6 rounded-xl shadow-sm" style={{ backgroundColor: COLORS.primary_white }}>
+        <h3 className="text-xl font-semibold mb-4">Recent Activity</h3>
 
-  <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
 
-    {/* If API says NO ACTIVITY */}
-    {activityData?.Message === "No activity logs found for this user" && (
-      <p className="text-sm text-gray-500">No recent activity available</p>
-    )}
+          {/* If API says NO ACTIVITY */}
+          {activityData?.Message === "No activity logs found for this user" && (
+            <p className="text-sm text-gray-500">No recent activity available</p>
+          )}
 
-    {/* If activity data exists */}
-    {Array.isArray(activityData?.Data) && activityData.Data.length > 0 &&
-      activityData.Data.map((item: ActivityItem) => (
-        <div key={item._id} className="flex items-center gap-3 mt-5">
-          <div
-            className="h-10 w-10 flex items-center justify-center rounded-full"
-            style={{ backgroundColor: `${COLORS.secondary_green}1A` }}
-          >
-            <img src={tick} alt="tick" />
-          </div>
+          {/* If activity data exists */}
+          {Array.isArray(activityData?.Data) && activityData.Data.length > 0 &&
+            activityData.Data.map((item: ActivityItem) => (
+              <div key={item._id} className="flex items-center gap-3 mt-5">
+                <div
+                  className="h-10 w-10 flex items-center justify-center rounded-full"
+                  style={{ backgroundColor: `${COLORS.secondary_green}1A` }}
+                >
+                  <img src={tick} alt="tick" />
+                </div>
 
-          <div className="flex flex-col">
-            <p className="font-medium" style={{ color: COLORS.primary_black }}>
-              {item.description}
-            </p>
-            <p className="text-xs" style={{ color: COLORS.primary_gray }}>
-              {formatDate(item.createdAt)}
-            </p>
-          </div>
+                <div className="flex flex-col">
+                  <p className="font-medium" style={{ color: COLORS.primary_black }}>
+                    {item.description}
+                  </p>
+                  <p className="text-xs" style={{ color: COLORS.primary_gray }}>
+                    {formatDate(item.createdAt)}
+                  </p>
+                </div>
+              </div>
+            ))}
         </div>
-      ))}
-  </div>
-</div>
+      </div>
     </div>
   );
 };

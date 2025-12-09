@@ -46,13 +46,13 @@ const ViewNotification: React.FC<ViewNotificationProps> = ({
                         <h2 className="text-lg font-bold text-gray-800" style={{ ...FONTS.medium }} >
                             Special Offers Alert
                         </h2>
-                        <p className="text-xs text-gray-500" style={{ ...FONTS.regular }}>Saturday, November 1, 2025 at 05:30 AM</p>
+                        <p className="text-xs text-gray-500" >Saturday, November 1, 2025 at 05:30 AM</p>
                     </div>
                 </div>
 
                 <div className="mb-4">
                     <h3 className="font-medium text-gray-700 mb-1" style={{ ...FONTS.medium }}>Message</h3>
-                    <p className="text-sm text-gray-600" style={{ ...FONTS.regular }}>Get 60% off on all tech courses. Use code: NEWYEAR60</p>
+                    <p className="text-sm text-gray-600">Get 60% off on all tech courses. Use code: NEWYEAR60</p>
                 </div>
 
                 <h2>Action</h2>
