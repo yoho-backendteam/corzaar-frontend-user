@@ -1,17 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import image1 from "../../../../assets/profile/images/image1.png";
 import image2 from "../../../../assets/profile/images/image2.png";
 import { COLORS } from "../../../../Constants/uiconstants";
-// import { useAppSelector } from "../../../../hooks/reduxhooks";
-import type { AppDispatch } from "../../../../store/store";
-import { useEffect, useState } from "react";
-import { getAllFavData, getCoursesById } from "../../../../features/settings/reducers/settingThunks";
 import { toast } from "react-toastify";
+import type { AppDispatch } from "../../../../store/store";
+import { getAllFavData, setCoursesById } from "../../../../features/settings/reducers/settingThunks";
 import { favSelect } from "../../../../features/settings/reducers/settingSelectors";
+import type { CombinedFavoriteItem, FavResponse } from "../../../../features/settings/types/settingTypes";
 
-type FavoriteCardProps = {
-  image: any;
+// ---------- CARD PROPS ----------
+interface FavoriteCardProps {
+  image: string;
   category: string;
   title: string;
   institute: string;
@@ -19,148 +19,154 @@ type FavoriteCardProps = {
   price: string;
   oldPrice?: string;
   buttonLabel: string;
-};
+}
 
-const FavoriteCard = ({
+// ---------- CARD COMPONENT ----------
+const FavoriteCard: React.FC<FavoriteCardProps> = ({
   image,
   category,
   title,
-  // institute,
   description,
   price,
   oldPrice,
   buttonLabel,
-}: FavoriteCardProps) => {
-  return (
-    <div className="rounded-2xl shadow-md overflow-hidden w-full h-fit p-4"
-      style={{ backgroundColor: COLORS.primary_white }}>
-      <img src={image} alt={title} className="w-full h-80 object-cover" />
-      <div className="p-4">
-        <span className="inline-block text-xs font-semibold px-2 py-1 rounded" style={{ backgroundColor: COLORS.primary_red, color: COLORS.primary_white }}>
-          {category}
-        </span>
-        <h3 className="mt-2 text-lg font-semibold">{title}</h3>
-        <p className="text-sm" style={{ color: COLORS.primary_gray }}>{description}</p>
+}) => (
+  <div
+    className="rounded-2xl shadow-md overflow-hidden w-full h-fit p-4"
+    style={{ backgroundColor: COLORS.primary_white }}
+  >
+    <img src={image} alt={title} className="w-full h-80 object-cover" />
+    <div className="p-4">
+      <span
+        className="inline-block text-xs font-semibold px-2 py-1 rounded"
+        style={{
+          backgroundColor: COLORS.primary_red,
+          color: COLORS.primary_white,
+        }}
+      >
+        {category}
+      </span>
+      <h3 className="mt-2 text-lg font-semibold">{title}</h3>
+      <p className="text-sm" style={{ color: COLORS.primary_gray }}>
+        {description}
+      </p>
 
-        <div className="mt-3 flex items-baseline gap-2">
-          <span className="text-3xl font-semibold">₹{price}</span>
-          {oldPrice && (
-            <span className="text-sm line-through" style={{ color: COLORS.primary_gray }}>
-              ₹{oldPrice}
-            </span>
-          )}
-        </div>
+      <div className="mt-3 flex items-baseline gap-2">
+        <span className="text-3xl font-semibold">₹{price}</span>
+        {oldPrice && (
+          <span
+            className="text-sm line-through"
+            style={{ color: COLORS.primary_gray }}
+          >
+            ₹{oldPrice}
+          </span>
+        )}
       </div>
-
-      <button className="w-full py-2 font-semibold rounded-xl transition"
-        style={{ backgroundColor: COLORS.primary_red, color: COLORS.primary_white }}>
-        {buttonLabel}
-      </button>
     </div>
-  );
-};
 
-// Interface for combined favorite item
-interface CombinedFavoriteItem {
-  courseId: string;
-  title: string;
-  price: number;
-  discountPrice?: number;
-  merchantId: string;
-  category: string;
-  institute: string;
-  description: string;
-  thumbnail?: string;
-}
+    <button
+      className="w-full py-2 font-semibold rounded-xl transition"
+      style={{
+        backgroundColor: COLORS.primary_red,
+        color: COLORS.primary_white,
+      }}
+    >
+      {buttonLabel}
+    </button>
+  </div>
+);
 
-export const Favorites = () => {
+// ---------- MAIN COMPONENT ----------
+export const Favorites: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [combinedFavorites, setCombinedFavorites] = useState<CombinedFavoriteItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  // Get favorites and course data from Redux store
-  const favoritesData: any = useSelector(favSelect);
-  // const courseData = useSelector(courseIdSelect);
+  // Redux selectors
+  const favoritesData: FavResponse | null = useSelector(favSelect);
 
-  // Fetch favorites data
+  // ---------- Fetch favorites ----------
   useEffect(() => {
-    const fetchFavorites = async () => {
+    const fetchFavorites = async (): Promise<void> => {
       try {
         setLoading(true);
-        const userId = "691d8d28340440bf767c5b1d";
-        await dispatch(getAllFavData(userId));
+        const userId = "68fb72ea19c3430ef1c8d3e6";
+        const result = await dispatch(getAllFavData(userId));
+        if (result?.success === true) {
+          toast.success(result.message)
+        }
       } catch (error: unknown) {
-        toast.error(error as string);
+        const errorMessage = error instanceof Error ? error.message : "An error occurred";
+        toast.error(errorMessage);
       }
     };
 
     fetchFavorites();
   }, [dispatch]);
 
-  // Fetch course details for each favorite item and combine data
+  // ---------- Fetch courses for each favorite ----------
   useEffect(() => {
-    const fetchCourseDetails = async () => {
-      if (favoritesData?.data?.data?.items?.length > 0) {
-        try {
-          const combinedData: CombinedFavoriteItem[] = [];
+    const fetchCourseDetails = async (): Promise<void> => {
+      const items = favoritesData?.data?.items ?? [];
 
-          for (const favItem of favoritesData.data.data.items) {
-            try {
-              // Fetch course details for each favorite item
-              const courseResponse = await dispatch(getCoursesById(favItem.courseId));
-              console.log("cour", courseResponse)
+      if (items.length === 0) {
+        setLoading(false);
+        return;
+      }
 
-              if (courseResponse?.data) {
-                const course: any = courseResponse.data;
-                console.log("cpusre", course.data.description);
+      try {
+        const combinedData: CombinedFavoriteItem[] = [];
 
+        for (const favItem of items) {
+          try {
+            const courseResponse = await dispatch(setCoursesById(favItem.courseId));
 
-                combinedData.push({
-                  courseId: favItem.courseId,
-                  title: favItem.title || course.title,
-                  price: favItem.discountPrice || favItem.price,
-                  discountPrice: favItem.discountPrice ? favItem.price : undefined,
-                  merchantId: favItem.merchantId,
-                  category: course.category?.primary || "Programming",
-                  institute: course.data.instituteId || "Institute Name",
-                  description: course.data.description || course.data.shortDescription,
-                  thumbnail: course.thumbnail
-                });
-              }
-            } catch (error) {
-              console.error(`Error fetching course ${favItem.courseId}:`, error);
+            const course = courseResponse?.data;
+            if (!course) {
+              console.warn(`No course data found for courseId: ${favItem.courseId}`);
+              continue;
             }
-          }
 
-          setCombinedFavorites(combinedData);
-        } catch (error: unknown) {
-          toast.error("Error combining favorite data");
-          console.error(error);
-        } finally {
-          setLoading(false);
+            const finalPrice = favItem.discountPrice || favItem.price;
+            const originalPrice = favItem.discountPrice ? favItem.price : undefined;
+
+            combinedData.push({
+              courseId: favItem.courseId,
+              title: favItem.title || course.title || "Untitled Course",
+              price: finalPrice,
+              discountPrice: originalPrice,
+              merchantId: favItem.merchantId,
+              category: course.category?.primary || "General",
+              institute: course.instituteId || "Institute Name",
+              description:
+                course.shortDescription ||
+                course.description ||
+                "No description available",
+              thumbnail: course.thumbnail,
+            });
+          } catch (error) {
+            console.error(`Error fetching course ${favItem.courseId}:`, error);
+          }
         }
-      } else {
+        setCombinedFavorites(combinedData);
+      } catch (error) {
+        console.error("Error combining favorite data:", error);
+        toast.error("Error loading favorite courses");
+      } finally {
         setLoading(false);
       }
     };
 
-    if (favoritesData?.data?.data?.items) {
+    if (favoritesData?.data?.items) {
       fetchCourseDetails();
+    } else {
+      setLoading(false);
     }
   }, [favoritesData, dispatch]);
-  console.log("comb", combinedFavorites)
 
-  // const imageMap: Record<string, string> = {
-  //   "image1.png": image1,
-  //   "image2.png": image2,
-  // };
-
-  // Get fallback image based on course title or use default
-  const getCourseImage = (course: CombinedFavoriteItem) => {
-    if (course.thumbnail) {
-      return course.thumbnail;
-    }
-    // Use a fallback logic based on course title or other properties
+  // ---------- Get fallback image ----------
+  const getCourseImage = (course: CombinedFavoriteItem): string => {
+    if (course.thumbnail) return course.thumbnail;
     return course.title.toLowerCase().includes("java") ? image1 : image2;
   };
 
@@ -174,6 +180,7 @@ export const Favorites = () => {
     );
   }
 
+  // ---------- Render ----------
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 justify-items-center">
       {combinedFavorites.length > 0 ? (
@@ -186,14 +193,20 @@ export const Favorites = () => {
             institute={course.institute}
             description={course.description}
             price={course.price.toString()}
-            oldPrice={course.discountPrice ? course.discountPrice.toString() : undefined}
+            oldPrice={
+              course.discountPrice
+                ? course.discountPrice.toString()
+                : undefined
+            }
             buttonLabel="View Course"
           />
         ))
       ) : (
-        <p className="text-sm" style={{ color: COLORS.primary_gray }}>
-          No favorites found.
-        </p>
+        <div className="col-span-2 flex justify-center items-center py-8">
+          <p className="text-sm" style={{ color: COLORS.primary_gray }}>
+            No favorites found. Add some courses to your favorites!
+          </p>
+        </div>
       )}
     </div>
   );

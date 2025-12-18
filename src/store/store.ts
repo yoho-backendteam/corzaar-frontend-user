@@ -37,7 +37,7 @@ const store = configureStore({
     query: querySlice,
     SettingSlice: SettingSlice,
     cartreducer: cartreducer,
-    queryreducer : queryreducer
+    queryreducer: queryreducer
   },
 
 })

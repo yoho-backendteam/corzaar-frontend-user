@@ -20,15 +20,7 @@ import { profileSelect } from "../features/settings/reducers/settingSelectors";
 export const Settingprofile = () => {
 
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  // Fetch profile data
-  useEffect(() => {
-    const id = "691d8d28340440bf767c5b1d";
-    dispatch(setProfileData(id));
-  }, [dispatch]);
-
-  const profileData = useSelector(profileSelect);
+  const profile = useAppSelector((state) => state.profile);
 
   const tabs = [
     { label: "Overview", content: <Overview /> },

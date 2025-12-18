@@ -8,7 +8,7 @@ import type {
   ProfileResponse,
   ActivityResponse,
   AttendanceResponse,
-  CoursesIdResponse
+  CourseResponse
 } from '../types/settingTypes';
 
 export const getAllPayment = async (params: string): Promise<PaymentResponse | undefined> => {
@@ -23,9 +23,8 @@ export const getAllPayment = async (params: string): Promise<PaymentResponse | u
 
 export const getFavlist = async (userId: string): Promise<FavResponse | undefined> => {
   try {
-    const response: any = await Client.fav.get(userId);
-    console.log("favorites service response:", response);
-    return response;
+    const response = await Client.fav.get(userId);
+    return response.data;
   } catch (error) {
     console.log("get favorites error:", error);
     return undefined;
@@ -34,9 +33,8 @@ export const getFavlist = async (userId: string): Promise<FavResponse | undefine
 
 export const getProfile = async (): Promise<ProfileResponse | undefined> => {
   try {
-    const response: any = await Client.profile.get();
-    console.log("profile service response:", response);
-    return response;
+    const response = await Client.profile.get();
+    return response?.data;
   } catch (error) {
     console.log("get profile error:", error);
     return undefined;
@@ -66,7 +64,6 @@ export const getProfileById = async (params: string): Promise<ProfileResponse | 
 export const getActivity = async (params: string): Promise<ActivityResponse | undefined> => {
   try {
     const response = await Client.activity.get(params);
-    console.log("activity service response:", response);
     return response?.data;
   } catch (error) {
     console.log("get activity error:", error);
@@ -77,7 +74,6 @@ export const getActivity = async (params: string): Promise<ActivityResponse | un
 export const getStudentAttendance = async (studentId: string): Promise<AttendanceResponse | undefined> => {
   try {
     const response = await Client.attendance.get(studentId);
-    console.log("attendance service response:", response.data);
     return response.data;
   } catch (error) {
     console.log("getStudentAttendance error:", error);
@@ -85,7 +81,7 @@ export const getStudentAttendance = async (studentId: string): Promise<Attendanc
   }
 };
 
-export const getCoursesId = async (id: string): Promise<CoursesIdResponse | undefined> => {
+export const getCoursesId = async (params: string): Promise<CourseResponse | undefined> => {
   try {
     const response = await Client.courses.getById(id);
     return response?.data;

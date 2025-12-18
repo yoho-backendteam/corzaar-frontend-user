@@ -9,8 +9,9 @@ import { PrivacySetting } from "./tabs/Privacysetting";
 import type { AppDispatch } from "../../../../store/store";
 import { useEffect } from "react";
 import { setAttendanceData, setProfileData } from "../../../../features/settings/reducers/settingThunks";
-import { attendanceSelect, profileSelect } from "../../../../features/settings/reducers/settingSelectors";
+import { profileSelect } from "../../../../features/settings/reducers/settingSelectors";
 import type { ProfileResponse } from "../../../../features/settings/types/settingTypes";
+import { toast } from "react-toastify";
 
 export const Settings: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,11 +20,14 @@ export const Settings: React.FC = () => {
   useEffect(() => {
     const fetchProfileData = async (): Promise<void> => {
       try {
-        const id = "691d8d28340440bf767c5b1d";
-        await dispatch(setProfileData(id));
+        const id = "68fb60f726d15f4ca736ff1d";
+        const profile = await dispatch(setProfileData(id));
+        if (profile?.success === true) {
+          toast.success(profile?.message)
+        }
       } catch (error: unknown) {
         if (error instanceof Error) {
-          console.error("Profile fetch error:", error.message);
+          toast.error(`Profile fetch error: ${error.message}`);
         }
       }
     };
@@ -48,8 +52,6 @@ export const Settings: React.FC = () => {
 
     fetchAttendanceData();
   }, [dispatch]);
-
-  const attendance = useSelector(attendanceSelect);
 
   return (
     <div className="space-y-6">

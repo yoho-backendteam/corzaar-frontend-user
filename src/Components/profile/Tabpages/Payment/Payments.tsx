@@ -81,16 +81,16 @@ export const Payments: React.FC = () => {
     (async () => {
       try {
         const id = "68fc9551b9818562f4a3299c";
-        const result: any = await dispatch(getAllPaymentData(id));
+        const result = await dispatch(getAllPaymentData(id));
 
-        const pay = result?.payload;
-        if (pay?.success === true) {
-          toast.success(pay.message);
+        if (result?.success === true) {
+          toast.success(result.message);
         } else {
           toast.error("Failed to load payments");
         }
-      } catch (error: any) {
-        toast.error(error.message);
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : "An error occurred";
+        toast.error(errorMessage);
       }
     })();
   }, [dispatch]);
@@ -101,7 +101,15 @@ export const Payments: React.FC = () => {
     <div>
       {payments.length > 0 ? (
         payments.map((payment: Payment, index: number) => (
-          <PaymentCard key={index} {...payment} />
+          <PaymentCard
+            key={index}
+            remarks={payment.remarks || "Payment"} // Add fallback
+            transactionId={payment.transactionId}
+            createdAt={payment.createdAt}
+            paymentMethod={payment.paymentMethod}
+            amount={payment.amount.toString()} // Convert to string
+            status={payment.status}
+          />
         ))
       ) : (
         <p className="text-gray-500 text-sm">No payment history found.</p>

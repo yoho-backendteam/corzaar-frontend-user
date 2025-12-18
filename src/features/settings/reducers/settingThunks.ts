@@ -1,37 +1,37 @@
 import type { AppDispatch } from "../../../store/store";
-import { 
-  getActivity, 
-  getAllPayment, 
-  getCoursesId, 
-  getFavlist, 
-  getPortfolio, 
-  getProfileById, 
-  getStudentAttendance 
+import {
+  getActivity,
+  getAllPayment,
+  getCoursesId,
+  getFavlist,
+  getPortfolio,
+  getProfileById,
+  getStudentAttendance
 } from "../services";
-import type { 
-  ProfileResponse, 
-  PaymentResponse, 
-  FavResponse, 
-  PortfolioResponse, 
-  ActivityResponse, 
-  AttendanceResponse, 
-  CoursesIdResponse 
+import type {
+  ProfileResponse,
+  PaymentResponse,
+  FavResponse,
+  PortfolioResponse,
+  ActivityResponse,
+  AttendanceResponse,
+  CourseResponse,
+  CoursesIdResponse,
 } from "../types/settingTypes";
-import { 
-  getFav, 
-  getPayment, 
-  getProfile, 
-  setActivity, 
-  setAttendance, 
-  setCoursesId, 
-  setPortfolio, 
-  setProfile 
+import {
+  getFav,
+  getPayment,
+  getProfile,
+  setActivity,
+  setAttendance,
+  setCoursesId,
+  setPortfolio,
+  setProfile
 } from "./SettingSlice";
 
-export const getAllPaymentData = (params: string) => async(dispatch: AppDispatch): Promise<PaymentResponse | undefined> => {
+export const getAllPaymentData = (params: string) => async (dispatch: AppDispatch): Promise<PaymentResponse | undefined> => {
   try {
     const response = await getAllPayment(params);
-    console.log("payment response", response);
     if (response) {
       dispatch(getPayment(response));
     }
@@ -40,12 +40,11 @@ export const getAllPaymentData = (params: string) => async(dispatch: AppDispatch
     console.log("Payment fetch error:", error);
     return undefined;
   }
-} 
+}
 
-export const getAllFavData = (userId: string) => async(dispatch: AppDispatch): Promise<FavResponse | undefined> => {
+export const getAllFavData = (userId: string) => async (dispatch: AppDispatch): Promise<FavResponse | undefined> => {
   try {
     const response = await getFavlist(userId);
-    console.log("favorites response", response);
     if (response) {
       dispatch(getFav(response));
     }
@@ -54,12 +53,11 @@ export const getAllFavData = (userId: string) => async(dispatch: AppDispatch): P
     console.log("Favorites fetch error:", error);
     return undefined;
   }
-} 
+}
 
-export const getProfileData = (userId: string) => async(dispatch: AppDispatch): Promise<ProfileResponse | undefined> => {
+export const getProfileData = (userId: string) => async (dispatch: AppDispatch): Promise<ProfileResponse | undefined> => {
   try {
     const response = await getProfileById(userId);
-    console.log("profile response", response);
     if (response) {
       dispatch(getProfile(response.data));
     }
@@ -68,12 +66,11 @@ export const getProfileData = (userId: string) => async(dispatch: AppDispatch): 
     console.log("Profile fetch error:", error);
     return undefined;
   }
-} 
+}
 
-export const getPortfolioData = (params: string) => async(dispatch: AppDispatch): Promise<PortfolioResponse | undefined> => {
+export const getPortfolioData = (params: string) => async (dispatch: AppDispatch): Promise<PortfolioResponse | undefined> => {
   try {
     const response = await getPortfolio(params);
-    console.log("portfolio response", response);
     if (response) {
       dispatch(setPortfolio(response));
     }
@@ -82,12 +79,11 @@ export const getPortfolioData = (params: string) => async(dispatch: AppDispatch)
     console.log("Portfolio fetch error:", error);
     return undefined;
   }
-} 
+}
 
 export const setProfileData = (params: string) => async (dispatch: AppDispatch): Promise<ProfileResponse | undefined> => {
   try {
     const response = await getProfileById(params);
-    console.log("profile by id response", response);
     if (response) {
       dispatch(setProfile(response));
     }
@@ -98,10 +94,9 @@ export const setProfileData = (params: string) => async (dispatch: AppDispatch):
   }
 }
 
-export const setActivityData = (params: string) => async(dispatch: AppDispatch): Promise<ActivityResponse | undefined> => {
+export const setActivityData = (params: string) => async (dispatch: AppDispatch): Promise<ActivityResponse | undefined> => {
   try {
     const response = await getActivity(params);
-    console.log("activity thunk response:", response);
     if (response) {
       dispatch(setActivity(response));
     }
@@ -112,10 +107,9 @@ export const setActivityData = (params: string) => async(dispatch: AppDispatch):
   }
 }
 
-export const setAttendanceData = (params: string) => async(dispatch: AppDispatch): Promise<AttendanceResponse | undefined> => {
+export const setAttendanceData = (params: string) => async (dispatch: AppDispatch): Promise<AttendanceResponse | undefined> => {
   try {
     const response = await getStudentAttendance(params);
-    console.log("attendance response", response);
     if (response) {
       dispatch(setAttendance(response));
     }
@@ -124,16 +118,19 @@ export const setAttendanceData = (params: string) => async(dispatch: AppDispatch
     console.log("Attendance fetch error:", error);
     return undefined;
   }
-} 
+}
 
-export const getCoursesById = (params: string) => async(dispatch: AppDispatch): Promise<CoursesIdResponse | undefined> => {
+export const setCoursesById = (params: string) => async (dispatch: AppDispatch): Promise<CourseResponse | undefined> => {
   try {
-    const response = await getCoursesId(params);
-    console.log("courses thunk response:", response);
+    const response: CourseResponse | undefined = await getCoursesId(params);
+
     if (response) {
-      dispatch(setCoursesId(response));
+      // Use type assertion to fix the type mismatch
+      dispatch(setCoursesId(response as unknown as CoursesIdResponse));
+      return response; // Return directly
     }
-    return response;
+
+    return undefined;
   } catch (error) {
     console.log("setCourseById error:", error);
     return undefined;
