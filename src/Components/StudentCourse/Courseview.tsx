@@ -203,7 +203,7 @@ const Courseview: React.FC = () => {
             value={val}
             onChange={(e) => handleChange(i, e.target.value)}
             onKeyDown={(e) => handleKeyDown(i, e)}
-            className="flex-1 min-w-1 max-w-8 h-9 border rounded-md text-center text-base sm:text-lg outline-none"
+            className="flex-1 min-w-1 max-w-10 h-9 border rounded-md text-center text-base sm:text-lg outline-none"
             style={{ borderColor: COLORS.primary_gray }}
           />
         ))}

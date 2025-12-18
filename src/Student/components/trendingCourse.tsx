@@ -16,9 +16,9 @@ const TrendingCourse = () => {
     : []; // ✅ prevents .slice() error
 
 
-     const handleOpen = (id: string) => {
-    navigate(`/courses/view/${id}`)
-  }
+  //    const handleOpen = (id: string) => {
+  //   navigate(`/courses/view/${id}`)
+  // }
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -133,7 +133,7 @@ const TrendingCourse = () => {
             {itemsToShow.map((course, index) => (
               <div
                 key={course.id || course._id || index} 
-                 onClick={() => { handleOpen(course?._id) }}
+                //  onClick={() => { handleOpen(course?._id) }}
                 className="flex-shrink-0 w-[85%] sm:w-[45%] cursor-pointer md:w-[30%] lg:w-[31%] snap-center"
               >
                 <CourseCard course={course} />

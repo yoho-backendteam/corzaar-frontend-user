@@ -90,7 +90,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
         OTP for Demo {storedOtp}
       </p>
 
-      <div className="flex flex-wrap justify-center gap-4 my-3 w-full mx-auto">
+      <div className="flex flex-wrap justify-center gap-2 my-3 w-full mx-auto">
         {otpValues.map((val, i) => (
           <input
             key={i}
@@ -100,7 +100,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
             value={val}
             onChange={(e) => handleChange(i, e.target.value)}
             onKeyDown={(e) => handleKeyDown(i, e)}
-            className="flex-1 min-w-9 max-w-10 h-10 border rounded-md text-center text-base sm:text-lg outline-none"
+            className="flex-1 min-w-1 max-w-10 h-10 border rounded-md text-center text-base sm:text-lg outline-none"
             style={{ borderColor: COLORS.primary_gray }}
           />
         ))}

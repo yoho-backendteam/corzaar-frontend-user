@@ -14,9 +14,9 @@ const RecommendedCourse = () => {
   const [_activeIndex, setActiveIndex] = useState(0);
   const Navigate = useNavigate();
 
-  const handleOpen = (course: CourseCardProps) => {
-    Navigate(`/courses/view/${course?._id}`)
-  }
+  // const handleOpen = (course: CourseCardProps) => {
+  //   Navigate(`/courses/view/${course?._id}`)
+  // }
 
 
   // const scroll = (direction: "left" | "right") => {
@@ -80,7 +80,7 @@ const RecommendedCourse = () => {
           RecommendCourses.map((course, index) => (
             <div
               key={index}
-              onClick={() => { handleOpen(course)}}
+              // onClick={() => { handleOpen(course)}}
               className="flex-shrink-0 w-[85%] cursor-pointer sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
             >
               <CourseCard course={course as unknown as CourseCardProps["course"]} />
