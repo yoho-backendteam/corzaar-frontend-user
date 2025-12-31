@@ -13,12 +13,14 @@ import { useNavigate } from "react-router-dom";
 import star from '../../assets/images/magic-starYellow.png'
 import type { StudentFormType } from "../../types/studentForm";
 import { toast } from "react-toastify";
-import { RegisterForm } from "../../features/profile";
+import { RegisterFormApi } from "../../features/profile";
+import { useRegisterform } from "../../context/RegsterContext";
 
 
 const StudentRegistration: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
+  const { RegisterForm, setRegisterFormClose } = useRegisterform()
   const [regform, setregform] = useState<StudentFormType>({
     personalInfo: {
       firstName: "",
@@ -52,16 +54,6 @@ const StudentRegistration: React.FC = () => {
     }
   });
 
-  // function handelChangeInput(key: string, e: ChangeEvent<HTMLInputElement>) {
-  //   try {
-  //     e.preventDefault()
-  //     const value = e.target.value
-
-  //     setregform((prev: StudentFormType) => ({ ...prev, [key]: value }))
-  //   } catch (error) {
-  //     console.error(error, "handel change events")
-  //   }
-  // }
 
   function handelPersonalInfo(key: string, e: ChangeEvent<HTMLInputElement>) {
     try {
@@ -123,10 +115,14 @@ const StudentRegistration: React.FC = () => {
 
   async function HandelSubmitForm() {
     try {
-      const data = await RegisterForm(regform)
+      const data = await RegisterFormApi(regform)
       if (data?.success) {
         toast.success(data?.message)
-        navigate("/courses")
+        if (RegisterForm) {
+          setRegisterFormClose()
+        } else {
+          navigate("/courses")
+        }
       } else {
         toast.warn(data?.message)
       }

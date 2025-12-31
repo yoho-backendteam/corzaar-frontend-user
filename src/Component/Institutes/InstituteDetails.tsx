@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store/store";
@@ -9,6 +9,7 @@ import {
   Mail,
   Phone,
   Globe,
+  X,
 } from "lucide-react";
 
 // import robo from "../../assets/robo.png";
@@ -24,10 +25,18 @@ import facebicon from "../../assets/facebicon.png";
 import ratingicon from "../../assets/ratingicon.png";
 import course from "../../assets/course.png";
 import heart from "../../assets/heart.png";
-import { FONTS } from "../../Constants/uiconstants";
+import { COLORS, FONTS } from "../../Constants/uiconstants";
 import type { Course } from "../../userHomeTypes/types";
 import { selectCourseData } from "../../features/home_page/reducers/homeSelector";
 import { getCourseThunk } from "../../features/home_page/reducers/homeThunk";
+import { toast } from "react-toastify";
+import type { OTPResponse } from "../../features/userlogin/types/otptypes";
+import { sendOTPThunk } from "../../features/userlogin/reducers/otpthunks";
+import { getBatchBycourseId } from "../../features/courses/service";
+import OTPVerification from "../../Components/Authentication/OTPVerification";
+import SendOTP from "../../Components/Authentication/SendOTP";
+import SignInPassword from "../../Components/Authentication/SignInPassword";
+import { BatchModal } from "../../Components/StudentCourse/batchs/SelectBatchCard";
 
 const InstituteDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -36,6 +45,59 @@ const InstituteDetails: React.FC = () => {
   const { loading, error } = useSelector((state: RootState) => state.institute);
   const navigate = useNavigate();
   const topCourses = useSelector<RootState, Course[]>(selectCourseData);
+  const [showLogin, setShowlogin] = useState(false)
+  const [method, setMethod] = useState<"password" | "otp">("otp");
+  const [otpStep, setOtpStep] = useState<"enter-phone" | "enter-otp">(
+    "enter-phone"
+  );
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [SelectedCourse, setSelectedCourse] = useState<any>(null);
+
+  const handleSendOTP = async (): Promise<void> => {
+    if (!phoneNumber) {
+      toast.error("Phone number is required");
+      return;
+    }
+
+    const resultAction = await dispatch(sendOTPThunk({ phoneNumber })) as OTPThunkResult;
+
+    if (sendOTPThunk.fulfilled.match(resultAction)) {
+      const payload: OTPResponse = resultAction.payload;
+
+      toast.success(payload.message);
+      setOtpStep("enter-otp");
+    } else {
+      const errorMessage =
+        typeof resultAction.payload === "string"
+          ? resultAction.payload
+          : "Failed to send OTP";
+      toast.error(errorMessage);
+    }
+  };
+
+
+  const handelSlectedCourse = async (courseId: string) => {
+    try {
+
+      const { data } = await getBatchBycourseId(courseId)
+
+      console.log(data, "add to")
+
+      if (data.length == 0) {
+        return toast.warn("there is no batch available")
+      }
+
+      setSelectedCourse(data)
+    } catch (error) {
+      // navigate("/login")
+      setShowlogin(true);
+    }
+  }
+
+  const handelcloseModel = () => {
+    setSelectedCourse(null)
+  }
+
 
   useEffect(() => {
     dispatch(getCourseThunk()).catch((err) => console.error(err));
@@ -194,7 +256,7 @@ const InstituteDetails: React.FC = () => {
                   key={course._id}
                   className=" bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
                 >
-                  <div className="relative">
+                  <div onClick={() => { handleOpen(course?._id) }} className="relative">
                     <img
                       src={course.image || undefined}
                       alt={course.title}
@@ -209,7 +271,7 @@ const InstituteDetails: React.FC = () => {
                   </div>
 
                   <div className="p-5">
-                    <div className="flex justify-between items-center mb-2">
+                    <div onClick={() => { handleOpen(course?._id) }} className="flex justify-between items-center mb-2">
                       <span className="bg-[#ED1C24] text-white text-xs px-2 py-1 rounded">
                         {course.category.primary || "Beginner"}
                       </span>
@@ -218,18 +280,18 @@ const InstituteDetails: React.FC = () => {
                       </span>
                     </div>
 
-                    <h3
+                    <h3 onClick={() => { handleOpen(course?._id) }}
                       style={FONTS.boldHeadingg2 as React.CSSProperties}
                       className="font-semibold text-[#000000]"
                     >
                       {course.title}
                     </h3>
 
-                    <p className="text-sm text-[#707070] mt-1">
+                    <p onClick={() => { handleOpen(course?._id) }} className="text-sm text-[#707070] mt-1">
                       {course.description || "No description"}
                     </p>
 
-                    <div className="flex items-center gap-4 text-gray-700 text-sm mt-2">
+                    <div onClick={() => { handleOpen(course?._id) }} className="flex items-center gap-4 text-gray-700 text-sm mt-2">
                       <div className="flex items-center gap-1">
                         <img src={star} alt="rating" className="w-4 h-4" />
                         <span>{course.rating || "N/A"}</span>
@@ -244,7 +306,7 @@ const InstituteDetails: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex justify-between items-center mt-3">
+                    <div onClick={() => { handleOpen(course?._id) }} className="flex justify-between items-center mt-3">
                       <div>
                         <span className="text-lg font-bold text-[#000000]">
                           ₹{course.pricing.price || 0}
@@ -258,10 +320,10 @@ const InstituteDetails: React.FC = () => {
                     </div>
 
                     <button
-                      onClick={() => { handleOpen(course?._id) }}
+                      onClick={() => handelSlectedCourse(course?._id)}
                       className={`mt-3 px-4 py-2 w-full text-sm font-medium cursor-pointer rounded-md ${course.enrolled
-                        ? "bg-[#ED1C24] text-[#FFFFFF]"
-                        : "bg-[#FFDD00] text-[#000000]"
+                          ? "bg-[#ED1C24] text-[#FFFFFF]"
+                          : "bg-[#FFDD00] text-[#000000]"
                         }`}
                     >
                       {course.enrolled ? "Already Enrolled" : "Add To Cart"}
@@ -376,6 +438,123 @@ const InstituteDetails: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <BatchModal
+        isOpen={SelectedCourse !== null}
+        onClose={handelcloseModel}
+        course={SelectedCourse}
+        gotoCart={() => navigate("/cart")}
+      />
+
+
+      {showLogin && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div
+            className="w-full md:w-1/4 rounded-lg shadow-md p-6 md:p-8 flex flex-col justify-between"
+            style={{
+              backgroundColor: COLORS.primary_white,
+              minHeight: "420px",
+            }}
+          >
+            <div>
+              <div className='flex justify-between'>
+                <h2
+                  style={{
+                    ...(FONTS.boldHeading as any),
+                    fontSize: "20px",
+                    color: COLORS.primary_black,
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Join now
+                </h2>
+                <p className='cursor-pointer'
+                  onClick={() => setShowlogin(false)}
+                  style={{
+                    ...(FONTS.boldHeading as any),
+                    fontSize: "20px",
+                    color: COLORS.primary_red,
+                    marginBottom: "0.5rem",
+                  }}><X className='w-6 h-6 text-black hover:text-[#ED1C24]' /></p>
+              </div>
+              <p
+                style={{
+                  ...(FONTS.regular as any),
+                  color: COLORS.primary_gray,
+                  marginBottom: "1.5rem",
+                  fontSize: "14px",
+                }}
+              >
+                Choose your preferred method to sign in to your account
+              </p>
+
+              <div className="flex mb-6">
+                <button
+                  onClick={() => {
+                    setMethod("otp");
+                    setOtpStep("enter-phone");
+                  }}
+                  className="flex-1 py-2 rounded-r-md font-semibold text-sm transition-all cursor-pointer"
+                  style={{
+                    backgroundColor:
+                      method === "otp"
+                        ? COLORS.primary_red
+                        : COLORS.primary_white,
+                    color:
+                      method === "otp"
+                        ? COLORS.primary_white
+                        : COLORS.primary_red,
+                    border: `1px solid ${COLORS.primary_red}`,
+                  }}
+                >
+                  <Phone className="inline mr-2 w-4 h-4 cursor-pointer" />
+                  Sign Up / Sign In
+                </button>
+              </div>
+
+              <div className="flex flex-col items-center transition-all duration-300 w-full">
+                {method === "password" && (
+                  <SignInPassword />
+                )}
+
+                {method === "otp" && otpStep === "enter-phone" && (
+                  <SendOTP
+                    goToOtp={handleSendOTP}
+                    phoneNumber={phoneNumber}
+                    setPhoneNumber={setPhoneNumber}
+                  />
+                )}
+
+                {method === "otp" && otpStep === "enter-otp" && (
+                  <OTPVerification goBack={() => setOtpStep("enter-phone")} />
+                )}
+              </div>
+            </div>
+
+            <p
+              className="text-center mt-4 text-sm"
+              style={{ color: COLORS.primary_gray }}
+            >
+              Don’t have an account?{" "}
+              <button
+                className='cursor-pointer'
+                onClick={() => setMethod("otp")}
+                style={{
+                  color: COLORS.primary_red,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  fontSize: "inherit",
+                }}
+              >
+                Sign up now
+              </button>
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -19,6 +19,8 @@ import type { OTPResponse } from '../../features/userlogin/types/otptypes';
 import { otpVerify } from "../../features/userlogin/reducers/service";
 import { useAuth } from "../../context/context";
 import { GetLocalstorage, RemoveLocalstorage } from "../../utils/helper";
+import { useRegisterform } from '../../context/RegsterContext';
+import StudentRegistration from '../StudentVerfication/StudentRegistration';
 
 export interface CourseData {
   _id?: string;
@@ -66,6 +68,7 @@ const Courseview: React.FC = () => {
     "enter-phone"
   );
   const [phoneNumber, setPhoneNumber] = useState("");
+  const { RegisterForm, setRegisterFormOpen, setRegisterFormClose } = useRegisterform()
 
   const { id } = useParams();
 
@@ -164,6 +167,7 @@ const Courseview: React.FC = () => {
         login(token)
         if (!response?.reg) {
           setShowlogin(false)
+          setRegisterFormOpen()
         } else {
           setShowlogin(false)
         }
@@ -205,7 +209,7 @@ const Courseview: React.FC = () => {
               value={val}
               onChange={(e) => handleChange(i, e.target.value)}
               onKeyDown={(e) => handleKeyDown(i, e)}
-              className="flex-1 min-w-1 max-w-8 h-9 border rounded-md text-center text-base sm:text-lg outline-none"
+              className="flex-1 min-w-1 max-w-10 h-9 border rounded-md text-center text-base sm:text-lg outline-none"
               style={{ borderColor: COLORS.primary_gray }}
             />
           ))}
@@ -705,6 +709,14 @@ const Courseview: React.FC = () => {
           </div>
         </div>
       )}
+
+      {
+        RegisterForm && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+            <StudentRegistration />
+          </div>
+        )
+      }
 
     </div>
   );

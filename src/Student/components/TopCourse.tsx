@@ -16,9 +16,9 @@ const TopCourse = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
 
-  const handleOpen = (id: string) => {
-    navigate(`/courses/view/${id}`)
-  }
+  //    const handleOpen = (id: string) => {
+  //   navigate(`/courses/view/${id}`)
+  // }
 
 
 
@@ -106,8 +106,8 @@ const TopCourse = () => {
             {itemsToShow?.map((course, index) => (
               <div
                 key={course?.id ?? index}
-                onClick={() => { handleOpen(course?._id) }}
-                className="shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
+                // onClick={() => { handleOpen(course?._id) }}
+                className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] cursor-pointer snap-center"
               >
                 <CourseCard course={course} />
               </div>

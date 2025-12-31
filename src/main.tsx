@@ -5,12 +5,15 @@ import App from './App.tsx'
 import { Provider } from "react-redux";
 import store from "./store/store.ts";
 import { AuthProvider } from './context/context.tsx';
+import { RegsterProvider } from './context/RegsterContext.tsx';
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <AuthProvider>
-        <App />
+        <RegsterProvider>
+          <App />
+        </RegsterProvider>
       </AuthProvider>
     </Provider>
   </StrictMode>,

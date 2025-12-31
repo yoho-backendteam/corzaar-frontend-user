@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import { otpVerify } from "../../features/userlogin/reducers/service";
 import { useAuth } from "../../context/context";
 import { GetLocalstorage, RemoveLocalstorage } from "../../utils/helper";
+import { useRegisterform } from "../../context/RegsterContext";
+import StudentRegistration from "../StudentVerfication/StudentRegistration";
 
 interface OTPVerificationProps {
   goBack: () => void;
@@ -15,6 +17,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
   const navigate = useNavigate();
   const [otpValues, setOtpValues] = useState<string[]>(Array(6).fill(""));
   const { login } = useAuth()
+  const { setRegisterFormOpen } = useRegisterform()
 
   const storedOtp: any = GetLocalstorage("generatedOtp");
   const token = GetLocalstorage("token")?.toString()
@@ -60,6 +63,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
       login(token)
       if (!response?.reg) {
         navigate("/student-register")
+        setRegisterFormOpen()
       } else {
         navigate('/')
       }
@@ -91,7 +95,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
         OTP for Demo `${storedOtp || ""}`
       </p>
 
-      <div className="flex flex-wrap justify-center gap-4 my-3 w-full mx-auto">
+      <div className="flex flex-wrap justify-center gap-2 my-3 w-full mx-auto">
         {otpValues.map((val, i) => (
           <input
             key={i}
@@ -101,7 +105,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
             value={val}
             onChange={(e) => handleChange(i, e.target.value)}
             onKeyDown={(e) => handleKeyDown(i, e)}
-            className="flex-1 min-w-9 max-w-10 h-10 border rounded-md text-center text-base sm:text-lg outline-none"
+            className="flex-1 min-w-1 max-w-10 h-10 border rounded-md text-center text-base sm:text-lg outline-none"
             style={{ borderColor: COLORS.primary_gray }}
           />
         ))}

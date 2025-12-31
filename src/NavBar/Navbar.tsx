@@ -46,8 +46,6 @@ const Navbar: React.FC = () => {
     };
   }, []);
 
-
-
   // Reverse geocode function using Nominatim OpenStreetMap API
   const reverseGeocode = async (lat: number, lon: number) => {
     try {

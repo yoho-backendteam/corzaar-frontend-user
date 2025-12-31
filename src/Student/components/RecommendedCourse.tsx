@@ -14,9 +14,20 @@ const RecommendedCourse = () => {
   const [_activeIndex, setActiveIndex] = useState(0);
   const Navigate = useNavigate();
 
-  const handleOpen = (course: CourseCardProps) => {
-    Navigate(`/courses/view/${course?._id}`)
-  }
+  // const handleOpen = (course: CourseCardProps) => {
+  //   Navigate(`/courses/view/${course?._id}`)
+  // }
+
+
+  // const scroll = (direction: "left" | "right") => {
+  //   if (scrollRef.current) {
+  //     const containerWidth = scrollRef.current.offsetWidth;
+  //     scrollRef.current.scrollBy({
+  //       left: direction === "left" ? -containerWidth / 1.05 : containerWidth / 1.05,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -68,58 +79,28 @@ const RecommendedCourse = () => {
         </div>
       </div>
 
-      <section className="relative py-10 px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden">
 
-
-        {itemsToShow?.length <= 0 ? (
-          <p className="text-center font-bold text-md">No top courses available</p>
-        ) : (
-          <>
-            {totalPages > 1 && (
-              <button
-                onClick={() => scroll("left")}
-                className="hidden cursor-pointer md:flex absolute  left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
-              >
-                <ChevronLeft className="w-6 h-6 " style={{ color: COLORS.primary_gray }} />
-              </button>
-            )}
-
+      {/* Course Cards */}
+      <div
+        ref={scrollRef}
+        className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
+      >
+        {RecommendCourses && RecommendCourses.length > 0 ? (
+          RecommendCourses.map((course, index) => (
             <div
-              ref={scrollRef}
-              className="flex gap-13 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pr-[15%] md:pr-[0%]"
+              key={index}
+              // onClick={() => { handleOpen(course)}}
+              className="flex-shrink-0 w-[85%] cursor-pointer sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
             >
-              {RecommendCourses && RecommendCourses.length > 0 ? (
-                RecommendCourses.map((course, index) => (
-                  <div
-                    key={index}
-                    onClick={() => { handleOpen(course) }}
-                    className="shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[30%] snap-center"
-                  >
-                    <CourseCard course={course as unknown as CourseCardProps["course"]} />
-                  </div>
-                ))
-              ) : (
-                <div className="text-center text-gray-500 w-full py-8">
-                  No recommended courses available
-                </div>
-              )}
+              <CourseCard course={course as unknown as CourseCardProps["course"]} />
             </div>
-
-            {totalPages > 1 && (
-              <button
-                onClick={() => scroll("right")}
-                className="hidden cursor-pointer md:flex absolute right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
-              >
-                <ChevronRight className="w-6 h-6 " style={{ color: COLORS.primary_red }} />
-              </button>
-            )}
-
-          </>
+          ))
+        ) : (
+          <div className="text-center text-gray-500 w-full py-8">
+            No recommended courses available
+          </div>
         )}
-      </section>
-
-
-
+      </div>
     </section>
   );
 };

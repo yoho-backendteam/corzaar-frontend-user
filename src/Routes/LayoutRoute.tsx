@@ -19,8 +19,10 @@ import ContactPage from "../Components/Queries/Querypage";
 import NotificationPage from "../pages/NotificationPage";
 import Checkout from "../pages/Student_Cart/Checkout";
 import Courseview from '../Components/StudentCourse/Courseview';
+import { useRegisterform } from "../context/RegsterContext";
 
 const LayoutRoute: React.FC = () => {
+  const { RegisterForm } = useRegisterform()
   return (
     <BrowserRouter>
       <Routes>
@@ -50,6 +52,11 @@ const LayoutRoute: React.FC = () => {
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/checkout" element={<Checkout />} />
               </Routes>
+              {
+                RegisterForm && (
+                  <StudentRegistration />
+                )
+              }
             </>
           }
         />
