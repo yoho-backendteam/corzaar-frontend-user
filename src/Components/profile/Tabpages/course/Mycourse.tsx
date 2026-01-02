@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CourseCard } from "./CourseNote";
 import { useAppDispatch } from "../../../../hooks/reduxhooks";
 import { COLORS } from "../../../../Constants/uiconstants";
@@ -6,8 +7,8 @@ import { useEffect, useState } from "react";
 
 export const Mycourse = () => {
   const dispatch = useAppDispatch();
-  const [courses, setCourses] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [courses,] = useState<any[]>([]);
+  const [loading,] = useState(true);
 
   useEffect(() => {
     // const userId = "691d8d28340440bf767c5b1d";

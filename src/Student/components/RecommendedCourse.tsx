@@ -4,15 +4,15 @@ import CourseCard from "./courseCard";
 import { COLORS } from "../../Constants/uiconstants";
 import { selectCourseData } from "../../features/home_page/reducers/homeSelector";
 import type { CourseCardProps } from "../../userHomeTypes/types";
-import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+// import { useNavigate } from "react-router-dom";
+// import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const RecommendedCourse = () => {
   const RecommendCourses = useSelector(selectCourseData);
 
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [_activeIndex, setActiveIndex] = useState(0);
-  const Navigate = useNavigate();
+  const [, setActiveIndex] = useState(0);
+  // const Navigate = useNavigate();
 
   // const handleOpen = (course: CourseCardProps) => {
   //   Navigate(`/courses/view/${course?._id}`)
@@ -46,18 +46,18 @@ const RecommendedCourse = () => {
 
   console.log(RecommendCourses, 'coursesss')
 
-  const itemsToShow = RecommendCourses;
-  const itemsPerPage = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-  const totalPages = Math.ceil(itemsToShow.length / itemsPerPage);
+  // const itemsToShow = RecommendCourses;
+  // const itemsPerPage = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+  // const totalPages = Math.ceil(itemsToShow.length / itemsPerPage);
 
-  const scroll = (direction: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const containerWidth = scrollRef.current.offsetWidth;
-    scrollRef.current.scrollBy({
-      left: direction === "left" ? -containerWidth / 1.05 : containerWidth / 1.05,
-      behavior: "smooth",
-    });
-  };
+  // const scroll = (direction: "left" | "right") => {
+  //   if (!scrollRef.current) return;
+  //   const containerWidth = scrollRef.current.offsetWidth;
+  //   scrollRef.current.scrollBy({
+  //     left: direction === "left" ? -containerWidth / 1.05 : containerWidth / 1.05,
+  //     behavior: "smooth",
+  //   });
+  // };
 
   return (
     <section className=" overflow-hidden relative">

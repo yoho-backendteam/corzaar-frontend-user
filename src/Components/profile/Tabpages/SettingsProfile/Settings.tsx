@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { COLORS } from "../../../../Constants/uiconstants";
@@ -35,7 +36,7 @@ export const Settings: React.FC = () => {
     fetchProfileData();
   }, [dispatch]);
 
-  const profileData: ProfileResponse | null = useSelector(profileSelect);
+  const profileData: ProfileResponse | null | any = useSelector(profileSelect);
 
   // Attendance data
   useEffect(() => {
@@ -56,7 +57,7 @@ export const Settings: React.FC = () => {
   return (
     <div className="space-y-6">
       <Personinformation profile={profileData} />
-      <AttendanceOverview attendance={attendance} />
+      <AttendanceOverview attendance={profileData?.data?.attendance} />
       <Notification />
       <PrivacySetting />
 

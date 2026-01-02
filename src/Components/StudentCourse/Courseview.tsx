@@ -68,7 +68,7 @@ const Courseview: React.FC = () => {
     "enter-phone"
   );
   const [phoneNumber, setPhoneNumber] = useState("");
-  const { RegisterForm, setRegisterFormOpen, setRegisterFormClose } = useRegisterform()
+  const { RegisterForm, setRegisterFormOpen } = useRegisterform()
 
   const { id } = useParams();
 

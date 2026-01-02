@@ -13,7 +13,7 @@ import { FaHeart } from "react-icons/fa";
 import enroll from '../../assets/clipboard-tick.png'
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import type { CourseCardProps } from "../../userHomeTypes/types";
-import { AddtoCartService } from "../../features/cart/services";
+// import { AddtoCartService } from "../../features/cart/services";
 import { toast } from "react-toastify";
 import { sendOTPThunk } from "../../features/userlogin/reducers/otpthunks";
 import { useDispatch } from "react-redux";
@@ -58,7 +58,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
       return;
     }
 
-    const resultAction = await dispatch(sendOTPThunk({ phoneNumber })) as OTPThunkResult;
+    const resultAction = await dispatch(sendOTPThunk({ phoneNumber })) as any;
 
     if (sendOTPThunk.fulfilled.match(resultAction)) {
       const payload: OTPResponse = resultAction.payload;
@@ -190,7 +190,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         </p>
 
         {/* Ratings, Students, Duration */}
-        {course?.reviews?.length ? course?.reviews?.map((review, index) => (
+        {course?.reviews?.length ? course?.reviews?.map((review: any, index: number) => (
           <div onClick={() => { handleOpen(course?._id) }} className="flex items-center text-sm  mb-4" style={{ color: COLORS.primary_gray }} key={index}>
             <div className="flex gap-3 items-center mr-4">
               <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />

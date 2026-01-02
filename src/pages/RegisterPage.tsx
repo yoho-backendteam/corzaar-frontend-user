@@ -1,4 +1,4 @@
-import React from 'react'
+
 import StudentRegistration from '../Components/StudentVerfication/StudentRegistration'
 
 const RegisterPage = () => {

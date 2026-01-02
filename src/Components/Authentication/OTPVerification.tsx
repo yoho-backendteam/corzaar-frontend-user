@@ -7,7 +7,6 @@ import { otpVerify } from "../../features/userlogin/reducers/service";
 import { useAuth } from "../../context/context";
 import { GetLocalstorage, RemoveLocalstorage } from "../../utils/helper";
 import { useRegisterform } from "../../context/RegsterContext";
-import StudentRegistration from "../StudentVerfication/StudentRegistration";
 
 interface OTPVerificationProps {
   goBack: () => void;

@@ -83,7 +83,7 @@ export const getStudentAttendance = async (studentId: string): Promise<Attendanc
 
 export const getCoursesId = async (params: string): Promise<CourseResponse | undefined> => {
   try {
-    const response = await Client.courses.getById(id);
+    const response = await Client.courses.getById(params);
     return response?.data;
   } catch (error) {
     console.log("getCoursesId error:", error);

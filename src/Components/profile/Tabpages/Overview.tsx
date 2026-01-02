@@ -7,7 +7,7 @@ import tick from "../../../assets/profile/icons/Container.png";
 import { setActivityData, setProfileData } from "../../../features/settings/reducers/settingThunks";
 import { activitySelect, profileSelect } from "../../../features/settings/reducers/settingSelectors";
 import { formatDate } from "../../../utils/helper";
-import type { UIProfileState, ActivityItem } from "../../../features/settings/types/settingTypes";
+import type { ActivityItem } from "../../../features/settings/types/settingTypes";
 
 export const Overview: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -50,55 +50,55 @@ export const Overview: React.FC = () => {
   console.log("aci", activityData);
 
 
-  // Mock UI profile data (replace with actual data from your store)
-  const profile: UIProfileState = useAppSelector((state: RootState) => ({
-    email: "john@example.com", // This should come from your actual profile state
-    role: "Student",
-    skills: ["JavaScript", "TypeScript", "React", "Node.js"],
-    interests: ["Web Development", "AI/ML", "Mobile Development"],
-    attendance: [
-      {
-        label: "Mathematics",
-        progress: 85,
-        sessionsCompleted: 17,
-        totalSessions: 20,
-        date: "2024-01-15"
-      },
-      {
-        label: "Physics",
-        progress: 75,
-        sessionsCompleted: 15,
-        totalSessions: 20,
-        date: "2024-01-14"
-      }
-    ],
-    recentActivity: [
-      {
-        title: "Completed Assignment",
-        date: "2024-01-15"
-      },
-      {
-        title: "Joined Course",
-        date: "2024-01-10"
-      }
-    ],
-    projects: [
-      {
-        title: "E-commerce Platform",
-        description: "Full-stack e-commerce application",
-        tags: ["React", "Node.js", "MongoDB"],
-        date: "2024-01-01"
-      }
-    ],
-    achievements: [
-      {
-        title: "Best Student Award",
-        organization: "University",
-        description: "Awarded for academic excellence",
-        date: "2024-01-01"
-      }
-    ]
-  }));
+  // // Mock UI profile data (replace with actual data from your store)
+  // const profileD: UIProfileState = useAppSelector(() => ({
+  //   email: "john@example.com", // This should come from your actual profile state
+  //   role: "Student",
+  //   skills: ["JavaScript", "TypeScript", "React", "Node.js"],
+  //   interests: ["Web Development", "AI/ML", "Mobile Development"],
+  //   attendance: [
+  //     {
+  //       label: "Mathematics",
+  //       progress: 85,
+  //       sessionsCompleted: 17,
+  //       totalSessions: 20,
+  //       date: "2024-01-15"
+  //     },
+  //     {
+  //       label: "Physics",
+  //       progress: 75,
+  //       sessionsCompleted: 15,
+  //       totalSessions: 20,
+  //       date: "2024-01-14"
+  //     }
+  //   ],
+  //   recentActivity: [
+  //     {
+  //       title: "Completed Assignment",
+  //       date: "2024-01-15"
+  //     },
+  //     {
+  //       title: "Joined Course",
+  //       date: "2024-01-10"
+  //     }
+  //   ],
+  //   projects: [
+  //     {
+  //       title: "E-commerce Platform",
+  //       description: "Full-stack e-commerce application",
+  //       tags: ["React", "Node.js", "MongoDB"],
+  //       date: "2024-01-01"
+  //     }
+  //   ],
+  //   achievements: [
+  //     {
+  //       title: "Best Student Award",
+  //       organization: "University",
+  //       description: "Awarded for academic excellence",
+  //       date: "2024-01-01"
+  //     }
+  //   ]
+  // }));
 
   // Get current city and country from profile data
   const getLocation = (): string => {
@@ -111,11 +111,11 @@ export const Overview: React.FC = () => {
   };
 
   // Get email from profile (you might need to adjust this based on your actual data structure)
-  const getEmail = (): string => {
-    // Since email is not in the provided profile response, using mock data
-    // Replace this with actual email field from your API if available
-    return profile.email;
-  };
+  // const getEmail = (): string => {
+  //   // Since email is not in the provided profile response, using mock data
+  //   // Replace this with actual email field from your API if available
+  //   return profile.email;
+  // };
 
   return (
     <div className="flex flex-col gap-6">
@@ -135,7 +135,7 @@ export const Overview: React.FC = () => {
               <label style={{ color: COLORS.primary_black }}>Full Name</label>
               <input
                 type="text"
-                value={fullName}
+                value={profileData?.fullName}
                 className="p-2 text-sm border rounded"
                 style={{
                   color: COLORS.primary_gray,
@@ -150,7 +150,7 @@ export const Overview: React.FC = () => {
               <label style={{ color: COLORS.primary_black }}>Email</label>
               <input
                 type="email"
-                value={email}
+                value={profileData?.email}
                 className="p-2 text-sm border rounded"
                 style={{
                   color: COLORS.primary_gray,
@@ -197,7 +197,7 @@ export const Overview: React.FC = () => {
             Skills
           </p>
 
-          {skills.length > 0 ? (
+          {/* {skills.length > 0 ? (
             <div className="flex flex-wrap gap-2">
               {skills.map((skill, index) => (
                 <span
@@ -209,9 +209,9 @@ export const Overview: React.FC = () => {
                 </span>
               ))}
             </div>
-          ) : (
-            <p className="text-sm text-gray-500">No skills available</p>
-          )}
+          ) : ( */}
+          <p className="text-sm text-gray-500">No skills available</p>
+          {/* )} */}
         </div>
 
         {/* Interests */}
@@ -220,7 +220,7 @@ export const Overview: React.FC = () => {
             Interests
           </p>
 
-          {interests.length > 0 ? (
+          {/* {interests.length > 0 ? (
             <div className="flex flex-wrap gap-2">
               {interests.map((interest, index) => (
                 <span
@@ -232,9 +232,9 @@ export const Overview: React.FC = () => {
                 </span>
               ))}
             </div>
-          ) : (
-            <p className="text-sm text-gray-500">No interests listed</p>
-          )}
+          ) : ( */}
+          <p className="text-sm text-gray-500">No interests listed</p>
+          {/* )} */}
         </div>
       </div>
 
@@ -246,7 +246,7 @@ export const Overview: React.FC = () => {
         </p>
 
         <div className="flex flex-col gap-4">
-          {attendance.map((course, index) => (
+          {/* {attendance.map((course, index) => (
             <div key={index}>
               <div className="flex justify-between items-center text-sm font-semibold mt-5">
                 <p style={{ color: COLORS.primary_black }}>{course.label}</p>
@@ -278,7 +278,7 @@ export const Overview: React.FC = () => {
                 <p>Last: {course.date}</p>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
 
@@ -289,7 +289,7 @@ export const Overview: React.FC = () => {
 
         <div className="flex flex-col gap-4">
           {activityData?.Data?.map((item: ActivityItem, index: number) => (
-            <div key={item._id} className="flex items-center gap-3 mt-5">
+            <div key={index} className="flex items-center gap-3 mt-5">
               <div
                 className="h-10 w-10 flex items-center justify-center rounded-full"
                 style={{ backgroundColor: `${COLORS.secondary_green}1A` }}

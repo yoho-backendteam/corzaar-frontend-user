@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,7 +60,7 @@ const InstituteDetails: React.FC = () => {
       return;
     }
 
-    const resultAction = await dispatch(sendOTPThunk({ phoneNumber })) as OTPThunkResult;
+    const resultAction = await dispatch(sendOTPThunk({ phoneNumber })) as any;
 
     if (sendOTPThunk.fulfilled.match(resultAction)) {
       const payload: OTPResponse = resultAction.payload;
@@ -322,8 +323,8 @@ const InstituteDetails: React.FC = () => {
                     <button
                       onClick={() => handelSlectedCourse(course?._id)}
                       className={`mt-3 px-4 py-2 w-full text-sm font-medium cursor-pointer rounded-md ${course.enrolled
-                          ? "bg-[#ED1C24] text-[#FFFFFF]"
-                          : "bg-[#FFDD00] text-[#000000]"
+                        ? "bg-[#ED1C24] text-[#FFFFFF]"
+                        : "bg-[#FFDD00] text-[#000000]"
                         }`}
                     >
                       {course.enrolled ? "Already Enrolled" : "Add To Cart"}

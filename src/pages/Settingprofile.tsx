@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { COLORS, FONTS } from "./../Constants/uiconstants";
 
 // import icon from "../assets/profile/icons/Icon.png";
@@ -12,15 +13,16 @@ import { Attendance } from "../Components/profile/Tabpages/Attendance/Attendance
 import Payments from "../Components/profile/Tabpages/Payment/Payments";
 import Favorites from "../Components/profile/Tabpages/Favorites/Favorites";
 import { Portfolio } from "../Components/profile/Tabpages/Portfolio/PortfolioPage";
-import type { AppDispatch } from "../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { setProfileData } from "../features/settings/reducers/settingThunks";
-import { profileSelect } from "../features/settings/reducers/settingSelectors";
+// import type { AppDispatch } from "../store/store";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { setProfileData } from "../features/settings/reducers/settingThunks";
+// import { profileSelect } from "../features/settings/reducers/settingSelectors";
+import { useAppSelector } from "../hooks/reduxhooks";
 export const Settingprofile = () => {
 
 
-  const profile = useAppSelector((state) => state.profile);
+  const profileData: any = useAppSelector((state) => state.profile);
 
   const tabs = [
     { label: "Overview", content: <Overview /> },
