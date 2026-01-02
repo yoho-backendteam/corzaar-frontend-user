@@ -15,7 +15,7 @@ import {
 
 // import robo from "../../assets/robo.png";
 import laptop from "../../assets/laptop.png";
-import icon from "../../assets/icon.png";
+import icon from "../../assets/Icon.png";
 import star from "../../assets/star.png";
 import hat from "../../assets/hat.png";
 import student from "../../assets/student.png";
