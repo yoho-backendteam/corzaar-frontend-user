@@ -91,7 +91,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ goBack }) => {
           color: COLORS.C_DIV_Title,
         } as any}
       >
-        OTP for Demo `${storedOtp || ""}`
+        OTP for Demo `{storedOtp || ""}`
       </p>
 
       <div className="flex flex-wrap justify-center gap-2 my-3 w-full mx-auto">
