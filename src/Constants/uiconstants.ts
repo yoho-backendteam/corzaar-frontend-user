@@ -22,7 +22,7 @@ export const COLORS = {
 export const FONTS = {
   regular: {
     fontFamily: '"Source Serif 4", serif',
-    fontOpticalSizing: "auto",
+    fontOpticalSizing: "auto" as const,
     fontWeight: 400,
     fontStyle: "normal",
   },
@@ -41,7 +41,7 @@ export const FONTS = {
   },
   boldHeading: {
     fontFamily: '"Source Serif 4", serif',
-    fontOpticalSizing: 'auto',
+    fontOpticalSizing: 'auto'as const,
     fontWeight: 700,
     fontStyle: 'normal',
     fontSize: '30px',

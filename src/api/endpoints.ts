@@ -124,6 +124,17 @@ export const API_END_POINTS = {
 
   payment: {
     create: "/payment/api/student/create"
-  }
+  },
+
+notification: {
+    create: "/api",
+    getAll: "/api/all",
+    getByType: "/api/:type",
+    getById: "/api/:id",
+    update: "/api/:id",
+    markAsRead: "/api/:id/read",
+    delete: "/api/:id",
+    webShow: "/api/webshow",
+  },
 };
 

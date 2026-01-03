@@ -12,7 +12,8 @@ interface ViewNotificationProps {
         message: string;
         time: string;
         type: string;
-    };
+    }
+
     onClose: () => void;
     onDelete: (id: number) => void;
 }
@@ -43,17 +44,22 @@ const ViewNotification: React.FC<ViewNotificationProps> = ({
                         </span>
                     </div>
                     <div>
-                        <h2 className="text-lg font-bold text-gray-800" style={{ ...FONTS.medium }} >
-                            Special Offers Alert
+                        <h2 className="text-lg font-bold text-gray-800" style={{ ...FONTS.medium }}>
+                            {notification.title}
                         </h2>
-                        <p className="text-xs text-gray-500" >Saturday, November 1, 2025 at 05:30 AM</p>
+                        <p className="text-xs text-gray-500" style={{ ...FONTS.regular }}>
+                            {notification.time}
+                        </p>
                     </div>
                 </div>
 
                 <div className="mb-4">
                     <h3 className="font-medium text-gray-700 mb-1" style={{ ...FONTS.medium }}>Message</h3>
-                    <p className="text-sm text-gray-600">Get 60% off on all tech courses. Use code: NEWYEAR60</p>
+                    <p className="text-sm text-gray-600" style={{ ...FONTS.regular }}>
+                        {notification.message}
+                    </p>
                 </div>
+
 
                 <h2>Action</h2>
                 <div className="flex justify-between items-center mt-2">
