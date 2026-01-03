@@ -9,10 +9,9 @@ export interface Notification {
 
 export interface CreateNotificationPayload {
   title: string;
-  message: string;
+  message: string;               
   type: string;
 }
-
 export interface UpdateNotificationPayload {
   title?: string;
   message?: string;

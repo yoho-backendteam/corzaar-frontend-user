@@ -226,9 +226,7 @@ class Client {
     getallinstitutes: () => httpClient.get(API_END_POINTS.user_home.getallinstitutes),
     getcategories: () => httpClient.get(API_END_POINTS.user_home.getcategories),
     addtokart: (data: addtocartTypes) => httpClient.post(API_END_POINTS.user_home.addtokart, data)
-
-
-  }
+}
 
   offer = {
     getalloffers: () => httpClient.get(API_END_POINTS.offer.getalloffers),
