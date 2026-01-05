@@ -10,13 +10,13 @@ import PopularInstitute from "../components/PopularInstitute";
 import ExpertsInstitute from "../components/ExpertsInstitues";
 import Category from "../components/Category";
 import Footer from "../components/footer";
-import star from '../../assets/magic-star.png'
+import star from '../../assets/magic-staryellow.png'
 import { FaArrowRight } from "react-icons/fa";
 import teacher from '../../assets/teacher4.png'
 
 
 const StudentHome:React.FC = () => {
-  const { stats, filters } = useSelector(
+  const { stats, filters} = useSelector(
     (state: RootState) => state.studentHome
   );
 
@@ -48,7 +48,7 @@ const StudentHome:React.FC = () => {
             alt="star"
             className="h-5 w-5 mr-2"
           />
-          <p className="text-sm sm:text-base md:text-lg">
+          <p className="text-sm sm:text-base md:text-lg text-[#FFDD00]">
             India’s Leading Educational Platform
           </p>
         </div>
@@ -147,7 +147,7 @@ const StudentHome:React.FC = () => {
         </div>
       </div>
 
-      <div className="space-y-16">
+      <div className="space-y-8">
         <div id="promotions-section">
           <SpecialPromotions />
         </div>

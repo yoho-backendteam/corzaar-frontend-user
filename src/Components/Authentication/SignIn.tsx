@@ -2,10 +2,11 @@ import { useState } from "react";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 import { Lock, Phone } from "lucide-react";
 import logocap from "../../assets/images/logocap.png";
-import SignInPassword from "./SignInPassword";
-import SendOTP from "./SendOTP";
-import OTPVerification from "./OTPVerification";
+
 import { useNavigate } from "react-router-dom";
+import SignInPassword from "../../Components/Authentication/SignInPassword";
+import SendOTP from "../../Components/Authentication/SendOTP";
+import OTPVerification from "../../Components/Authentication/OTPVerification";
 
 const SignIn = () => {
 const navigate = useNavigate();

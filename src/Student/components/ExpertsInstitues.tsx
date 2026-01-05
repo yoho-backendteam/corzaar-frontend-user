@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
 import { COLORS } from "../../Constants/uiconstants";
 
-const ExpertsInstitute = () => {
+const ExpertsInstitute:React.FC= () => {
   const institutes = useSelector(
     (state: RootState) => state.studentHome.InstitueExperts
   );

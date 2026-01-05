@@ -1,4 +1,4 @@
-import starIcon from "../../assets/react.svg";
+// import starIcon from "../../assets/react.svg";
 import promo1 from "../../assets/teacher.svg";
 import promo2 from "../../assets/teacher2.png";
 import promo3 from "../../assets/teacher3.png";

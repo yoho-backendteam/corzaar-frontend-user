@@ -1,9 +1,9 @@
 import React from 'react'
-import FeaturedDeals from '../components/CourseOnSale/FeatureDeals'
-import CoursesOnSale from '../components/CourseOnSale/CoursesOnSale'
+import FeaturedDeals from '../Components/CourseOnSale/FeatureDeals'
+import CoursesOnSale from '../Components/CourseOnSale/CoursesOnSale'
 import { COLORS } from '../Constants/uiconstants'
 
-const OfferPage:React.FC = () => {
+const OfferPages:React.FC = () => {
   return (
     <div>
         <div className="min-h-screen" style={{ backgroundColor: COLORS.primary_yellow }}>
@@ -17,4 +17,4 @@ const OfferPage:React.FC = () => {
   )
 }
 
-export default OfferPage
+export default OfferPages

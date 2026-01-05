@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {selectFilteredNotifications,selectUnreadCount,selectTotalCount,} from "../../redux/Notification/notificationSelector";
 import {markAsRead,deleteNotification,markAllAsRead,setFilter,} from "../../redux/Notification/notificationSlice";
 import { Trash2, CheckCheck } from "lucide-react";
-import ViewNotification from "./ViewNotification";
+import ViewNotification from "../../Components/Notification/ViewNotification";
 import bellicon from "../../assets/Notification/bellicon.png";
 import { FONTS } from "../../Constants/uiconstants";
 
@@ -19,10 +19,10 @@ const Notification: React.FC = () => {
     <div className="bg-yellow-400 min-h-screen px-4 sm:px-6 md:px-10 py-6">
       <div className="flex flex-col gap-4 md:flex-row justify-between items-start md:items-center mb-6 space-y-3 md:space-y-0">
         <div>
-          <h1 className="text-xl md:text-2xl font-semibold text-black"style={{ ...FONTS.boldHeading }}>
+          <h1 className="text-xl md:text-2xl font-semibold text-black" style={{ ...FONTS.boldHeading as any}}>
             Notifications
           </h1>
-          <p className="text-sm text-gray-700" style={{ ...FONTS.regular }}>
+          <p className="text-sm text-gray-700" style={{ ...FONTS.regular as any }}>
             Stay updated with your courses and activities
           </p>
         </div>
@@ -30,7 +30,7 @@ const Notification: React.FC = () => {
         <button
           onClick={() => dispatch(markAllAsRead())}
           className="flex items-center gap-2 bg-white text-black font-medium px-4 py-2 rounded-md shadow hover:bg-gray-100 w-full sm:w-auto justify-center">
-          <CheckCheck className="w-4 h-4" style={{ ...FONTS.medium }} />
+          <CheckCheck className="w-4 h-4" style={{ ...FONTS.medium as any}} />
           Mark all as read
         </button>
       </div>
@@ -39,11 +39,11 @@ const Notification: React.FC = () => {
         <div className="flex justify-between items-center bg-white p-4 rounded-md shadow">
           <div className="flex items-center gap-2">
             <img src={bellicon} className="w-7 h-7" />
-            <span className="text-sm md:text-base font-medium"style={{ ...FONTS.medium }}>
+            <span className="text-sm md:text-base font-medium" style={{ ...FONTS.medium as any}}>
               Unread
             </span>
           </div>
-          <span className="text-lg font-bold"style={{ ...FONTS.boldHeading }}>
+          <span className="text-lg font-bold" style={{ ...FONTS.boldHeading as any}}>
             {unreadCount}
           </span>
         </div>
@@ -51,17 +51,17 @@ const Notification: React.FC = () => {
         <div className="flex justify-between items-center bg-white p-4 rounded-md shadow">
           <div className="flex items-center gap-2">
             <img src={bellicon} className="w-7 h-7" />
-            <span className="text-sm md:text-base font-medium" style={{ ...FONTS.medium }}>
+            <span className="text-sm md:text-base font-medium" style={{ ...FONTS.medium as any}}>
               Total
             </span>
           </div>
-          <span className="text-lg font-bold" style={{ ...FONTS.boldHeading }}>
+          <span className="text-lg font-bold" style={{ ...FONTS.boldHeading as any}}>
             {totalCount}
           </span>
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 justify-center sm:justify-start items-center sm:gap-3 mb-6 text-center" style={{ ...FONTS.medium }}>
+      <div className="flex flex-wrap gap-2 justify-center sm:justify-start items-center sm:gap-3 mb-6 text-center" style={{ ...FONTS.medium as any}}>
         {["all", "unread", "read"].map((f) => (
           <button
             key={f}
@@ -84,7 +84,7 @@ const Notification: React.FC = () => {
         {notifications.map((n) => (
           <div
             key={n.id}
-            className={`bg-white p-4 rounded-md shadow border-l-4 border-t-[1px] border-b-[1px] flex flex-col sm:flex-row justify-between sm:items-center gap-3 sm:gap-4
+            className={`bg-white p-4 rounded-md shadow border-l-4 border-t border-b flex flex-col sm:flex-row justify-between sm:items-center gap-3 sm:gap-4
               ${
                 n.type === "offer"
                   ? "border-[#9810FA]"
@@ -95,13 +95,13 @@ const Notification: React.FC = () => {
             <div className="flex items-start gap-3">
               <img src={n.img} alt={n.title} className="w-8 h-8" />
               <div>
-                <h2 className="font-semibold text-gray-800 text-sm sm:text-base" style={{ ...FONTS.medium }}>
+                <h2 className="font-semibold text-gray-800 text-sm sm:text-base" style={{ ...FONTS.medium as any}}>
                   {n.title}
                 </h2>
-                <p className=" text-sm text-gray-600 leading-snug" style={{ ...FONTS.regular }}>
+                <p className=" text-sm text-gray-600 leading-snug" style={{ ...FONTS.regular as any}}>
                   {n.message}
                 </p>
-                <p className="text-xs text-gray-400 mt-2"style={{ ...FONTS.medium }}>
+                <p className="text-xs text-gray-400 mt-2"style={{ ...FONTS.medium as any}}>
                   {n.time}
                 </p>
               </div>
@@ -111,13 +111,13 @@ const Notification: React.FC = () => {
               {!n.read && (
                 <button
                   onClick={() => dispatch(markAsRead(n.id))}
-                  className="text-sm text-gray-800 hover:underline whitespace-nowrap" style={{ ...FONTS.medium }}>
+                  className="text-sm text-gray-800 hover:underline whitespace-nowrap" style={{ ...FONTS.medium as any}}>
                   Mark as read
                 </button>
               )}
               <button
                 onClick={() => setSelectedNotification(n)}
-                className="text-black px-3 py-1 rounded text-sm font-medium bg-[#FFDD00] whitespace-nowrap" style={{ ...FONTS.medium }}>
+                className="text-black px-3 py-1 rounded text-sm font-medium bg-[#FFDD00] whitespace-nowrap" style={{ ...FONTS.medium as any}}>
                 View
               </button>
               <button

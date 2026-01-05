@@ -43,35 +43,35 @@ const ViewNotification: React.FC<ViewNotificationProps> = ({
                         </span>
                     </div>
                     <div>
-                        <h2 className="text-lg font-bold text-gray-800" style={{ ...FONTS.medium }} >
+                        <h2 className="text-lg font-bold text-gray-800" style={{ ...FONTS.medium as any}} >
                             Special Offers Alert
                         </h2>
-                        <p className="text-xs text-gray-500" style={{ ...FONTS.regular }}>Saturday, November 1, 2025 at 05:30 AM</p>
+                        <p className="text-xs text-gray-500" style={{ ...FONTS.regular as any}}>Saturday, November 1, 2025 at 05:30 AM</p>
                     </div>
                 </div>
 
                 <div className="mb-4">
-                    <h3 className="font-medium text-gray-700 mb-1" style={{ ...FONTS.medium }}>Message</h3>
-                    <p className="text-sm text-gray-600" style={{ ...FONTS.regular }}>Get 60% off on all tech courses. Use code: NEWYEAR60</p>
+                    <h3 className="font-medium text-gray-700 mb-1" style={{ ...FONTS.medium as any}}>Message</h3>
+                    <p className="text-sm text-gray-600" style={{ ...FONTS.regular as any}}>Get 60% off on all tech courses. Use code: NEWYEAR60</p>
                 </div>
 
                 <h2>Action</h2>
                 <div className="flex justify-between items-center mt-2">
                     <button
                         onClick={onClose}
-                        className="bg-[#ED1C24] text-white px-4 py-2 rounded-md text-sm " style={{ ...FONTS.medium }}>
+                        className="bg-[#ED1C24] text-white px-4 py-2 rounded-md text-sm " style={{ ...FONTS.medium as any}}>
                         View Details
                     </button>
                 </div>
 
                 <div className="flex justify-between mt-10">
                     <div>
-                        <button className="px-2 rounded-full border border-[#9810FA] text-[#9810FA]" style={{ ...FONTS.medium }}>Promo</button>
+                        <button className="px-2 rounded-full border border-[#9810FA] text-[#9810FA]" style={{ ...FONTS.medium as any}}>Promo</button>
                     </div>
                     <button
                         onClick={() => onDelete(notification.id)}
-                        className="flex items-center gap-1 bg-[#ED1C24] text-white px-4 py-2 rounded-md text-sm " style={{ ...FONTS.medium }}>
-                        <img src={deleteicon} className="w-4 h-4" style={{ ...FONTS.medium }} />
+                        className="flex items-center gap-1 bg-[#ED1C24] text-white px-4 py-2 rounded-md text-sm " style={{ ...FONTS.medium as any}}>
+                        <img src={deleteicon} className="w-4 h-4" style={{ ...FONTS.medium as any}} />
                         Delete
                     </button>
                 </div>

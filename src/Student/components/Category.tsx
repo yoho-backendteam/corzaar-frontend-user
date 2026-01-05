@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { COLORS } from "../../Constants/uiconstants";
 
 
-const Category = () => {
+const Category:React.FC = () => {
     const categories = useSelector((state: RootState) => state.studentHome.categories)
   return (
     <>

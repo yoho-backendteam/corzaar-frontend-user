@@ -4,7 +4,7 @@ import type { RootState } from "../../store/store";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 
 
-const SpecialPromotions = () => {
+const SpecialPromotions:React.FC = () => {
   const promotions = useSelector(
     (state: RootState) => state.studentHome.promotions
   );

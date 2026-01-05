@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import dealsSlice from "../features/deals/dealsSlice"
 import coursesSlice from "../features/courses/courseSlice"
-import courseReducer from "../components/Redux/CourseSlice";
+import courseReducer from "../Components/Redux/CourseSlice";
 import contactReducer from "../redux/Queries/queryslice";
 import studentHomeReducer from '../Student/redux/studentSlice'
 import profileReducer from "../features/profile/profileSlice";

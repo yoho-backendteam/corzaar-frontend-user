@@ -8,7 +8,7 @@ import { COLORS, FONTS } from "../Constants/uiconstants";
 export default function ContactForm() {
     const dispatch = useDispatch();
     const form = useSelector(selectContactForm);
-    const change = (f, v) => dispatch(updateField({ field: f, value: v }));
+    const change = (f:any, v:any) => dispatch(updateField({ field: f, value: v }));
 
     return (
         <div className="bg-white p-6 md:p-7 rounded-xl shadow w-full h-full">
@@ -27,9 +27,9 @@ export default function ContactForm() {
                         <label className="block mb-1" style={{ ...FONTS.boldHeading4 }}>{label}</label>
                         <input
                             className="p-3 w-full shadow-md rounded-xl focus:outline-none"
-                            value={form[field]}
+                            value={form[field as keyof typeof form]}
                             placeholder={label}
-                            style={{ ...FONTS.medium, color: COLORS.primary_gray }}
+                            style={{ ...FONTS.medium as any, color: COLORS.primary_gray }}
                             onChange={(e) => change(field, e.target.value)}
                         />
                     </div>
@@ -41,7 +41,7 @@ export default function ContactForm() {
                         className="p-3 w-full shadow-md rounded-xl focus:outline-none"
                         value={form.category}
                         onChange={(e) => change("category", e.target.value)}
-                        style={{ ...FONTS.medium, color: COLORS.primary_gray }}
+                        style={{ ...FONTS.medium as any, color: COLORS.primary_gray }}
                     >
                         <option>Select a Category</option>
                         {categories.map((c) => <option key={c}>{c}</option>)}
@@ -55,7 +55,7 @@ export default function ContactForm() {
                 value={form.subject}
                 placeholder="Brief description"
                 onChange={(e) => change("subject", e.target.value)}
-                style={{ ...FONTS.medium, color: COLORS.primary_gray }}
+                style={{ ...FONTS.medium as any, color: COLORS.primary_gray }}
             />
 
             <label className="block mb-1" style={{ ...FONTS.boldHeading4 }}>Message</label>
@@ -64,7 +64,7 @@ export default function ContactForm() {
                 value={form.message}
                 placeholder="Tell us more about your inquiry"
                 onChange={(e) => change("message", e.target.value)}
-                style={{ ...FONTS.medium, color: COLORS.primary_gray }}
+                style={{ ...FONTS.medium as any, color: COLORS.primary_gray }}
             ></textarea>
 
             <div className="text-right py-11.5">

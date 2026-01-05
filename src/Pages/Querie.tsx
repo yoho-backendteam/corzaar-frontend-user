@@ -1,7 +1,7 @@
 import React from 'react'
 import ContactPage from "../Components/Querypage";
 
-const Queries = () => {
+const Querie:React.FC = () => {
   return (
     <div>
       <ContactPage />
@@ -9,4 +9,4 @@ const Queries = () => {
   )
 }
 
-export default Queries
+export default Querie

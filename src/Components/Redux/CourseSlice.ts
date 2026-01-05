@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { dummyCourses } from "../DummyData/CourseData";
-
+import { dummyCourses } from "../../Components/DummyData/CourseData"
 const courseSlice = createSlice({
   name: "courses",
   initialState: {

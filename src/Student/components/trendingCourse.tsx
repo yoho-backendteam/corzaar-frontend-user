@@ -5,7 +5,7 @@ import CourseCard from "./courseCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { COLORS } from "../../Constants/uiconstants";
 
-const TrendingCourse = () => {
+const TrendingCourse:React.FC = () => {
   const trendingCourses = useSelector(
     (state: RootState) => state.studentHome.trendingCourses
   );
@@ -82,7 +82,7 @@ const TrendingCourse = () => {
         {trendingCourses.map((course) => (
           <div
             key={course.id}
-            className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
+            className="shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[31%] snap-center"
           >
             <CourseCard course={course} />
           </div>

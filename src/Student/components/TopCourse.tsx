@@ -5,7 +5,7 @@ import CourseCard from "./courseCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
 
-const TopCourse = () => {
+const TopCourse:React.FC = () => {
   const topCourses = useSelector(
     (state: RootState) => state.studentHome.topCourses
   );

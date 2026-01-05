@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../../hooks/reduxhooks";
-import { CourseProgressCard } from "./Progresscard";
+import { CourseProgressCard } from "../../../../Components/profile/Tabpages/Attendance/Progresscard";
 
 export const Attendance = () => {
   const profile = useAppSelector((state) => state.profile);

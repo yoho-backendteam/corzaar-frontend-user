@@ -1,20 +1,20 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
-import Courses from '../pages/Courses';
+import Course from '../pages/Course';
 // import Institutes from '../pages/Institutes';
-import OfferPage from '../pages/OfferPage';
-import Queries from '../pages/Queries';
+import OfferPages from '../pages/OfferPages';
+import Querie from '../pages/Querie';
 import Navbar from '../NavBar/Navbar';
 import CartPage from '../pages/CartPage';
-import NotificationPage from '../pages/NotificationPage';
+import NotificationPages from '../pages/NotificationPages';
 import ProfilePage from '../pages/ProfilePage';
-import { Settingprofile } from '../pages/Settingprofile';
-import { Portfolio } from '../components/profile/Tabpages/Portfolio/Portfolio';
-import SignIn from '../components/Authentication/SignIn';
-import StudentRegistration from '../components/StudentVerfication/StudentRegistration';
-import ExploreInstitutes from '../Component/Institutes/ExploreInstitutes';
-import InstituteDetails from '../Component/Institutes/InstituteDetails';
+import { Settingprofile } from '../pages/Settingprofiles';
+import { Portfolio } from '../Components/profile/Tabpages/Portfolio/Portfolio';
+import SignIn from '../Components/Authentication/SignIn';
+import StudentRegistration from '../Components/StudentVerfication/StudentRegistration';
+import ExploreInstitutes from '../Components/Institutes/ExploreInstitutes';
+import InstituteDetails from '../Components/Institutes/InstituteDetails';
 
 const LayoutRoute: React.FC = () => {
   return (
@@ -30,15 +30,15 @@ const LayoutRoute: React.FC = () => {
               <Navbar />
               <Routes>
                 <Route path="/Home" element={<Home />} />
-                <Route path="/Courses" element={<Courses />} />
+                <Route path="/Courses" element={<Course />} />
                 <Route path="/Institutes" element={<ExploreInstitutes />} />
                 <Route path="/institute/:id" element={<InstituteDetails />} />
                 {/* <Route path="/Institutes" element={<Institutes />} /> */}
-                <Route path="/Offers" element={<OfferPage />} />
+                <Route path="/Offers" element={<OfferPages />} />
                 <Route path="/cartPage" element={<CartPage />} />
-                <Route path="/notificationPage" element={<NotificationPage />} />
+                <Route path="/notificationPage" element={<NotificationPages />} />
                 <Route path="/profilePage" element={<ProfilePage />} />
-                <Route path="/Queries" element={<Queries />} />
+                <Route path="/Queries" element={<Querie />} />
                 <Route path="/settingprofile" element={<Settingprofile />} />
                 <Route path="/Portfolio" element={<Portfolio />} />
                 <Route path="/Mycourse" element={<CartPage />} />

@@ -5,7 +5,6 @@ import {
   Users,
   Clock,
   ShoppingCart,
-  CheckCircle,
 } from "lucide-react";
 import { FaHeart } from "react-icons/fa";
 import enroll from '../../assets/clipboard-tick.png'

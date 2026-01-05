@@ -77,7 +77,7 @@ export default function ExploreCourses() {
 
   <details className="relative w-full">
     <summary
-      className="flex items-center justify-between px-4 border rounded-lg hover:bg-gray-100 transition cursor-pointer list-none bg-white h-[44px]"
+      className="flex items-center justify-between px-4 border rounded-lg hover:bg-gray-100 transition cursor-pointer list-none bg-white h-11"
       style={{
         borderColor: COLORS.primary_gray,
         color: COLORS.primary_black,

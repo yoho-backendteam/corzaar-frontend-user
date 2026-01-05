@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { COLORS, FONTS } from "../../Constants/uiconstants";
-import StudentInfo from "./StudentInfo";
-import PersonalDetails from "./PersonalDetails";
-import Address from "./Address";
-import EmergencyContact from "./EmergencyContact";
+import StudentInfo from "../../Components/StudentVerfication/StudentInfo";
+import PersonalDetails from "../../Components/StudentVerfication//PersonalDetails";
+import Address from "../../Components/StudentVerfication//Address";
+import EmergencyContact from "../../Components/StudentVerfication/EmergencyContact";
 import { CircleCheck } from "lucide-react";
 import { HiOutlineUsers, HiOutlinePhone } from "react-icons/hi2";
 import { LuUserRound } from "react-icons/lu";

@@ -19,8 +19,7 @@ import {
   Mail,
   Phone,
   Globe,
-  Linkedin,
-  Facebook,
+ 
 } from "lucide-react";
 import { FONTS } from "../../Constants/uiconstants";
 
@@ -211,7 +210,7 @@ const InstituteDetails: React.FC = () => {
 
 
   {/* 🔴 40% OFF Badge */}
-  <div style={FONTS.tabheadingg as React.CSSProperties} className="absolute top-3 left-3 mt-5 ml-5 px-3 py-2 bg-[#ED1C24] text-white text-xs font-semibold px-3 py-1 rounded-md shadow-md z-10">
+  <div style={FONTS.tabheadingg as React.CSSProperties} className="absolute top-3 left-3 mt-5 ml-5 px-3 py-2 bg-[#ED1C24] text-white text-xs font-semibold  rounded-md shadow-md z-10">
     40% OFF
   </div>
 

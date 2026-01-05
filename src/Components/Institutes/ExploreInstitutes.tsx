@@ -75,8 +75,8 @@ const ExploreInstitutes: React.FC = () => {
           <button
             key={cat}
             onClick={() => dispatch(setActiveCategory(cat))}
-            style={FONTS.tabheading as React.CSSProperties}
-            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border text-xs sm:text-sm md:text-base font-medium transition-all duration-200
+            style={FONTS.boldHeadingg as React.CSSProperties}
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border  text-[10px] sm:text-xs md:text-sm font-medium transition-all duration-200
               ${
                 activeCategory === cat
                   ? "bg-[#ED1C24] text-white border-[#ED1C24]"

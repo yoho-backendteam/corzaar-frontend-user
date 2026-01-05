@@ -1,4 +1,4 @@
-import { CourseCard } from "./CourseNote";
+import { CourseCard } from "../../../../Components/profile/Tabpages/course/CourseNote";
 import { useAppSelector } from "../../../../hooks/reduxhooks";
 import { COLORS } from "../../../../Constants/uiconstants";
 

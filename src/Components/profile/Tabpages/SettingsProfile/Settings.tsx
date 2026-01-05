@@ -1,9 +1,9 @@
 import { COLORS } from "../../../../Constants/uiconstants";
-import { AttendanceOverview } from "./tabs/AttendanceOverview";
-import Notification from "./tabs/Notification";
-import { Password } from "./tabs/Password";
-import { PrivacySetting } from "./tabs/Privacysetting";
-import { Personinformation } from "./tabs/personinformation";
+import { AttendanceOverview } from "../../../../Components/profile/Tabpages/SettingsProfile/tabs/AttendanceOverview";
+import Notification from "../../../../Components/profile/Tabpages/SettingsProfile/tabs/Notification";
+import { Password } from "../../../../Components/profile/Tabpages/SettingsProfile/tabs/Password";
+import { PrivacySetting } from "../../../../Components/profile/Tabpages/SettingsProfile/tabs/Privacysetting";
+import { Personinformation } from "../../../../Components/profile/Tabpages/SettingsProfile/tabs/personinformation";
 
 export const Settings = () => {
   return (

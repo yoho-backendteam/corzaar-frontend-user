@@ -1,6 +1,6 @@
 import Notification from '../Components/Notification/Notification'
 import React from 'react'
-const NotificationPage:React.FC= () => {
+const NotificationPages:React.FC= () => {
   return (
     <div>
       <Notification />
@@ -8,4 +8,4 @@ const NotificationPage:React.FC= () => {
   )
 }
 
-export default NotificationPage
+export default NotificationPages

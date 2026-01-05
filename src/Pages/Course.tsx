@@ -1,7 +1,7 @@
 import React from 'react'
 import StudentCourse from '../Components/StudentCourse/StudentCourse'
 
-const Courses:React.FC = () => {
+const Course:React.FC = () => {
   return (
     <div>
         <StudentCourse />
@@ -9,4 +9,4 @@ const Courses:React.FC = () => {
   )
 }
 
-export default Courses
+export default Course
