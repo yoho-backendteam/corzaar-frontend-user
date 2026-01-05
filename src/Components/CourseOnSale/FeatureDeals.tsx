@@ -139,7 +139,7 @@ const FeaturedDeals: React.FC = () => {
                         }}
                       >
                         {deal?.courseData?.title}
-                      </span>
+                      </span>  
                     ) : (
                       <span>No course assigned</span>
                     )}
