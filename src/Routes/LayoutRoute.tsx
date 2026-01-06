@@ -9,7 +9,7 @@ import Navbar from '../NavBar/Navbar';
 import CartPage from '../pages/CartPage';
 import NotificationPages from '../pages/NotificationPages';
 import ProfilePage from '../pages/ProfilePage';
-import { Settingprofile } from '../pages/Settingprofiles';
+import { Settingprofiles } from '../pages/Settingprofiles';
 import { Portfolio } from '../Components/profile/Tabpages/Portfolio/Portfolio';
 import SignIn from '../Components/Authentication/SignIn';
 import StudentRegistration from '../Components/StudentVerfication/StudentRegistration';
@@ -39,7 +39,7 @@ const LayoutRoute: React.FC = () => {
                 <Route path="/notificationPage" element={<NotificationPages />} />
                 <Route path="/profilePage" element={<ProfilePage />} />
                 <Route path="/Queries" element={<Querie />} />
-                <Route path="/settingprofile" element={<Settingprofile />} />
+                <Route path="/settingprofile" element={<Settingprofiles />} />
                 <Route path="/Portfolio" element={<Portfolio />} />
                 <Route path="/Mycourse" element={<CartPage />} />
               </Routes>
