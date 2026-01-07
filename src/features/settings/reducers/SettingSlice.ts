@@ -19,7 +19,7 @@ const initialState: SettingState = {
   setData: null,
   activityData: null,
   attendanceData: null,
-  coursesIdData: null, // Should match CoursesIdResponse type
+  coursesIdData: null, 
 
 };
 
