@@ -79,7 +79,7 @@ export const API_END_POINTS = {
       get: `/student/api/cart/fav/getinstitute/:userId`,
     },
     profile: {
-      get: "users/profile",
+      get: "/users/profile",
       getById: "/student/api/student_management/getbyid/:id"
     },
     portfolio: {

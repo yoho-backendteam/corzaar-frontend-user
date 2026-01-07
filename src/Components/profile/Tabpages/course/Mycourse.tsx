@@ -3,7 +3,7 @@ import { CourseCard } from "./CourseNote";
 import { useAppDispatch } from "../../../../hooks/reduxhooks";
 import { COLORS } from "../../../../Constants/uiconstants";
 import { useEffect, useState } from "react";
-// import { getCoursesById } from "../../../../features/settings/reducers/settingThunks";
+ import { setCoursesById } from "../../../../features/settings/reducers/settingThunks";
 
 export const Mycourse = () => {
   const dispatch = useAppDispatch();
@@ -11,9 +11,9 @@ export const Mycourse = () => {
   const [loading,] = useState(true);
 
   useEffect(() => {
-    // const userId = "691d8d28340440bf767c5b1d";
+     const userId = "691d8d28340440bf767c5b1d";
 
-    // dispatch(getCoursesById(userId))
+    dispatch(setCoursesById(userId))
     //   .then((res: any) => {
     //     console.log("🚀 Courses API Response:", res);
 

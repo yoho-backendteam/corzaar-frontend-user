@@ -72,6 +72,8 @@ export interface PersonalInfo {
 }
 
 export interface ProfileData {
+  email: any;
+  fullName: any;
   _id: string;
   studentId: string;
   rollNumber: string;

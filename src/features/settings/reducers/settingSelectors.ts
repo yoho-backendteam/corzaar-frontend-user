@@ -6,4 +6,4 @@ export const portSelect = (state: RootState) => state.SettingSlice.port
 export const profileSelect = (state: RootState) => state.SettingSlice.setData
 export const activitySelect = (state: RootState) => state.SettingSlice.activityData
 export const attendanceSelect = (state: RootState) => state.SettingSlice.attendanceData
-export const courseIdSelect = (state: RootState) => state.SettingSlice.coursesIdData
+export const courseIdSelect = (state: RootState) => state.SettingSlice.coursesIdData    

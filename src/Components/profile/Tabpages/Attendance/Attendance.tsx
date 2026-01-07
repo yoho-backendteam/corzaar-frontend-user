@@ -53,7 +53,7 @@ export const Attendance = (): JSX.Element => {
   useEffect(() => {
     const fetchCourseDetails = async (): Promise<void> => {
       if (courseIds.length === 0) return;
-
+ 
       try {
         for (const id of courseIds) {
           if (id) await dispatch(setCoursesById(id));

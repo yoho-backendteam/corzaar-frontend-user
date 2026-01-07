@@ -19,7 +19,8 @@ const initialState: SettingState = {
   setData: null,
   activityData: null,
   attendanceData: null,
-  coursesIdData: null
+  coursesIdData: null, // Should match CoursesIdResponse type
+
 };
 
 const SettingSlice = createSlice({
@@ -47,9 +48,10 @@ const SettingSlice = createSlice({
     setAttendance: (state, action: PayloadAction<AttendanceResponse>) => {
       state.attendanceData = action.payload;
     },
-    setCoursesId: (state, action: PayloadAction<CoursesIdResponse>) => {
-      state.coursesIdData = action.payload;
-    },
+ setCoursesId: (state, action: PayloadAction<CoursesIdResponse>) => {
+  state.coursesIdData = action.payload;
+},
+
   }
 });
 
