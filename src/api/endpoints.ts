@@ -112,7 +112,7 @@ export const API_END_POINTS = {
   },
 
   offer: {
-    getalloffers: "/open/other/api/offer",
+    getalloffers: "/open/other/api/offer/all",
     getofferbyid: "/open/other/api/offer/:id",
   },
 
